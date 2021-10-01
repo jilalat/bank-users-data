@@ -1,6 +1,43 @@
 'use strict';
-
+let req = [
+  // - Added customer should adher to all table logic (Search, Sort..)
+];
+let done = [
+  // - Form to add customer
+  // - Fields
+  //     - Customer number (Number field)
+  //     - Customer name
+  //     - Description (textarea)
+  //     - Currency (Select: EUR, INR, USD)
+  //     - Rate (Number field)
+  //     - Balance (Number field)
+  //     - Deposit (Number filed)
+  //     - Status (Select: Active, Inactive)
+  // - Add customer to start of the array
+  // - Validation
+  //     - All fields are required (“This field is required”)
+  //     - Customer number should be unique (Error below input: “Customer number already exists”)
+  //     - Customer number should be 10 digits (Error below input: “Customer number should be 10 digits”)
+  //     - Customer name should be unique (Error below input: “Customer already exists”)
+  //     - Customer name should be string (Error below input: “Customer name must be string”)
+  //     - Description should at least have 10 characters (“Description should at least have 10 characters”)
+  //     - All fields are required (“This field is required”)
+  //     - Description should at least have 10 characters (“Description should at least have 10 characters”)
+  // - After submission clear form
+  // - Validation triggers on submit, if validation passed add customer, otherwise show errors.
+];
 let user = [
+  {
+    fullName: 'Teresa Reynolds',
+    idNumber: '4709935578',
+    description:
+      'Bunkbed  Drop  down  Deflector  Risotto  Uplifted  Synergy  Vindicate  Java  Suave  Chosen  Sleet  Voting  Reclining  Diaper  Isolating  Unzip  Reporter  Golf  Showman  Floss',
+    currency: 'USD',
+    deposit: '0190108',
+    rate: '641544',
+    balance: '1598207735',
+    status: 'inactive',
+  },
   {
     fullName: 'Lois Waters',
     idNumber: '6924871646',
@@ -22,17 +59,6 @@ let user = [
     rate: '224769',
     balance: '6908307213',
     status: 'active',
-  },
-  {
-    fullName: 'Teresa Reynolds',
-    idNumber: '4709935578',
-    description:
-      'Bunkbed  Drop  down  Deflector  Risotto  Uplifted  Synergy  Vindicate  Java  Suave  Chosen  Sleet  Voting  Reclining  Diaper  Isolating  Unzip  Reporter  Golf  Showman  Floss',
-    currency: 'USD',
-    deposit: '0190108',
-    rate: '641544',
-    balance: '1598207735',
-    status: 'inactive',
   },
   {
     fullName: 'Mable Caldwell',
@@ -419,6 +445,7 @@ colorDeleteSearch.addEventListener('mouseleave', () => {
 colorDeleteSearch.addEventListener('click', () => {
   searchInputField.value = '';
   searchInputField.focus();
+  refresh(user);
   colorDeleteSearch.classList.add('hidden');
   blackDeleteSearch.classList.add('hidden');
 });
@@ -428,13 +455,29 @@ searchBar.addEventListener('mouseleave', () => {
   searchBar.classList.add('hidden');
 });
 
-// search
 searchInputField.addEventListener('input', () => {
   if (searchInputField.value.trim() !== '') {
     blackDeleteSearch.classList.remove('hidden');
   } else {
     blackDeleteSearch.classList.add('hidden');
   }
+});
+
+// search
+
+searchInputField.addEventListener('keyup', () => {
+  let searchInputValue = searchInputField.value;
+  let copyOfUser = user.slice();
+  let filtered = copyOfUser.filter(userD => {
+    if (userD.fullName.toLowerCase().includes(searchInputValue)) {
+      return userD;
+    }
+    if (userD.fullName.toUpperCase().includes(searchInputValue)) {
+      return userD;
+    }
+  });
+  refresh(filtered);
+  emptyData.classList.add('hidden');
 });
 
 // Add User Icon
@@ -452,9 +495,236 @@ addUserColoredIcon.addEventListener('click', () => {
   overlay.classList.remove('hidden');
   addUserForm.classList.remove('hidden');
   closeFormBtn.classList.remove('hidden');
+  fullNameInput.focus();
 });
 
 // Form
+
+let fullNameInput = document.querySelector('.full-name-input');
+let fullNameInputDiv = document.querySelector('.full-name-input-div');
+let idNumberInput = document.querySelector('.id-number-input');
+let idNumberInputDiv = document.querySelector('.id-number-input-div');
+let descriptionInput = document.querySelector('.description-input');
+let descriptionInputDiv = document.querySelector('.description-input-div');
+let currencyInput = document.querySelector('.currency-input');
+let currencyInputDiv = document.querySelector('.currency-input-div');
+let depositInput = document.querySelector('.deposit-input');
+let depositInputDiv = document.querySelector('.deposit-input-div');
+let rateInput = document.querySelector('.rate-input');
+let rateInputDiv = document.querySelector('.rate-input-div');
+let balanceInput = document.querySelector('.balance-input');
+let balanceInputDiv = document.querySelector('.balance-input-div');
+let statusInput = document.querySelector('.status-input');
+let statusInputDiv = document.querySelector('.status-input-div');
+let clearBtn = document.querySelector('.clear-btn');
+
+let errorIcon = document.querySelectorAll('.error-icon');
+let validIcon = document.querySelectorAll('.valid-icon');
+let inputDiv = document.querySelectorAll('.input-div');
+let inputArea = document.querySelectorAll('.input');
+let errors = document.querySelectorAll('.errors');
+
+// Form inputs
+
+let onBlurValid = k => {
+  for (let i = 0; i < inputDiv.length; i++) {
+    inputDiv[k].classList.add('valid-border');
+    validIcon[k].classList.remove('hidden');
+    inputDiv[k].classList.remove('error-border');
+    errorIcon[k].classList.add('hidden');
+    errors[k].classList.add('non-visible');
+  }
+};
+let onBlurError = k => {
+  for (let i = 0; i < inputDiv.length; i++) {
+    inputDiv[k].classList.add('error-border');
+    errorIcon[k].classList.remove('hidden');
+    errors[k].classList.remove('non-visible');
+    errors[k].textContent = 'This field is required';
+    inputDiv[k].classList.remove('valid-border');
+    validIcon[k].classList.add('hidden');
+  }
+};
+
+let mustBeNumber = (value, index) => {
+  if (value.trim() == '') {
+    onBlurError(index);
+  } else if (!isNaN(value) && value.trim() !== '') {
+    onBlurValid(index);
+  } else if (isNaN(value) && value.trim() !== '') {
+    onBlurError(index);
+    errors[index].textContent = `This field must be a number`;
+  }
+};
+
+let fullNameInputErrors = () => {
+  if (fullNameInput.value.trim() == '') {
+    onBlurError(0);
+  } else if (/[^a-z A-Z]/.test(fullNameInput.value)) {
+    onBlurError(0);
+    errors[0].textContent = `Customer name must be string`;
+  } else {
+    onBlurValid(0);
+  }
+  user.forEach(element => {
+    if (element.fullName == fullNameInput.value) {
+      onBlurError(0);
+      errors[0].textContent = `User already exists`;
+    }
+  });
+};
+
+let idNumberInputErrors = () => {
+  if (
+    !isNaN(idNumberInput.value) &&
+    idNumberInput.value.length != 10 &&
+    idNumberInput.value.trim() !== ''
+  ) {
+    onBlurError(1);
+    errors[1].textContent = 'Customer number should be 10 digits';
+  }
+  user.forEach(element => {
+    if (element.idNumber == idNumberInput.value) {
+      onBlurError(1);
+      errors[1].textContent = `User ID Number already exists`;
+    }
+  });
+};
+
+let descriptionInputErrors = () => {
+  if (descriptionInput.value.length >= 10) {
+    onBlurValid(2);
+  } else {
+    onBlurError(2);
+    if (
+      descriptionInput.value.trim() !== '' &&
+      descriptionInput.value.length > 0 &&
+      descriptionInput.value.length < 10
+    ) {
+      errors[2].textContent = 'Description should at least have 10 characters';
+    }
+  }
+};
+
+let currencyInputErrors = () => {
+  if (currencyInput.value != '') {
+    onBlurValid(3);
+  } else {
+    onBlurError(3);
+    errors[3].textContent = 'You must choose a Currency';
+  }
+};
+
+let statusInputErrors = () => {
+  if (statusInput.value != '') {
+    onBlurValid(7);
+  } else {
+    onBlurError(7);
+    errors[7].textContent = 'Status must be Active or Inactive';
+  }
+};
+
+fullNameInput.addEventListener('keyup', () => {
+  fullNameInputErrors();
+});
+
+idNumberInput.addEventListener('keyup', () => {
+  mustBeNumber(idNumberInput.value, 1);
+  idNumberInputErrors();
+});
+
+descriptionInput.addEventListener('keyup', () => {
+  descriptionInputErrors();
+});
+
+currencyInput.addEventListener('change', () => {
+  currencyInputErrors();
+});
+currencyInput.addEventListener('blur', () => {
+  currencyInputErrors();
+});
+
+depositInput.addEventListener('keyup', () => {
+  mustBeNumber(depositInput.value, 4);
+});
+
+rateInput.addEventListener('keyup', () => {
+  mustBeNumber(rateInput.value, 5);
+});
+
+balanceInput.addEventListener('keyup', () => {
+  mustBeNumber(balanceInput.value, 6);
+});
+
+statusInput.addEventListener('change', () => {
+  statusInputErrors();
+});
+statusInput.addEventListener('blur', () => {
+  statusInputErrors();
+});
+
+let resetForm = () => {
+  inputDiv.forEach(element => {
+    element.classList.remove('valid-border');
+  });
+  inputDiv.forEach(element => {
+    element.classList.remove('error-border');
+  });
+  inputArea.forEach(element => {
+    element.value = '';
+  });
+  validIcon.forEach(element => {
+    element.classList.add('hidden');
+  });
+  errorIcon.forEach(element => {
+    element.classList.add('hidden');
+  });
+  errors.forEach(element => {
+    element.classList.add('non-visible');
+  });
+};
+
+clearBtn.addEventListener('click', resetForm);
+
+//submit
+
+addUserForm.addEventListener('submit', e => {
+  e.preventDefault();
+  if (
+    inputDiv[0].classList.contains('valid-border') &&
+    inputDiv[1].classList.contains('valid-border') &&
+    inputDiv[2].classList.contains('valid-border') &&
+    inputDiv[3].classList.contains('valid-border') &&
+    inputDiv[4].classList.contains('valid-border') &&
+    inputDiv[5].classList.contains('valid-border') &&
+    inputDiv[6].classList.contains('valid-border') &&
+    inputDiv[7].classList.contains('valid-border')
+  ) {
+    user.unshift({
+      fullName: fullNameInput.value,
+      idNumber: idNumberInput.value,
+      description: descriptionInput.value,
+      currency: currencyInput.value,
+      deposit: depositInput.value,
+      rate: rateInput.value,
+      balance: balanceInput.value,
+      status: statusInput.value,
+    });
+    refresh(user);
+    resetForm();
+    closeForm();
+  } else {
+    fullNameInputErrors();
+    mustBeNumber(idNumberInput.value, 1);
+    idNumberInputErrors();
+    descriptionInputErrors();
+    currencyInputErrors();
+    mustBeNumber(depositInput.value, 4);
+    mustBeNumber(rateInput.value, 5);
+    mustBeNumber(balanceInput.value, 6);
+    statusInputErrors();
+  }
+});
 
 let closeForm = () => {
   addUserForm.classList.add('hidden');
@@ -469,7 +739,10 @@ let pressEscape = esc => {
 
 closeFormBtn.addEventListener('click', closeForm);
 overlay.addEventListener('click', closeForm);
-cancelFormBtn.addEventListener('click', closeForm);
+cancelFormBtn.addEventListener('click', () => {
+  resetForm();
+  closeForm();
+});
 
 //theade
 
@@ -515,9 +788,7 @@ let sortByStatusZtoA = (a, b) => {
   }
 };
 
-
-
-// Name Sort-by
+// Sort-by
 let blueUpIcon = document.querySelectorAll('.blue-up');
 let blackUpIcon = document.querySelectorAll('.black-up');
 let blackDownIcon = document.querySelectorAll('.black-down');
@@ -526,85 +797,82 @@ let blueDownIcon = document.querySelectorAll('.blue-down');
 let tableNameP = document.querySelector('.p-name');
 let tableStatusP = document.querySelector('.p-status');
 
+let UpIcon = (i, j) => {
+  blackUpIcon[i].classList.add('hidden');
+  blackDownIcon[i].classList.remove('hidden');
+  blueUpIcon[i].classList.remove('hidden');
+  blueDownIcon[i].classList.add('hidden');
+  blueUpIcon[j].classList.add('hidden');
+  blueDownIcon[j].classList.add('hidden');
+  blackUpIcon[j].classList.remove('hidden');
+  blackDownIcon[j].classList.remove('hidden');
+};
+let DownIcon = (i, j) => {
+  blackUpIcon[i].classList.remove('hidden');
+  blackDownIcon[i].classList.add('hidden');
+  blueUpIcon[i].classList.add('hidden');
+  blueDownIcon[i].classList.remove('hidden');
+  blueUpIcon[j].classList.add('hidden');
+  blueDownIcon[j].classList.add('hidden');
+  blackUpIcon[j].classList.remove('hidden');
+  blackDownIcon[j].classList.remove('hidden');
+};
+
 blackUpIcon[0].addEventListener('click', () => {
-  blackUpIcon[0].classList.add('hidden');
-  blackDownIcon[0].classList.remove('hidden');
-  blueUpIcon[0].classList.remove('hidden');
-  blueDownIcon[0].classList.add('hidden');
-  blueUpIcon[1].classList.add('hidden');
-  blueDownIcon[1].classList.add('hidden');
-  blackUpIcon[1].classList.remove('hidden');
-  blackDownIcon[1].classList.remove('hidden');
+  UpIcon(0, 1);
   sortUser.sort(sortByFullNameAtoZ);
   refresh(sortUser);
 });
-blackDownIcon[0].addEventListener('click', () => {
-  blackUpIcon[0].classList.remove('hidden');
-  blackDownIcon[0].classList.add('hidden');
-  blueUpIcon[0].classList.add('hidden');
-  blueDownIcon[0].classList.remove('hidden');
-  blueUpIcon[1].classList.add('hidden');
-  blueDownIcon[1].classList.add('hidden');
-  blackUpIcon[1].classList.remove('hidden');
-  blackDownIcon[1].classList.remove('hidden');
-  sortUser.sort(sortByFullNameZtoA);
-  refresh(sortUser);
-});
-
-let resetNameSort = () => {
-  blackUpIcon[0].classList.remove('hidden');
-  blackDownIcon[0].classList.remove('hidden');
-  blueUpIcon[0].classList.add('hidden');
-  blueDownIcon[0].classList.add('hidden');
-  refresh(user);
-};
-blueUpIcon[0].addEventListener('click', resetNameSort);
-blueDownIcon[0].addEventListener('click', resetNameSort);
-tableNameP.addEventListener('click', resetNameSort);
-
-// Status Sort-by
 
 blackUpIcon[1].addEventListener('click', () => {
-  blackUpIcon[1].classList.add('hidden');
-  blackDownIcon[1].classList.remove('hidden');
-  blueUpIcon[1].classList.remove('hidden');
-  blueDownIcon[1].classList.add('hidden');
-  blueUpIcon[0].classList.add('hidden');
-  blueDownIcon[0].classList.add('hidden');
-  blackUpIcon[0].classList.remove('hidden');
-  blackDownIcon[0].classList.remove('hidden');
+  UpIcon(1, 0);
   sortUser.sort(sortByStatusAtoZ);
   refresh(sortUser);
 });
+
+blackDownIcon[0].addEventListener('click', () => {
+  DownIcon(0, 1);
+  sortUser.sort(sortByFullNameZtoA);
+  refresh(sortUser);
+});
 blackDownIcon[1].addEventListener('click', () => {
-  blackUpIcon[1].classList.remove('hidden');
-  blackDownIcon[1].classList.add('hidden');
-  blueUpIcon[1].classList.add('hidden');
-  blueDownIcon[1].classList.remove('hidden');
-  blueUpIcon[0].classList.add('hidden');
-  blueDownIcon[0].classList.add('hidden');
-  blackUpIcon[0].classList.remove('hidden');
-  blackDownIcon[0].classList.remove('hidden');
+  DownIcon(1, 0);
   sortUser.sort(sortByStatusZtoA);
   refresh(sortUser);
 });
 
-let resetStatusSort = () => {
-  blackUpIcon[1].classList.remove('hidden');
-  blackDownIcon[1].classList.remove('hidden');
-  blueUpIcon[1].classList.add('hidden');
-  blueDownIcon[1].classList.add('hidden');
+let resetSort = i => {
+  blackUpIcon[i].classList.remove('hidden');
+  blackDownIcon[i].classList.remove('hidden');
+  blueUpIcon[i].classList.add('hidden');
+  blueDownIcon[i].classList.add('hidden');
   refresh(user);
 };
-blueUpIcon[1].addEventListener('click', resetStatusSort);
-blueDownIcon[1].addEventListener('click', resetStatusSort);
-tableStatusP.addEventListener('click', resetStatusSort);
+
+blueUpIcon[0].addEventListener('click', () => {
+  resetSort(0);
+});
+blueDownIcon[0].addEventListener('click', () => {
+  resetSort(0);
+});
+tableNameP.addEventListener('click', () => {
+  resetSort(0);
+});
+blueUpIcon[1].addEventListener('click', () => {
+  resetSort(1);
+});
+blueDownIcon[1].addEventListener('click', () => {
+  resetSort(1);
+});
+tableStatusP.addEventListener('click', () => {
+  resetSort(1);
+});
 
 //tbody
 
 let tableBody = document.querySelector('.table-body');
 
-let addNewUser = userData => {
+let addNewUser = (userData, index) => {
   //create Elements :
   let UserRow = document.createElement('tr');
   let currency = document.createElement('p');
@@ -648,6 +916,7 @@ let addNewUser = userData => {
   let colorDeleteUserIcon = document.createElement('img');
 
   //create Classes :
+  UserRow.setAttribute('user-index', index);
   currency.setAttribute('class', 'currency');
 
   checkUserTD.setAttribute('class', 'center-text-align');
@@ -755,7 +1024,19 @@ let addNewUser = userData => {
     colorDeleteUserIcon.classList.add('hidden');
     blackDeleteUserIcon.classList.remove('hidden');
   });
-  //colorDeleteUserIcon.addEventListener('click', () => {});
+
+  //delete user :
+
+  colorDeleteUserIcon.addEventListener('click', e => {
+    e.preventDefault();
+    let deleteUser = window.confirm(
+      'Are you sure you wont to delete this user ?'
+    );
+    if (deleteUser === true) {
+      user.splice(index, 1);
+    }
+    refresh(user);
+  });
 };
 
 // tfoot
@@ -797,32 +1078,18 @@ colorRightArrow.addEventListener('mouseleave', () => {
 //colorLeftArrow.addEventListener('click', () => {});
 //colorRightArrow.addEventListener('click', () => {});
 
-
-
-
-
-
-
-
 // onLoad
 
 let emptyData = document.querySelector('.empty-row');
 let noUsers = () => {
-    emptyData.classList.remove('hidden');
-    emptyData.textContent = `you dont have any user here :(`;
-
+  emptyData.classList.remove('hidden');
+  emptyData.textContent = `you dont have any user here :(`;
 };
 
-let clearTableBody = () => {
-  while (tableBody.hasChildNodes()) {
-    tableBody.removeChild(tableBody.firstChild);
-  }
-}
-
-let refresh = (arr) => {
-  clearTableBody();
-  arr.forEach(element => {
-    addNewUser(element);
+let refresh = arr => {
+  tableBody.innerHTML = null;
+  arr.forEach((element, index) => {
+    addNewUser(element, index);
   });
 };
 
