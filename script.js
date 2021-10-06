@@ -1,8 +1,8 @@
 'use strict';
-let req = [
-  // - Added customer should adher to all table logic (Search, Sort..)
-];
-let done = [
+let req = {
+  //     - save everything to local storage
+};
+let done = {
   // - Form to add customer
   // - Fields
   //     - Customer number (Number field)
@@ -25,8 +25,14 @@ let done = [
   //     - Description should at least have 10 characters (“Description should at least have 10 characters”)
   // - After submission clear form
   // - Validation triggers on submit, if validation passed add customer, otherwise show errors.
-];
-let user = [
+  // - Added customer should adher to all table logic (Search, Sort..)
+  // Data table requirements:
+  //     - Validation on change
+  //     - show a notification when a customer is added (5s)
+  //     - Form fill progress percentage
+};
+
+let users = [
   {
     fullName: 'Teresa Reynolds',
     idNumber: '4709935578',
@@ -35,8 +41,8 @@ let user = [
     currency: 'USD',
     deposit: '0190108',
     rate: '641544',
-    balance: '1598207735',
-    status: 'inactive',
+    balance: '-1598207735',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Lois Waters',
@@ -47,7 +53,7 @@ let user = [
     deposit: '4468146',
     rate: '892496',
     balance: '9369680749',
-    status: 'active',
+    status: 'INACTIVE',
   },
   {
     fullName: 'Roberta Francis',
@@ -57,8 +63,8 @@ let user = [
     currency: 'EUR',
     deposit: '1472711',
     rate: '224769',
-    balance: '6908307213',
-    status: 'active',
+    balance: '-6908307213',
+    status: 'PAID',
   },
   {
     fullName: 'Mable Caldwell',
@@ -68,8 +74,8 @@ let user = [
     currency: 'INR',
     deposit: '2489707',
     rate: '342142',
-    balance: '8758528450',
-    status: 'inactive',
+    balance: '0',
+    status: 'OPEN',
   },
   {
     fullName: 'Genevieve Cortez',
@@ -80,7 +86,7 @@ let user = [
     deposit: '8843045',
     rate: '812272',
     balance: '3166305644',
-    status: 'inactive',
+    status: 'ORDERED',
   },
   {
     fullName: 'Wayne Hubbard',
@@ -90,8 +96,8 @@ let user = [
     currency: 'INR',
     deposit: '1461559',
     rate: '062410',
-    balance: '1122470730',
-    status: 'active',
+    balance: '-1122470730',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Lucy Elliott',
@@ -102,7 +108,7 @@ let user = [
     deposit: '3524020',
     rate: '277289',
     balance: '3714576807',
-    status: 'active',
+    status: 'ORDERED',
   },
   {
     fullName: 'Darnell Barton',
@@ -113,7 +119,7 @@ let user = [
     deposit: '1136287',
     rate: '247781',
     balance: '3902749183',
-    status: 'active',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Melvin Bennett',
@@ -124,7 +130,7 @@ let user = [
     deposit: '2582985',
     rate: '429851',
     balance: '5237845048',
-    status: 'inactive',
+    status: 'OPEN',
   },
   {
     fullName: 'Amber Griffith',
@@ -135,7 +141,7 @@ let user = [
     deposit: '4856617',
     rate: '256769',
     balance: '7819995075',
-    status: 'inactive',
+    status: 'PAID',
   },
   {
     fullName: 'Cristina Snyder',
@@ -146,7 +152,7 @@ let user = [
     deposit: '5977925',
     rate: '575380',
     balance: '6866997163',
-    status: 'active',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Beth Perry',
@@ -157,7 +163,7 @@ let user = [
     deposit: '5789310',
     rate: '530072',
     balance: '6560775003',
-    status: 'active',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Chelsea Stone',
@@ -168,7 +174,7 @@ let user = [
     deposit: '5824163',
     rate: '484711',
     balance: '8592461599',
-    status: 'inactive',
+    status: 'INACTIVE',
   },
   {
     fullName: 'Thelma Padilla',
@@ -179,7 +185,7 @@ let user = [
     deposit: '0966945',
     rate: '655960',
     balance: '2312433214',
-    status: 'active',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Irene Welch',
@@ -190,7 +196,7 @@ let user = [
     deposit: '1832706',
     rate: '170854',
     balance: '3035524055',
-    status: 'inactive',
+    status: 'OPEN',
   },
   {
     fullName: 'Doris Chandler',
@@ -201,7 +207,7 @@ let user = [
     deposit: '7200319',
     rate: '221401',
     balance: '3575076183',
-    status: 'active',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Frances Black',
@@ -212,7 +218,7 @@ let user = [
     deposit: '0140836',
     rate: '143802',
     balance: '8671405270',
-    status: 'inactive',
+    status: 'INACTIVE',
   },
   {
     fullName: 'Marcia Harris',
@@ -223,7 +229,7 @@ let user = [
     deposit: '7863259',
     rate: '959580',
     balance: '2044120124',
-    status: 'inactive',
+    status: 'PAID',
   },
   {
     fullName: 'Delores Foster',
@@ -234,7 +240,7 @@ let user = [
     deposit: '0050501',
     rate: '361711',
     balance: '6022690123',
-    status: 'active',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Norman Buchanan',
@@ -245,7 +251,7 @@ let user = [
     deposit: '9134971',
     rate: '538399',
     balance: '0850711688',
-    status: 'inactive',
+    status: 'INACTIVE',
   },
   {
     fullName: 'Charles Bradley',
@@ -256,7 +262,7 @@ let user = [
     deposit: '3660042',
     rate: '529565',
     balance: '8564614162',
-    status: 'active',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Fredrick Young',
@@ -267,7 +273,7 @@ let user = [
     deposit: '8016529',
     rate: '892306',
     balance: '2449115824',
-    status: 'inactive',
+    status: 'INACTIVE',
   },
   {
     fullName: 'Juan Joseph',
@@ -278,7 +284,7 @@ let user = [
     deposit: '3585134',
     rate: '925489',
     balance: '1925762012',
-    status: 'active',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Lillie Maxwell',
@@ -289,7 +295,7 @@ let user = [
     deposit: '9599424',
     rate: '703555',
     balance: '3067796592',
-    status: 'inactive',
+    status: 'PAID',
   },
   {
     fullName: 'Omar Munoz',
@@ -300,7 +306,7 @@ let user = [
     deposit: '5042734',
     rate: '882937',
     balance: '9554866191',
-    status: 'inactive',
+    status: 'INACTIVE',
   },
   {
     fullName: 'Joann Morrison',
@@ -311,7 +317,7 @@ let user = [
     deposit: '9541969',
     rate: '267336',
     balance: '4257941434',
-    status: 'active',
+    status: 'OPEN',
   },
   {
     fullName: 'Archie Stokes ',
@@ -322,7 +328,7 @@ let user = [
     deposit: '5479568',
     rate: '154580',
     balance: '6639078105',
-    status: 'inactive',
+    status: 'ORDERED',
   },
   {
     fullName: 'Jamie Cole',
@@ -333,7 +339,7 @@ let user = [
     deposit: '2740067',
     rate: '726171',
     balance: '9234710923',
-    status: 'inactive',
+    status: 'INACTIVE',
   },
   {
     fullName: 'Earnest Roberson',
@@ -344,7 +350,7 @@ let user = [
     deposit: '2295637',
     rate: '388082',
     balance: '8409647561',
-    status: 'active',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Yolanda Griffin',
@@ -355,7 +361,7 @@ let user = [
     deposit: '0405947',
     rate: '309092',
     balance: '7571624225',
-    status: 'inactive',
+    status: 'INACTIVE',
   },
   {
     fullName: 'Elijah Banks',
@@ -366,7 +372,7 @@ let user = [
     deposit: '0321758',
     rate: '590848',
     balance: '6025379216',
-    status: 'active',
+    status: 'PAID',
   },
   {
     fullName: 'Hector Glover',
@@ -377,7 +383,7 @@ let user = [
     deposit: '4335385',
     rate: '512823',
     balance: '2737103623',
-    status: 'inactive',
+    status: 'INACTIVE',
   },
   {
     fullName: 'Margarita Cunningham',
@@ -388,7 +394,7 @@ let user = [
     deposit: '1827344',
     rate: '407700',
     balance: '3073964890',
-    status: 'inactive',
+    status: 'OPEN',
   },
 ];
 
@@ -442,17 +448,20 @@ colorDeleteSearch.addEventListener('mouseleave', () => {
   colorDeleteSearch.classList.add('hidden');
   blackDeleteSearch.classList.remove('hidden');
 });
+
 colorDeleteSearch.addEventListener('click', () => {
-  searchInputField.value = '';
   searchInputField.focus();
-  refresh(user);
+  searchInputField.value = '';
+  refresh(users);
   colorDeleteSearch.classList.add('hidden');
   blackDeleteSearch.classList.add('hidden');
 });
 
 searchBar.addEventListener('mouseleave', () => {
-  searchIcon.classList.remove('hidden');
-  searchBar.classList.add('hidden');
+  if (searchInputField.value.trim() === '') {
+    searchIcon.classList.remove('hidden');
+    searchBar.classList.add('hidden');
+  }
 });
 
 searchInputField.addEventListener('input', () => {
@@ -465,19 +474,22 @@ searchInputField.addEventListener('input', () => {
 
 // search
 
-searchInputField.addEventListener('keyup', () => {
-  let searchInputValue = searchInputField.value;
-  let copyOfUser = user.slice();
-  let filtered = copyOfUser.filter(userD => {
-    if (userD.fullName.toLowerCase().includes(searchInputValue)) {
-      return userD;
-    }
-    if (userD.fullName.toUpperCase().includes(searchInputValue)) {
-      return userD;
-    }
+let filteredArr = arr => {
+  let searchInputValue = searchInputField.value.toLowerCase();
+  let filtered = arr.filter(user => {
+    return (
+      user.fullName.toUpperCase().includes(searchInputValue) ||
+      user.description.toUpperCase().includes(searchInputValue) ||
+      user.fullName.toLowerCase().includes(searchInputValue) ||
+      user.description.toLowerCase().includes(searchInputValue)
+    );
   });
-  refresh(filtered);
-  emptyData.classList.add('hidden');
+  return filtered;
+};
+
+searchInputField.addEventListener('keyup', () => {
+  tableBody.innerHTML = null;
+  refresh(users);
 });
 
 // Add User Icon
@@ -491,6 +503,7 @@ addUserColoredIcon.addEventListener('mouseleave', () => {
   addUserBlackIcon.classList.remove('hidden');
   addUserColoredIcon.classList.add('hidden');
 });
+
 addUserColoredIcon.addEventListener('click', () => {
   overlay.classList.remove('hidden');
   addUserForm.classList.remove('hidden');
@@ -499,6 +512,10 @@ addUserColoredIcon.addEventListener('click', () => {
 });
 
 // Form
+
+let progressBar = document.querySelector('.progress-bar');
+let progressColor = document.querySelector('.progress-color');
+let progressValue = document.querySelector('.progress-value');
 
 let fullNameInput = document.querySelector('.full-name-input');
 let fullNameInputDiv = document.querySelector('.full-name-input-div');
@@ -535,6 +552,7 @@ let onBlurValid = k => {
     errors[k].classList.add('non-visible');
   }
 };
+
 let onBlurError = k => {
   for (let i = 0; i < inputDiv.length; i++) {
     inputDiv[k].classList.add('error-border');
@@ -566,7 +584,7 @@ let fullNameInputErrors = () => {
   } else {
     onBlurValid(0);
   }
-  user.forEach(element => {
+  users.forEach(element => {
     if (element.fullName == fullNameInput.value) {
       onBlurError(0);
       errors[0].textContent = `User already exists`;
@@ -583,7 +601,7 @@ let idNumberInputErrors = () => {
     onBlurError(1);
     errors[1].textContent = 'Customer number should be 10 digits';
   }
-  user.forEach(element => {
+  users.forEach(element => {
     if (element.idNumber == idNumberInput.value) {
       onBlurError(1);
       errors[1].textContent = `User ID Number already exists`;
@@ -624,43 +642,114 @@ let statusInputErrors = () => {
   }
 };
 
+let validArr = [];
+let addProgressValue = i => {
+  if (
+    Object.entries(inputDiv).every(element =>
+      element[1].classList.contains('valid-border')
+    )
+  ) {
+    progressValue.textContent = '100';
+    progressColor.style.width = `100%`;
+  } else {
+    if (
+      inputDiv[i].classList.contains('valid-border') &&
+      !validArr.includes(`${i} is valid`)
+    ) {
+      validArr.unshift(`${i} is valid`);
+      // console.log(validArr);
+    } else if (
+      !inputDiv[i].classList.contains('valid-border') &&
+      validArr.includes(`${i} is valid`)
+    ) {
+      validArr.splice(`${i} is valid`, 1);
+      // console.log(validArr);
+    }
+    progressValue.textContent = (100 / inputDiv.length) * validArr.length;
+    progressColor.style.width = `${progressValue.textContent}%`;
+  }
+};
+
 fullNameInput.addEventListener('keyup', () => {
   fullNameInputErrors();
+  addProgressValue(0);
+});
+
+fullNameInput.addEventListener('blur', () => {
+  fullNameInputErrors();
+  addProgressValue(0);
 });
 
 idNumberInput.addEventListener('keyup', () => {
   mustBeNumber(idNumberInput.value, 1);
   idNumberInputErrors();
+  addProgressValue(1);
+});
+
+idNumberInput.addEventListener('blur', () => {
+  mustBeNumber(idNumberInput.value, 1);
+  idNumberInputErrors();
+  addProgressValue(1);
 });
 
 descriptionInput.addEventListener('keyup', () => {
   descriptionInputErrors();
+  addProgressValue(2);
+});
+
+descriptionInput.addEventListener('blur', () => {
+  descriptionInputErrors();
+  addProgressValue(2);
 });
 
 currencyInput.addEventListener('change', () => {
   currencyInputErrors();
+  addProgressValue(3);
 });
+
 currencyInput.addEventListener('blur', () => {
   currencyInputErrors();
+  addProgressValue(3);
 });
 
 depositInput.addEventListener('keyup', () => {
   mustBeNumber(depositInput.value, 4);
+  addProgressValue(4);
+});
+
+depositInput.addEventListener('blur', () => {
+  mustBeNumber(depositInput.value, 4);
+  addProgressValue(4);
 });
 
 rateInput.addEventListener('keyup', () => {
   mustBeNumber(rateInput.value, 5);
+  addProgressValue(5);
+});
+
+rateInput.addEventListener('blur', () => {
+  mustBeNumber(rateInput.value, 5);
+  addProgressValue(5);
 });
 
 balanceInput.addEventListener('keyup', () => {
   mustBeNumber(balanceInput.value, 6);
+  addProgressValue(6);
+});
+
+balanceInput.addEventListener('blur', () => {
+  mustBeNumber(balanceInput.value, 6);
+  addProgressValue(6);
 });
 
 statusInput.addEventListener('change', () => {
   statusInputErrors();
+  addProgressValue(7);
 });
+
 statusInput.addEventListener('blur', () => {
   statusInputErrors();
+  addProgressValue(7);
 });
 
 let resetForm = () => {
@@ -682,25 +771,33 @@ let resetForm = () => {
   errors.forEach(element => {
     element.classList.add('non-visible');
   });
+  progressValue.textContent = '0';
+  progressColor.style.width = '1%';
+  validArr = [];
 };
 
 clearBtn.addEventListener('click', resetForm);
 
-//submit
+//Form Modal
+let successfullyAddUserModal = document.querySelector('.add-user-modal');
+let successfullyAddUserModalValue = document.querySelector(
+  '.add-user-modal-value'
+);
+let hideUserModal = () => {
+  successfullyAddUserModal.classList.add('non-visible');
+};
 
 addUserForm.addEventListener('submit', e => {
   e.preventDefault();
   if (
-    inputDiv[0].classList.contains('valid-border') &&
-    inputDiv[1].classList.contains('valid-border') &&
-    inputDiv[2].classList.contains('valid-border') &&
-    inputDiv[3].classList.contains('valid-border') &&
-    inputDiv[4].classList.contains('valid-border') &&
-    inputDiv[5].classList.contains('valid-border') &&
-    inputDiv[6].classList.contains('valid-border') &&
-    inputDiv[7].classList.contains('valid-border')
+    Object.entries(inputDiv).every(element =>
+      element[1].classList.contains('valid-border')
+    )
   ) {
-    user.unshift({
+    successfullyAddUserModal.classList.remove('non-visible');
+    successfullyAddUserModalValue.innerHTML = fullNameInput.value;
+    setTimeout('hideUserModal()', 5000);
+    users.unshift({
       fullName: fullNameInput.value,
       idNumber: idNumberInput.value,
       description: descriptionInput.value,
@@ -710,7 +807,7 @@ addUserForm.addEventListener('submit', e => {
       balance: balanceInput.value,
       status: statusInput.value,
     });
-    refresh(user);
+    refresh(users);
     resetForm();
     closeForm();
   } else {
@@ -731,12 +828,14 @@ let closeForm = () => {
   overlay.classList.add('hidden');
   closeFormBtn.classList.add('hidden');
 };
+
 let pressEscape = esc => {
   if (esc.key === 'Escape' && !addUserForm.classList.contains('hidden')) {
     closeForm();
   }
 };
 
+//submit
 closeFormBtn.addEventListener('click', closeForm);
 overlay.addEventListener('click', closeForm);
 cancelFormBtn.addEventListener('click', () => {
@@ -748,29 +847,18 @@ cancelFormBtn.addEventListener('click', () => {
 
 // Sort Functions
 
-let sortUser = user.slice();
-
 let sortByFullNameAtoZ = (a, b) => {
-  if (a.fullName > b.fullName) {
+  if (a.fullName.toLowerCase() > b.fullName.toLowerCase()) {
     return 1;
-  } else if (b.fullName > a.fullName) {
+  } else if (b.fullName.toLowerCase() > a.fullName.toLowerCase()) {
     return -1;
-  } else {
-    return 0;
-  }
-};
-let sortByFullNameZtoA = (a, b) => {
-  if (a.fullName > b.fullName) {
-    return -1;
-  } else if (b.fullName > a.fullName) {
-    return 1;
   } else {
     return 0;
   }
 };
 
 let sortByStatusAtoZ = (a, b) => {
-  if (a.status > b.status) {
+  if (a.status.toLowerCase() > b.status.toLowerCase()) {
     return 1;
   } else if (b.status > a.status) {
     return -1;
@@ -778,10 +866,21 @@ let sortByStatusAtoZ = (a, b) => {
     return 0;
   }
 };
-let sortByStatusZtoA = (a, b) => {
-  if (a.status > b.status) {
+
+let sortByFullNameZtoA = (a, b) => {
+  if (a.fullName.toLowerCase() > b.fullName.toLowerCase()) {
     return -1;
-  } else if (b.status > a.status) {
+  } else if (b.fullName.toLowerCase() > a.fullName.toLowerCase()) {
+    return 1;
+  } else {
+    return 0;
+  }
+};
+
+let sortByStatusZtoA = (a, b) => {
+  if (a.status.toLowerCase() > b.status.toLowerCase()) {
+    return -1;
+  } else if (b.status.toLowerCase() > a.status.toLowerCase()) {
     return 1;
   } else {
     return 0;
@@ -797,7 +896,7 @@ let blueDownIcon = document.querySelectorAll('.blue-down');
 let tableNameP = document.querySelector('.p-name');
 let tableStatusP = document.querySelector('.p-status');
 
-let UpIcon = (i, j) => {
+let sortUpIcon = (i, j) => {
   blackUpIcon[i].classList.add('hidden');
   blackDownIcon[i].classList.remove('hidden');
   blueUpIcon[i].classList.remove('hidden');
@@ -807,7 +906,8 @@ let UpIcon = (i, j) => {
   blackUpIcon[j].classList.remove('hidden');
   blackDownIcon[j].classList.remove('hidden');
 };
-let DownIcon = (i, j) => {
+
+let sortDownIcon = (i, j) => {
   blackUpIcon[i].classList.remove('hidden');
   blackDownIcon[i].classList.add('hidden');
   blueUpIcon[i].classList.add('hidden');
@@ -819,26 +919,31 @@ let DownIcon = (i, j) => {
 };
 
 blackUpIcon[0].addEventListener('click', () => {
-  UpIcon(0, 1);
-  sortUser.sort(sortByFullNameAtoZ);
-  refresh(sortUser);
+  sortUpIcon(0, 1);
+  let sortFiltered = users.slice();
+  sortFiltered.sort(sortByFullNameAtoZ);
+  refresh(sortFiltered);
 });
 
 blackUpIcon[1].addEventListener('click', () => {
-  UpIcon(1, 0);
-  sortUser.sort(sortByStatusAtoZ);
-  refresh(sortUser);
+  sortUpIcon(1, 0);
+  let sortFiltered = users.slice();
+  sortFiltered.sort(sortByStatusAtoZ);
+  refresh(sortFiltered);
 });
 
 blackDownIcon[0].addEventListener('click', () => {
-  DownIcon(0, 1);
-  sortUser.sort(sortByFullNameZtoA);
-  refresh(sortUser);
+  sortDownIcon(0, 1);
+  let sortFiltered = users.slice();
+  sortFiltered.sort(sortByFullNameZtoA);
+  refresh(sortFiltered);
 });
+
 blackDownIcon[1].addEventListener('click', () => {
-  DownIcon(1, 0);
-  sortUser.sort(sortByStatusZtoA);
-  refresh(sortUser);
+  sortDownIcon(1, 0);
+  let sortFiltered = users.slice();
+  sortFiltered.sort(sortByStatusZtoA);
+  refresh(sortFiltered);
 });
 
 let resetSort = i => {
@@ -846,24 +951,29 @@ let resetSort = i => {
   blackDownIcon[i].classList.remove('hidden');
   blueUpIcon[i].classList.add('hidden');
   blueDownIcon[i].classList.add('hidden');
-  refresh(user);
+  refresh(users);
 };
 
 blueUpIcon[0].addEventListener('click', () => {
   resetSort(0);
 });
+
 blueDownIcon[0].addEventListener('click', () => {
   resetSort(0);
 });
+
 tableNameP.addEventListener('click', () => {
   resetSort(0);
 });
+
 blueUpIcon[1].addEventListener('click', () => {
   resetSort(1);
 });
+
 blueDownIcon[1].addEventListener('click', () => {
   resetSort(1);
 });
+
 tableStatusP.addEventListener('click', () => {
   resetSort(1);
 });
@@ -871,12 +981,17 @@ tableStatusP.addEventListener('click', () => {
 //tbody
 
 let tableBody = document.querySelector('.table-body');
+let emptyData = document.querySelector('.empty-row');
 
 let addNewUser = (userData, index) => {
   //create Elements :
   let UserRow = document.createElement('tr');
-  let currency = document.createElement('p');
-  let currencyValue = document.createTextNode(userData.currency);
+  let rateCurrency = document.createElement('p');
+  let rateCurrencyValue = document.createTextNode(userData.currency);
+  let balanceCurrency = document.createElement('p');
+  let balanceCurrencyValue = document.createTextNode(userData.currency);
+  let depositCurrency = document.createElement('p');
+  let depositCurrencyValue = document.createTextNode(userData.currency);
 
   let checkUserTD = document.createElement('td');
   let uncheckedUserIcon = document.createElement('img');
@@ -894,32 +1009,44 @@ let addNewUser = (userData, index) => {
 
   let rateAndCurrencyTD = document.createElement('td');
   let rate = document.createElement('p');
-  let rateValue = document.createTextNode(userData.rate);
-
+  let rateValue = document.createTextNode(Number(userData.rate).toFixed(2));
   let balanceAndCurrencyTD = document.createElement('td');
   let balance = document.createElement('p');
-  let balanceValue = document.createTextNode(userData.balance);
+  let balanceValue = document.createTextNode(Number(userData.balance).toFixed(2));
 
   let depositAndCurrencyTD = document.createElement('td');
   let deposit = document.createElement('p');
-  let depositValue = document.createTextNode(userData.deposit);
+  let depositValue = document.createTextNode(Number(userData.deposit).toFixed(2));
 
   let statusTD = document.createElement('td');
   let activeBtn = document.createElement('button');
   let activeBtnValue = document.createTextNode(userData.status);
   let inactiveBtn = document.createElement('button');
   let inactiveBtnValue = document.createTextNode(userData.status);
+  let paidBtn = document.createElement('button');
+  let paidBtnValue = document.createTextNode(userData.status);
+  let openBtn = document.createElement('button');
+  let openBtnValue = document.createTextNode(userData.status);
+  let orderedBtn = document.createElement('button');
+  let orderedBtnValue = document.createTextNode(userData.status);
 
   let moreTD = document.createElement('td');
   let moreDiv = document.createElement('div');
   let blackDeleteUserIcon = document.createElement('img');
   let colorDeleteUserIcon = document.createElement('img');
+  let blackEditUserIcon = document.createElement('img');
+  let colorEditUserIcon = document.createElement('img');
+  let blackPrintUserIcon = document.createElement('img');
+  let colorPrintUserIcon = document.createElement('img');
 
   //create Classes :
   UserRow.setAttribute('user-index', index);
-  currency.setAttribute('class', 'currency');
+  // UserRow.setAttribute('class', 'tr');
+  rateCurrency.setAttribute('class', 'currency right-text-align');
+  balanceCurrency.setAttribute('class', 'currency right-text-align');
+  depositCurrency.setAttribute('class', 'currency right-text-align');
 
-  checkUserTD.setAttribute('class', 'center-text-align');
+  checkUserTD.setAttribute('class', 'check-user-td center-text-align');
   uncheckedUserIcon.setAttribute('src', './images/unchecked-user.svg');
   uncheckedUserIcon.setAttribute('class', 'medium-icons');
   checkedUserIcon.setAttribute('src', './images/checked-user.svg');
@@ -933,17 +1060,20 @@ let addNewUser = (userData, index) => {
   description.setAttribute('class', 'description');
 
   rateAndCurrencyTD.setAttribute('class', '');
-  rate.setAttribute('class', 'rate');
+  rate.setAttribute('class', 'rate right-text-align');
 
   balanceAndCurrencyTD.setAttribute('class', '');
-  balance.setAttribute('class', 'balance');
+  balance.setAttribute('class', 'balance right-text-align');
 
   depositAndCurrencyTD.setAttribute('class', '');
-  deposit.setAttribute('class', 'deposit');
+  deposit.setAttribute('class', 'deposit right-text-align');
 
   statusTD.setAttribute('class', 'center-text-align');
   activeBtn.setAttribute('class', 'active-btn');
   inactiveBtn.setAttribute('class', 'inactive-btn');
+  paidBtn.setAttribute('class', 'paid-btn');
+  openBtn.setAttribute('class', 'open-btn');
+  orderedBtn.setAttribute('class', 'ordered-btn');
 
   moreTD.setAttribute('class', 'center-text-align');
 
@@ -952,14 +1082,24 @@ let addNewUser = (userData, index) => {
   colorDeleteUserIcon.setAttribute('src', './images/delete-user.svg');
   colorDeleteUserIcon.setAttribute('class', 'medium-icons hidden');
 
+  blackEditUserIcon.setAttribute('src', './images/b-edit-user.svg');
+  blackEditUserIcon.setAttribute('class', 'medium-icons edit-icon');
+  colorEditUserIcon.setAttribute('src', './images/edit-user.svg');
+  colorEditUserIcon.setAttribute('class', 'medium-icons hidden edit-icon');
+
+  blackPrintUserIcon.setAttribute('src', './images/b-print-user.png');
+  blackPrintUserIcon.setAttribute('class', 'medium-icons');
+  colorPrintUserIcon.setAttribute('src', './images/print-user.png');
+  colorPrintUserIcon.setAttribute('class', 'medium-icons hidden');
+
   //Append Child :
   tableBody.appendChild(UserRow);
   UserRow.appendChild(checkUserTD);
   UserRow.appendChild(fullNameIdNumberTD);
   UserRow.appendChild(descriptionTD);
-  UserRow.appendChild(depositAndCurrencyTD);
   UserRow.appendChild(rateAndCurrencyTD);
   UserRow.appendChild(balanceAndCurrencyTD);
+  UserRow.appendChild(depositAndCurrencyTD);
   UserRow.appendChild(statusTD);
   UserRow.appendChild(moreTD);
 
@@ -972,22 +1112,31 @@ let addNewUser = (userData, index) => {
   descriptionTD.appendChild(description);
 
   depositAndCurrencyTD.appendChild(deposit);
-  depositAndCurrencyTD.appendChild(currency);
+  depositAndCurrencyTD.appendChild(depositCurrency);
 
   rateAndCurrencyTD.appendChild(rate);
-  rateAndCurrencyTD.appendChild(currency);
+  rateAndCurrencyTD.appendChild(rateCurrency);
 
   balanceAndCurrencyTD.appendChild(balance);
-  balanceAndCurrencyTD.appendChild(currency);
+  balanceAndCurrencyTD.appendChild(balanceCurrency);
 
   statusTD.appendChild(activeBtn);
   statusTD.appendChild(inactiveBtn);
+  statusTD.appendChild(paidBtn);
+  statusTD.appendChild(openBtn);
+  statusTD.appendChild(orderedBtn);
 
   moreTD.appendChild(moreDiv);
   moreTD.appendChild(blackDeleteUserIcon);
   moreTD.appendChild(colorDeleteUserIcon);
+  moreTD.appendChild(blackEditUserIcon);
+  moreTD.appendChild(colorEditUserIcon);
+  moreTD.appendChild(blackPrintUserIcon);
+  moreTD.appendChild(colorPrintUserIcon);
 
-  currency.appendChild(currencyValue);
+  depositCurrency.appendChild(depositCurrencyValue);
+  rateCurrency.appendChild(rateCurrencyValue);
+  balanceCurrency.appendChild(balanceCurrencyValue);
   fullName.appendChild(fullNameValue);
   idNumber.appendChild(idNumberValue);
   description.appendChild(descriptionValue);
@@ -996,24 +1145,48 @@ let addNewUser = (userData, index) => {
   deposit.appendChild(depositValue);
   activeBtn.appendChild(activeBtnValue);
   inactiveBtn.appendChild(inactiveBtnValue);
+  paidBtn.appendChild(paidBtnValue);
+  openBtn.appendChild(openBtnValue);
+  orderedBtn.appendChild(orderedBtnValue);
 
   //Add Styles
 
-  uncheckedUserIcon.addEventListener('click', () => {
-    uncheckedUserIcon.classList.add('hidden');
-    checkedUserIcon.classList.remove('hidden');
-  });
-  checkedUserIcon.addEventListener('click', () => {
-    checkedUserIcon.classList.add('hidden');
-    uncheckedUserIcon.classList.remove('hidden');
-  });
-
-  if (userData.status === 'active') {
+  if (userData.status === 'ACTIVE') {
     activeBtn.classList.remove('hidden');
     inactiveBtn.classList.add('hidden');
-  } else {
-    inactiveBtn.classList.remove('hidden');
+    paidBtn.classList.add('hidden');
+    openBtn.classList.add('hidden');
+    orderedBtn.classList.add('hidden');
+  } else if (userData.status === 'INACTIVE') {
     activeBtn.classList.add('hidden');
+    inactiveBtn.classList.remove('hidden');
+    paidBtn.classList.add('hidden');
+    openBtn.classList.add('hidden');
+    orderedBtn.classList.add('hidden');
+  } else if (userData.status === 'PAID') {
+    activeBtn.classList.add('hidden');
+    inactiveBtn.classList.add('hidden');
+    paidBtn.classList.remove('hidden');
+    openBtn.classList.add('hidden');
+    orderedBtn.classList.add('hidden');
+  } else if (userData.status === 'OPEN') {
+    activeBtn.classList.add('hidden');
+    inactiveBtn.classList.add('hidden');
+    paidBtn.classList.add('hidden');
+    openBtn.classList.remove('hidden');
+    orderedBtn.classList.add('hidden');
+  } else {
+    activeBtn.classList.add('hidden');
+    inactiveBtn.classList.add('hidden');
+    paidBtn.classList.add('hidden');
+    openBtn.classList.add('hidden');
+    orderedBtn.classList.remove('hidden');
+  }
+
+  if (userData.balance > 0) {
+    balance.style.color = '#008400';
+  } else if (userData.balance < 0) {
+    balance.style.color = '#E01A1A';
   }
 
   blackDeleteUserIcon.addEventListener('mouseenter', () => {
@@ -1025,34 +1198,69 @@ let addNewUser = (userData, index) => {
     blackDeleteUserIcon.classList.remove('hidden');
   });
 
+  blackEditUserIcon.addEventListener('mouseenter', () => {
+    blackEditUserIcon.classList.add('hidden');
+    colorEditUserIcon.classList.remove('hidden');
+  });
+  colorEditUserIcon.addEventListener('mouseleave', () => {
+    colorEditUserIcon.classList.add('hidden');
+    blackEditUserIcon.classList.remove('hidden');
+  });
+
+  blackPrintUserIcon.addEventListener('mouseenter', () => {
+    blackPrintUserIcon.classList.add('hidden');
+    colorPrintUserIcon.classList.remove('hidden');
+  });
+  colorPrintUserIcon.addEventListener('mouseleave', () => {
+    colorPrintUserIcon.classList.add('hidden');
+    blackPrintUserIcon.classList.remove('hidden');
+  });
+
+  // check Users
+
+  uncheckedUserIcon.addEventListener('click', () => {
+    uncheckedUserIcon.classList.add('hidden');
+    checkedUserIcon.classList.remove('hidden');
+    UserRow.style.backgroundColor = '#d1dffa';
+    checkUserTD.classList.add('check-before');
+  });
+  checkedUserIcon.addEventListener('click', () => {
+    checkedUserIcon.classList.add('hidden');
+    uncheckedUserIcon.classList.remove('hidden');
+    UserRow.style.backgroundColor = '';
+    checkUserTD.classList.remove('check-before');
+  });
+
   //delete user :
 
   colorDeleteUserIcon.addEventListener('click', e => {
     e.preventDefault();
-    let deleteUser = window.confirm(
-      'Are you sure you wont to delete this user ?'
-    );
-    if (deleteUser === true) {
-      user.splice(index, 1);
+    if (confirm('Are you sure you wont to delete this user ?')) {
+      let userIdNumberIndex = userData.idNumber;
+      if (userData.idNumber.includes(userIdNumberIndex)) {
+        console.log(userIdNumberIndex);
+      }
+      users.splice(users.indexOf(userData), 1);
+      refresh(users);
     }
-    refresh(user);
   });
 };
 
-// tfoot
-let activeUsers = document.querySelector('.active-users');
-let numberOfActiveUsers = [];
-for (let i = 0; i < user.length; i++) {
-  if (user[i].status === 'active') {
-    numberOfActiveUsers.push(user[i].status);
-  }
-}
-activeUsers.textContent = numberOfActiveUsers.length;
 
+// tfoot
+
+// active Users :
+
+let activeUsers = document.querySelector('.active-users');
 let totalOfUsers = document.querySelectorAll('.total-of-users');
-totalOfUsers.forEach(element => {
-  element.textContent = user.length;
-});
+
+// rows per page
+
+let rowsPerPage = document.querySelector('.rows-per-page');
+
+// starting & ending-index
+
+// next / previous page :
 
 let blackRightArrow = document.querySelector('.black-right-arrow');
 let colorRightArrow = document.querySelector('.color-right-arrow');
@@ -1063,14 +1271,17 @@ blackLeftArrow.addEventListener('mouseenter', () => {
   blackLeftArrow.classList.add('hidden');
   colorLeftArrow.classList.remove('hidden');
 });
+
 blackRightArrow.addEventListener('mouseenter', () => {
   blackRightArrow.classList.add('hidden');
   colorRightArrow.classList.remove('hidden');
 });
+
 colorLeftArrow.addEventListener('mouseleave', () => {
   blackLeftArrow.classList.remove('hidden');
   colorLeftArrow.classList.add('hidden');
 });
+
 colorRightArrow.addEventListener('mouseleave', () => {
   blackRightArrow.classList.remove('hidden');
   colorRightArrow.classList.add('hidden');
@@ -1080,21 +1291,51 @@ colorRightArrow.addEventListener('mouseleave', () => {
 
 // onLoad
 
-let emptyData = document.querySelector('.empty-row');
-let noUsers = () => {
-  emptyData.classList.remove('hidden');
-  emptyData.textContent = `you dont have any user here :(`;
-};
-
-let refresh = arr => {
+let refresh = arrayToRender => {
   tableBody.innerHTML = null;
-  arr.forEach((element, index) => {
+  let filteredUsers = filteredArr(arrayToRender) || arrayToRender;
+  filteredUsers.forEach((element, index) => {
     addNewUser(element, index);
+  });
+
+  let numberOfActiveUsers = [];
+  for (let i = 0; i < filteredUsers.length; i++) {
+    if (filteredUsers[i].status === 'ACTIVE') {
+      numberOfActiveUsers.push(filteredUsers[i].status);
+    }
+  }
+  activeUsers.textContent = numberOfActiveUsers.length;
+  totalOfUsers.forEach(element => {
+    element.textContent = filteredUsers.length;
   });
 };
 
-if (user.length == 0) {
-  noUsers();
+// let returnToStartStatus = arr => {
+//   tableBody.innerHTML = null;
+//   searchInputField.value = '';
+//   arr.forEach((element, index) => {
+//     addNewUser(element, index);
+//   });
+//   activeUsers.textContent = arr.length;
+//   let numberOfActiveUsers = [];
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i].status === 'ACTIVE') {
+//       numberOfActiveUsers.push(arr[i].status);
+//     }
+//   }
+//   activeUsers.textContent = numberOfActiveUsers.length;
+//   totalOfUsers.forEach(element => {
+//     element.textContent = users.length;
+//   });
+// };
+
+// if (users.length == 0) {
+//   noUsers();
+// } else {
+//   returnToStartStatus(users);
+// }
+if (users.length == 0) {
+  emptyData.classList.remove('hidden');
 } else {
-  refresh(user);
+  refresh(users);
 }

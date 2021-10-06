@@ -6,6 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <title>Customer data</title>
 </head>
 
@@ -15,7 +18,13 @@
   <form action="" class="form hidden">
     <span class="close-form">&times;</span>
     <div class="flex">
-      <progress id="file" max="100" value="50" class="hidden"> 70% </progress>
+      <!-- <progress id="progress-bar" max="100" value="50" class="progress-bar"> 70% </progress> -->
+      <div class="progress-bar flex">
+        <p class="progress-text">Progress :&nbsp&nbsp <span class="progress-value">0</span>%</p>
+        <!-- <div id="" max="100" value="50" > 0% </div> -->
+        <div class="progress-color"></div>
+
+      </div>
       <div class="left-form col-flex stretch">
         <div class="input-div flex-btwn full-name-input-div">
           <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
@@ -29,7 +38,7 @@
           <input type="text" placeholder="ID Number" class="input id-number-input">
         </div>
         <p class="errors non-visible">Error</p>
-        <div class="input-div textarea-input-div textarea flex-start">
+        <div class="input-div textarea-input-div textarea flex-s">
           <div class="textarea-imgs">
             <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
             <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
@@ -45,10 +54,10 @@
           <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
           <select name="" id="" class="options-error currency-input input">
             <option value="" disabled selected>Currency</option>
-            <option value="usd">USD</option>
-            <option value="eur">EUR</option>
-            <option value="gbp">GBP</option>
-            <option value="inr">INR</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="INR">INR</option>
           </select>
         </div>
         <p class="errors non-visible">Error</p>
@@ -75,8 +84,11 @@
           <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
           <select name="" id="" class="options-error status-input input">
             <option value="" disabled selected>Status</option>
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
+            <option value="ACTIVE">ACTIVE</option>
+            <option value="INACTIVE">INACTIVE</option>
+            <option value="PAID">PAID</option>
+            <option value="OPEN">OPEN</option>
+            <option value="ORDERED">ORDERED</option>
           </select>
         </div>
         <p class="errors non-visible">Error</p>
@@ -106,33 +118,42 @@
         <img src="./images/b-add-user.svg" alt="" class="big-icons add-user-black-icon">
       </div>
     </div>
-    <br><br><br><br>
+    <!-- non-visible -->
+    <div class="flex">
+      <div class="add-user-modal flex non-visible">
+        <img class="medium-icons" src="./images/checked-with-success.png" alt="">
+        <div class="flex add-user-modal-p">
+          <p class="add-user-modal-value">hhhhhh</p>
+          <p>has been successfully added</p>
+        </div>
+      </div>
+    </div>
     <table>
       <thead>
         <tr>
-          <th class="table-check-user center-text-align"><input type="checkbox"></th>
+          <th class="table-check-user center-text-align"><input type="checkbox" id="checkbox"></th>
           <th class="table-name-and-id-number">
-            <div class="flex">
+            <div class="flex-start">
               <p class="p-name">NAME</p>
               <div class="col-flex sort">
                 <img src="./images/blue-up.svg" alt="" class="small-icons blue-up hidden">
-                <img src="./images/black-up.svg" alt="" class="small-icons black-up">
-                <img src="./images/black-down.svg" alt="" class="small-icons black-down">
+                <img src="./images/black-up.png" alt="" class="small-icons black-up">
+                <img src="./images/black-down.png" alt="" class="small-icons black-down">
                 <img src="./images/blue-down.svg" alt="" class="small-icons blue-down hidden">
               </div>
             </div>
           </th>
           <th class="table-description left-text-align">DESCRIPTION</th>
-          <th class="table-deposit-and-currency left-text-align">DEPOSIT</th>
-          <th class="table-rate-and-currency left-text-align">RATE</th>
-          <th class="table-balance-and-currency left-text-align">BALANCE</th>
-          <th class="table-status center-text-align">
-            <div class="flex">
+          <th class="table-rate-and-currency right-text-align">RATE</th>
+          <th class="table-balance-and-currency right-text-align">BALANCE</th>
+          <th class="table-deposit-and-currency right-text-align">DEPOSIT</th>
+          <th class="table-status">
+            <div class="flex-end">
               <p class="p-status">STATUS</p>
               <div class="col-flex sort">
                 <img src="./images/blue-up.svg" alt="" class="small-icons blue-up hidden">
-                <img src="./images/black-up.svg" alt="" class="small-icons black-up">
-                <img src="./images/black-down.svg" alt="" class="small-icons black-down">
+                <img src="./images/black-up.png" alt="" class="small-icons black-up">
+                <img src="./images/black-down.png" alt="" class="small-icons black-down">
                 <img src="./images/blue-down.svg" alt="" class="small-icons blue-down hidden">
               </div>
             </div>
@@ -141,33 +162,34 @@
         </tr>
       </thead>
       <tbody class="table-body">
-        <tr>
-          <td class="empty-row center-text-align hidden" colspan="8">
-            <p></p>
+        <tr class="empty-row hidden">
+          <td class="empty-td center-text-align" colspan="8">
+            <p>you don't have any user here :(</p>
           </td>
         </tr>
       </tbody>
       <tfoot>
         <tr>
-          <td colspan="3">
-            <p>ACTIVE CUSTOMERS: <span class="active-users"></span> / <span class="total-of-users"></span></p>
+          <td colspan="4">
+            <p  class="flex-start">ACTIVE CUSTOMERS:&nbsp;&nbsp;<span class="active-users"></span> / <span class="total-of-users"></span></p>
           </td>
           <td colspan="2">
-            <p class="rows-per-page">Rows per page :</p>
+                <div class="flex right-text-align">
+              <p class="rows-per-page">Rows per page :</p>
+              <select name="" id="rows-per-page" class="">
+                <option value="ALL" selected>ALL</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+              </select>
+            </div>
           </td>
           <td>
-            <select name="" id="rows-per-page" class="options-error">
-              <option value="5" selected>5</option>
-              <option value="10">10</option>
-              <option value="15">15</option>
-              <option value="20">20</option>
-              <option value="25">25</option>
-              <option value="30">30</option>
-            </select>
-          </td>
-          <td>
-            <p><span class="starting-index">0</span> - <span class="ending-index">15</span> of <span
-                class="total-of-users">21</span></p>
+            <p><span class="starting-index">0</span> - <span class="ending-index">5</span> of <span
+                class="total-of-users"></span></p>
           </td>
           <td>
             <div class="flex-around">
