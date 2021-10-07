@@ -506,6 +506,10 @@ addUserColoredIcon.addEventListener('mouseleave', () => {
 
 addUserColoredIcon.addEventListener('click', () => {
   overlay.classList.remove('hidden');
+  progressBar.classList.remove('hidden');
+  submitBtn.classList.remove('hidden');
+  updateUserBtn.classList.add('hidden');
+  clearBtn.classList.remove('hidden');
   addUserForm.classList.remove('hidden');
   closeFormBtn.classList.remove('hidden');
   fullNameInput.focus();
@@ -534,6 +538,8 @@ let balanceInputDiv = document.querySelector('.balance-input-div');
 let statusInput = document.querySelector('.status-input');
 let statusInputDiv = document.querySelector('.status-input-div');
 let clearBtn = document.querySelector('.clear-btn');
+let submitBtn = document.querySelector('.submit-btn');
+let updateUserBtn = document.querySelector('.update-user-btn');
 
 let errorIcon = document.querySelectorAll('.error-icon');
 let validIcon = document.querySelectorAll('.valid-icon');
@@ -584,6 +590,9 @@ let fullNameInputErrors = () => {
   } else {
     onBlurValid(0);
   }
+};
+
+let fullNameExist = () => {
   users.forEach(element => {
     if (element.fullName == fullNameInput.value) {
       onBlurError(0);
@@ -601,6 +610,9 @@ let idNumberInputErrors = () => {
     onBlurError(1);
     errors[1].textContent = 'Customer number should be 10 digits';
   }
+};
+
+let idExist = () => {
   users.forEach(element => {
     if (element.idNumber == idNumberInput.value) {
       onBlurError(1);
@@ -644,52 +656,51 @@ let statusInputErrors = () => {
 
 let validArr = [];
 let addProgressValue = i => {
-  if (
-    Object.entries(inputDiv).every(element =>
-      element[1].classList.contains('valid-border')
-    )
-  ) {
-    progressValue.textContent = '100';
-    progressColor.style.width = `100%`;
-  } else {
-    if (
-      inputDiv[i].classList.contains('valid-border') &&
-      !validArr.includes(`${i} is valid`)
-    ) {
-      validArr.unshift(`${i} is valid`);
-      // console.log(validArr);
-    } else if (
-      !inputDiv[i].classList.contains('valid-border') &&
-      validArr.includes(`${i} is valid`)
-    ) {
-      validArr.splice(`${i} is valid`, 1);
-      // console.log(validArr);
+  if (inputDiv[i].classList.contains('valid-border')) {
+    if (!validArr.includes(i)) {
+      validArr.push(i);
     }
-    progressValue.textContent = (100 / inputDiv.length) * validArr.length;
-    progressColor.style.width = `${progressValue.textContent}%`;
+  } else {
+    if (validArr.includes(i)) {
+      validArr.splice(validArr.indexOf(i), 1);
+    }
   }
+  progressValue.textContent = (100 / inputDiv.length) * validArr.length;
+  progressColor.style.width = `${progressValue.textContent}%`;
 };
 
 fullNameInput.addEventListener('keyup', () => {
   fullNameInputErrors();
   addProgressValue(0);
+  if (!submitBtn.classList.contains('hidden')) {
+    fullNameExist();
+  }
 });
 
 fullNameInput.addEventListener('blur', () => {
   fullNameInputErrors();
   addProgressValue(0);
+  if (!submitBtn.classList.contains('hidden')) {
+    fullNameExist();
+  }
 });
 
 idNumberInput.addEventListener('keyup', () => {
   mustBeNumber(idNumberInput.value, 1);
   idNumberInputErrors();
   addProgressValue(1);
+  if (!submitBtn.classList.contains('hidden')) {
+    idExist();
+  }
 });
 
 idNumberInput.addEventListener('blur', () => {
   mustBeNumber(idNumberInput.value, 1);
   idNumberInputErrors();
   addProgressValue(1);
+  if (!submitBtn.classList.contains('hidden')) {
+    idExist();
+  }
 });
 
 descriptionInput.addEventListener('keyup', () => {
@@ -783,34 +794,46 @@ let successfullyAddUserModal = document.querySelector('.add-user-modal');
 let successfullyAddUserModalValue = document.querySelector(
   '.add-user-modal-value'
 );
+
+let successfullyAdded = document.querySelector('.added');
+let successfullyUpdated = document.querySelector('.updated');
 let hideUserModal = () => {
   successfullyAddUserModal.classList.add('non-visible');
 };
 
 addUserForm.addEventListener('submit', e => {
   e.preventDefault();
+
   if (
     Object.entries(inputDiv).every(element =>
       element[1].classList.contains('valid-border')
     )
   ) {
-    successfullyAddUserModal.classList.remove('non-visible');
-    successfullyAddUserModalValue.innerHTML = fullNameInput.value;
-    setTimeout('hideUserModal()', 5000);
-    users.unshift({
-      fullName: fullNameInput.value,
-      idNumber: idNumberInput.value,
-      description: descriptionInput.value,
-      currency: currencyInput.value,
-      deposit: depositInput.value,
-      rate: rateInput.value,
-      balance: balanceInput.value,
-      status: statusInput.value,
-    });
+    if (!submitBtn.classList.contains('hidden')) {
+      successfullyAddUserModal.classList.remove('non-visible');
+      successfullyAdded.classList.remove('hidden');
+      successfullyUpdated.classList.add('hidden');
+      successfullyAddUserModalValue.innerHTML = fullNameInput.value;
+      setTimeout('hideUserModal()', 5000);
+      users.unshift({
+        fullName: fullNameInput.value,
+        idNumber: idNumberInput.value,
+        description: descriptionInput.value,
+        currency: currencyInput.value,
+        deposit: depositInput.value,
+        rate: rateInput.value,
+        balance: balanceInput.value,
+        status: statusInput.value,
+      });
+    }
     refresh(users);
     resetForm();
     closeForm();
   } else {
+    if (!submitBtn.classList.contains('hidden')) {
+      fullNameExist();
+      idExist();
+    }
     fullNameInputErrors();
     mustBeNumber(idNumberInput.value, 1);
     idNumberInputErrors();
@@ -837,7 +860,14 @@ let pressEscape = esc => {
 
 //submit
 closeFormBtn.addEventListener('click', closeForm);
-overlay.addEventListener('click', closeForm);
+overlay.addEventListener('click', () => {
+  if (submitBtn.classList.contains('hidden')) {
+    resetForm();
+    closeForm();
+  } else {
+    closeForm();
+  }
+});
 cancelFormBtn.addEventListener('click', () => {
   resetForm();
   closeForm();
@@ -983,7 +1013,7 @@ tableStatusP.addEventListener('click', () => {
 let tableBody = document.querySelector('.table-body');
 let emptyData = document.querySelector('.empty-row');
 
-let addNewUser = (userData, index) => {
+let addNewUser = userData => {
   //create Elements :
   let UserRow = document.createElement('tr');
   let rateCurrency = document.createElement('p');
@@ -1012,11 +1042,15 @@ let addNewUser = (userData, index) => {
   let rateValue = document.createTextNode(Number(userData.rate).toFixed(2));
   let balanceAndCurrencyTD = document.createElement('td');
   let balance = document.createElement('p');
-  let balanceValue = document.createTextNode(Number(userData.balance).toFixed(2));
+  let balanceValue = document.createTextNode(
+    Number(userData.balance).toFixed(2)
+  );
 
   let depositAndCurrencyTD = document.createElement('td');
   let deposit = document.createElement('p');
-  let depositValue = document.createTextNode(Number(userData.deposit).toFixed(2));
+  let depositValue = document.createTextNode(
+    Number(userData.deposit).toFixed(2)
+  );
 
   let statusTD = document.createElement('td');
   let activeBtn = document.createElement('button');
@@ -1036,11 +1070,11 @@ let addNewUser = (userData, index) => {
   let colorDeleteUserIcon = document.createElement('img');
   let blackEditUserIcon = document.createElement('img');
   let colorEditUserIcon = document.createElement('img');
-  let blackPrintUserIcon = document.createElement('img');
-  let colorPrintUserIcon = document.createElement('img');
+  // let blackPrintUserIcon = document.createElement('img');
+  // let colorPrintUserIcon = document.createElement('img');
 
   //create Classes :
-  UserRow.setAttribute('user-index', index);
+  // UserRow.setAttribute('user-index', index);
   // UserRow.setAttribute('class', 'tr');
   rateCurrency.setAttribute('class', 'currency right-text-align');
   balanceCurrency.setAttribute('class', 'currency right-text-align');
@@ -1076,6 +1110,7 @@ let addNewUser = (userData, index) => {
   orderedBtn.setAttribute('class', 'ordered-btn');
 
   moreTD.setAttribute('class', 'center-text-align');
+  moreDiv.setAttribute('class', 'flex-btwn');
 
   blackDeleteUserIcon.setAttribute('src', './images/b-delete-user.svg');
   blackDeleteUserIcon.setAttribute('class', 'medium-icons');
@@ -1087,10 +1122,10 @@ let addNewUser = (userData, index) => {
   colorEditUserIcon.setAttribute('src', './images/edit-user.svg');
   colorEditUserIcon.setAttribute('class', 'medium-icons hidden edit-icon');
 
-  blackPrintUserIcon.setAttribute('src', './images/b-print-user.png');
-  blackPrintUserIcon.setAttribute('class', 'medium-icons');
-  colorPrintUserIcon.setAttribute('src', './images/print-user.png');
-  colorPrintUserIcon.setAttribute('class', 'medium-icons hidden');
+  // blackPrintUserIcon.setAttribute('src', './images/b-print-user.png');
+  // blackPrintUserIcon.setAttribute('class', 'medium-icons');
+  // colorPrintUserIcon.setAttribute('src', './images/print-user.png');
+  // colorPrintUserIcon.setAttribute('class', 'medium-icons hidden');
 
   //Append Child :
   tableBody.appendChild(UserRow);
@@ -1127,12 +1162,12 @@ let addNewUser = (userData, index) => {
   statusTD.appendChild(orderedBtn);
 
   moreTD.appendChild(moreDiv);
-  moreTD.appendChild(blackDeleteUserIcon);
-  moreTD.appendChild(colorDeleteUserIcon);
-  moreTD.appendChild(blackEditUserIcon);
-  moreTD.appendChild(colorEditUserIcon);
-  moreTD.appendChild(blackPrintUserIcon);
-  moreTD.appendChild(colorPrintUserIcon);
+  moreDiv.appendChild(blackEditUserIcon);
+  moreDiv.appendChild(colorEditUserIcon);
+  moreDiv.appendChild(blackDeleteUserIcon);
+  moreDiv.appendChild(colorDeleteUserIcon);
+  // moreTD.appendChild(blackPrintUserIcon);
+  // moreTD.appendChild(colorPrintUserIcon);
 
   depositCurrency.appendChild(depositCurrencyValue);
   rateCurrency.appendChild(rateCurrencyValue);
@@ -1207,14 +1242,14 @@ let addNewUser = (userData, index) => {
     blackEditUserIcon.classList.remove('hidden');
   });
 
-  blackPrintUserIcon.addEventListener('mouseenter', () => {
-    blackPrintUserIcon.classList.add('hidden');
-    colorPrintUserIcon.classList.remove('hidden');
-  });
-  colorPrintUserIcon.addEventListener('mouseleave', () => {
-    colorPrintUserIcon.classList.add('hidden');
-    blackPrintUserIcon.classList.remove('hidden');
-  });
+  // blackPrintUserIcon.addEventListener('mouseenter', () => {
+  //   blackPrintUserIcon.classList.add('hidden');
+  //   colorPrintUserIcon.classList.remove('hidden');
+  // });
+  // colorPrintUserIcon.addEventListener('mouseleave', () => {
+  //   colorPrintUserIcon.classList.add('hidden');
+  //   blackPrintUserIcon.classList.remove('hidden');
+  // });
 
   // check Users
 
@@ -1231,21 +1266,97 @@ let addNewUser = (userData, index) => {
     checkUserTD.classList.remove('check-before');
   });
 
+  // Edit User :
+
+  colorEditUserIcon.addEventListener('click', e => {
+    e.preventDefault();
+    submitBtn.classList.add('hidden');
+    clearBtn.classList.add('hidden');
+    updateUserBtn.classList.remove('hidden');
+    closeFormBtn.classList.add('hidden');
+    overlay.classList.remove('hidden');
+    addUserForm.classList.remove('hidden');
+    progressBar.classList.add('hidden');
+    fullNameInput.value = userData.fullName;
+    idNumberInput.value = userData.idNumber;
+    descriptionInput.value = userData.description;
+    currencyInput.value = userData.currency;
+    depositInput.value = userData.deposit;
+    rateInput.value = userData.rate;
+    balanceInput.value = userData.balance;
+    statusInput.value = userData.status;
+    console.log(users.indexOf(userData));
+  });
+
+  updateUserBtn.addEventListener('click', e => {
+    e.preventDefault();
+    if (
+      Object.entries(inputDiv).every(element =>
+        element[1].classList.contains('valid-border')
+      )
+    ) {
+      // if (!submitBtn.classList.contains('hidden')) {
+      successfullyAddUserModal.classList.remove('non-visible');
+      successfullyAdded.classList.add('hidden');
+      successfullyUpdated.classList.remove('hidden');
+      successfullyAddUserModalValue.innerHTML = fullNameInput.value;
+      setTimeout('hideUserModal()', 5000);
+      // users.unshift({
+      userData.fullName = fullNameInput.value;
+      userData.idNumber = idNumberInput.value;
+      userData.description = descriptionInput.value;
+      userData.currency = currencyInput.value;
+      userData.deposit = depositInput.value;
+      userData.rate = rateInput.value;
+      userData.balance = balanceInput.value;
+      userData.status = statusInput.value;
+      //   users.splice(users.indexOf(userData), 1, userData);
+      // console.log(userData);
+      // console.log(users.indexOf(userData));
+      // console.log(users);
+
+      users.splice(users.indexOf(userData), 1);
+      refresh(users);
+
+      //   if (confirm('Are you sure you wont to delete this user ?')) {
+      //     let userIdNumberIndex = userData.idNumber;
+      //     if (userData.idNumber.includes(userIdNumberIndex)) {
+      //       console.log(userIdNumberIndex);
+      //     }
+      //     users.splice(users.indexOf(userData), 1);
+      //     refresh(users);
+      //   }
+      // });
+
+      // });
+      // }
+      refresh(users);
+      resetForm();
+      closeForm();
+    } else {
+      fullNameInputErrors();
+      mustBeNumber(idNumberInput.value, 1);
+      idNumberInputErrors();
+      descriptionInputErrors();
+      currencyInputErrors();
+      mustBeNumber(depositInput.value, 4);
+      mustBeNumber(rateInput.value, 5);
+      mustBeNumber(balanceInput.value, 6);
+      statusInputErrors();
+    }
+    // console.log('updated');
+  });
+
   //delete user :
 
   colorDeleteUserIcon.addEventListener('click', e => {
     e.preventDefault();
     if (confirm('Are you sure you wont to delete this user ?')) {
-      let userIdNumberIndex = userData.idNumber;
-      if (userData.idNumber.includes(userIdNumberIndex)) {
-        console.log(userIdNumberIndex);
-      }
       users.splice(users.indexOf(userData), 1);
       refresh(users);
     }
   });
 };
-
 
 // tfoot
 
@@ -1255,8 +1366,14 @@ let activeUsers = document.querySelector('.active-users');
 let totalOfUsers = document.querySelectorAll('.total-of-users');
 
 // rows per page
-
-let rowsPerPage = document.querySelector('.rows-per-page');
+let rowsPerPage = document.getElementById('rows-per-page');
+// let  = document.querySelector('.');
+let selectedRowsPerPage = e => {
+  rowsPerPage.addEventListener('change', () => {
+    console.log(rowsPerPage.value);
+    e = rowsPerPage.value;
+  });
+};
 
 // starting & ending-index
 
@@ -1294,8 +1411,8 @@ colorRightArrow.addEventListener('mouseleave', () => {
 let refresh = arrayToRender => {
   tableBody.innerHTML = null;
   let filteredUsers = filteredArr(arrayToRender) || arrayToRender;
-  filteredUsers.forEach((element, index) => {
-    addNewUser(element, index);
+  filteredUsers.forEach(element => {
+    addNewUser(element);
   });
 
   let numberOfActiveUsers = [];
@@ -1308,34 +1425,18 @@ let refresh = arrayToRender => {
   totalOfUsers.forEach(element => {
     element.textContent = filteredUsers.length;
   });
+
+
+
+  selectedRowsPerPage();
+
+
 };
 
-// let returnToStartStatus = arr => {
-//   tableBody.innerHTML = null;
-//   searchInputField.value = '';
-//   arr.forEach((element, index) => {
-//     addNewUser(element, index);
-//   });
-//   activeUsers.textContent = arr.length;
-//   let numberOfActiveUsers = [];
-//   for (let i = 0; i < arr.length; i++) {
-//     if (arr[i].status === 'ACTIVE') {
-//       numberOfActiveUsers.push(arr[i].status);
-//     }
-//   }
-//   activeUsers.textContent = numberOfActiveUsers.length;
-//   totalOfUsers.forEach(element => {
-//     element.textContent = users.length;
-//   });
-// };
-
-// if (users.length == 0) {
-//   noUsers();
-// } else {
-//   returnToStartStatus(users);
-// }
 if (users.length == 0) {
   emptyData.classList.remove('hidden');
 } else {
   refresh(users);
+  resetForm();
 }
+

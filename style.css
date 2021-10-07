@@ -338,7 +338,7 @@ thead {
 }
 
 .table-more {
-  width: 11%;
+  width: 8%;
   padding-top: 15px;
 }
 
@@ -424,14 +424,17 @@ tbody tr:hover {
 }
 
 .edit-icon {
-  margin: 0 10px;
+  /* margin: 0 10px; */
 }
 
 tfoot {
-  background-color: #ffffff1e;
+  background-color: #9c10101e;
   color: #606F89;
   font-weight: 600 ;
+  /* margin-top: 100px; */
+  /* padding-top: 50px; */
 }
+
 
 .rows-per-page {
   text-align: end;
