@@ -803,7 +803,6 @@ let hideUserModal = () => {
 
 addUserForm.addEventListener('submit', e => {
   e.preventDefault();
-
   if (
     Object.entries(inputDiv).every(element =>
       element[1].classList.contains('valid-border')
@@ -834,15 +833,7 @@ addUserForm.addEventListener('submit', e => {
       fullNameExist();
       idExist();
     }
-    fullNameInputErrors();
-    mustBeNumber(idNumberInput.value, 1);
-    idNumberInputErrors();
-    descriptionInputErrors();
-    currencyInputErrors();
-    mustBeNumber(depositInput.value, 4);
-    mustBeNumber(rateInput.value, 5);
-    mustBeNumber(balanceInput.value, 6);
-    statusInputErrors();
+    formErrors();
   }
 });
 
@@ -868,10 +859,23 @@ overlay.addEventListener('click', () => {
     closeForm();
   }
 });
+
 cancelFormBtn.addEventListener('click', () => {
   resetForm();
   closeForm();
 });
+
+let formErrors = () => {
+  fullNameInputErrors();
+  mustBeNumber(idNumberInput.value, 1);
+  idNumberInputErrors();
+  descriptionInputErrors();
+  currencyInputErrors();
+  mustBeNumber(depositInput.value, 4);
+  mustBeNumber(rateInput.value, 5);
+  mustBeNumber(balanceInput.value, 6);
+  statusInputErrors();
+};
 
 //theade
 
@@ -1266,8 +1270,6 @@ let addNewUser = userData => {
     checkUserTD.classList.remove('check-before');
   });
 
-  // Edit User :
-
   colorEditUserIcon.addEventListener('click', e => {
     e.preventDefault();
     submitBtn.classList.add('hidden');
@@ -1286,65 +1288,35 @@ let addNewUser = userData => {
     balanceInput.value = userData.balance;
     statusInput.value = userData.status;
     console.log(users.indexOf(userData));
-  });
-
-  updateUserBtn.addEventListener('click', e => {
-    e.preventDefault();
-    if (
-      Object.entries(inputDiv).every(element =>
-        element[1].classList.contains('valid-border')
-      )
-    ) {
-      // if (!submitBtn.classList.contains('hidden')) {
-      successfullyAddUserModal.classList.remove('non-visible');
-      successfullyAdded.classList.add('hidden');
-      successfullyUpdated.classList.remove('hidden');
-      successfullyAddUserModalValue.innerHTML = fullNameInput.value;
-      setTimeout('hideUserModal()', 5000);
-      // users.unshift({
-      userData.fullName = fullNameInput.value;
-      userData.idNumber = idNumberInput.value;
-      userData.description = descriptionInput.value;
-      userData.currency = currencyInput.value;
-      userData.deposit = depositInput.value;
-      userData.rate = rateInput.value;
-      userData.balance = balanceInput.value;
-      userData.status = statusInput.value;
-      //   users.splice(users.indexOf(userData), 1, userData);
-      // console.log(userData);
-      // console.log(users.indexOf(userData));
-      // console.log(users);
-
-      users.splice(users.indexOf(userData), 1);
-      refresh(users);
-
-      //   if (confirm('Are you sure you wont to delete this user ?')) {
-      //     let userIdNumberIndex = userData.idNumber;
-      //     if (userData.idNumber.includes(userIdNumberIndex)) {
-      //       console.log(userIdNumberIndex);
-      //     }
-      //     users.splice(users.indexOf(userData), 1);
-      //     refresh(users);
-      //   }
-      // });
-
-      // });
-      // }
-      refresh(users);
-      resetForm();
-      closeForm();
-    } else {
-      fullNameInputErrors();
-      mustBeNumber(idNumberInput.value, 1);
-      idNumberInputErrors();
-      descriptionInputErrors();
-      currencyInputErrors();
-      mustBeNumber(depositInput.value, 4);
-      mustBeNumber(rateInput.value, 5);
-      mustBeNumber(balanceInput.value, 6);
-      statusInputErrors();
-    }
-    // console.log('updated');
+    console.log(userData);
+    formErrors();
+    updateUserBtn.addEventListener('click', () => {
+      if (
+        Object.entries(inputDiv).every(element =>
+          element[1].classList.contains('valid-border')
+        )
+      ) {
+        successfullyAddUserModal.classList.remove('non-visible');
+        successfullyAdded.classList.add('hidden');
+        successfullyUpdated.classList.remove('hidden');
+        successfullyAddUserModalValue.innerHTML = fullNameInput.value;
+        setTimeout('hideUserModal()', 5000);
+        userData.fullName = fullNameInput.value;
+        userData.idNumber = idNumberInput.value;
+        userData.description = descriptionInput.value;
+        userData.currency = currencyInput.value;
+        userData.deposit = depositInput.value;
+        userData.rate = rateInput.value;
+        userData.balance = balanceInput.value;
+        userData.status = statusInput.value;
+        users.splice(users.indexOf(userData), 1, userData);
+        refresh(users);
+        resetForm();
+        closeForm();
+      } else {
+        formErrors();
+      }
+    });
   });
 
   //delete user :
@@ -1368,15 +1340,21 @@ let totalOfUsers = document.querySelectorAll('.total-of-users');
 // rows per page
 let rowsPerPage = document.getElementById('rows-per-page');
 // let  = document.querySelector('.');
-let selectedRowsPerPage = e => {
-  rowsPerPage.addEventListener('change', () => {
-    console.log(rowsPerPage.value);
-    e = rowsPerPage.value;
-  });
-};
+// let selectedRowsPerPage = e => {
+// e = rowsPerPage.value;
+// console.log(e);
+
+// let rowsPerPageValueOnChange = rowsPerPage.addEventListener('change', (e) => {
+//   refresh(users);
+//   e = rowsPerPage.value;
+//   console.log(e);
+// })
+
+// let selectedRowsPerPage = rowsPerPageValueOnChange ||rowsPerPage.value;
+// // };
+// console.log(selectedRowsPerPage);
 
 // starting & ending-index
-
 // next / previous page :
 
 let blackRightArrow = document.querySelector('.black-right-arrow');
@@ -1410,10 +1388,18 @@ colorRightArrow.addEventListener('mouseleave', () => {
 
 let refresh = arrayToRender => {
   tableBody.innerHTML = null;
+  // let totalRowsPerPage = selectedRowsPerPage;
   let filteredUsers = filteredArr(arrayToRender) || arrayToRender;
+  // let totalRowsPerPage = filteredUsers.splice(rowsPerPageValueOnChange);
   filteredUsers.forEach(element => {
     addNewUser(element);
   });
+  // console.log(totalRowsPerPage);
+  // filteredUsers.slice(selectedRowsPerPage())
+
+  // for (let i = 0; i < totalRowsPerPage; i++) {
+  //   addNewUser(filteredUsers[i]);
+  // }
 
   let numberOfActiveUsers = [];
   for (let i = 0; i < filteredUsers.length; i++) {
@@ -1425,12 +1411,6 @@ let refresh = arrayToRender => {
   totalOfUsers.forEach(element => {
     element.textContent = filteredUsers.length;
   });
-
-
-
-  selectedRowsPerPage();
-
-
 };
 
 if (users.length == 0) {
@@ -1439,4 +1419,3 @@ if (users.length == 0) {
   refresh(users);
   resetForm();
 }
-
