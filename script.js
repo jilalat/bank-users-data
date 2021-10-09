@@ -879,6 +879,10 @@ let formErrors = () => {
 
 //theade
 
+// checkbox
+
+let checkAll = document.getElementById('checkbox');
+
 // Sort Functions
 
 let sortByFullNameAtoZ = (a, b) => {
@@ -1228,6 +1232,22 @@ let addNewUser = userData => {
     balance.style.color = '#E01A1A';
   }
 
+  // Check All
+
+  checkAll.addEventListener('click', () => {
+    if (checkAll.checked == true) {
+      uncheckedUserIcon.classList.add('hidden');
+      checkedUserIcon.classList.remove('hidden');
+      UserRow.style.backgroundColor = '#d1dffa';
+      checkUserTD.classList.add('check-before');
+    } else {
+      uncheckedUserIcon.classList.remove('hidden');
+      checkedUserIcon.classList.add('hidden');
+      UserRow.style.backgroundColor = '';
+      checkUserTD.classList.remove('check-before');
+    }
+  });
+
   blackDeleteUserIcon.addEventListener('mouseenter', () => {
     blackDeleteUserIcon.classList.add('hidden');
     colorDeleteUserIcon.classList.remove('hidden');
@@ -1338,23 +1358,28 @@ let activeUsers = document.querySelector('.active-users');
 let totalOfUsers = document.querySelectorAll('.total-of-users');
 
 // rows per page
-let rowsPerPage = document.getElementById('rows-per-page');
-// let  = document.querySelector('.');
-// let selectedRowsPerPage = e => {
-// e = rowsPerPage.value;
-// console.log(e);
 
-// let rowsPerPageValueOnChange = rowsPerPage.addEventListener('change', (e) => {
-//   refresh(users);
-//   e = rowsPerPage.value;
-//   console.log(e);
-// })
+let rowsPerPage = document.getElementById('rows-per-page');
+
+let rowsPerPageValueOnChange = rowsPerPage.addEventListener('change', e => {
+  refresh(users);
+
+  e = rowsPerPage.value;
+  console.log(e);
+});
 
 // let selectedRowsPerPage = rowsPerPageValueOnChange ||rowsPerPage.value;
-// // };
+// };
 // console.log(selectedRowsPerPage);
 
+// let usersToRenderPerPage = (arr, num) => {
+//   for (let i = 0; i < num; i++) {
+//     refresh(arr);
+// };
+// };
+
 // starting & ending-index
+
 // next / previous page :
 
 let blackRightArrow = document.querySelector('.black-right-arrow');
@@ -1390,16 +1415,17 @@ let refresh = arrayToRender => {
   tableBody.innerHTML = null;
   // let totalRowsPerPage = selectedRowsPerPage;
   let filteredUsers = filteredArr(arrayToRender) || arrayToRender;
-  // let totalRowsPerPage = filteredUsers.splice(rowsPerPageValueOnChange);
-  filteredUsers.forEach(element => {
-    addNewUser(element);
-  });
-  // console.log(totalRowsPerPage);
-  // filteredUsers.slice(selectedRowsPerPage())
 
-  // for (let i = 0; i < totalRowsPerPage; i++) {
-  //   addNewUser(filteredUsers[i]);
-  // }
+  let selectedRowsPerPage = rowsPerPageValueOnChange || rowsPerPage.value;
+  let totalRowsPerPage = filteredUsers;
+  // console.log((filteredUsers.length - selectedRowsPerPage));
+  // usersToRenderPerPage(filteredUsers, selectedRowsPerPage);
+  // filteredUsers.forEach(element => {
+  //   addNewUser(element);
+  // });
+  for (let i = 0; i < selectedRowsPerPage; i++) {
+    addNewUser(filteredUsers[i]);
+    }
 
   let numberOfActiveUsers = [];
   for (let i = 0; i < filteredUsers.length; i++) {
@@ -1416,6 +1442,7 @@ let refresh = arrayToRender => {
 if (users.length == 0) {
   emptyData.classList.remove('hidden');
 } else {
+  checkAll.checked = false;
   refresh(users);
   resetForm();
 }

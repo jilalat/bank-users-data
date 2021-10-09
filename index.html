@@ -43,7 +43,7 @@
             <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
             <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
           </div>
-          <textarea name="" id="" rows="3" class="input description-input" placeholder="Description"
+          <textarea name="" id="" class="input description-input" placeholder="Description"
             maxlength="250"></textarea>
         </div>
         <p class="errors non-visible">Error</p>
@@ -137,10 +137,10 @@
             <div class="flex-start">
               <p class="p-name">NAME</p>
               <div class="col-flex sort">
-                <img src="./images/blue-up.svg" alt="" class="small-icons blue-up hidden">
-                <img src="./images/black-up.png" alt="" class="small-icons black-up">
-                <img src="./images/black-down.png" alt="" class="small-icons black-down">
-                <img src="./images/blue-down.svg" alt="" class="small-icons blue-down hidden">
+                <img src="./images/blue-up.svg" alt="" class="micro-icons blue-up hidden">
+                <img src="./images/black-up.png" alt="" class="micro-icons black-up">
+                <img src="./images/black-down.png" alt="" class="micro-icons black-down">
+                <img src="./images/blue-down.svg" alt="" class="micro-icons blue-down hidden">
               </div>
             </div>
           </th>
@@ -152,10 +152,10 @@
             <div class="flex-end">
               <p class="p-status">STATUS</p>
               <div class="col-flex sort">
-                <img src="./images/blue-up.svg" alt="" class="small-icons blue-up hidden">
-                <img src="./images/black-up.png" alt="" class="small-icons black-up">
-                <img src="./images/black-down.png" alt="" class="small-icons black-down">
-                <img src="./images/blue-down.svg" alt="" class="small-icons blue-down hidden">
+                <img src="./images/blue-up.svg" alt="" class="micro-icons blue-up hidden">
+                <img src="./images/black-up.png" alt="" class="micro-icons black-up">
+                <img src="./images/black-down.png" alt="" class="micro-icons black-down">
+                <img src="./images/blue-down.svg" alt="" class="micro-icons blue-down hidden">
               </div>
             </div>
           </th>
@@ -172,32 +172,35 @@
       <tfoot>
         <tr>
           <td colspan="4">
-            <p  class="flex-start"> <small>ACTIVE CUSTOMERS:</small> &nbsp;&nbsp;<span class="active-users"></span><small>&nbsp; / <span class="total-of-users"></span></small></p>
+            <p  class="flex-start"> <small>ACTIVE CUSTOMERS :</small>&nbsp;&nbsp;<span class="active-users"></span><small>&nbsp; / <span class="total-of-users"></span></small></p>
           </td>
           <td colspan="2">
                 <div class="flex right-text-align">
               <p class="rows-per-page">Rows per page :</p>
-              <select name="" id="rows-per-page" class="">
-                <option value="all" selected>ALL</option>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-                <option value="25">25</option>
-                <option value="30">30</option>
-              </select>
+             <div class="rows-per-page-select">
+                <select name="" id="rows-per-page" class="">
+                  <option value="5">5</option>
+                  <option value="10" selected>10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                  <option value="25">25</option>
+                  <option value="30">30</option>
+                </select>
+                <img src="./images/black-down.png" alt="" class="micro-icons rows-per-page-icon">
+             </div>
             </div>
           </td>
-          <td>
-            <p><span class="starting-index">0</span> - <span class="ending-index">5</span> of <span
-                class="total-of-users"></span></p>
-          </td>
-          <td>
-            <div class="flex-around">
-              <img src="./images/b-left-arrow.svg" alt="" class="medium-icons black-left-arrow">
-              <img src="./images/left-arrow.svg" alt="" class="medium-icons color-left-arrow hidden">
-              <img src="./images/right-arrow.svg" alt="" class="medium-icons color-right-arrow hidden">
-              <img src="./images/b-right-arrow.svg" alt="" class="medium-icons black-right-arrow">
+          <td colspan="2" >
+            <div class="flex">
+              <p class="right-text-align"><span class="starting-index">0</span> - <span class="ending-index">5</span> of <span
+                  class="total-of-users"></span></p>
+                            <div class="arrows flex-btwn">
+                              <!-- flex-around -->
+                <img src="./images/b-left-arrow.svg" alt="" class="medium-icons black-left-arrow">
+                <img src="./images/left-arrow.svg" alt="" class="medium-icons color-left-arrow hidden">
+                <img src="./images/right-arrow.svg" alt="" class="medium-icons color-right-arrow hidden">
+                <img src="./images/b-right-arrow.svg" alt="" class="medium-icons black-right-arrow">
+              </div>
             </div>
           </td>
         </tr>
