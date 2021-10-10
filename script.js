@@ -890,10 +890,12 @@ let sortByFullNameZtoA = (a, b) => {
   }
 };
 
+let statusOrder = ['OPEN', 'ACTIVE', 'INACTIVE', 'PAID', 'ORDERED'];
+
 let sortByStatusAtoZ = (a, b) => {
-  if (a.status.toLowerCase() > b.status.toLowerCase()) {
+  if (statusOrder.indexOf(a.status) > statusOrder.indexOf(b.status)) {
     return 1;
-  } else if (b.status > a.status) {
+  } else if (statusOrder.indexOf(a.status) < statusOrder.indexOf(b.status)) {
     return -1;
   } else {
     return 0;
@@ -901,9 +903,9 @@ let sortByStatusAtoZ = (a, b) => {
 };
 
 let sortByStatusZtoA = (a, b) => {
-  if (a.status.toLowerCase() > b.status.toLowerCase()) {
+  if (statusOrder.indexOf(a.status) > statusOrder.indexOf(b.status)) {
     return -1;
-  } else if (b.status.toLowerCase() > a.status.toLowerCase()) {
+  } else if (statusOrder.indexOf(a.status) < statusOrder.indexOf(b.status)) {
     return 1;
   } else {
     return 0;
