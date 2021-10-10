@@ -37,7 +37,7 @@ let users = [
     fullName: 'Teresa Reynolds',
     idNumber: '4709935578',
     description:
-      'Bunkbed  Drop  down  Deflector  Risotto  Uplifted  Synergy  Vindicate  Java  Suave  Chosen  Sleet  Voting  Reclining  Diaper  Isolating  Unzip  Reporter  Golf  Showman  Floss',
+      'Bunkbed  Drop  down  Deflector  Risotto  Uplifted  Synergy  Vindicate  Java  Suave  Chosen  Sleet  Voting  Reclining  Diaper  Isolating  Unzip  Reporter  Golf  Showman  Flosss',
     currency: 'USD',
     deposit: '0190108',
     rate: '641544',
@@ -125,7 +125,7 @@ let users = [
     fullName: 'Melvin Bennett',
     idNumber: '9576569304',
     description:
-      'Sheet  Rinse  Slider  Circling  Placidly  Dictation  Game  Squire  District  Darwinism  Supremacy  Aggregate  Tingling  Shortlist  Entangled  Ruby  Product  Vocation  Gambling  Vindicate',
+      'Sssheet  Rinse  Slider  Circling  Placidly  Dictation  Game  Squire  District  Darwinism  Supremacy  Aggregate  Tingling  Shortlist  Entangled  Ruby  Product  Vocation  Gambling  Vindicate',
     currency: 'USD',
     deposit: '2582985',
     rate: '429851',
@@ -257,7 +257,7 @@ let users = [
     fullName: 'Charles Bradley',
     idNumber: '1031253602',
     description:
-      'Slacks  Undermine  Cornfield  Busboy  Overthrow  Triceps  Hardener  Closable  Automated  Parasite  Quintuple  Antelope  Undocked  Outclass  Stellar  Unsliced  Reprogram  Bootleg  Flogging  Handcart',
+      'Slacks  Undermine  Cornfield  Busboy  Overthrow  Triceps  Hardener  Closable  Automated  Parasite  Quintuple  Antelope  Undocked  Outclasss  Stellar  Unsliced  Reprogram  Bootleg  Flogging  Handcart',
     currency: 'EUR',
     deposit: '3660042',
     rate: '529565',
@@ -320,7 +320,7 @@ let users = [
     status: 'OPEN',
   },
   {
-    fullName: 'Archie Stokes ',
+    fullName: 'Archie Stokesss ',
     idNumber: '9434895783',
     description:
       'Salad  Resistant  Puzzling  Endless  Slacked  Define  Shiftless  Bobble  Tissue  Cornfield  Giggling  Wobbling  Polyester  Wagon  Zoology  Estrogen  Goldfish  Gaffe  Browse  Shirt',
@@ -353,7 +353,7 @@ let users = [
     status: 'ACTIVE',
   },
   {
-    fullName: 'Yolanda Griffin',
+    fullName: 'Yolanda Grisssin',
     idNumber: '1665912884',
     description:
       'Joining  Lazy  Stipend  Actress  Handwoven  Gulp  Decorated  Moonlight  Evasion  Corrosive  Patronage  Chowtime  Bleach  Stinging  Degraded  Mummy  Pound  Willfully  Unscathed  Sheet',
@@ -367,7 +367,7 @@ let users = [
     fullName: 'Elijah Banks',
     idNumber: '7241658188',
     description:
-      'Trivial  Facility  Uplifted  Jailhouse  Flyable  Champion  Retract  Elastic  Karaoke  Bungee  Saint  Garnish  Impale  Marxism  Overarch  Survivor  Climate  Twisty  Tablet  Flatfoot',
+      'Trivial  Facility  Uplifted  Jailhouse  Flyable  Champion  Retract  Elastic  Karaoke  Bungee  Saint  Garnish  Impale  Marxism  Overarch sss Survivor  Climate  Twisty  Tablet  Flatfoot',
     currency: 'EUR',
     deposit: '0321758',
     rate: '590848',
@@ -549,53 +549,49 @@ let errors = document.querySelectorAll('.errors');
 
 // Form inputs
 
-let onBlurValid = k => {
-  for (let i = 0; i < inputDiv.length; i++) {
-    inputDiv[k].classList.add('valid-border');
-    validIcon[k].classList.remove('hidden');
-    inputDiv[k].classList.remove('error-border');
-    errorIcon[k].classList.add('hidden');
-    errors[k].classList.add('non-visible');
-  }
+let onValid = k => {
+  inputDiv[k].classList.add('valid-border');
+  validIcon[k].classList.remove('hidden');
+  inputDiv[k].classList.remove('error-border');
+  errorIcon[k].classList.add('hidden');
+  errors[k].classList.add('non-visible');
 };
 
-let onBlurError = k => {
-  for (let i = 0; i < inputDiv.length; i++) {
-    inputDiv[k].classList.add('error-border');
-    errorIcon[k].classList.remove('hidden');
-    errors[k].classList.remove('non-visible');
-    errors[k].textContent = 'This field is required';
-    inputDiv[k].classList.remove('valid-border');
-    validIcon[k].classList.add('hidden');
-  }
+let onError = k => {
+  inputDiv[k].classList.add('error-border');
+  errorIcon[k].classList.remove('hidden');
+  errors[k].classList.remove('non-visible');
+  errors[k].textContent = 'This field is required';
+  inputDiv[k].classList.remove('valid-border');
+  validIcon[k].classList.add('hidden');
 };
 
 let mustBeNumber = (value, index) => {
   if (value.trim() == '') {
-    onBlurError(index);
+    onError(index);
   } else if (!isNaN(value) && value.trim() !== '') {
-    onBlurValid(index);
+    onValid(index);
   } else if (isNaN(value) && value.trim() !== '') {
-    onBlurError(index);
+    onError(index);
     errors[index].textContent = `This field must be a number`;
   }
 };
 
 let fullNameInputErrors = () => {
   if (fullNameInput.value.trim() == '') {
-    onBlurError(0);
+    onError(0);
   } else if (/[^a-z A-Z]/.test(fullNameInput.value)) {
-    onBlurError(0);
+    onError(0);
     errors[0].textContent = `Customer name must be string`;
   } else {
-    onBlurValid(0);
+    onValid(0);
   }
 };
 
 let fullNameExist = () => {
   users.forEach(element => {
     if (element.fullName == fullNameInput.value) {
-      onBlurError(0);
+      onError(0);
       errors[0].textContent = `User already exists`;
     }
   });
@@ -607,7 +603,7 @@ let idNumberInputErrors = () => {
     idNumberInput.value.length != 10 &&
     idNumberInput.value.trim() !== ''
   ) {
-    onBlurError(1);
+    onError(1);
     errors[1].textContent = 'Customer number should be 10 digits';
   }
 };
@@ -615,7 +611,7 @@ let idNumberInputErrors = () => {
 let idExist = () => {
   users.forEach(element => {
     if (element.idNumber == idNumberInput.value) {
-      onBlurError(1);
+      onError(1);
       errors[1].textContent = `User ID Number already exists`;
     }
   });
@@ -623,9 +619,9 @@ let idExist = () => {
 
 let descriptionInputErrors = () => {
   if (descriptionInput.value.length >= 10) {
-    onBlurValid(2);
+    onValid(2);
   } else {
-    onBlurError(2);
+    onError(2);
     if (
       descriptionInput.value.trim() !== '' &&
       descriptionInput.value.length > 0 &&
@@ -638,19 +634,19 @@ let descriptionInputErrors = () => {
 
 let currencyInputErrors = () => {
   if (currencyInput.value != '') {
-    onBlurValid(3);
+    onValid(3);
   } else {
-    onBlurError(3);
+    onError(3);
     errors[3].textContent = 'You must choose a Currency';
   }
 };
 
 let statusInputErrors = () => {
   if (statusInput.value != '') {
-    onBlurValid(7);
+    onValid(7);
   } else {
-    onBlurError(7);
-    errors[7].textContent = 'Status must be Active or Inactive';
+    onError(7);
+    errors[7].textContent = 'This field is required';
   }
 };
 
@@ -669,7 +665,7 @@ let addProgressValue = i => {
   progressColor.style.width = `${progressValue.textContent}%`;
 };
 
-fullNameInput.addEventListener('keyup', () => {
+fullNameInput.addEventListener('input', () => {
   fullNameInputErrors();
   addProgressValue(0);
   if (!submitBtn.classList.contains('hidden')) {
@@ -677,7 +673,7 @@ fullNameInput.addEventListener('keyup', () => {
   }
 });
 
-fullNameInput.addEventListener('blur', () => {
+fullNameInput.addEventListener('input', () => {
   fullNameInputErrors();
   addProgressValue(0);
   if (!submitBtn.classList.contains('hidden')) {
@@ -685,7 +681,7 @@ fullNameInput.addEventListener('blur', () => {
   }
 });
 
-idNumberInput.addEventListener('keyup', () => {
+idNumberInput.addEventListener('input', () => {
   mustBeNumber(idNumberInput.value, 1);
   idNumberInputErrors();
   addProgressValue(1);
@@ -694,7 +690,7 @@ idNumberInput.addEventListener('keyup', () => {
   }
 });
 
-idNumberInput.addEventListener('blur', () => {
+idNumberInput.addEventListener('input', () => {
   mustBeNumber(idNumberInput.value, 1);
   idNumberInputErrors();
   addProgressValue(1);
@@ -703,12 +699,12 @@ idNumberInput.addEventListener('blur', () => {
   }
 });
 
-descriptionInput.addEventListener('keyup', () => {
+descriptionInput.addEventListener('input', () => {
   descriptionInputErrors();
   addProgressValue(2);
 });
 
-descriptionInput.addEventListener('blur', () => {
+descriptionInput.addEventListener('input', () => {
   descriptionInputErrors();
   addProgressValue(2);
 });
@@ -723,32 +719,32 @@ currencyInput.addEventListener('blur', () => {
   addProgressValue(3);
 });
 
-depositInput.addEventListener('keyup', () => {
+depositInput.addEventListener('input', () => {
   mustBeNumber(depositInput.value, 4);
   addProgressValue(4);
 });
 
-depositInput.addEventListener('blur', () => {
+depositInput.addEventListener('input', () => {
   mustBeNumber(depositInput.value, 4);
   addProgressValue(4);
 });
 
-rateInput.addEventListener('keyup', () => {
+rateInput.addEventListener('input', () => {
   mustBeNumber(rateInput.value, 5);
   addProgressValue(5);
 });
 
-rateInput.addEventListener('blur', () => {
+rateInput.addEventListener('input', () => {
   mustBeNumber(rateInput.value, 5);
   addProgressValue(5);
 });
 
-balanceInput.addEventListener('keyup', () => {
+balanceInput.addEventListener('input', () => {
   mustBeNumber(balanceInput.value, 6);
   addProgressValue(6);
 });
 
-balanceInput.addEventListener('blur', () => {
+balanceInput.addEventListener('input', () => {
   mustBeNumber(balanceInput.value, 6);
   addProgressValue(6);
 });
@@ -766,8 +762,6 @@ statusInput.addEventListener('blur', () => {
 let resetForm = () => {
   inputDiv.forEach(element => {
     element.classList.remove('valid-border');
-  });
-  inputDiv.forEach(element => {
     element.classList.remove('error-border');
   });
   inputArea.forEach(element => {
@@ -814,20 +808,11 @@ addUserForm.addEventListener('submit', e => {
       successfullyUpdated.classList.add('hidden');
       successfullyAddUserModalValue.innerHTML = fullNameInput.value;
       setTimeout('hideUserModal()', 5000);
-      users.unshift({
-        fullName: fullNameInput.value,
-        idNumber: idNumberInput.value,
-        description: descriptionInput.value,
-        currency: currencyInput.value,
-        deposit: depositInput.value,
-        rate: rateInput.value,
-        balance: balanceInput.value,
-        status: statusInput.value,
-      });
+      unshiftInData(users);
     }
-    refresh(users);
     resetForm();
     closeForm();
+    refresh(users);
   } else {
     if (!submitBtn.classList.contains('hidden')) {
       fullNameExist();
@@ -895,21 +880,21 @@ let sortByFullNameAtoZ = (a, b) => {
   }
 };
 
-let sortByStatusAtoZ = (a, b) => {
-  if (a.status.toLowerCase() > b.status.toLowerCase()) {
-    return 1;
-  } else if (b.status > a.status) {
-    return -1;
-  } else {
-    return 0;
-  }
-};
-
 let sortByFullNameZtoA = (a, b) => {
   if (a.fullName.toLowerCase() > b.fullName.toLowerCase()) {
     return -1;
   } else if (b.fullName.toLowerCase() > a.fullName.toLowerCase()) {
     return 1;
+  } else {
+    return 0;
+  }
+};
+
+let sortByStatusAtoZ = (a, b) => {
+  if (a.status.toLowerCase() > b.status.toLowerCase()) {
+    return 1;
+  } else if (b.status > a.status) {
+    return -1;
   } else {
     return 0;
   }
@@ -922,6 +907,30 @@ let sortByStatusZtoA = (a, b) => {
     return 1;
   } else {
     return 0;
+  }
+};
+
+let sortedArr = arr => {
+  if (
+    blackUpIcon[0].classList.contains('hidden') &&
+    !blueUpIcon[0].classList.remove('hidden')
+  ) {
+    arr.sort(sortByFullNameAtoZ);
+  } else if (
+    blackDownIcon[0].classList.contains('hidden') &&
+    !blueDownIcon[0].classList.remove('hidden')
+  ) {
+    arr.sort(sortByFullNameZtoA);
+  } else if (
+    blackUpIcon[1].classList.contains('hidden') &&
+    !blueUpIcon[1].classList.remove('hidden')
+  ) {
+    arr.sort(sortByStatusAtoZ);
+  } else if (
+    blackDownIcon[1].classList.contains('hidden') &&
+    !blueDownIcon[1].classList.remove('hidden')
+  ) {
+    arr.sort(sortByStatusZtoA);
   }
 };
 
@@ -958,30 +967,22 @@ let sortDownIcon = (i, j) => {
 
 blackUpIcon[0].addEventListener('click', () => {
   sortUpIcon(0, 1);
-  let sortFiltered = users.slice();
-  sortFiltered.sort(sortByFullNameAtoZ);
-  refresh(sortFiltered);
+  refresh(users);
 });
 
 blackUpIcon[1].addEventListener('click', () => {
   sortUpIcon(1, 0);
-  let sortFiltered = users.slice();
-  sortFiltered.sort(sortByStatusAtoZ);
-  refresh(sortFiltered);
+  refresh(users);
 });
 
 blackDownIcon[0].addEventListener('click', () => {
   sortDownIcon(0, 1);
-  let sortFiltered = users.slice();
-  sortFiltered.sort(sortByFullNameZtoA);
-  refresh(sortFiltered);
+  refresh(users);
 });
 
 blackDownIcon[1].addEventListener('click', () => {
   sortDownIcon(1, 0);
-  let sortFiltered = users.slice();
-  sortFiltered.sort(sortByStatusZtoA);
-  refresh(sortFiltered);
+  refresh(users);
 });
 
 let resetSort = i => {
@@ -1021,7 +1022,22 @@ tableStatusP.addEventListener('click', () => {
 let tableBody = document.querySelector('.table-body');
 let emptyData = document.querySelector('.empty-row');
 
+let unshiftInData = arr => {
+  arr.unshift({
+    fullName: fullNameInput.value,
+    idNumber: idNumberInput.value,
+    description: descriptionInput.value,
+    currency: currencyInput.value,
+    deposit: depositInput.value,
+    rate: rateInput.value,
+    balance: balanceInput.value,
+    status: statusInput.value,
+  });
+};
+
 let addNewUser = userData => {
+  // UserRow.innerHTML = <td class="center-text-align"><img src="./images/unchecked-user.svg" alt="" class="medium-icons"><img src="./images/checked-user.svg" alt="" class="medium-icons"></td><td><p class="full-name">Full Name</p><p class="id-number">ID Number</p></td><td><p class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut recusandae expedita ea modi dolorum magni at neque odit id? Cum error excepturi ullam voluptas ipsam necessitatibus esse voluptatem atque commodi.</p></td><td><p class="rate">Rate</p><p class="currency">Currency</p></td><td><p class="balance">Balance</p><p class="currency">Currency</p></td><td><p class="deposit">Deposit</p><p class="currency">Currency</p></td><td class="center-text-align"><button class="active-btn ">ACTIVE</button><button class="inactive-btn hidden">INACTIVE</button></td><td class="center-text-align"><img src="./images/b-delete-user.svg" alt="" class="medium-icons"><img src="./images/delete-user.svg" alt="" class="medium-icons"></td>;
+
   //create Elements :
   let UserRow = document.createElement('tr');
   let rateCurrency = document.createElement('p');
@@ -1299,6 +1315,7 @@ let addNewUser = userData => {
     overlay.classList.remove('hidden');
     addUserForm.classList.remove('hidden');
     progressBar.classList.add('hidden');
+
     fullNameInput.value = userData.fullName;
     idNumberInput.value = userData.idNumber;
     descriptionInput.value = userData.description;
@@ -1310,6 +1327,7 @@ let addNewUser = userData => {
     console.log(users.indexOf(userData));
     console.log(userData);
     formErrors();
+
     updateUserBtn.addEventListener('click', () => {
       if (
         Object.entries(inputDiv).every(element =>
@@ -1321,6 +1339,7 @@ let addNewUser = userData => {
         successfullyUpdated.classList.remove('hidden');
         successfullyAddUserModalValue.innerHTML = fullNameInput.value;
         setTimeout('hideUserModal()', 5000);
+
         userData.fullName = fullNameInput.value;
         userData.idNumber = idNumberInput.value;
         userData.description = descriptionInput.value;
@@ -1363,7 +1382,6 @@ let rowsPerPage = document.getElementById('rows-per-page');
 
 let rowsPerPageValueOnChange = rowsPerPage.addEventListener('change', e => {
   refresh(users);
-
   e = rowsPerPage.value;
   console.log(e);
 });
@@ -1412,20 +1430,19 @@ colorRightArrow.addEventListener('mouseleave', () => {
 // onLoad
 
 let refresh = arrayToRender => {
+  if (searchInputField.value.trim() !== '') {
+    searchIcon.classList.add('hidden');
+    searchBar.classList.remove('hidden');
+    blackDeleteSearch.classList.remove('hidden');
+  }
   tableBody.innerHTML = null;
-  // let totalRowsPerPage = selectedRowsPerPage;
   let filteredUsers = filteredArr(arrayToRender) || arrayToRender;
+  let sortFiltered = filteredUsers.slice() || filteredUsers;
+  sortedArr(sortFiltered);
 
-  let selectedRowsPerPage = rowsPerPageValueOnChange || rowsPerPage.value;
-  let totalRowsPerPage = filteredUsers;
-  // console.log((filteredUsers.length - selectedRowsPerPage));
-  // usersToRenderPerPage(filteredUsers, selectedRowsPerPage);
-  // filteredUsers.forEach(element => {
-  //   addNewUser(element);
-  // });
-  for (let i = 0; i < selectedRowsPerPage; i++) {
-    addNewUser(filteredUsers[i]);
-    }
+  sortFiltered.forEach(element => {
+    addNewUser(element);
+  });
 
   let numberOfActiveUsers = [];
   for (let i = 0; i < filteredUsers.length; i++) {

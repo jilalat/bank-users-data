@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <title>Customer data</title>
 </head>
 
@@ -18,12 +18,9 @@
   <form action="" class="form hidden">
     <span class="close-form">&times;</span>
     <div class="flex">
-      <!-- <progress id="progress-bar" max="100" value="50" class="progress-bar"> 70% </progress> -->
       <div class="progress-bar flex">
         <p class="progress-text">Progress :&nbsp&nbsp <span class="progress-value">0</span>%</p>
-        <!-- <div id="" max="100" value="50" > 0% </div> -->
         <div class="progress-color"></div>
-
       </div>
       <div class="left-form col-flex stretch">
         <div class="input-div flex-btwn full-name-input-div">
@@ -43,8 +40,7 @@
             <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
             <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
           </div>
-          <textarea name="" id="" class="input description-input" placeholder="Description"
-            maxlength="250"></textarea>
+          <textarea name="" id="" class="input description-input" placeholder="Description" maxlength="250"></textarea>
         </div>
         <p class="errors non-visible">Error</p>
       </div>
@@ -53,7 +49,7 @@
           <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
           <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
           <select name="" id="" class="options-error currency-input input">
-            <option value="" disabled selected>Currency</option>
+            <option value="" disabled selected hidden>Currency</option>
             <option value="USD">USD</option>
             <option value="EUR">EUR</option>
             <option value="GBP">GBP</option>
@@ -83,7 +79,7 @@
           <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
           <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
           <select name="" id="" class="options-error status-input input">
-            <option value="" disabled selected>Status</option>
+            <option value="" disabled selected hidden>Status</option>
             <option value="ACTIVE">ACTIVE</option>
             <option value="INACTIVE">INACTIVE</option>
             <option value="PAID">PAID</option>
@@ -105,7 +101,6 @@
   <main>
     <div class="flex-btwn top-icons">
       <div class="search-icon">
-        <!-- <img src="./images/search.svg" alt="" class="search-icon big-icons"> -->
         <img src="./images/b-user.svg" alt="" class="black-search-user-icon big-icons">
         <img src="./images/user.svg" alt="" class="color-search-user-icon hidden big-icons">
       </div>
@@ -119,13 +114,13 @@
         <img src="./images/b-add-user.svg" alt="" class="big-icons add-user-black-icon">
       </div>
     </div>
-    <!-- non-visible -->
     <div class="flex">
       <div class="add-user-modal flex non-visible">
         <img class="medium-icons" src="./images/checked-with-success.png" alt="">
         <div class="flex add-user-modal-p">
           <p class="add-user-modal-value">hhhhhh</p>
-          <p>has been successfully <span class="added hidden">added</span> <span class="updated hidden">updated</span></p>
+          <p>has been successfully <span class="added hidden">added</span> <span class="updated hidden">updated</span>
+          </p>
         </div>
       </div>
     </div>
@@ -172,12 +167,13 @@
       <tfoot>
         <tr>
           <td colspan="4">
-            <p  class="flex-start"> <small>ACTIVE CUSTOMERS :</small>&nbsp;&nbsp;<span class="active-users"></span><small>&nbsp; / <span class="total-of-users"></span></small></p>
+            <p class="flex-start"> <small>ACTIVE CUSTOMERS :</small>&nbsp;&nbsp;<span
+                class="active-users"></span><small>&nbsp; / <span class="total-of-users"></span></small></p>
           </td>
           <td colspan="2">
-                <div class="flex right-text-align">
+            <div class="flex right-text-align">
               <p class="rows-per-page">Rows per page :</p>
-             <div class="rows-per-page-select">
+              <div class="rows-per-page-select">
                 <select name="" id="rows-per-page" class="">
                   <option value="5">5</option>
                   <option value="10" selected>10</option>
@@ -187,15 +183,14 @@
                   <option value="30">30</option>
                 </select>
                 <img src="./images/black-down.png" alt="" class="micro-icons rows-per-page-icon">
-             </div>
+              </div>
             </div>
           </td>
-          <td colspan="2" >
+          <td colspan="2">
             <div class="flex">
-              <p class="right-text-align"><span class="starting-index">0</span> - <span class="ending-index">5</span> of <span
-                  class="total-of-users"></span></p>
-                            <div class="arrows flex-btwn">
-                              <!-- flex-around -->
+              <p class="right-text-align"><span class="starting-index">0</span> - <span class="ending-index">5</span> of
+                <span class="total-of-users"></span></p>
+              <div class="arrows flex-btwn">
                 <img src="./images/b-left-arrow.svg" alt="" class="medium-icons black-left-arrow">
                 <img src="./images/left-arrow.svg" alt="" class="medium-icons color-left-arrow hidden">
                 <img src="./images/right-arrow.svg" alt="" class="medium-icons color-right-arrow hidden">
