@@ -13,194 +13,210 @@
 </head>
 
 <body>
-  <div class="overlay hidden"></div>
+  <!-- <div class="overlay hidden"></div> -->
   <!-- <div > -->
-  <form action="" class="form hidden">
-    <span class="close-form">&times;</span>
-    <div class="flex">
-      <div class="progress-bar flex">
-        <p class="progress-text">Progress :&nbsp&nbsp <span class="progress-value">0</span>%</p>
-        <div class="progress-color"></div>
-      </div>
-      <div class="left-form col-flex stretch">
-        <div class="input-div flex-btwn full-name-input-div">
-          <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
-          <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
-          <input type="text" placeholder="Full Name" class="input full-name-input">
+  <!-- <div class="form-container"> -->
+
+  <div class="form-container flex" id="form-container">
+    <form action="" class="form col-flex" id="form">
+      <!-- <span class="close-form">&times;</span> -->
+      <div class="col-flex">
+        <div class="progress-bar flex">
+          <p class="progress-text">Progress :&nbsp&nbsp <span class="progress-value">0</span>%</p>
+          <div class="progress-color"></div>
         </div>
-        <p class="errors non-visible">Error</p>
-        <div class="input-div id-number-input-div flex-btwn">
-          <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
-          <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
-          <input type="text" placeholder="ID Number" class="input id-number-input">
-        </div>
-        <p class="errors non-visible">Error</p>
-        <div class="input-div textarea-input-div textarea flex-s">
-          <div class="textarea-imgs">
-            <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
-            <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+    
+        <div class="flex">
+          <div class="left-form star-col-flex stretch">
+            <div class="input-div flex-btwn full-name-input-div">
+              <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+              <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+              <input type="text" placeholder="Full Name" class="input full-name-input">
+            </div>
+            <p class="errors non-visible">Error</p>
+            <div class="input-div id-number-input-div flex-btwn">
+              <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+              <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+              <input type="text" placeholder="ID Number" class="input id-number-input">
+            </div>
+            <p class="errors non-visible">Error</p>
+            <div class="input-div textarea-input-div textarea flex-s">
+              <div class="textarea-imgs">
+                <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+                <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+              </div>
+              <textarea name="" id="" class="input description-input" placeholder="Description"
+                maxlength="250"></textarea>
+            </div>
+            <p class="errors non-visible">Error</p>
           </div>
-          <textarea name="" id="" class="input description-input" placeholder="Description" maxlength="250"></textarea>
+          <div class="right-form star-col-flex">
+            <div class="input-div currency-input-div flex-btwn">
+              <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+              <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+              <select name="" id="" class="options-error currency-input input">
+                <option value="" disabled selected hidden>Currency</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="INR">INR</option>
+              </select>
+            </div>
+            <p class="errors non-visible">Error</p>
+            <div class="input-div deposit-input-div flex-btwn">
+              <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+              <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+              <input type="text" placeholder="Deposit Amount" class="input deposit-input">
+            </div>
+            <p class="errors non-visible">Error</p>
+            <div class="input-div rate-input-div flex-btwn">
+              <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+              <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+              <input type="text" class="input rate-input" placeholder="Rate" maxlength="10">
+            </div>
+            <p class="errors non-visible">Error</p>
+            <div class="input-div balance-input-div flex-btwn">
+              <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+              <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+              <input type="text" placeholder="Balance" class="input balance-input">
+            </div>
+            <p class="errors non-visible">Error</p>
+            <div class="input-div status-input-div flex-btwn">
+              <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+              <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+              <select name="" id="" class="options-error status-input input">
+                <option value="" disabled selected hidden>Status</option>
+                <option value="ACTIVE">ACTIVE</option>
+                <option value="INACTIVE">INACTIVE</option>
+                <option value="PAID">PAID</option>
+                <option value="OPEN">OPEN</option>
+                <option value="ORDERED">ORDERED</option>
+              </select>
+            </div>
+            <p class="errors non-visible">Error</p>
+          </div>
         </div>
-        <p class="errors non-visible">Error</p>
       </div>
-      <div class="right-form col-flex">
-        <div class="input-div currency-input-div flex-btwn">
-          <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
-          <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
-          <select name="" id="" class="options-error currency-input input">
-            <option value="" disabled selected hidden>Currency</option>
-            <option value="USD">USD</option>
-            <option value="EUR">EUR</option>
-            <option value="GBP">GBP</option>
-            <option value="INR">INR</option>
-          </select>
-        </div>
-        <p class="errors non-visible">Error</p>
-        <div class="input-div deposit-input-div flex-btwn">
-          <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
-          <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
-          <input type="text" placeholder="Deposit Amount" class="input deposit-input">
-        </div>
-        <p class="errors non-visible">Error</p>
-        <div class="input-div rate-input-div flex-btwn">
-          <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
-          <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
-          <input type="text" class="input rate-input" placeholder="Rate" maxlength="10">
-        </div>
-        <p class="errors non-visible">Error</p>
-        <div class="input-div balance-input-div flex-btwn">
-          <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
-          <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
-          <input type="text" placeholder="Balance" class="input balance-input">
-        </div>
-        <p class="errors non-visible">Error</p>
-        <div class="input-div status-input-div flex-btwn">
-          <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
-          <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
-          <select name="" id="" class="options-error status-input input">
-            <option value="" disabled selected hidden>Status</option>
-            <option value="ACTIVE">ACTIVE</option>
-            <option value="INACTIVE">INACTIVE</option>
-            <option value="PAID">PAID</option>
-            <option value="OPEN">OPEN</option>
-            <option value="ORDERED">ORDERED</option>
-          </select>
-        </div>
-        <p class="errors non-visible">Error</p>
+      <div class="flex">
+        <input type="submit" id="submit-btn" value="Submit" class="btn submit-btn">
+        <button class="btn update-user-btn">Update User</button>
+        <input type="reset" value="Clear" class="btn clear-btn">
+        <input type="button" value="Cancel" class="btn cancel-form hidden">
       </div>
-    </div>
-    <div class="flex">
-      <input type="submit" id="submit-btn" value="Submit" class="btn submit-btn">
-      <button class="btn update-user-btn">Update User</button>
-      <input type="reset" value="Clear" class="btn clear-btn">
-      <input type="button" value="Cancel" class="btn cancel-form">
-    </div>
-  </form>
+    </form>
+  </div>
+  <!-- </div> -->
 
   <main>
-    <div class="flex-btwn top-icons">
-      <div class="search-icon">
-        <img src="./images/b-user.svg" alt="" class="black-search-user-icon big-icons">
-        <img src="./images/user.svg" alt="" class="color-search-user-icon hidden big-icons">
-      </div>
-      <div class="search-bar flex hidden">
-        <input type="text" name="" id="" class="search-input-field" placeholder="Search">
-        <img src="./images/b-zoom.svg" alt="" class="small-icons hidden black-delete-search">
-        <img src="./images/zoom.svg" alt="" class="small-icons hidden color-delete-search">
-      </div>
-      <div class="add-user-icons flex">
-        <img src="./images/add-user.svg" alt="" class="big-icons add-user-colored-icon hidden">
-        <img src="./images/b-add-user.svg" alt="" class="big-icons add-user-black-icon">
-      </div>
-    </div>
-    <div class="flex">
-      <div class="add-user-modal flex non-visible">
-        <img class="medium-icons" src="./images/checked-with-success.png" alt="">
-        <div class="flex add-user-modal-p">
-          <p class="add-user-modal-value">hhhhhh</p>
-          <p>has been successfully <span class="added hidden">added</span> <span class="updated hidden">updated</span>
-          </p>
+    <div class="dashboard">
+      <!-- <div class="flex-btwn top-icons"> -->
+      <div class="search star-col-flex">
+        <div class="search-icon">
+          <img src="./images/b-user.svg" alt="" class="black-search-user-icon big-icons">
+          <img src="./images/user.svg" alt="" class="color-search-user-icon hidden big-icons">
+        </div>
+        <div class="search-bar flex hidden">
+          <input type="text" name="" id="" class="search-input-field" placeholder="Search">
+          <img src="./images/b-zoom.svg" alt="" class="small-icons hidden black-delete-search">
+          <img src="./images/zoom.svg" alt="" class="small-icons hidden color-delete-search">
         </div>
       </div>
+      <div class="add-user-icons flex">
+        <a href="#form-container"><img src="./images/add-user.svg" alt="" class="big-icons add-user-colored-icon hidden"></a>
+        <img src="./images/b-add-user.svg" alt="" class="big-icons add-user-black-icon">
+      </div>
+      <!-- </div> -->
+      <div class="flex">
+        <div class="add-user-modal flex non-visible">
+          <!-- non-visible -->
+          <img class="medium-icons" src="./images/checked-with-success.png" alt="">
+          <div class="flex add-user-modal-p">
+            <p class="add-user-modal-value">hhhhhh</p>
+            <p>has been successfully <span class="added hidden">added</span> <span class="updated hidden">updated</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th class="table-check-user center-text-align"><input type="checkbox" id="checkbox"></th>
+            <th class="table-name-and-id-number">
+              <div class="flex-start">
+                <p class="p-name">NAME</p>
+                <div class="col-flex sort">
+                  <img src="./images/blue-up.svg" alt="" class="micro-icons blue-up hidden">
+                  <img src="./images/black-up.png" alt="" class="micro-icons black-up">
+                  <img src="./images/black-down.png" alt="" class="micro-icons black-down">
+                  <img src="./images/blue-down.svg" alt="" class="micro-icons blue-down hidden">
+                </div>
+              </div>
+            </th>
+            <th class="table-description left-text-align">DESCRIPTION</th>
+            <th class="table-rate-and-currency right-text-align">RATE</th>
+            <th class="table-balance-and-currency right-text-align">BALANCE</th>
+            <th class="table-deposit-and-currency right-text-align">DEPOSIT</th>
+            <th class="table-status">
+              <div class="flex-end">
+                <p class="p-status">STATUS</p>
+                <div class="col-flex sort">
+                  <img src="./images/blue-up.svg" alt="" class="micro-icons blue-up hidden">
+                  <img src="./images/black-up.png" alt="" class="micro-icons black-up">
+                  <img src="./images/black-down.png" alt="" class="micro-icons black-down">
+                  <img src="./images/blue-down.svg" alt="" class="micro-icons blue-down hidden">
+                </div>
+              </div>
+            </th>
+            <th class="table-more center-text-align"><img src="./images/more.svg" alt="" class="small-icons"></th>
+          </tr>
+        </thead>
+        <tbody class="table-body">
+          <tr class="empty-row hidden">
+            <td class="empty-td center-text-align" colspan="8">
+              <p>you don't have any user here :(</p>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4">
+              <p class="flex-start"> <small>ACTIVE CUSTOMERS :</small>&nbsp;&nbsp;<span
+                  class="active-users"></span><small>&nbsp; / <span class="total-of-users"></span></small></p>
+            </td>
+            <td colspan="2">
+              <div class="flex right-text-align">
+                <p class="rows-per-page">Rows per page :</p>
+                <div class="rows-per-page-select">
+                  <select name="" id="rows-per-page" class="">
+                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                  </select>
+                  <img src="./images/black-down.png" alt="" class="micro-icons rows-per-page-icon">
+                </div>
+              </div>
+            </td>
+            <td colspan="2">
+              <div class="flex">
+                <p class="right-text-align"><span class="starting-index">0</span> - <span class="ending-index">5</span>
+                  of
+                  <span class="total-of-users"></span>
+                </p>
+                <div class="arrows flex-btwn">
+                  <img src="./images/b-left-arrow.svg" alt="" class="medium-icons black-left-arrow">
+                  <img src="./images/left-arrow.svg" alt="" class="medium-icons color-left-arrow hidden">
+                  <img src="./images/right-arrow.svg" alt="" class="medium-icons color-right-arrow hidden">
+                  <img src="./images/b-right-arrow.svg" alt="" class="medium-icons black-right-arrow">
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th class="table-check-user center-text-align"><input type="checkbox" id="checkbox"></th>
-          <th class="table-name-and-id-number">
-            <div class="flex-start">
-              <p class="p-name">NAME</p>
-              <div class="col-flex sort">
-                <img src="./images/blue-up.svg" alt="" class="micro-icons blue-up hidden">
-                <img src="./images/black-up.png" alt="" class="micro-icons black-up">
-                <img src="./images/black-down.png" alt="" class="micro-icons black-down">
-                <img src="./images/blue-down.svg" alt="" class="micro-icons blue-down hidden">
-              </div>
-            </div>
-          </th>
-          <th class="table-description left-text-align">DESCRIPTION</th>
-          <th class="table-rate-and-currency right-text-align">RATE</th>
-          <th class="table-balance-and-currency right-text-align">BALANCE</th>
-          <th class="table-deposit-and-currency right-text-align">DEPOSIT</th>
-          <th class="table-status">
-            <div class="flex-end">
-              <p class="p-status">STATUS</p>
-              <div class="col-flex sort">
-                <img src="./images/blue-up.svg" alt="" class="micro-icons blue-up hidden">
-                <img src="./images/black-up.png" alt="" class="micro-icons black-up">
-                <img src="./images/black-down.png" alt="" class="micro-icons black-down">
-                <img src="./images/blue-down.svg" alt="" class="micro-icons blue-down hidden">
-              </div>
-            </div>
-          </th>
-          <th class="table-more center-text-align"><img src="./images/more.svg" alt="" class="small-icons"></th>
-        </tr>
-      </thead>
-      <tbody class="table-body">
-        <tr class="empty-row hidden">
-          <td class="empty-td center-text-align" colspan="8">
-            <p>you don't have any user here :(</p>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="4">
-            <p class="flex-start"> <small>ACTIVE CUSTOMERS :</small>&nbsp;&nbsp;<span
-                class="active-users"></span><small>&nbsp; / <span class="total-of-users"></span></small></p>
-          </td>
-          <td colspan="2">
-            <div class="flex right-text-align">
-              <p class="rows-per-page">Rows per page :</p>
-              <div class="rows-per-page-select">
-                <select name="" id="rows-per-page" class="">
-                  <option value="5">5</option>
-                  <option value="10" selected>10</option>
-                  <option value="15">15</option>
-                  <option value="20">20</option>
-                  <option value="25">25</option>
-                  <option value="30">30</option>
-                </select>
-                <img src="./images/black-down.png" alt="" class="micro-icons rows-per-page-icon">
-              </div>
-            </div>
-          </td>
-          <td colspan="2">
-            <div class="flex">
-              <p class="right-text-align"><span class="starting-index">0</span> - <span class="ending-index">5</span> of
-                <span class="total-of-users"></span></p>
-              <div class="arrows flex-btwn">
-                <img src="./images/b-left-arrow.svg" alt="" class="medium-icons black-left-arrow">
-                <img src="./images/left-arrow.svg" alt="" class="medium-icons color-left-arrow hidden">
-                <img src="./images/right-arrow.svg" alt="" class="medium-icons color-right-arrow hidden">
-                <img src="./images/b-right-arrow.svg" alt="" class="medium-icons black-right-arrow">
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
   </main>
 
   <script src="script.js"></script>
