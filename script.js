@@ -1,8 +1,6 @@
-'use strict';
+// 'use strict';
 let req = {
-  //   - save everything to local storage
   //   - After adding new customer, scroll to and highlight the newly added row in table
-  //   - After clinking edit customer, scroll to the form and pre-fill all the fields
 };
 let done = {
   // - Form to add customer
@@ -28,12 +26,14 @@ let done = {
   // - After submission clear form
   // - Validation triggers on submit, if validation passed add customer, otherwise show errors.
   // - Added customer should adher to all table logic (Search, Sort..)
+  // - save everything to local storage
   // Data table requirements:
   //     - Validation on change
   //     - show a notification when a customer is added (5s)
   //     - Form fill progress percentage
   // Edit customer
   //   - After submitting the changes of the edited customer, notification message should say: “Customer updated successfully”
+  //   - After clinking edit customer, scroll to the form and pre-fill all the fields
 };
 
 let users = [
@@ -402,28 +402,122 @@ let users = [
   },
 ];
 
-// Top Icons
-let main = document.querySelector('main');
+// Local Storage
+let getLocalStorage = localStorage.getItem('usersData');
+let getUsersData = JSON.parse(getLocalStorage);
+
+// Top Main
+let main = document.getElementById('main');
 let searchBar = document.querySelector('.search-bar');
 let searchInputField = document.querySelector('.search-input-field');
 let searchIcon = document.querySelector('.search-icon');
 let blackSearchUserIcon = document.querySelector('.black-search-user-icon');
 let colorSearchUserIcon = document.querySelector('.color-search-user-icon');
-
 let blackDeleteSearch = document.querySelector('.black-delete-search');
 let colorDeleteSearch = document.querySelector('.color-delete-search');
-
-// let addUserIcons = document.querySelector('.add-user-icons');
-let addUserColoredIcon = document.querySelector('.add-user-colored-icon');
+let addUserRound = document.querySelector('.add-user-icons');
 let addUserBlackIcon = document.querySelector('.add-user-black-icon');
+let addUserColoredIcon = document.querySelector('.add-user-colored-icon');
 
-// Form & Overlay
-let addUserForm = document.querySelector('.form');
+// Success Form Modal
+let successfullyAddUserModal = document.querySelector('.add-user-modal');
+let successfullyAdded = document.querySelector('.added');
+let successfullyUpdated = document.querySelector('.updated');
+let successfullyAddUserModalValue = document.querySelector(
+  '.add-user-modal-value'
+);
+
+// Error Form Modal
+let errorModal = document.querySelector('.error-modal');
+let errorModalValue = document.querySelector('.error-modal-value');
+
+// Overlay
 // let overlay = document.querySelector('.overlay');
 // let closeFormBtn = document.querySelector('.close-form');
-let cancelFormBtn = document.querySelector('.cancel-form');
 
-// Search Bar
+// Form
+let formContainer = document.getElementById('form-container');
+let addUserForm = document.querySelector('.form');
+let progressBar = document.querySelector('.progress-bar');
+let progressColor = document.querySelector('.progress-color');
+let progressValue = document.querySelector('.progress-value');
+
+// let classIndex = document.querySelector('');
+// let tableRow = document.querySelectorAll('table-row');
+// let idIndex = document.getElementById('index');
+
+// Form Btns
+let formBtns = document.querySelector('.form-btns');
+let submitBtn = document.querySelector('.submit-btn');
+let updateUserBtn = document.querySelector('.update-user-btn');
+let clearBtn = document.querySelector('.clear-btn');
+let cancelBtn = document.getElementById('cancel-btn');
+let cancelFormBtn = document.querySelector('.cancel-form');
+let cancelUpdate = document.querySelector('.cancel-update');
+
+// Form Inputs
+let fullNameInput = document.querySelector('.full-name-input');
+let fullNameInputDiv = document.querySelector('.full-name-input-div');
+let idNumberInput = document.querySelector('.id-number-input');
+let idNumberInputDiv = document.querySelector('.id-number-input-div');
+let descriptionInput = document.querySelector('.description-input');
+let descriptionInputDiv = document.querySelector('.description-input-div');
+let currencyInput = document.querySelector('.currency-input');
+let currencyInputDiv = document.querySelector('.currency-input-div');
+let depositInput = document.querySelector('.deposit-input');
+let depositInputDiv = document.querySelector('.deposit-input-div');
+let rateInput = document.querySelector('.rate-input');
+let rateInputDiv = document.querySelector('.rate-input-div');
+let balanceInput = document.querySelector('.balance-input');
+let balanceInputDiv = document.querySelector('.balance-input-div');
+let statusInput = document.querySelector('.status-input');
+let statusInputDiv = document.querySelector('.status-input-div');
+
+// Form Validation
+let errorIcon = document.querySelectorAll('.error-icon');
+let validIcon = document.querySelectorAll('.valid-icon');
+let inputDiv = document.querySelectorAll('.input-div');
+let inputArea = document.querySelectorAll('.input');
+let errors = document.querySelectorAll('.errors');
+let greenBorder = document.querySelector('.green-border');
+
+// checkbox
+let checkAll = document.getElementById('checkbox');
+
+// Sort-by
+let blueUpIcon = document.querySelectorAll('.blue-up');
+let blackUpIcon = document.querySelectorAll('.black-up');
+let blackDownIcon = document.querySelectorAll('.black-down');
+let blueDownIcon = document.querySelectorAll('.blue-down');
+let tableNameP = document.querySelector('.p-name');
+let tableStatusP = document.querySelector('.p-status');
+
+// table Body
+let tableBody = document.querySelector('.table-body');
+let emptyData = document.querySelector('.empty-row');
+// let userIndex = document.getElementsByTagName('user-index');
+// let userIndex = document.querySelector('[user-index]');
+
+// Table Footer
+
+// active Users :
+let activeUsers = document.querySelector('.active-users');
+let totalOfUsers = document.querySelectorAll('.total-of-users');
+
+// rows per page
+let rowsPerPage = document.getElementById('rows-per-page');
+
+// starting & ending-index
+let startingIndex = document.querySelector('.starting-index');
+let endingIndex = document.querySelector('.ending-index');
+
+// Next & Previous pages
+let blackRightArrow = document.querySelector('.black-right-arrow');
+let colorRightArrow = document.querySelector('.color-right-arrow');
+let blackLeftArrow = document.querySelector('.black-left-arrow');
+let colorLeftArrow = document.querySelector('.color-left-arrow');
+
+// Search Bar Style
 blackSearchUserIcon.addEventListener('mouseenter', () => {
   blackSearchUserIcon.classList.add('hidden');
   colorSearchUserIcon.classList.remove('hidden');
@@ -458,7 +552,7 @@ colorDeleteSearch.addEventListener('mouseleave', () => {
 colorDeleteSearch.addEventListener('click', () => {
   searchInputField.focus();
   searchInputField.value = '';
-  refresh(users);
+  refresh(getUsersData);
   colorDeleteSearch.classList.add('hidden');
   blackDeleteSearch.classList.add('hidden');
 });
@@ -470,16 +564,7 @@ searchBar.addEventListener('mouseleave', () => {
   }
 });
 
-searchInputField.addEventListener('input', () => {
-  if (searchInputField.value.trim() !== '') {
-    blackDeleteSearch.classList.remove('hidden');
-  } else {
-    blackDeleteSearch.classList.add('hidden');
-  }
-});
-
 // search
-
 let filteredArr = arr => {
   let searchInputValue = searchInputField.value.toLowerCase();
   let filtered = arr.filter(user => {
@@ -493,82 +578,67 @@ let filteredArr = arr => {
   return filtered;
 };
 
-searchInputField.addEventListener('keyup', () => {
-  tableBody.innerHTML = null;
-  refresh(users);
+searchInputField.addEventListener('input', () => {
+  if (searchInputField.value.trim() !== '') {
+    blackDeleteSearch.classList.remove('hidden');
+  } else {
+    blackDeleteSearch.classList.add('hidden');
+  }
 });
 
-// Add User Icon
+searchInputField.addEventListener('keyup', () => {
+  tableBody.innerHTML = null;
+  refresh(getUsersData);
+});
 
-addUserBlackIcon.addEventListener('mouseenter', () => {
+// Add User Icon Style
+
+addUserRound.addEventListener('mouseenter', () => {
   addUserBlackIcon.classList.add('hidden');
   addUserColoredIcon.classList.remove('hidden');
 });
 
-addUserColoredIcon.addEventListener('mouseleave', () => {
+addUserRound.addEventListener('mouseleave', () => {
   addUserBlackIcon.classList.remove('hidden');
   addUserColoredIcon.classList.add('hidden');
 });
 
-addUserColoredIcon.addEventListener('click', () => {
-  // overlay.classList.remove('hidden');
-  // addUserIcons.classList.add('hidden');
-  // progressBar.classList.remove('hidden');
-  // submitBtn.classList.remove('hidden');
-  // clearBtn.classList.remove('hidden');
-  // cancelFormBtn.classList.remove('hidden');
-  updateUserBtn.classList.add('hidden');
-  submitFormBtns();
-  
-
-
-
-  // progressBar.classList.remove('hidden');
-  // submitBtn.classList.remove('hidden');
-  // updateUserBtn.classList.add('hidden');
-  // clearBtn.classList.remove('hidden');
-  // cancelFormBtn.classList.remove('hidden');
-  // addUserForm.classList.remove('hidden');
-  // closeFormBtn.classList.remove('hidden');
-  fullNameInput.focus();
+addUserRound.addEventListener('click', () => {
+  if (fullNameInput.value !== '' && submitBtn.classList.contains('hidden')) {
+    console.log('btn desibled and not empty');
+    errorModal.classList.remove('hidden');
+    formContainer.scrollIntoView();
+    setTimeout(errorModalMessage, 5000);
+  } else {
+    resetForm();
+    formContainer.scrollIntoView();
+    showSubmitFormBtns();
+  }
 });
 
-// Form
+addUserForm.addEventListener('input', () => {
+  if (formBtns.firstElementChild.classList.contains('hidden')) {
+    showSubmitFormBtns();
+  }
+});
 
-let progressBar = document.querySelector('.progress-bar');
-let progressColor = document.querySelector('.progress-color');
-let progressValue = document.querySelector('.progress-value');
-// let greenBorder = document.querySelector('.green-border');
-// let tableRow = document.getElementById('table-row');
+// Progress Bar
+let validArr = [];
+let addProgressValue = i => {
+  if (inputDiv[i].classList.contains('valid-border')) {
+    if (!validArr.includes(i)) {
+      validArr.push(i);
+    }
+  } else {
+    if (validArr.includes(i)) {
+      validArr.splice(validArr.indexOf(i), 1);
+    }
+  }
+  progressValue.textContent = (100 / inputDiv.length) * validArr.length;
+  progressColor.style.width = `${progressValue.textContent}%`;
+};
 
-let fullNameInput = document.querySelector('.full-name-input');
-let fullNameInputDiv = document.querySelector('.full-name-input-div');
-let idNumberInput = document.querySelector('.id-number-input');
-let idNumberInputDiv = document.querySelector('.id-number-input-div');
-let descriptionInput = document.querySelector('.description-input');
-let descriptionInputDiv = document.querySelector('.description-input-div');
-let currencyInput = document.querySelector('.currency-input');
-let currencyInputDiv = document.querySelector('.currency-input-div');
-let depositInput = document.querySelector('.deposit-input');
-let depositInputDiv = document.querySelector('.deposit-input-div');
-let rateInput = document.querySelector('.rate-input');
-let rateInputDiv = document.querySelector('.rate-input-div');
-let balanceInput = document.querySelector('.balance-input');
-let balanceInputDiv = document.querySelector('.balance-input-div');
-let statusInput = document.querySelector('.status-input');
-let statusInputDiv = document.querySelector('.status-input-div');
-let clearBtn = document.querySelector('.clear-btn');
-let submitBtn = document.querySelector('.submit-btn');
-let updateUserBtn = document.querySelector('.update-user-btn');
-
-let errorIcon = document.querySelectorAll('.error-icon');
-let validIcon = document.querySelectorAll('.valid-icon');
-let inputDiv = document.querySelectorAll('.input-div');
-let inputArea = document.querySelectorAll('.input');
-let errors = document.querySelectorAll('.errors');
-
-// Form inputs
-
+// Form Errors
 let onValid = k => {
   inputDiv[k].classList.add('valid-border');
   validIcon[k].classList.remove('hidden');
@@ -609,7 +679,7 @@ let fullNameInputErrors = () => {
 };
 
 let fullNameExist = () => {
-  users.forEach(element => {
+  getUsersData.forEach(element => {
     if (element.fullName == fullNameInput.value) {
       onError(0);
       errors[0].textContent = `User already exists`;
@@ -629,7 +699,7 @@ let idNumberInputErrors = () => {
 };
 
 let idExist = () => {
-  users.forEach(element => {
+  getUsersData.forEach(element => {
     if (element.idNumber == idNumberInput.value) {
       onError(1);
       errors[1].textContent = `User ID Number already exists`;
@@ -670,21 +740,19 @@ let statusInputErrors = () => {
   }
 };
 
-let validArr = [];
-let addProgressValue = i => {
-  if (inputDiv[i].classList.contains('valid-border')) {
-    if (!validArr.includes(i)) {
-      validArr.push(i);
-    }
-  } else {
-    if (validArr.includes(i)) {
-      validArr.splice(validArr.indexOf(i), 1);
-    }
-  }
-  progressValue.textContent = (100 / inputDiv.length) * validArr.length;
-  progressColor.style.width = `${progressValue.textContent}%`;
+let formErrors = () => {
+  fullNameInputErrors();
+  mustBeNumber(idNumberInput.value, 1);
+  idNumberInputErrors();
+  descriptionInputErrors();
+  currencyInputErrors();
+  mustBeNumber(depositInput.value, 4);
+  mustBeNumber(rateInput.value, 5);
+  mustBeNumber(balanceInput.value, 6);
+  statusInputErrors();
 };
 
+// Form Validation
 fullNameInput.addEventListener('input', () => {
   fullNameInputErrors();
   addProgressValue(0);
@@ -693,7 +761,7 @@ fullNameInput.addEventListener('input', () => {
   }
 });
 
-fullNameInput.addEventListener('input', () => {
+fullNameInput.addEventListener('blur', () => {
   fullNameInputErrors();
   addProgressValue(0);
   if (!submitBtn.classList.contains('hidden')) {
@@ -710,7 +778,7 @@ idNumberInput.addEventListener('input', () => {
   }
 });
 
-idNumberInput.addEventListener('input', () => {
+idNumberInput.addEventListener('blur', () => {
   mustBeNumber(idNumberInput.value, 1);
   idNumberInputErrors();
   addProgressValue(1);
@@ -724,7 +792,7 @@ descriptionInput.addEventListener('input', () => {
   addProgressValue(2);
 });
 
-descriptionInput.addEventListener('input', () => {
+descriptionInput.addEventListener('blur', () => {
   descriptionInputErrors();
   addProgressValue(2);
 });
@@ -744,7 +812,7 @@ depositInput.addEventListener('input', () => {
   addProgressValue(4);
 });
 
-depositInput.addEventListener('input', () => {
+depositInput.addEventListener('blur', () => {
   mustBeNumber(depositInput.value, 4);
   addProgressValue(4);
 });
@@ -754,7 +822,7 @@ rateInput.addEventListener('input', () => {
   addProgressValue(5);
 });
 
-rateInput.addEventListener('input', () => {
+rateInput.addEventListener('blur', () => {
   mustBeNumber(rateInput.value, 5);
   addProgressValue(5);
 });
@@ -764,7 +832,7 @@ balanceInput.addEventListener('input', () => {
   addProgressValue(6);
 });
 
-balanceInput.addEventListener('input', () => {
+balanceInput.addEventListener('blur', () => {
   mustBeNumber(balanceInput.value, 6);
   addProgressValue(6);
 });
@@ -779,6 +847,7 @@ statusInput.addEventListener('blur', () => {
   addProgressValue(7);
 });
 
+// Form Btns
 let resetForm = () => {
   inputDiv.forEach(element => {
     element.classList.remove('valid-border');
@@ -801,106 +870,11 @@ let resetForm = () => {
   validArr = [];
 };
 
-clearBtn.addEventListener('click', resetForm);
-
-//Form Modal
-let successfullyAddUserModal = document.querySelector('.add-user-modal');
-let successfullyAddUserModalValue = document.querySelector(
-  '.add-user-modal-value'
-);
-
-let successfullyAdded = document.querySelector('.added');
-let successfullyUpdated = document.querySelector('.updated');
-let hideSuccessfullyAdded = () => {
-  successfullyAddUserModal.classList.add('non-visible');
-  // document.getElementById('table-row').classList.remove('green-border');
-};
-
-addUserForm.addEventListener('submit', e => {
-  e.preventDefault();
-  if (
-    Object.entries(inputDiv).every(element =>
-      element[1].classList.contains('valid-border')
-    )
-  ) {
-    if (!submitBtn.classList.contains('hidden')) {
-      successfullyAddUserModal.classList.remove('non-visible');
-      successfullyAdded.classList.remove('hidden');
-      successfullyUpdated.classList.add('hidden');
-      successfullyAddUserModalValue.innerHTML = fullNameInput.value;
-      setTimeout('hideSuccessfullyAdded()', 5000);
-      unshiftInData(users);
-    }
-    resetForm();
-    // closeForm();
-    refresh(users);
-    // unshiftInData(users).scrollIntoView();
-    main.scrollIntoView();
-    // addUserIcons.classList.remove('hidden');
-    // let UserRow = document.createElement('tr');
-    // tableRow.classList.add('green-border');
-    // document.getElementById('table-row').classList.add('green-border');
-    // document.querySelector('.table-row').classList.add('green-border');
-    
-    
-    // users.indexOf(users)
-    // let userIdNumberIndex = users.idNumber;
-    // if (users.idNumber.includes(userIdNumberIndex)) {
-    //   console.log(userIdNumberIndex);
-    // }
-
-    hideFormBtns();
- 
-    
-  } else {
-    if (!submitBtn.classList.contains('hidden')) {
-      fullNameExist();
-      idExist();
-    }
-    formErrors();
-  }
-});
-
-// let closeForm = () => {
-//   addUserForm.classList.add('hidden');
-//   // overlay.classList.add('hidden');
-//   // closeFormBtn.classList.add('hidden');
-// };
-
-// let pressEscape = esc => {
-//   if (esc.key === 'Escape' && !addUserForm.classList.contains('hidden')) {
-//     closeForm();
-//   }
-// };
-
-//submit
-// closeFormBtn.addEventListener('click', closeForm);
-// overlay.addEventListener('click', () => {
-//   if (submitBtn.classList.contains('hidden')) {
-//     resetForm();
-//     closeForm();
-//   } else {
-//     closeForm();
-//   }
-// });
-
-cancelFormBtn.addEventListener('click', () => {
+clearBtn.onclick = () => resetForm();
+cancelFormBtn.onclick = () => {
   resetForm();
   hideFormBtns();
-  // closeForm();
   main.scrollIntoView();
-});
-
-let formErrors = () => {
-  fullNameInputErrors();
-  mustBeNumber(idNumberInput.value, 1);
-  idNumberInputErrors();
-  descriptionInputErrors();
-  currencyInputErrors();
-  mustBeNumber(depositInput.value, 4);
-  mustBeNumber(rateInput.value, 5);
-  mustBeNumber(balanceInput.value, 6);
-  statusInputErrors();
 };
 
 let hideFormBtns = () => {
@@ -909,107 +883,134 @@ let hideFormBtns = () => {
   updateUserBtn.classList.add('hidden');
   clearBtn.classList.add('hidden');
   cancelFormBtn.classList.add('hidden');
+  cancelUpdate.classList.add('hidden');
 };
 
-let submitFormBtns = () => {
+let showSubmitFormBtns = () => {
+  updateUserBtn.classList.add('hidden');
   progressBar.classList.remove('hidden');
   submitBtn.classList.remove('hidden');
   clearBtn.classList.remove('hidden');
   cancelFormBtn.classList.remove('hidden');
+  cancelUpdate.classList.add('hidden');
 };
 
-// console.log(addUserForm.lastElementChild.lastElementChild.classList);
-  addUserForm.addEventListener('input', () => {
-    hideFormBtns();
-    if (addUserForm.lastElementChild.lastElementChild.classList.contains('hidden')) {
-      console.log('hhhhhhhhhhhh');
-      submitFormBtns();
+// let takeID = [];
+
+// submit Form
+let setAndRefresh = arr => {
+  localStorage.setItem('usersData', JSON.stringify(arr));
+  refresh(arr);
+};
+
+submitBtn.addEventListener('click', e => {
+  e.preventDefault();
+  if (
+    Object.entries(inputDiv).every(element =>
+      element[1].classList.contains('valid-border')
+    )
+  ) {
+    if (!submitBtn.classList.contains('hidden')) {
+      successfullyAddUserModal.classList.remove('hidden');
+      successfullyAdded.classList.remove('hidden');
+      successfullyUpdated.classList.add('hidden');
+      successfullyAddUserModalValue.innerHTML = fullNameInput.value;
+      getUsersData.unshift({
+        fullName: fullNameInput.value,
+        idNumber: idNumberInput.value,
+        description: descriptionInput.value,
+        currency: currencyInput.value,
+        deposit: depositInput.value,
+        rate: rateInput.value,
+        balance: balanceInput.value,
+        status: statusInput.value,
+      });
+      setAndRefresh(getUsersData);
+      let goTo = document.getElementById(idNumberInput.value);
+      goTo.classList.add('green-border');
+      goTo.scrollIntoView();
+      resetForm();
+      hideFormBtns();
+      setTimeout(hideSuccessfullyAdded, 5000);
+      setTimeout(hideSuccessBorder, 5000, goTo);
     }
+  } else {
+    formErrors();
+    fullNameExist();
+    idExist();
+  }
 });
+
+// Success Form Modal
+let hideSuccessfullyAdded = () => {
+  successfullyAddUserModal.classList.add('hidden');
+};
+let errorModalMessage = () => {
+  errorModal.classList.add('hidden');
+};
+
+let hideSuccessBorder = index => {
+  index.classList.remove('green-border');
+};
 
 //theade
 
-// checkbox
-
-let checkAll = document.getElementById('checkbox');
-
 // Sort Functions
+let sortByFullNameAtoZ = (a, b) =>
+  a.fullName.toLowerCase() > b.fullName.toLowerCase()
+    ? 1
+    : b.fullName.toLowerCase() > a.fullName.toLowerCase()
+    ? -1
+    : 0;
 
-let sortByFullNameAtoZ = (a, b) => {
-  if (a.fullName.toLowerCase() > b.fullName.toLowerCase()) {
-    return 1;
-  } else if (b.fullName.toLowerCase() > a.fullName.toLowerCase()) {
-    return -1;
-  } else {
-    return 0;
-  }
-};
-
-let sortByFullNameZtoA = (a, b) => {
-  if (a.fullName.toLowerCase() > b.fullName.toLowerCase()) {
-    return -1;
-  } else if (b.fullName.toLowerCase() > a.fullName.toLowerCase()) {
-    return 1;
-  } else {
-    return 0;
-  }
-};
+let sortByFullNameZtoA = (a, b) =>
+  a.fullName.toLowerCase() > b.fullName.toLowerCase()
+    ? -1
+    : b.fullName.toLowerCase() > a.fullName.toLowerCase()
+    ? 1
+    : 0;
 
 let statusOrder = ['OPEN', 'ACTIVE', 'INACTIVE', 'PAID', 'ORDERED'];
 
-let sortByStatusAtoZ = (a, b) => {
-  if (statusOrder.indexOf(a.status) > statusOrder.indexOf(b.status)) {
-    return 1;
-  } else if (statusOrder.indexOf(a.status) < statusOrder.indexOf(b.status)) {
-    return -1;
-  } else {
-    return 0;
-  }
-};
+let sortByStatusAtoZ = (a, b) =>
+  statusOrder.indexOf(a.status) > statusOrder.indexOf(b.status)
+    ? 1
+    : statusOrder.indexOf(a.status) < statusOrder.indexOf(b.status)
+    ? -1
+    : 0;
 
-let sortByStatusZtoA = (a, b) => {
-  if (statusOrder.indexOf(a.status) > statusOrder.indexOf(b.status)) {
-    return -1;
-  } else if (statusOrder.indexOf(a.status) < statusOrder.indexOf(b.status)) {
-    return 1;
-  } else {
-    return 0;
-  }
-};
+let sortByStatusZtoA = (a, b) =>
+  statusOrder.indexOf(a.status) > statusOrder.indexOf(b.status)
+    ? -1
+    : statusOrder.indexOf(a.status) < statusOrder.indexOf(b.status)
+    ? 1
+    : 0;
 
 let sortedArr = arr => {
   if (
     blackUpIcon[0].classList.contains('hidden') &&
     !blueUpIcon[0].classList.remove('hidden')
   ) {
-    arr.sort(sortByFullNameAtoZ);
+    return arr.sort(sortByFullNameAtoZ);
   } else if (
     blackDownIcon[0].classList.contains('hidden') &&
     !blueDownIcon[0].classList.remove('hidden')
   ) {
-    arr.sort(sortByFullNameZtoA);
+    return arr.sort(sortByFullNameZtoA);
   } else if (
     blackUpIcon[1].classList.contains('hidden') &&
     !blueUpIcon[1].classList.remove('hidden')
   ) {
-    arr.sort(sortByStatusAtoZ);
+    return arr.sort(sortByStatusAtoZ);
   } else if (
     blackDownIcon[1].classList.contains('hidden') &&
     !blueDownIcon[1].classList.remove('hidden')
   ) {
-    arr.sort(sortByStatusZtoA);
+    return arr.sort(sortByStatusZtoA);
   }
 };
 
 // Sort-by
-let blueUpIcon = document.querySelectorAll('.blue-up');
-let blackUpIcon = document.querySelectorAll('.black-up');
-let blackDownIcon = document.querySelectorAll('.black-down');
-let blueDownIcon = document.querySelectorAll('.blue-down');
-
-let tableNameP = document.querySelector('.p-name');
-let tableStatusP = document.querySelector('.p-status');
-
 let sortUpIcon = (i, j) => {
   blackUpIcon[i].classList.add('hidden');
   blackDownIcon[i].classList.remove('hidden');
@@ -1034,22 +1035,22 @@ let sortDownIcon = (i, j) => {
 
 blackUpIcon[0].addEventListener('click', () => {
   sortUpIcon(0, 1);
-  refresh(users);
+  refresh(getUsersData);
 });
 
 blackUpIcon[1].addEventListener('click', () => {
   sortUpIcon(1, 0);
-  refresh(users);
+  refresh(getUsersData);
 });
 
 blackDownIcon[0].addEventListener('click', () => {
   sortDownIcon(0, 1);
-  refresh(users);
+  refresh(getUsersData);
 });
 
 blackDownIcon[1].addEventListener('click', () => {
   sortDownIcon(1, 0);
-  refresh(users);
+  refresh(getUsersData);
 });
 
 let resetSort = i => {
@@ -1057,7 +1058,7 @@ let resetSort = i => {
   blackDownIcon[i].classList.remove('hidden');
   blueUpIcon[i].classList.add('hidden');
   blueDownIcon[i].classList.add('hidden');
-  refresh(users);
+  refresh(getUsersData);
 };
 
 blueUpIcon[0].addEventListener('click', () => {
@@ -1070,6 +1071,7 @@ blueDownIcon[0].addEventListener('click', () => {
 
 tableNameP.addEventListener('click', () => {
   resetSort(0);
+  resetSort(1);
 });
 
 blueUpIcon[1].addEventListener('click', () => {
@@ -1081,16 +1083,144 @@ blueDownIcon[1].addEventListener('click', () => {
 });
 
 tableStatusP.addEventListener('click', () => {
+  resetSort(0);
   resetSort(1);
 });
 
 //tbody
 
-let tableBody = document.querySelector('.table-body');
-let emptyData = document.querySelector('.empty-row');
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-let unshiftInData = arr => {
-  arr.unshift({
+let addNewUser = userData => {
+  //create Elements :
+  let {
+    fullName,
+    idNumber,
+    description,
+    currency,
+    deposit,
+    rate,
+    balance,
+    status,
+  } = userData;
+
+  let UserRow = document.createElement('tr');
+  UserRow.setAttribute('class', 'table-row');
+  UserRow.setAttribute('id', `${idNumber}`);
+  UserRow.innerHTML = `
+  <td><input type="checkbox" id="check-user"></td>
+<td class="">
+  <p class="full-name">${fullName}</p>
+  <p class="id-number">${idNumber}</p>
+</td>
+<td class="">
+  <p class="description">${description}</p>
+</td>
+<td class="">
+  <p class="rate right-text-align">${Number(rate).toFixed(2)}</p>
+  <p class="currency right-text-align">${currency}</p>
+</td>
+<td class="">
+  <p class="balance right-text-align ${checkBalance(balance)}">${Number(
+    balance
+  ).toFixed(2)}</p>
+  <p class="currency right-text-align">${currency}</p>
+</td>
+<td class="">
+  <p class="deposit right-text-align">${Number(deposit).toFixed(2)}</p>
+  <p class="currency right-text-align">${currency}</p>
+</td>
+<td class="center-text-align">
+<button id="" class="${showStatus(status)}">${status}</button>
+  </td>
+`;
+  UserRow.appendChild(appendDeleteAndEdit(userData));
+  return UserRow;
+};
+
+let checkBalance = b => {
+  return b > 0 ? 'positive' : 'negative';
+};
+
+let showStatus = sts => {
+  return `${sts.toLowerCase()}-btn`;
+};
+
+let appendDeleteAndEdit = item => {
+  let moreTD = document.createElement('td');
+  let moreDiv = document.createElement('div');
+  let blackDeleteUserIcon = document.createElement('img');
+  let blackEditUserIcon = document.createElement('img');
+  blackDeleteUserIcon.setAttribute('src', './images/b-delete-user.svg');
+  blackDeleteUserIcon.setAttribute(
+    'class',
+    'medium-icons black-delete-user-icon'
+  );
+  moreTD.setAttribute('class', 'center-text-align');
+  moreDiv.setAttribute('class', 'flex-btwn');
+  blackEditUserIcon.setAttribute('src', './images/b-edit-user.svg');
+  blackEditUserIcon.setAttribute('class', 'medium-icons black-edit-user-icon');
+  // blackEditUserIcon.setAttribute('id', `${e}`);
+  moreTD.appendChild(moreDiv);
+  moreDiv.appendChild(blackEditUserIcon);
+  moreDiv.appendChild(blackDeleteUserIcon);
+
+  blackEditUserIcon.addEventListener('click', e => {
+    if (fullNameInput.value !== '' && submitBtn.classList.contains('hidden')) {
+      console.log('btn desibled and not empty');
+      errorModal.classList.remove('hidden');
+      formContainer.scrollIntoView();
+      setTimeout(errorModalMessage, 5000);
+    } else {
+      resetForm();
+      let rowId = e.target.parentElement.parentElement.parentElement.id;
+      console.log(rowId);
+      let rowIdIndex = getUsersData.findIndex(
+        element => element.idNumber === rowId
+      );
+      console.log(rowIdIndex);
+      e.preventDefault();
+      updateUsersForm(item, rowIdIndex);
+      getUsersData.splice(getUsersData.indexOf(item), 1);
+      setAndRefresh(getUsersData);
+      formErrors();
+    }
+  });
+
+  blackDeleteUserIcon.addEventListener('click', e => {
+    e.preventDefault();
+    deleteUsers(item);
+  });
+  return moreTD;
+};
+
+let deleteUsers = deleteItem => {
+  if (confirm('Are you sure you wont to delete this user ?')) {
+    getUsersData.splice(getUsersData.indexOf(deleteItem), 1);
+    setAndRefresh(getUsersData);
+  }
+};
+
+let updateUsersForm = (editItem, idNumberIndex) => {
+  submitBtn.classList.add('hidden');
+  clearBtn.classList.add('hidden');
+  updateUserBtn.classList.remove('hidden');
+  formContainer.scrollIntoView();
+  // progressBar.classList.('hidden');
+  cancelFormBtn.classList.add('hidden');
+  cancelUpdate.classList.remove('hidden');
+  // resetForm();
+  // if (fullNameInput.value === '') {
+  fullNameInput.value = editItem.fullName;
+  idNumberInput.value = editItem.idNumber;
+  descriptionInput.value = editItem.description;
+  currencyInput.value = editItem.currency;
+  depositInput.value = editItem.deposit;
+  rateInput.value = editItem.rate;
+  balanceInput.value = editItem.balance;
+  statusInput.value = editItem.status;
+
+  let beforeUpdate = {
     fullName: fullNameInput.value,
     idNumber: idNumberInput.value,
     description: descriptionInput.value,
@@ -1099,393 +1229,133 @@ let unshiftInData = arr => {
     rate: rateInput.value,
     balance: balanceInput.value,
     status: statusInput.value,
+  };
+
+  fullNameInput.addEventListener('input', () => {
+    fullNameInputErrors();
+    addProgressValue(0);
+    fullNameExist();
+  });
+
+  fullNameInput.addEventListener('blur', () => {
+    fullNameInputErrors();
+    addProgressValue(0);
+    fullNameExist();
+  });
+
+  idNumberInput.addEventListener('input', () => {
+    mustBeNumber(idNumberInput.value, 1);
+    idNumberInputErrors();
+    addProgressValue(1);
+    idExist();
+  });
+
+  idNumberInput.addEventListener('blur', () => {
+    mustBeNumber(idNumberInput.value, 1);
+    idNumberInputErrors();
+    addProgressValue(1);
+    idExist();
+  });
+
+  updateUserBtn.addEventListener('click', () => {
+    updateUser(idNumberIndex);
+    if (
+      Object.entries(inputDiv).every(element =>
+        element[1].classList.contains('valid-border')
+      )
+    ) {
+      successfullyAddUserModal.classList.remove('hidden');
+      successfullyAdded.classList.add('hidden');
+      successfullyUpdated.classList.remove('hidden');
+    }
+    setTimeout(hideSuccessfullyAdded, 5000);
+
+  });
+
+  cancelUpdate.addEventListener('click', () => {
+    getUsersData.splice(idNumberIndex, 0, beforeUpdate);
+    setAndRefresh(getUsersData);
+    let goTo = document.getElementById(idNumberInput.value);
+    resetForm();
+    goTo.classList.add('green-border');
+    goTo.scrollIntoView();
+    hideFormBtns();
+    setTimeout(hideSuccessBorder, 5000, goTo);
   });
 };
 
-let addNewUser = (userData, index) => {
-  // UserRow.innerHTML = <td class="center-text-align"><img src="./images/unchecked-user.svg" alt="" class="medium-icons"><img src="./images/checked-user.svg" alt="" class="medium-icons"></td><td><p class="full-name">Full Name</p><p class="id-number">ID Number</p></td><td><p class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut recusandae expedita ea modi dolorum magni at neque odit id? Cum error excepturi ullam voluptas ipsam necessitatibus esse voluptatem atque commodi.</p></td><td><p class="rate">Rate</p><p class="currency">Currency</p></td><td><p class="balance">Balance</p><p class="currency">Currency</p></td><td><p class="deposit">Deposit</p><p class="currency">Currency</p></td><td class="center-text-align"><button class="active-btn ">ACTIVE</button><button class="inactive-btn hidden">INACTIVE</button></td><td class="center-text-align"><img src="./images/b-delete-user.svg" alt="" class="medium-icons"><img src="./images/delete-user.svg" alt="" class="medium-icons"></td>;
+let updateUser = idIndex => {
+  if (
+    Object.entries(inputDiv).every(element =>
+      element[1].classList.contains('valid-border')
+    )
+  ) {
+    successfullyAddUserModalValue.innerHTML = fullNameInput.value;
+    let updatedObj = {
+      fullName: fullNameInput.value,
+      idNumber: idNumberInput.value,
+      description: descriptionInput.value,
+      currency: currencyInput.value,
+      deposit: depositInput.value,
+      rate: rateInput.value,
+      balance: balanceInput.value,
+      status: statusInput.value,
+    };
+    fullNameExist();
+    idExist();
+        // getUsersData[idIndex].fullName = fullNameInput.value;
+    // getUsersData[idIndex].idNumber = idNumberInput.value;
+    // getUsersData[idIndex].description = descriptionInput.value;
+    // getUsersData[idIndex].currency = currencyInput.value;
+    // getUsersData[idIndex].deposit = depositInput.value;
+    // getUsersData[idIndex].rate = rateInput.value;
+    // getUsersData[idIndex].balance = balanceInput.value;
+    // getUsersData[idIndex].status = statusInput.value;
 
-  //create Elements :
-  let UserRow = document.createElement('tr');
-  let rateCurrency = document.createElement('p');
-  let rateCurrencyValue = document.createTextNode(userData.currency);
-  let balanceCurrency = document.createElement('p');
-  let balanceCurrencyValue = document.createTextNode(userData.currency);
-  let depositCurrency = document.createElement('p');
-  let depositCurrencyValue = document.createTextNode(userData.currency);
-
-  let checkUserTD = document.createElement('td');
-  let uncheckedUserIcon = document.createElement('img');
-  let checkedUserIcon = document.createElement('img');
-
-  let fullNameIdNumberTD = document.createElement('td');
-  let fullName = document.createElement('p');
-  let fullNameValue = document.createTextNode(userData.fullName);
-  let idNumber = document.createElement('p');
-  let idNumberValue = document.createTextNode(userData.idNumber);
-
-  let descriptionTD = document.createElement('td');
-  let description = document.createElement('p');
-  let descriptionValue = document.createTextNode(userData.description);
-
-  let rateAndCurrencyTD = document.createElement('td');
-  let rate = document.createElement('p');
-  let rateValue = document.createTextNode(Number(userData.rate).toFixed(2));
-  let balanceAndCurrencyTD = document.createElement('td');
-  let balance = document.createElement('p');
-  let balanceValue = document.createTextNode(
-    Number(userData.balance).toFixed(2)
-  );
-
-  let depositAndCurrencyTD = document.createElement('td');
-  let deposit = document.createElement('p');
-  let depositValue = document.createTextNode(
-    Number(userData.deposit).toFixed(2)
-  );
-
-  let statusTD = document.createElement('td');
-  let activeBtn = document.createElement('button');
-  let activeBtnValue = document.createTextNode(userData.status);
-  let inactiveBtn = document.createElement('button');
-  let inactiveBtnValue = document.createTextNode(userData.status);
-  let paidBtn = document.createElement('button');
-  let paidBtnValue = document.createTextNode(userData.status);
-  let openBtn = document.createElement('button');
-  let openBtnValue = document.createTextNode(userData.status);
-  let orderedBtn = document.createElement('button');
-  let orderedBtnValue = document.createTextNode(userData.status);
-
-  let moreTD = document.createElement('td');
-  let moreDiv = document.createElement('div');
-  let blackDeleteUserIcon = document.createElement('img');
-  let colorDeleteUserIcon = document.createElement('img');
-  let blackEditUserIcon = document.createElement('img');
-  let colorEditUserIcon = document.createElement('img');
-  // let blackPrintUserIcon = document.createElement('img');
-  // let colorPrintUserIcon = document.createElement('img');
-
-  //create Classes :
-  UserRow.setAttribute('user-index', index);
-  UserRow.setAttribute('class', 'table-row');
-  // green-border
-  rateCurrency.setAttribute('class', 'currency right-text-align');
-  balanceCurrency.setAttribute('class', 'currency right-text-align');
-  depositCurrency.setAttribute('class', 'currency right-text-align');
-
-  checkUserTD.setAttribute('class', 'check-user-td center-text-align');
-  uncheckedUserIcon.setAttribute('src', './images/unchecked-user.svg');
-  uncheckedUserIcon.setAttribute('class', 'medium-icons');
-  checkedUserIcon.setAttribute('src', './images/checked-user.svg');
-  checkedUserIcon.setAttribute('class', 'checked-icon medium-icons hidden');
-
-  fullNameIdNumberTD.setAttribute('class', '');
-  fullName.setAttribute('class', 'full-name');
-  idNumber.setAttribute('class', 'id-number');
-
-  descriptionTD.setAttribute('class', '');
-  description.setAttribute('class', 'description');
-
-  rateAndCurrencyTD.setAttribute('class', '');
-  rate.setAttribute('class', 'rate right-text-align');
-
-  balanceAndCurrencyTD.setAttribute('class', '');
-  balance.setAttribute('class', 'balance right-text-align');
-
-  depositAndCurrencyTD.setAttribute('class', '');
-  deposit.setAttribute('class', 'deposit right-text-align');
-
-  statusTD.setAttribute('class', 'center-text-align');
-  activeBtn.setAttribute('class', 'active-btn');
-  inactiveBtn.setAttribute('class', 'inactive-btn');
-  paidBtn.setAttribute('class', 'paid-btn');
-  openBtn.setAttribute('class', 'open-btn');
-  orderedBtn.setAttribute('class', 'ordered-btn');
-
-  moreTD.setAttribute('class', 'center-text-align');
-  moreDiv.setAttribute('class', 'flex-btwn');
-
-  blackDeleteUserIcon.setAttribute('src', './images/b-delete-user.svg');
-  blackDeleteUserIcon.setAttribute('class', 'medium-icons');
-  colorDeleteUserIcon.setAttribute('src', './images/delete-user.svg');
-  colorDeleteUserIcon.setAttribute('class', 'medium-icons hidden');
-
-  blackEditUserIcon.setAttribute('src', './images/b-edit-user.svg');
-  blackEditUserIcon.setAttribute('class', 'medium-icons edit-icon');
-  colorEditUserIcon.setAttribute('src', './images/edit-user.svg');
-  colorEditUserIcon.setAttribute('class', 'medium-icons hidden edit-icon');
-
-  // blackPrintUserIcon.setAttribute('src', './images/b-print-user.png');
-  // blackPrintUserIcon.setAttribute('class', 'medium-icons');
-  // colorPrintUserIcon.setAttribute('src', './images/print-user.png');
-  // colorPrintUserIcon.setAttribute('class', 'medium-icons hidden');
-
-  //Append Child :
-  tableBody.appendChild(UserRow);
-  UserRow.appendChild(checkUserTD);
-  UserRow.appendChild(fullNameIdNumberTD);
-  UserRow.appendChild(descriptionTD);
-  UserRow.appendChild(rateAndCurrencyTD);
-  UserRow.appendChild(balanceAndCurrencyTD);
-  UserRow.appendChild(depositAndCurrencyTD);
-  UserRow.appendChild(statusTD);
-  UserRow.appendChild(moreTD);
-
-  checkUserTD.appendChild(uncheckedUserIcon);
-  checkUserTD.appendChild(checkedUserIcon);
-
-  fullNameIdNumberTD.appendChild(fullName);
-  fullNameIdNumberTD.appendChild(idNumber);
-
-  descriptionTD.appendChild(description);
-
-  depositAndCurrencyTD.appendChild(deposit);
-  depositAndCurrencyTD.appendChild(depositCurrency);
-
-  rateAndCurrencyTD.appendChild(rate);
-  rateAndCurrencyTD.appendChild(rateCurrency);
-
-  balanceAndCurrencyTD.appendChild(balance);
-  balanceAndCurrencyTD.appendChild(balanceCurrency);
-
-  statusTD.appendChild(activeBtn);
-  statusTD.appendChild(inactiveBtn);
-  statusTD.appendChild(paidBtn);
-  statusTD.appendChild(openBtn);
-  statusTD.appendChild(orderedBtn);
-
-  moreTD.appendChild(moreDiv);
-  moreDiv.appendChild(blackEditUserIcon);
-  moreDiv.appendChild(colorEditUserIcon);
-  moreDiv.appendChild(blackDeleteUserIcon);
-  moreDiv.appendChild(colorDeleteUserIcon);
-  // moreTD.appendChild(blackPrintUserIcon);
-  // moreTD.appendChild(colorPrintUserIcon);
-
-  depositCurrency.appendChild(depositCurrencyValue);
-  rateCurrency.appendChild(rateCurrencyValue);
-  balanceCurrency.appendChild(balanceCurrencyValue);
-  fullName.appendChild(fullNameValue);
-  idNumber.appendChild(idNumberValue);
-  description.appendChild(descriptionValue);
-  rate.appendChild(rateValue);
-  balance.appendChild(balanceValue);
-  deposit.appendChild(depositValue);
-  activeBtn.appendChild(activeBtnValue);
-  inactiveBtn.appendChild(inactiveBtnValue);
-  paidBtn.appendChild(paidBtnValue);
-  openBtn.appendChild(openBtnValue);
-  orderedBtn.appendChild(orderedBtnValue);
-
-  //Add Styles
-
-  if (userData.status === 'ACTIVE') {
-    activeBtn.classList.remove('hidden');
-    inactiveBtn.classList.add('hidden');
-    paidBtn.classList.add('hidden');
-    openBtn.classList.add('hidden');
-    orderedBtn.classList.add('hidden');
-  } else if (userData.status === 'INACTIVE') {
-    activeBtn.classList.add('hidden');
-    inactiveBtn.classList.remove('hidden');
-    paidBtn.classList.add('hidden');
-    openBtn.classList.add('hidden');
-    orderedBtn.classList.add('hidden');
-  } else if (userData.status === 'PAID') {
-    activeBtn.classList.add('hidden');
-    inactiveBtn.classList.add('hidden');
-    paidBtn.classList.remove('hidden');
-    openBtn.classList.add('hidden');
-    orderedBtn.classList.add('hidden');
-  } else if (userData.status === 'OPEN') {
-    activeBtn.classList.add('hidden');
-    inactiveBtn.classList.add('hidden');
-    paidBtn.classList.add('hidden');
-    openBtn.classList.remove('hidden');
-    orderedBtn.classList.add('hidden');
-  } else {
-    activeBtn.classList.add('hidden');
-    inactiveBtn.classList.add('hidden');
-    paidBtn.classList.add('hidden');
-    openBtn.classList.add('hidden');
-    orderedBtn.classList.remove('hidden');
+    // getUsersData.splice(idIndex,1, getUsersData[idIndex]);
+    getUsersData.splice(idIndex, 0, updatedObj);
+    setAndRefresh(getUsersData);
+    let goTo = document.getElementById(idNumberInput.value);
+    resetForm();
+    goTo.classList.add('green-border');
+    goTo.scrollIntoView();
+    hideFormBtns();
+    setTimeout(hideSuccessBorder, 5000, goTo);
   }
-
-  if (userData.balance > 0) {
-    balance.style.color = '#008400';
-  } else if (userData.balance < 0) {
-    balance.style.color = '#E01A1A';
-  }
-
-  submitBtn.addEventListener('click', () => {
-    console.log('clicked');
-    // document.querySelector('.table-row').classList.add('green-border');
-    // let userIdNumberIndex = userData.idNumber;
-    // if (userData.idNumber.includes(userIdNumberIndex)) {
-    //   console.log(userIdNumberIndex);
-    //   UserRow.classList.add('green-border');
-    //   }
-  })
-
-  // Check All
-
-  checkAll.addEventListener('click', () => {
-    if (checkAll.checked == true) {
-      uncheckedUserIcon.classList.add('hidden');
-      checkedUserIcon.classList.remove('hidden');
-      UserRow.style.backgroundColor = '#d1dffa';
-      checkUserTD.classList.add('check-before');
-    } else {
-      uncheckedUserIcon.classList.remove('hidden');
-      checkedUserIcon.classList.add('hidden');
-      UserRow.style.backgroundColor = '';
-      checkUserTD.classList.remove('check-before');
-    }
-  });
-
-  blackDeleteUserIcon.addEventListener('mouseenter', () => {
-    blackDeleteUserIcon.classList.add('hidden');
-    colorDeleteUserIcon.classList.remove('hidden');
-  });
-  colorDeleteUserIcon.addEventListener('mouseleave', () => {
-    colorDeleteUserIcon.classList.add('hidden');
-    blackDeleteUserIcon.classList.remove('hidden');
-  });
-
-  blackEditUserIcon.addEventListener('mouseenter', () => {
-    blackEditUserIcon.classList.add('hidden');
-    colorEditUserIcon.classList.remove('hidden');
-  });
-  colorEditUserIcon.addEventListener('mouseleave', () => {
-    colorEditUserIcon.classList.add('hidden');
-    blackEditUserIcon.classList.remove('hidden');
-  });
-
-  // blackPrintUserIcon.addEventListener('mouseenter', () => {
-  //   blackPrintUserIcon.classList.add('hidden');
-  //   colorPrintUserIcon.classList.remove('hidden');
-  // });
-  // colorPrintUserIcon.addEventListener('mouseleave', () => {
-  //   colorPrintUserIcon.classList.add('hidden');
-  //   blackPrintUserIcon.classList.remove('hidden');
-  // });
-
-  // check Users
-
-  uncheckedUserIcon.addEventListener('click', () => {
-    uncheckedUserIcon.classList.add('hidden');
-    checkedUserIcon.classList.remove('hidden');
-    UserRow.style.backgroundColor = '#d1dffa';
-    checkUserTD.classList.add('check-before');
-  });
-  checkedUserIcon.addEventListener('click', () => {
-    checkedUserIcon.classList.add('hidden');
-    uncheckedUserIcon.classList.remove('hidden');
-    UserRow.style.backgroundColor = '';
-    checkUserTD.classList.remove('check-before');
-  });
-
-  colorEditUserIcon.addEventListener('click', e => {
-    e.preventDefault();
-    submitBtn.classList.add('hidden');
-    clearBtn.classList.add('hidden');
-    updateUserBtn.classList.remove('hidden');
-    addUserForm.scrollIntoView()
-    progressBar.classList.add('hidden');
-    cancelFormBtn.classList.remove('hidden');
-    fullNameInput.value = userData.fullName;
-    idNumberInput.value = userData.idNumber;
-    descriptionInput.value = userData.description;
-    currencyInput.value = userData.currency;
-    depositInput.value = userData.deposit;
-    rateInput.value = userData.rate;
-    balanceInput.value = userData.balance;
-    statusInput.value = userData.status;
-    console.log(users.indexOf(userData));
-    console.log(userData);
-    formErrors();
-
-    updateUserBtn.addEventListener('click', () => {
-      if (
-        Object.entries(inputDiv).every(element =>
-          element[1].classList.contains('valid-border')
-        )
-      ) {
-        console.log('yes');
-        successfullyAddUserModal.classList.remove('non-visible');
-        successfullyAdded.classList.add('hidden');
-        successfullyUpdated.classList.remove('hidden');
-        // cancelFormBtn.classList.remove('hidden');
-        successfullyAddUserModalValue.innerHTML = fullNameInput.value;
-        setTimeout('hideSuccessfullyAdded()', 5000);
-        
-        userData.fullName = fullNameInput.value;
-        userData.idNumber = idNumberInput.value;
-        userData.description = descriptionInput.value;
-        userData.currency = currencyInput.value;
-        userData.deposit = depositInput.value;
-        userData.rate = rateInput.value;
-        userData.balance = balanceInput.value;
-        userData.status = statusInput.value;
-        // resetForm();
-        users.splice(users.indexOf(userData), 1, userData);
-        refresh(users);
-        main.scrollIntoView();
-        hideFormBtns();
-
-        // closeForm();
-      } else {
-        formErrors();
-        console.log('no');
-      }
-    });
-  });
-
-  //delete user :
-
-  colorDeleteUserIcon.addEventListener('click', e => {
-    e.preventDefault();
-    if (confirm('Are you sure you wont to delete this user ?')) {
-      users.splice(users.indexOf(userData), 1);
-      refresh(users);
-    }
-  });
 };
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // tfoot
 
 // active Users :
-
-let activeUsers = document.querySelector('.active-users');
-let totalOfUsers = document.querySelectorAll('.total-of-users');
+let showActiveUsers = arr => {
+  let numberOfActiveUsers = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].status === 'ACTIVE') {
+      numberOfActiveUsers.push(arr[i].status);
+    }
+  }
+  return numberOfActiveUsers.length;
+};
 
 // rows per page
 
-let rowsPerPage = document.getElementById('rows-per-page');
-
 let rowsPerPageValueOnChange = rowsPerPage.addEventListener('change', e => {
-  refresh(users);
   e = rowsPerPage.value;
-  console.log(e);
+  refresh(getUsersData);
+  // console.log(e);
 });
-
-// let selectedRowsPerPage = rowsPerPageValueOnChange ||rowsPerPage.value;
-// };
-// console.log(selectedRowsPerPage);
-
-// let usersToRenderPerPage = (arr, num) => {
-//   for (let i = 0; i < num; i++) {
-//     refresh(arr);
-// };
-// };
 
 // starting & ending-index
 
-// next / previous page :
+startingIndex;
+endingIndex;
 
-let blackRightArrow = document.querySelector('.black-right-arrow');
-let colorRightArrow = document.querySelector('.color-right-arrow');
-let blackLeftArrow = document.querySelector('.black-left-arrow');
-let colorLeftArrow = document.querySelector('.color-left-arrow');
+// next / previous page :
+let nbOfPages = (arr, num) => {
+  return arr > num ? Math.ceil(arr.length / num) : arr.length;
+};
 
 blackLeftArrow.addEventListener('mouseenter', () => {
   blackLeftArrow.classList.add('hidden');
@@ -1510,42 +1380,56 @@ colorRightArrow.addEventListener('mouseleave', () => {
 //colorRightArrow.addEventListener('click', () => {});
 
 // onLoad
-
-let refresh = arrayToRender => {
+let searchOnLoad = () => {
   if (searchInputField.value.trim() !== '') {
-    searchIcon.classList.add('hidden');
     searchBar.classList.remove('hidden');
     blackDeleteSearch.classList.remove('hidden');
+    searchIcon.classList.add('hidden');
   }
-  tableBody.innerHTML = null;
-  let filteredUsers = filteredArr(arrayToRender) || arrayToRender;
-  let sortFiltered = filteredUsers.slice() || filteredUsers;
-  sortedArr(sortFiltered);
-
-  sortFiltered.forEach((element, index) => {
-    addNewUser(element, index);
-  });
-
-  let numberOfActiveUsers = [];
-  for (let i = 0; i < filteredUsers.length; i++) {
-    if (filteredUsers[i].status === 'ACTIVE') {
-      numberOfActiveUsers.push(filteredUsers[i].status);
-    }
-  }
-  activeUsers.textContent = numberOfActiveUsers.length;
-  totalOfUsers.forEach(element => {
-    element.textContent = filteredUsers.length;
-  });
 };
 
-if (users.length == 0) {
-  emptyData.classList.remove('hidden');
-} else {
-  checkAll.checked = false;
-  refresh(users);
+let onLoad = () => {
   resetForm();
   hideFormBtns();
   main.scrollIntoView();
+};
+
+let refresh = arrayToRender => {
+  searchOnLoad();
+  tableBody.innerHTML = null;
+  let selectedRowsPerPage = rowsPerPageValueOnChange || rowsPerPage.value;
+  // console.log(selectedRowsPerPage);
+  let filteredUsers = filteredArr(arrayToRender) || arrayToRender;
+  let sortFiltered = filteredUsers.slice() || filteredUsers;
+  sortedArr(sortFiltered);
+  let totalRowsPerPage = sortFiltered;
+  startingIndex;
+  endingIndex;
+  let numberOfPages = nbOfPages(sortFiltered, selectedRowsPerPage);
+  // console.log(numberOfPages);
+  activeUsers.textContent = showActiveUsers(sortFiltered);
+  totalOfUsers.forEach(element => {
+    element.textContent = sortFiltered.length;
+  });
+  totalRowsPerPage.forEach(element => {
+    tableBody.appendChild(addNewUser(element));
+  });
+
+  // for (let i = 0; i < selectedRowsPerPage; i++) {
+  //   tableBody.appendChild(addNewUser(totalRowsPerPage[i]));
+  // }
+};
+
+if (getLocalStorage == '[]') {
+  emptyData.classList.remove('hidden');
+  onLoad();
+} else if (getLocalStorage == null) {
+  localStorage.setItem('usersData', JSON.stringify(users));
+  refresh(getUsersData);
+  onLoad();
+} else {
+  // checkAll.checked = false;
+  searchOnLoad();
+  refresh(getUsersData);
+  onLoad();
 }
-
-

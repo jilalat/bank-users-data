@@ -179,10 +179,20 @@ textarea::placeholder {
   margin: 12px 25px;
   font-weight: 600;
   /* background-color: #008400; */
+  cursor: pointer;
+  border: 2px solid #0635c9;
+  padding: 6px 20px;
+  border-radius: 10px;
+  color: #0635c9;
 }
 
-.btn {
-  cursor: pointer;
+.form-btns {
+  margin-top: 25px;
+  /* background-color: #1ae5be; */
+}
+.btn:hover {
+  background-color: #1ae5be;
+  border: 2px solid #1ae5be;
 }
 
 .form-container {
@@ -206,6 +216,8 @@ textarea::placeholder {
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
+  /* background-color: #ba5300; */
+  /* margin-bottom: 15px; */
   /* color: #7556cd; */
   /* margin-bottom: 20px; */
   /* margin: auto; */
@@ -264,7 +276,9 @@ padding-top: 20px;
 /* height: 100vh;
 overflow: auto; */
 padding-bottom: 55px;
+height: 100vh;
 }
+
 
 .dashboard {
   position: relative;
@@ -272,19 +286,25 @@ padding-bottom: 55px;
   margin: auto;
   border: 3px solid #000000;
   padding: 40px;
+
 }
 
+/* .add-user-modal {
 
+} */
 
 .add-user-icons {
+/* offset: auto;
+offset: 10px 30px;
+offset: none; */
   background-color: #ffffff;
   /* border: 0.5px solid #000000; */
   /* box-shadow: ; */
-  box-shadow: -3px -3px 16px rgb(0, 0, 0);
+  box-shadow: 3px 3px 16px rgb(0, 0, 0), -3px -3px 36px rgb(0, 0, 0);
     /* box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.342); */
   position: fixed;
   /* position: -webkit-sticky; */
-  right: 20px;
+  left: 20px;
   bottom: 20px; 
   width: 70px;
   height: 70px;
@@ -292,7 +312,9 @@ padding-bottom: 55px;
   /* margin-left: auto; */
   z-index: 100;
 }
-
+.add-user-icons:hover{
+  box-shadow: 3px 3px 16px rgb(6,53, 201), -3px -3px 36px rgb(26,229, 190);
+}
 .search {
   /* background-color: #ff0033; */
   height: 40px;
@@ -320,39 +342,50 @@ padding-bottom: 55px;
   /* height: 40px; */
   
 }
-
-.add-user-modal {
-  /* position: fixed; */
-  background-color: #1ae5be;
-  padding: 15px;
+.add-user-modal, .error-modal {
+    position: fixed;
+  padding: 25px 50px;
   font-size: 20px;
-  margin: 10px 0;
-  border: 1px solid #0635c9;
   border-radius: 15px;
-  color: #0635c9;
-  width: 100%;
-  /* left: 20px;
+  right: 20px;
   bottom: 20px; 
-  width: 500px;
-  height: 70px;
-  z-index: 100; */
+  /* height: 70px; */
+  z-index: 100;
+}
+.add-user-modal {
+  background-color: #1ae5be;
+  border: 1px solid #0635c9;
+  color: #0635c9;
+  box-shadow: 3px -3px 16px rgb(6,53, 201), -3px 3px 16px rgb(6,53, 201);
+}
+.error-modal {
+  background-color: #facbd5;
+  border: 1px solid #ff0033;
+  color: #ff0033;
+  box-shadow: 3px -3px 16px rgb(255,0, 51), -3px 3px 16px rgb(255,0, 51);
 }
 
-.add-user-modal-p {
+.add-user-modal-p, .error-modal-p {
   margin-top: 6px;
 }
 
-.add-user-modal-value {
+.add-user-modal-value, .error-modal-value {
   margin-right: 7px;
   margin-left: 20px;
   font-weight: 700;
   font-style: italic;
 }
 
+.error-modal-value {
+  /* color: #ff0033; */
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
-  /* margin-top: 50px; */
+  margin-top: 50px;
+  /* margin-bottom: 50px; */
+  /* background-color: #fa8072; */
 }
 
 .center-text-align {
@@ -474,6 +507,32 @@ tbody tr:hover {
   line-height: 15px;
 }
 
+.positive {
+  color: #008400;
+}
+.negative {
+  color: #E01A1A;
+}
+
+.unchecked-user-icon {
+  /* display: none; */
+  background-color: #E01A1A;
+  padding: 10px;
+}
+.black-delete-user-icon {
+  /* display: none; */
+  /* background-color: #E01A1A; */
+  /* padding: 10px; */
+}
+
+.black-edit-user-icon {
+  /* background-color: #331b1b; */
+  /* padding: 10px; */
+}
+/* .black-delete-user-icon:hover + .color-delete-user-icon {
+  display: block;
+} */
+
 .active-btn,
 .inactive-btn,
 .paid-btn,
@@ -491,22 +550,26 @@ letter-spacing: 0.08em;
 .active-btn {
   background-color: #0a65ff;
   color: #ffffff;
+  
 }
 
 .inactive-btn {
   color: #707070;
-  border: 1.5px solid #707070;
+  border: 2px solid #707070;
+  font-weight: 600;
 }
 
 .paid-btn,
 .ordered-btn {
   color: #ffffff;
   background-color: #008400;
+  /* border: ; */
 }
 
 .open-btn {
   color: #ba5300;
-  border: 1.5px solid #ba5300;
+  border: 2px solid #ba5300;
+  font-weight: 600;
 }
 
 tfoot {

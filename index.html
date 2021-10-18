@@ -18,96 +18,104 @@
   <!-- <div class="form-container"> -->
 
   <div class="form-container flex" id="form-container">
-    <form action="" class="form col-flex" id="form">
-      <!-- <span class="close-form">&times;</span> -->
-      <div class="col-flex">
-        <div class="progress-bar flex">
-          <p class="progress-text">Progress :&nbsp&nbsp <span class="progress-value">0</span>%</p>
-          <div class="progress-color"></div>
-        </div>
-    
-        <div class="flex">
-          <div class="left-form star-col-flex stretch">
-            <div class="input-div flex-btwn full-name-input-div">
-              <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
-              <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
-              <input type="text" placeholder="Full Name" class="input full-name-input">
-            </div>
-            <p class="errors non-visible">Error</p>
-            <div class="input-div id-number-input-div flex-btwn">
-              <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
-              <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
-              <input type="text" placeholder="ID Number" class="input id-number-input">
-            </div>
-            <p class="errors non-visible">Error</p>
-            <div class="input-div textarea-input-div textarea flex-s">
-              <div class="textarea-imgs">
+    <div class="col-flex">
+      <form action="" class="form col-flex" id="form">
+        <!-- <span class="close-form">&times;</span> -->
+        <div class="col-flex">
+          <div class="progress-bar flex">
+            <p class="progress-text">Progress :&nbsp&nbsp <span class="progress-value">0</span>%</p>
+            <div class="progress-color"></div>
+          </div>
+
+          <div class="flex">
+            <div class="left-form star-col-flex stretch">
+              <div class="input-div flex-btwn full-name-input-div">
                 <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
                 <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+                <input type="text" placeholder="Full Name" class="input full-name-input" >
               </div>
-              <textarea name="" id="" class="input description-input" placeholder="Description"
-                maxlength="250"></textarea>
+              <p class="errors non-visible">Error</p>
+              <div class="input-div id-number-input-div flex-btwn">
+                <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+                <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+                <input type="text" placeholder="ID Number" class="input id-number-input">
+              </div>
+              <p class="errors non-visible">Error</p>
+              <div class="input-div textarea-input-div textarea flex-s">
+                <div class="textarea-imgs">
+                  <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+                  <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+                </div>
+                <textarea name="" id="" class="input description-input" placeholder="Description"
+                  maxlength="250"></textarea>
+              </div>
+              <p class="errors non-visible">Error</p>
             </div>
-            <p class="errors non-visible">Error</p>
-          </div>
-          <div class="right-form star-col-flex">
-            <div class="input-div currency-input-div flex-btwn">
-              <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
-              <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
-              <select name="" id="" class="options-error currency-input input">
-                <option value="" disabled selected hidden>Currency</option>
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
-                <option value="INR">INR</option>
-              </select>
+            <div class="right-form star-col-flex">
+              <div class="input-div currency-input-div flex-btwn">
+                <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+                <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+                <select name="" id="" class="options-error currency-input input">
+                  <option value="" disabled selected hidden>Currency</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                  <option value="GBP">GBP</option>
+                  <option value="INR">INR</option>
+                </select>
+              </div>
+              <p class="errors non-visible">Error</p>
+              <div class="input-div deposit-input-div flex-btwn">
+                <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+                <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+                <input type="text" placeholder="Deposit Amount" class="input deposit-input">
+              </div>
+              <p class="errors non-visible">Error</p>
+              <div class="input-div rate-input-div flex-btwn">
+                <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+                <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+                <input type="text" class="input rate-input" placeholder="Rate" maxlength="10">
+              </div>
+              <p class="errors non-visible">Error</p>
+              <div class="input-div balance-input-div flex-btwn">
+                <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+                <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+                <input type="text" placeholder="Balance" class="input balance-input">
+              </div>
+              <p class="errors non-visible">Error</p>
+              <div class="input-div status-input-div flex-btwn">
+                <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+                <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+                <select name="" id="" class="options-error status-input input">
+                  <option value="" disabled selected hidden>Status</option>
+                  <option value="ACTIVE">ACTIVE</option>
+                  <option value="INACTIVE">INACTIVE</option>
+                  <option value="PAID">PAID</option>
+                  <option value="OPEN">OPEN</option>
+                  <option value="ORDERED">ORDERED</option>
+                </select>
+              </div>
+              <p class="errors non-visible">Error</p>
             </div>
-            <p class="errors non-visible">Error</p>
-            <div class="input-div deposit-input-div flex-btwn">
-              <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
-              <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
-              <input type="text" placeholder="Deposit Amount" class="input deposit-input">
-            </div>
-            <p class="errors non-visible">Error</p>
-            <div class="input-div rate-input-div flex-btwn">
-              <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
-              <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
-              <input type="text" class="input rate-input" placeholder="Rate" maxlength="10">
-            </div>
-            <p class="errors non-visible">Error</p>
-            <div class="input-div balance-input-div flex-btwn">
-              <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
-              <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
-              <input type="text" placeholder="Balance" class="input balance-input">
-            </div>
-            <p class="errors non-visible">Error</p>
-            <div class="input-div status-input-div flex-btwn">
-              <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
-              <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
-              <select name="" id="" class="options-error status-input input">
-                <option value="" disabled selected hidden>Status</option>
-                <option value="ACTIVE">ACTIVE</option>
-                <option value="INACTIVE">INACTIVE</option>
-                <option value="PAID">PAID</option>
-                <option value="OPEN">OPEN</option>
-                <option value="ORDERED">ORDERED</option>
-              </select>
-            </div>
-            <p class="errors non-visible">Error</p>
           </div>
         </div>
-      </div>
-      <div class="flex">
-        <input type="submit" id="submit-btn" value="Submit" class="btn submit-btn">
+        <div class="flex">
+          <!-- <input type="submit" id="submit-btn" value="Submit" class="btn submit-btn"> -->
+          <!-- <input type="reset" value="Clear" class="btn clear-btn">
+<input type="button" value="Cancel" class="btn cancel-form"> -->
+        </div>
+      </form>
+      <div class="form-btns">
         <button class="btn update-user-btn">Update User</button>
-        <input type="reset" value="Clear" class="btn clear-btn">
-        <input type="button" value="Cancel" class="btn cancel-form hidden">
+        <button id="submit-btn" class="btn submit-btn">Submit</button>
+        <button class="btn clear-btn">Clear</button>
+        <button class="btn cancel-form">Cancel</button>
+        <button class="btn cancel-update">Cancel Update</button>
       </div>
-    </form>
+    </div>
   </div>
   <!-- </div> -->
 
-  <main>
+  <main id="main">
     <div class="dashboard">
       <!-- <div class="flex-btwn top-icons"> -->
       <div class="search star-col-flex">
@@ -122,19 +130,29 @@
         </div>
       </div>
       <div class="add-user-icons flex">
-        <a href="#form-container"><img src="./images/add-user.svg" alt="" class="big-icons add-user-colored-icon hidden"></a>
+        <img src="./images/add-user.svg" alt=""
+            class="big-icons add-user-colored-icon hidden">
         <img src="./images/b-add-user.svg" alt="" class="big-icons add-user-black-icon">
       </div>
       <!-- </div> -->
       <div class="flex">
-        <div class="add-user-modal flex non-visible">
+        <div class="add-user-modal flex hidden">
           <!-- non-visible -->
           <img class="medium-icons" src="./images/checked-with-success.png" alt="">
           <div class="flex add-user-modal-p">
             <p class="add-user-modal-value">hhhhhh</p>
-            <p>has been successfully <span class="added hidden">added</span> <span class="updated hidden">updated</span>
+            <p>has been successfully <span class="added hidden"><b>added</b></span> <span class="updated hidden"><b>updated</b></span>
             </p>
           </div>
+        </div>
+      </div>
+      <div class="flex">
+        <div class="error-modal flex hidden">
+          <!-- non-visible -->
+          <img class="medium-icons" src="./images/error.svg" alt="">
+          <div class="flex error-modal-p">
+            <p class="error-modal-value">You must Update or Cancel Update First</p>
+            </div>
         </div>
       </div>
       <table>
@@ -188,6 +206,7 @@
                 <p class="rows-per-page">Rows per page :</p>
                 <div class="rows-per-page-select">
                   <select name="" id="rows-per-page" class="">
+                    <option value="9999999999999999">ALL</option>
                     <option value="5">5</option>
                     <option value="10" selected>10</option>
                     <option value="15">15</option>
@@ -201,10 +220,7 @@
             </td>
             <td colspan="2">
               <div class="flex">
-                <p class="right-text-align"><span class="starting-index">0</span> - <span class="ending-index">5</span>
-                  of
-                  <span class="total-of-users"></span>
-                </p>
+                <p class="right-text-align"><span class="starting-index">0</span> - <span class="ending-index">5</span> of <span class="total-of-users"></span></p>
                 <div class="arrows flex-btwn">
                   <img src="./images/b-left-arrow.svg" alt="" class="medium-icons black-left-arrow">
                   <img src="./images/left-arrow.svg" alt="" class="medium-icons color-left-arrow hidden">
