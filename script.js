@@ -621,7 +621,7 @@ let addProgressValue = i => {
 // Update Progress Bar
 let updValidArr = [0, 1, 2, 3, 4, 5, 6, 7];
 let removeProgressValue = i => {
-  if (inputDiv[i].classList.contains('error-border')) {
+  if (!inputDiv[i].classList.contains('valid-border')) {
     if (updValidArr.includes(i)) {
       updValidArr.splice(updValidArr.indexOf(i), 1);
     }
@@ -632,6 +632,15 @@ let removeProgressValue = i => {
   }
   progressValue.textContent = (100 / inputDiv.length) * updValidArr.length;
   progressColor.style.width = `${progressValue.textContent}%`;
+
+  if (
+    Object.entries(inputDiv).every(element =>
+      element[1].classList.contains('valid-border')
+    )
+  ) {
+    progressValue.textContent = '100';
+    progressColor.style.width = `100%`;
+  }
 };
 
 // Form Errors
@@ -918,7 +927,6 @@ submitBtn.addEventListener('click', e => {
       main.scrollIntoView();
       let goTo = document.getElementById(idNumberInput.value);
       goTo.classList.add('green-border');
-
       goTo.scrollIntoView({ block: 'center' });
       resetForm();
       hideFormBtns();
@@ -1137,6 +1145,7 @@ let showStatus = sts => {
 };
 
 let rowIdIndexArr = [];
+let beforeUpdate = {};
 
 let appendDeleteAndEdit = item => {
   let moreTD = document.createElement('td');
@@ -1166,9 +1175,53 @@ let appendDeleteAndEdit = item => {
       let rowIdIndex = getUsersData.findIndex(
         element => element.idNumber === rowId
       );
-      console.log(rowIdIndex);
-      rowIdIndexArr.push(rowIdIndex);
-      console.log(rowIdIndexArr[0]);
+      console.log('rowIdIndex', rowIdIndex);
+      if (rowIdIndexArr.length != 0) {
+        rowIdIndexArr = [];
+        rowIdIndexArr.push(rowIdIndex);
+      } else {
+        rowIdIndexArr.push(rowIdIndex);
+      }
+
+      if (Object.entries(beforeUpdate).length != 0) {
+        // beforeUpdate = {};
+        // delete beforeUpdate['fullName'];
+        // delete beforeUpdate['idNumber'];
+        // delete beforeUpdate['description'];
+        // delete beforeUpdate['currency'];
+        // delete beforeUpdate['deposit'];
+        // delete beforeUpdate['rate'];
+        // delete beforeUpdate['balance'];
+        // delete beforeUpdate['status'];
+
+        beforeUpdate = {
+          fullName: item.fullName,
+          idNumber: item.idNumber,
+          description: item.description,
+          currency: item.currency,
+          deposit: item.deposit,
+          rate: item.rate,
+          balance: item.balance,
+          status: item.status,
+        };
+      } else {
+        beforeUpdate = {
+          fullName: item.fullName,
+          idNumber: item.idNumber,
+          description: item.description,
+          currency: item.currency,
+          deposit: item.deposit,
+          rate: item.rate,
+          balance: item.balance,
+          status: item.status,
+        };
+      }
+      console.log('Progress', updValidArr);
+      console.log('beforeUpdate', beforeUpdate);
+      console.log('beforeUpdate length', Object.entries(beforeUpdate).length);
+
+      console.log('rowIdIndexArr[0]', rowIdIndexArr[0]);
+      console.log('rowIdIndexArr', rowIdIndexArr);
       e.preventDefault();
       updateUsersForm(item);
       getUsersData.splice(getUsersData.indexOf(item), 1);
@@ -1194,7 +1247,7 @@ let deleteUsers = deleteItem => {
   }
 };
 
-let updateUsersForm = (editItem) => {
+let updateUsersForm = editItem => {
   submitBtn.classList.add('hidden');
   clearBtn.classList.add('hidden');
   updateUserBtn.classList.remove('hidden');
@@ -1209,48 +1262,13 @@ let updateUsersForm = (editItem) => {
   rateInput.value = editItem.rate;
   balanceInput.value = editItem.balance;
   statusInput.value = editItem.status;
-
-  let beforeUpdate = {
-    fullName: fullNameInput.value,
-    idNumber: idNumberInput.value,
-    description: descriptionInput.value,
-    currency: currencyInput.value,
-    deposit: depositInput.value,
-    rate: rateInput.value,
-    balance: balanceInput.value,
-    status: statusInput.value,
-  };
   formInputAndBlurErrors(removeProgressValue);
-
   updateUserBtn.addEventListener('click', () => {
     updateUser();
-    if (
-      Object.entries(inputDiv).every(element =>
-        element[1].classList.contains('valid-border')
-      )
-    ) {
-      successfullyAddUserModal.classList.remove('hidden');
-      successfullyAdded.classList.add('hidden');
-      successfullyUpdated.classList.remove('hidden');
-    }
-    setTimeout(hideSuccessfullyAdded, 5000);
-    updValidArr = [1, 2, 3, 4, 5, 6, 7];
-    rowIdIndexArr = [];
-    console.log(rowIdIndexArr);
   });
 
   cancelUpdate.addEventListener('click', () => {
-    getUsersData.splice(rowIdIndexArr[0], 0, beforeUpdate);
-    setAndRefresh(getUsersData);
-    let goTo = document.getElementById(idNumberInput.value);
-    resetForm();
-    goTo.classList.add('green-border');
-    goTo.scrollIntoView({ block: 'center' });
-    hideFormBtns();
-    setTimeout(hideSuccessBorder, 5000, goTo);
-    updValidArr = [1, 2, 3, 4, 5, 6, 7];
-    rowIdIndexArr = [];
-    console.log(rowIdIndexArr);
+    cancelUpdateUser();
   });
 };
 
@@ -1260,6 +1278,11 @@ let updateUser = () => {
       element[1].classList.contains('valid-border')
     )
   ) {
+    successfullyAddUserModal.classList.remove('hidden');
+    successfullyAdded.classList.add('hidden');
+    successfullyUpdated.classList.remove('hidden');
+    updValidArr = [1, 2, 3, 4, 5, 6, 7];
+    console.log('rowIdIndexArr afterUp', rowIdIndexArr);
     successfullyAddUserModalValue.innerHTML = fullNameInput.value;
     let updatedObj = {
       fullName: fullNameInput.value,
@@ -1271,8 +1294,6 @@ let updateUser = () => {
       balance: balanceInput.value,
       status: statusInput.value,
     };
-    fullNameExist();
-    idExist();
     getUsersData.splice(rowIdIndexArr[0], 0, updatedObj);
     setAndRefresh(getUsersData);
     main.scrollIntoView();
@@ -1281,8 +1302,23 @@ let updateUser = () => {
     goTo.classList.add('green-border');
     goTo.scrollIntoView({ block: 'center' });
     hideFormBtns();
+    setTimeout(hideSuccessfullyAdded, 5000);
     setTimeout(hideSuccessBorder, 5000, goTo);
   }
+};
+
+let cancelUpdateUser = () => {
+  getUsersData.splice(rowIdIndexArr[0], 0, beforeUpdate);
+  setAndRefresh(getUsersData);
+  let goTo = document.getElementById(idNumberInput.value);
+  resetForm();
+  goTo.classList.add('green-border');
+  goTo.scrollIntoView({ block: 'center' });
+  hideFormBtns();
+  setTimeout(hideSuccessBorder, 5000, goTo);
+  updValidArr = [1, 2, 3, 4, 5, 6, 7];
+  // rowIdIndexArr = [];
+  console.log('rowIdIndexArr afterCan', rowIdIndexArr);
 };
 
 // tfoot
@@ -1364,7 +1400,7 @@ let refresh = arrayToRender => {
   totalRowsPerPage.forEach(element => {
     tableBody.appendChild(addNewUser(element));
   });
-  
+
   startingIndex.textContent = sortFiltered.length !== 0 ? 1 : 0;
   endingIndex.textContent =
     sortFiltered.length > selectedRowsPerPage
