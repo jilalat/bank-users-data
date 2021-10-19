@@ -1,7 +1,5 @@
 // 'use strict';
-let req = {
-  //   - After adding new customer, scroll to and highlight the newly added row in table
-};
+let req = {};
 let done = {
   // - Form to add customer
   // - Fields
@@ -34,6 +32,7 @@ let done = {
   // Edit customer
   //   - After submitting the changes of the edited customer, notification message should say: “Customer updated successfully”
   //   - After clinking edit customer, scroll to the form and pre-fill all the fields
+  //   - After adding new customer, scroll to and highlight the newly added row in table
 };
 
 let users = [
@@ -429,11 +428,6 @@ let successfullyAddUserModalValue = document.querySelector(
 
 // Error Form Modal
 let errorModal = document.querySelector('.error-modal');
-let errorModalValue = document.querySelector('.error-modal-value');
-
-// Overlay
-// let overlay = document.querySelector('.overlay');
-// let closeFormBtn = document.querySelector('.close-form');
 
 // Form
 let formContainer = document.getElementById('form-container');
@@ -442,36 +436,23 @@ let progressBar = document.querySelector('.progress-bar');
 let progressColor = document.querySelector('.progress-color');
 let progressValue = document.querySelector('.progress-value');
 
-// let classIndex = document.querySelector('');
-// let tableRow = document.querySelectorAll('table-row');
-// let idIndex = document.getElementById('index');
-
 // Form Btns
 let formBtns = document.querySelector('.form-btns');
 let submitBtn = document.querySelector('.submit-btn');
 let updateUserBtn = document.querySelector('.update-user-btn');
 let clearBtn = document.querySelector('.clear-btn');
-let cancelBtn = document.getElementById('cancel-btn');
 let cancelFormBtn = document.querySelector('.cancel-form');
 let cancelUpdate = document.querySelector('.cancel-update');
 
 // Form Inputs
 let fullNameInput = document.querySelector('.full-name-input');
-let fullNameInputDiv = document.querySelector('.full-name-input-div');
 let idNumberInput = document.querySelector('.id-number-input');
-let idNumberInputDiv = document.querySelector('.id-number-input-div');
 let descriptionInput = document.querySelector('.description-input');
-let descriptionInputDiv = document.querySelector('.description-input-div');
 let currencyInput = document.querySelector('.currency-input');
-let currencyInputDiv = document.querySelector('.currency-input-div');
 let depositInput = document.querySelector('.deposit-input');
-let depositInputDiv = document.querySelector('.deposit-input-div');
 let rateInput = document.querySelector('.rate-input');
-let rateInputDiv = document.querySelector('.rate-input-div');
 let balanceInput = document.querySelector('.balance-input');
-let balanceInputDiv = document.querySelector('.balance-input-div');
 let statusInput = document.querySelector('.status-input');
-let statusInputDiv = document.querySelector('.status-input-div');
 
 // Form Validation
 let errorIcon = document.querySelectorAll('.error-icon');
@@ -479,10 +460,6 @@ let validIcon = document.querySelectorAll('.valid-icon');
 let inputDiv = document.querySelectorAll('.input-div');
 let inputArea = document.querySelectorAll('.input');
 let errors = document.querySelectorAll('.errors');
-let greenBorder = document.querySelector('.green-border');
-
-// checkbox
-let checkAll = document.getElementById('checkbox');
 
 // Sort-by
 let blueUpIcon = document.querySelectorAll('.blue-up');
@@ -495,8 +472,6 @@ let tableStatusP = document.querySelector('.p-status');
 // table Body
 let tableBody = document.querySelector('.table-body');
 let emptyData = document.querySelector('.empty-row');
-// let userIndex = document.getElementsByTagName('user-index');
-// let userIndex = document.querySelector('[user-index]');
 
 // Table Footer
 
@@ -572,7 +547,8 @@ let filteredArr = arr => {
       user.fullName.toUpperCase().includes(searchInputValue) ||
       user.description.toUpperCase().includes(searchInputValue) ||
       user.fullName.toLowerCase().includes(searchInputValue) ||
-      user.description.toLowerCase().includes(searchInputValue)
+      user.description.toLowerCase().includes(searchInputValue) ||
+      user.idNumber.includes(searchInputValue)
     );
   });
   return filtered;
@@ -603,13 +579,17 @@ addUserRound.addEventListener('mouseleave', () => {
   addUserColoredIcon.classList.add('hidden');
 });
 
+let mustUpdateOrCancel = () => {
+  errorModal.classList.remove('hidden');
+  formContainer.scrollIntoView();
+  setTimeout(errorModalMessage, 5000);
+};
+
 addUserRound.addEventListener('click', () => {
   if (fullNameInput.value !== '' && submitBtn.classList.contains('hidden')) {
-    console.log('btn desibled and not empty');
-    errorModal.classList.remove('hidden');
-    formContainer.scrollIntoView();
-    setTimeout(errorModalMessage, 5000);
+    mustUpdateOrCancel();
   } else {
+    updValidArr = [];
     resetForm();
     formContainer.scrollIntoView();
     showSubmitFormBtns();
@@ -622,19 +602,35 @@ addUserForm.addEventListener('input', () => {
   }
 });
 
-// Progress Bar
-let validArr = [];
+// Submit Progress Bar
+let subValidArr = [];
 let addProgressValue = i => {
   if (inputDiv[i].classList.contains('valid-border')) {
-    if (!validArr.includes(i)) {
-      validArr.push(i);
+    if (!subValidArr.includes(i)) {
+      subValidArr.push(i);
     }
   } else {
-    if (validArr.includes(i)) {
-      validArr.splice(validArr.indexOf(i), 1);
+    if (subValidArr.includes(i)) {
+      subValidArr.splice(subValidArr.indexOf(i), 1);
     }
   }
-  progressValue.textContent = (100 / inputDiv.length) * validArr.length;
+  progressValue.textContent = (100 / inputDiv.length) * subValidArr.length;
+  progressColor.style.width = `${progressValue.textContent}%`;
+};
+
+// Update Progress Bar
+let updValidArr = [0, 1, 2, 3, 4, 5, 6, 7];
+let removeProgressValue = i => {
+  if (inputDiv[i].classList.contains('error-border')) {
+    if (updValidArr.includes(i)) {
+      updValidArr.splice(updValidArr.indexOf(i), 1);
+    }
+  } else {
+    if (!updValidArr.includes(i)) {
+      updValidArr.push(i);
+    }
+  }
+  progressValue.textContent = (100 / inputDiv.length) * updValidArr.length;
   progressColor.style.width = `${progressValue.textContent}%`;
 };
 
@@ -752,100 +748,95 @@ let formErrors = () => {
   statusInputErrors();
 };
 
-// Form Validation
-fullNameInput.addEventListener('input', () => {
-  fullNameInputErrors();
-  addProgressValue(0);
-  if (!submitBtn.classList.contains('hidden')) {
+let formInputAndBlurErrors = progV => {
+  fullNameInput.addEventListener('input', () => {
+    fullNameInputErrors();
     fullNameExist();
-  }
-});
+    progV(0);
+  });
 
-fullNameInput.addEventListener('blur', () => {
-  fullNameInputErrors();
-  addProgressValue(0);
-  if (!submitBtn.classList.contains('hidden')) {
+  fullNameInput.addEventListener('blur', () => {
+    fullNameInputErrors();
     fullNameExist();
-  }
-});
+    progV(0);
+  });
 
-idNumberInput.addEventListener('input', () => {
-  mustBeNumber(idNumberInput.value, 1);
-  idNumberInputErrors();
-  addProgressValue(1);
-  if (!submitBtn.classList.contains('hidden')) {
+  idNumberInput.addEventListener('input', () => {
+    mustBeNumber(idNumberInput.value, 1);
+    idNumberInputErrors();
     idExist();
-  }
-});
+    progV(1);
+  });
 
-idNumberInput.addEventListener('blur', () => {
-  mustBeNumber(idNumberInput.value, 1);
-  idNumberInputErrors();
-  addProgressValue(1);
-  if (!submitBtn.classList.contains('hidden')) {
+  idNumberInput.addEventListener('blur', () => {
+    mustBeNumber(idNumberInput.value, 1);
+    idNumberInputErrors();
     idExist();
-  }
-});
+    progV(1);
+  });
 
-descriptionInput.addEventListener('input', () => {
-  descriptionInputErrors();
-  addProgressValue(2);
-});
+  descriptionInput.addEventListener('input', () => {
+    descriptionInputErrors();
+    progV(2);
+  });
 
-descriptionInput.addEventListener('blur', () => {
-  descriptionInputErrors();
-  addProgressValue(2);
-});
+  descriptionInput.addEventListener('blur', () => {
+    descriptionInputErrors();
+    progV(2);
+  });
 
-currencyInput.addEventListener('change', () => {
-  currencyInputErrors();
-  addProgressValue(3);
-});
+  currencyInput.addEventListener('change', () => {
+    currencyInputErrors();
+    progV(3);
+  });
 
-currencyInput.addEventListener('blur', () => {
-  currencyInputErrors();
-  addProgressValue(3);
-});
+  currencyInput.addEventListener('blur', () => {
+    currencyInputErrors();
+    progV(3);
+  });
 
-depositInput.addEventListener('input', () => {
-  mustBeNumber(depositInput.value, 4);
-  addProgressValue(4);
-});
+  depositInput.addEventListener('input', () => {
+    mustBeNumber(depositInput.value, 4);
+    progV(4);
+  });
 
-depositInput.addEventListener('blur', () => {
-  mustBeNumber(depositInput.value, 4);
-  addProgressValue(4);
-});
+  depositInput.addEventListener('blur', () => {
+    mustBeNumber(depositInput.value, 4);
+    progV(4);
+  });
 
-rateInput.addEventListener('input', () => {
-  mustBeNumber(rateInput.value, 5);
-  addProgressValue(5);
-});
+  rateInput.addEventListener('input', () => {
+    mustBeNumber(rateInput.value, 5);
+    progV(5);
+  });
 
-rateInput.addEventListener('blur', () => {
-  mustBeNumber(rateInput.value, 5);
-  addProgressValue(5);
-});
+  rateInput.addEventListener('blur', () => {
+    mustBeNumber(rateInput.value, 5);
+    progV(5);
+  });
 
-balanceInput.addEventListener('input', () => {
-  mustBeNumber(balanceInput.value, 6);
-  addProgressValue(6);
-});
+  balanceInput.addEventListener('input', () => {
+    mustBeNumber(balanceInput.value, 6);
+    progV(6);
+  });
 
-balanceInput.addEventListener('blur', () => {
-  mustBeNumber(balanceInput.value, 6);
-  addProgressValue(6);
-});
+  balanceInput.addEventListener('blur', () => {
+    mustBeNumber(balanceInput.value, 6);
+    progV(6);
+  });
 
-statusInput.addEventListener('change', () => {
-  statusInputErrors();
-  addProgressValue(7);
-});
+  statusInput.addEventListener('change', () => {
+    statusInputErrors();
+    progV(7);
+  });
 
-statusInput.addEventListener('blur', () => {
-  statusInputErrors();
-  addProgressValue(7);
-});
+  statusInput.addEventListener('blur', () => {
+    statusInputErrors();
+    progV(7);
+  });
+};
+
+formInputAndBlurErrors(addProgressValue);
 
 // Form Btns
 let resetForm = () => {
@@ -867,7 +858,7 @@ let resetForm = () => {
   });
   progressValue.textContent = '0';
   progressColor.style.width = '1%';
-  validArr = [];
+  subValidArr = [];
 };
 
 clearBtn.onclick = () => resetForm();
@@ -894,8 +885,6 @@ let showSubmitFormBtns = () => {
   cancelFormBtn.classList.remove('hidden');
   cancelUpdate.classList.add('hidden');
 };
-
-// let takeID = [];
 
 // submit Form
 let setAndRefresh = arr => {
@@ -926,9 +915,11 @@ submitBtn.addEventListener('click', e => {
         status: statusInput.value,
       });
       setAndRefresh(getUsersData);
+      main.scrollIntoView();
       let goTo = document.getElementById(idNumberInput.value);
       goTo.classList.add('green-border');
-      goTo.scrollIntoView();
+
+      goTo.scrollIntoView({ block: 'center' });
       resetForm();
       hideFormBtns();
       setTimeout(hideSuccessfullyAdded, 5000);
@@ -945,6 +936,7 @@ submitBtn.addEventListener('click', e => {
 let hideSuccessfullyAdded = () => {
   successfullyAddUserModal.classList.add('hidden');
 };
+
 let errorModalMessage = () => {
   errorModal.classList.add('hidden');
 };
@@ -1089,10 +1081,8 @@ tableStatusP.addEventListener('click', () => {
 
 //tbody
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//create Elements :
 let addNewUser = userData => {
-  //create Elements :
   let {
     fullName,
     idNumber,
@@ -1146,6 +1136,8 @@ let showStatus = sts => {
   return `${sts.toLowerCase()}-btn`;
 };
 
+let rowIdIndexArr = [];
+
 let appendDeleteAndEdit = item => {
   let moreTD = document.createElement('td');
   let moreDiv = document.createElement('div');
@@ -1160,17 +1152,13 @@ let appendDeleteAndEdit = item => {
   moreDiv.setAttribute('class', 'flex-btwn');
   blackEditUserIcon.setAttribute('src', './images/b-edit-user.svg');
   blackEditUserIcon.setAttribute('class', 'medium-icons black-edit-user-icon');
-  // blackEditUserIcon.setAttribute('id', `${e}`);
   moreTD.appendChild(moreDiv);
   moreDiv.appendChild(blackEditUserIcon);
   moreDiv.appendChild(blackDeleteUserIcon);
 
   blackEditUserIcon.addEventListener('click', e => {
     if (fullNameInput.value !== '' && submitBtn.classList.contains('hidden')) {
-      console.log('btn desibled and not empty');
-      errorModal.classList.remove('hidden');
-      formContainer.scrollIntoView();
-      setTimeout(errorModalMessage, 5000);
+      mustUpdateOrCancel();
     } else {
       resetForm();
       let rowId = e.target.parentElement.parentElement.parentElement.id;
@@ -1179,10 +1167,15 @@ let appendDeleteAndEdit = item => {
         element => element.idNumber === rowId
       );
       console.log(rowIdIndex);
+      rowIdIndexArr.push(rowIdIndex);
+      console.log(rowIdIndexArr[0]);
       e.preventDefault();
-      updateUsersForm(item, rowIdIndex);
+      updateUsersForm(item);
       getUsersData.splice(getUsersData.indexOf(item), 1);
-      setAndRefresh(getUsersData);
+      progressBar.classList.remove('hidden');
+      progressValue.textContent = 100;
+      progressColor.style.width = `${progressValue.textContent}%`;
+      // setAndRefresh(getUsersData);
       formErrors();
     }
   });
@@ -1201,16 +1194,13 @@ let deleteUsers = deleteItem => {
   }
 };
 
-let updateUsersForm = (editItem, idNumberIndex) => {
+let updateUsersForm = (editItem) => {
   submitBtn.classList.add('hidden');
   clearBtn.classList.add('hidden');
   updateUserBtn.classList.remove('hidden');
   formContainer.scrollIntoView();
-  // progressBar.classList.('hidden');
   cancelFormBtn.classList.add('hidden');
   cancelUpdate.classList.remove('hidden');
-  // resetForm();
-  // if (fullNameInput.value === '') {
   fullNameInput.value = editItem.fullName;
   idNumberInput.value = editItem.idNumber;
   descriptionInput.value = editItem.description;
@@ -1230,35 +1220,10 @@ let updateUsersForm = (editItem, idNumberIndex) => {
     balance: balanceInput.value,
     status: statusInput.value,
   };
-
-  fullNameInput.addEventListener('input', () => {
-    fullNameInputErrors();
-    addProgressValue(0);
-    fullNameExist();
-  });
-
-  fullNameInput.addEventListener('blur', () => {
-    fullNameInputErrors();
-    addProgressValue(0);
-    fullNameExist();
-  });
-
-  idNumberInput.addEventListener('input', () => {
-    mustBeNumber(idNumberInput.value, 1);
-    idNumberInputErrors();
-    addProgressValue(1);
-    idExist();
-  });
-
-  idNumberInput.addEventListener('blur', () => {
-    mustBeNumber(idNumberInput.value, 1);
-    idNumberInputErrors();
-    addProgressValue(1);
-    idExist();
-  });
+  formInputAndBlurErrors(removeProgressValue);
 
   updateUserBtn.addEventListener('click', () => {
-    updateUser(idNumberIndex);
+    updateUser();
     if (
       Object.entries(inputDiv).every(element =>
         element[1].classList.contains('valid-border')
@@ -1269,22 +1234,27 @@ let updateUsersForm = (editItem, idNumberIndex) => {
       successfullyUpdated.classList.remove('hidden');
     }
     setTimeout(hideSuccessfullyAdded, 5000);
-
+    updValidArr = [1, 2, 3, 4, 5, 6, 7];
+    rowIdIndexArr = [];
+    console.log(rowIdIndexArr);
   });
 
   cancelUpdate.addEventListener('click', () => {
-    getUsersData.splice(idNumberIndex, 0, beforeUpdate);
+    getUsersData.splice(rowIdIndexArr[0], 0, beforeUpdate);
     setAndRefresh(getUsersData);
     let goTo = document.getElementById(idNumberInput.value);
     resetForm();
     goTo.classList.add('green-border');
-    goTo.scrollIntoView();
+    goTo.scrollIntoView({ block: 'center' });
     hideFormBtns();
     setTimeout(hideSuccessBorder, 5000, goTo);
+    updValidArr = [1, 2, 3, 4, 5, 6, 7];
+    rowIdIndexArr = [];
+    console.log(rowIdIndexArr);
   });
 };
 
-let updateUser = idIndex => {
+let updateUser = () => {
   if (
     Object.entries(inputDiv).every(element =>
       element[1].classList.contains('valid-border')
@@ -1303,28 +1273,17 @@ let updateUser = idIndex => {
     };
     fullNameExist();
     idExist();
-        // getUsersData[idIndex].fullName = fullNameInput.value;
-    // getUsersData[idIndex].idNumber = idNumberInput.value;
-    // getUsersData[idIndex].description = descriptionInput.value;
-    // getUsersData[idIndex].currency = currencyInput.value;
-    // getUsersData[idIndex].deposit = depositInput.value;
-    // getUsersData[idIndex].rate = rateInput.value;
-    // getUsersData[idIndex].balance = balanceInput.value;
-    // getUsersData[idIndex].status = statusInput.value;
-
-    // getUsersData.splice(idIndex,1, getUsersData[idIndex]);
-    getUsersData.splice(idIndex, 0, updatedObj);
+    getUsersData.splice(rowIdIndexArr[0], 0, updatedObj);
     setAndRefresh(getUsersData);
+    main.scrollIntoView();
     let goTo = document.getElementById(idNumberInput.value);
     resetForm();
     goTo.classList.add('green-border');
-    goTo.scrollIntoView();
+    goTo.scrollIntoView({ block: 'center' });
     hideFormBtns();
     setTimeout(hideSuccessBorder, 5000, goTo);
   }
 };
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // tfoot
 
@@ -1344,13 +1303,7 @@ let showActiveUsers = arr => {
 let rowsPerPageValueOnChange = rowsPerPage.addEventListener('change', e => {
   e = rowsPerPage.value;
   refresh(getUsersData);
-  // console.log(e);
 });
-
-// starting & ending-index
-
-startingIndex;
-endingIndex;
 
 // next / previous page :
 let nbOfPages = (arr, num) => {
@@ -1398,14 +1351,11 @@ let refresh = arrayToRender => {
   searchOnLoad();
   tableBody.innerHTML = null;
   let selectedRowsPerPage = rowsPerPageValueOnChange || rowsPerPage.value;
-  // console.log(selectedRowsPerPage);
   let filteredUsers = filteredArr(arrayToRender) || arrayToRender;
   let sortFiltered = filteredUsers.slice() || filteredUsers;
   sortedArr(sortFiltered);
-  let totalRowsPerPage = sortFiltered;
-  startingIndex;
-  endingIndex;
-  let numberOfPages = nbOfPages(sortFiltered, selectedRowsPerPage);
+  let totalRowsPerPage = sortFiltered.slice(0, selectedRowsPerPage);
+  // let numberOfPages = nbOfPages(sortFiltered, selectedRowsPerPage);
   // console.log(numberOfPages);
   activeUsers.textContent = showActiveUsers(sortFiltered);
   totalOfUsers.forEach(element => {
@@ -1414,10 +1364,12 @@ let refresh = arrayToRender => {
   totalRowsPerPage.forEach(element => {
     tableBody.appendChild(addNewUser(element));
   });
-
-  // for (let i = 0; i < selectedRowsPerPage; i++) {
-  //   tableBody.appendChild(addNewUser(totalRowsPerPage[i]));
-  // }
+  
+  startingIndex.textContent = sortFiltered.length !== 0 ? 1 : 0;
+  endingIndex.textContent =
+    sortFiltered.length > selectedRowsPerPage
+      ? selectedRowsPerPage
+      : sortFiltered.length;
 };
 
 if (getLocalStorage == '[]') {
