@@ -434,6 +434,14 @@ let blueDownIcon = document.querySelectorAll('.blue-down');
 let tableNameP = document.querySelector('.p-name');
 let tableStatusP = document.querySelector('.p-status');
 let statusOrder = ['OPEN', 'ACTIVE', 'INACTIVE', 'PAID', 'ORDERED'];
+let clickToReset = [
+  tableStatusP,
+  tableNameP,
+  blueUpIcon[0],
+  blueDownIcon[0],
+  blueUpIcon[1],
+  blueDownIcon[1],
+];
 
 // table Body
 let tableBody = document.querySelector('.table-body');
@@ -457,6 +465,7 @@ let startingIndex = document.querySelector('.starting-index');
 let endingIndex = document.querySelector('.ending-index');
 
 // Next & Previous pages
+let currentPage = 0;
 let blackRightArrow = document.querySelector('.black-right-arrow');
 let colorRightArrow = document.querySelector('.color-right-arrow');
 let blackLeftArrow = document.querySelector('.black-left-arrow');
@@ -534,6 +543,7 @@ searchInputField.addEventListener('input', () => {
 
 searchInputField.addEventListener('keyup', () => {
   tableBody.innerHTML = null;
+  currentPage = 0;
   refresh(getUsersData);
 });
 
@@ -984,14 +994,7 @@ blackUpIcon[1].onclick = () => sortUpIcon(1, 0);
 blackDownIcon[0].onclick = () => sortDownIcon(0, 1);
 blackDownIcon[1].onclick = () => sortDownIcon(1, 0);
 
-[
-  tableStatusP,
-  tableNameP,
-  blueUpIcon[0],
-  blueDownIcon[0],
-  blueUpIcon[1],
-  blueDownIcon[1],
-].forEach(element => {
+clickToReset.forEach(element => {
   element.addEventListener('click', () => {
     resetSort(0);
     resetSort(1);
@@ -999,7 +1002,6 @@ blackDownIcon[1].onclick = () => sortDownIcon(1, 0);
 });
 
 //tbody
-
 //create Elements :
 let addNewUser = userData => {
   let {
@@ -1017,31 +1019,31 @@ let addNewUser = userData => {
   UserRow.setAttribute('class', 'table-row');
   UserRow.setAttribute('id', `${idNumber}`);
   UserRow.innerHTML = `
-  <td><input type="checkbox" id="check-user"></td>
+<td><input type="checkbox" id="check-user"></td>
 <td class="">
-  <p class="full-name">${fullName}</p>
-  <p class="id-number">${idNumber}</p>
+<p class="full-name">${fullName}</p>
+<p class="id-number">${idNumber}</p>
 </td>
 <td class="">
-  <p class="description">${description}</p>
+<p class="description">${description}</p>
 </td>
 <td class="">
-  <p class="rate right-text-align">${Number(rate).toFixed(2)}</p>
-  <p class="currency right-text-align">${currency}</p>
+<p class="rate right-text-align">${Number(rate).toFixed(2)}</p>
+<p class="currency right-text-align">${currency}</p>
 </td>
 <td class="">
-  <p class="balance right-text-align ${checkBalance(balance)}">${Number(
+<p class="balance right-text-align ${checkBalance(balance)}">${Number(
     balance
   ).toFixed(2)}</p>
-  <p class="currency right-text-align">${currency}</p>
+<p class="currency right-text-align">${currency}</p>
 </td>
 <td class="">
-  <p class="deposit right-text-align">${Number(deposit).toFixed(2)}</p>
-  <p class="currency right-text-align">${currency}</p>
+<p class="deposit right-text-align">${Number(deposit).toFixed(2)}</p>
+<p class="currency right-text-align">${currency}</p>
 </td>
 <td class="center-text-align">
 <button id="" class="${showStatus(status)}">${status}</button>
-  </td>
+</td>
 `;
   UserRow.appendChild(appendDeleteAndEdit(userData));
   return UserRow;
@@ -1108,8 +1110,8 @@ let takeCopy = (element, id) => {
 
 let updateProgressBar = () => {
   progressBar.classList.remove('hidden');
-      progressValue.textContent = 100;
-      progressColor.style.width = `${progressValue.textContent}%`;
+  progressValue.textContent = 100;
+  progressColor.style.width = `${progressValue.textContent}%`;
 };
 
 let editUserFcts = (e, id) => {
@@ -1123,6 +1125,9 @@ let editUserFcts = (e, id) => {
 let deleteUsers = deleteItem => {
   if (confirm('Are you sure you wont to delete this user ?')) {
     getUsersData.splice(getUsersData.indexOf(deleteItem), 1);
+    if (startingIndex.textContent > getUsersData.length) {
+      currentPage -= 1;
+    }
     setAndRefresh(getUsersData);
   }
 };
@@ -1206,6 +1211,7 @@ let showActiveUsers = arr => {
 
 let rowsPerPageValueOnChange = rowsPerPage.addEventListener('change', e => {
   e = rowsPerPage.value;
+  currentPage = 0;
   refresh(getUsersData);
 });
 
@@ -1233,8 +1239,20 @@ colorRightArrow.addEventListener('mouseleave', () => {
   blackRightArrow.classList.remove('hidden');
   colorRightArrow.classList.add('hidden');
 });
-//colorLeftArrow.addEventListener('click', () => {});
-//colorRightArrow.addEventListener('click', () => {});
+
+colorRightArrow.addEventListener('click', () => {
+  if ((currentPage + 1) * rowsPerPage.value < getUsersData.length) {
+    currentPage++;
+  }
+  refresh(getUsersData);
+});
+
+colorLeftArrow.addEventListener('click', () => {
+  if (currentPage != 0) {
+    currentPage--;
+  }
+  refresh(getUsersData);
+});
 
 // onLoad
 let searchOnLoad = () => {
@@ -1257,22 +1275,23 @@ let refresh = arrayToRender => {
   let filteredUsers = filteredArr(arrayToRender) || arrayToRender;
   let sortFiltered = filteredUsers.slice() || filteredUsers;
   sortedArr(sortFiltered);
-  let totalRowsPerPage = sortFiltered.slice(0, selectedRowsPerPage);
-  // let numberOfPages = nbOfPages(sortFiltered, selectedRowsPerPage);
-  // console.log(numberOfPages);
+  let totalRowsPerPage = sortFiltered.slice(
+    currentPage * selectedRowsPerPage,
+    (currentPage + 1) * selectedRowsPerPage
+  );
   activeUsers.textContent = showActiveUsers(sortFiltered);
   totalOfUsers.forEach(element => {
     element.textContent = sortFiltered.length;
   });
+
+  startingIndex.textContent = currentPage * selectedRowsPerPage + 1;
+  endingIndex.textContent =
+    totalRowsPerPage.length -
+    selectedRowsPerPage +
+    selectedRowsPerPage * (currentPage + 1);
   totalRowsPerPage.forEach(element => {
     tableBody.appendChild(addNewUser(element));
   });
-
-  startingIndex.textContent = sortFiltered.length !== 0 ? 1 : 0;
-  endingIndex.textContent =
-    sortFiltered.length > selectedRowsPerPage
-      ? selectedRowsPerPage
-      : sortFiltered.length;
 };
 
 if (getLocalStorage == '[]') {

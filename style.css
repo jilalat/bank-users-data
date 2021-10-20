@@ -574,7 +574,7 @@ letter-spacing: 0.08em;
 
 tfoot {
   background-color: #ffffff1e;
-  background-color: #770f0f1e;
+  background-color: #e074741e;
   color: #606f89;
   font-weight: 600;
 }
@@ -606,6 +606,6 @@ tfoot {
 .arrows {
   width: 55px;
   margin-left: auto;
-  background-color: #ff0033;
+  /* background-color: #ff0033; */
 }
 
