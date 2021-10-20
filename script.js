@@ -418,16 +418,14 @@ let addUserRound = document.querySelector('.add-user-icons');
 let addUserBlackIcon = document.querySelector('.add-user-black-icon');
 let addUserColoredIcon = document.querySelector('.add-user-colored-icon');
 
-// Success Form Modal
+// Message Modal
+let errorModal = document.querySelector('.error-modal');
 let successfullyAddUserModal = document.querySelector('.add-user-modal');
 let successfullyAdded = document.querySelector('.added');
 let successfullyUpdated = document.querySelector('.updated');
 let successfullyAddUserModalValue = document.querySelector(
   '.add-user-modal-value'
 );
-
-// Error Form Modal
-let errorModal = document.querySelector('.error-modal');
 
 // Form
 let formContainer = document.getElementById('form-container');
@@ -460,6 +458,8 @@ let validIcon = document.querySelectorAll('.valid-icon');
 let inputDiv = document.querySelectorAll('.input-div');
 let inputArea = document.querySelectorAll('.input');
 let errors = document.querySelectorAll('.errors');
+let inputAndBlurEventListeners = ['input', 'blur']
+let changeAndBlurEventListeners = ['change', 'blur']
 
 // Sort-by
 let blueUpIcon = document.querySelectorAll('.blue-up');
@@ -468,10 +468,16 @@ let blackDownIcon = document.querySelectorAll('.black-down');
 let blueDownIcon = document.querySelectorAll('.blue-down');
 let tableNameP = document.querySelector('.p-name');
 let tableStatusP = document.querySelector('.p-status');
+let statusOrder = ['OPEN', 'ACTIVE', 'INACTIVE', 'PAID', 'ORDERED'];
 
 // table Body
 let tableBody = document.querySelector('.table-body');
 let emptyData = document.querySelector('.empty-row');
+let rowIdIndexArr = [];
+
+// Progress Bar
+let subValidArr = [];
+let updValidArr = [0, 1, 2, 3, 4, 5, 6, 7];
 
 // Table Footer
 
@@ -603,7 +609,6 @@ addUserForm.addEventListener('input', () => {
 });
 
 // Submit Progress Bar
-let subValidArr = [];
 let addProgressValue = i => {
   if (inputDiv[i].classList.contains('valid-border')) {
     if (!subValidArr.includes(i)) {
@@ -619,7 +624,6 @@ let addProgressValue = i => {
 };
 
 // Update Progress Bar
-let updValidArr = [0, 1, 2, 3, 4, 5, 6, 7];
 let removeProgressValue = i => {
   if (!inputDiv[i].classList.contains('valid-border')) {
     if (updValidArr.includes(i)) {
@@ -674,9 +678,12 @@ let fullNameInputErrors = () => {
   }
 };
 
-let fullNameExist = (arr) => {
+let fullNameExist = arr => {
   arr.forEach(element => {
-    if (element.fullName.toLowerCase() == fullNameInput.value.toLowerCase() || element.fullName.toUpperCase() == fullNameInput.value.toUpperCase()) {
+    if (
+      element.fullName.toLowerCase() == fullNameInput.value.toLowerCase() ||
+      element.fullName.toUpperCase() == fullNameInput.value.toUpperCase()
+    ) {
       onError(0);
       errors[0].textContent = `User already exists`;
     }
@@ -694,7 +701,7 @@ let idNumberInputErrors = () => {
   }
 };
 
-let idExist = (arr) => {
+let idExist = arr => {
   arr.forEach(element => {
     if (element.idNumber == idNumberInput.value) {
       onError(1);
@@ -749,91 +756,64 @@ let formErrors = () => {
 };
 
 let formInputAndBlurErrors = (progV, arr) => {
-  fullNameInput.addEventListener('input', () => {
-    fullNameInputErrors();
-    fullNameExist(arr);
-    progV(0);
-  });
+  inputAndBlurEventListeners.forEach(event =>
+    fullNameInput.addEventListener(event, () => {
+      fullNameInputErrors();
+      fullNameExist(arr);
+      progV(0);
+    })
+  );
+  
+  inputAndBlurEventListeners.forEach(event =>
+    idNumberInput.addEventListener(event, () => {
+      mustBeNumber(idNumberInput.value, 1);
+      idNumberInputErrors();
+      idExist(arr);
+      progV(1);
+    })
+  );
 
-  fullNameInput.addEventListener('blur', () => {
-    fullNameInputErrors();
-    fullNameExist(arr);
-    progV(0);
-  });
+  inputAndBlurEventListeners.forEach(event =>
+    descriptionInput.addEventListener(event, () => {
+      descriptionInputErrors();
+      progV(2);
+    })
+  );
 
-  idNumberInput.addEventListener('input', () => {
-    mustBeNumber(idNumberInput.value, 1);
-    idNumberInputErrors();
-    idExist(arr);
-    progV(1);
-  });
-
-  idNumberInput.addEventListener('blur', () => {
-    mustBeNumber(idNumberInput.value, 1);
-    idNumberInputErrors();
-    idExist(arr);
-    progV(1);
-  });
-
-  descriptionInput.addEventListener('input', () => {
-    descriptionInputErrors();
-    progV(2);
-  });
-
-  descriptionInput.addEventListener('blur', () => {
-    descriptionInputErrors();
-    progV(2);
-  });
-
-  currencyInput.addEventListener('change', () => {
+  changeAndBlurEventListeners.forEach(event =>
+    currencyInput.addEventListener(event, () => {
     currencyInputErrors();
     progV(3);
-  });
+    })
+  );
 
-  currencyInput.addEventListener('blur', () => {
-    currencyInputErrors();
-    progV(3);
-  });
+  inputAndBlurEventListeners.forEach(event =>
+    depositInput.addEventListener(event, () => {
+      mustBeNumber(depositInput.value, 4);
+      progV(4);
+    })
+  );
 
-  depositInput.addEventListener('input', () => {
-    mustBeNumber(depositInput.value, 4);
-    progV(4);
-  });
+  inputAndBlurEventListeners.forEach(event =>
+    rateInput.addEventListener(event, () => {
+      mustBeNumber(rateInput.value, 5);
+      progV(5);
+    })
+  );
 
-  depositInput.addEventListener('blur', () => {
-    mustBeNumber(depositInput.value, 4);
-    progV(4);
-  });
+  inputAndBlurEventListeners.forEach(event =>
+    balanceInput.addEventListener(event, () => {
+      mustBeNumber(balanceInput.value, 6);
+      progV(6);
+    })
+  );
 
-  rateInput.addEventListener('input', () => {
-    mustBeNumber(rateInput.value, 5);
-    progV(5);
-  });
-
-  rateInput.addEventListener('blur', () => {
-    mustBeNumber(rateInput.value, 5);
-    progV(5);
-  });
-
-  balanceInput.addEventListener('input', () => {
-    mustBeNumber(balanceInput.value, 6);
-    progV(6);
-  });
-
-  balanceInput.addEventListener('blur', () => {
-    mustBeNumber(balanceInput.value, 6);
-    progV(6);
-  });
-
-  statusInput.addEventListener('change', () => {
-    statusInputErrors();
-    progV(7);
-  });
-
-  statusInput.addEventListener('blur', () => {
-    statusInputErrors();
-    progV(7);
-  });
+  changeAndBlurEventListeners.forEach(event =>
+    statusInput.addEventListener(event, () => {
+      statusInputErrors();
+      progV(7);
+    })
+  );
 };
 
 formInputAndBlurErrors(addProgressValue, getUsersData);
@@ -890,6 +870,12 @@ let setAndRefresh = arr => {
   localStorage.setItem('usersData', JSON.stringify(arr));
   refresh(arr);
 };
+
+let resetAndHideFormBtns = () => {
+  resetForm();
+  hideFormBtns();
+};
+
 submitBtn.addEventListener('click', e => {
   e.preventDefault();
   if (
@@ -928,7 +914,7 @@ submitBtn.addEventListener('click', e => {
   }
 });
 
-// Success Form Modal
+// Message Modal
 let hideSuccessfullyAdded = () => {
   successfullyAddUserModal.classList.add('hidden');
 };
@@ -957,8 +943,6 @@ let sortByFullNameZtoA = (a, b) =>
     : b.fullName.toLowerCase() > a.fullName.toLowerCase()
     ? 1
     : 0;
-
-let statusOrder = ['OPEN', 'ACTIVE', 'INACTIVE', 'PAID', 'ORDERED'];
 
 let sortByStatusAtoZ = (a, b) =>
   statusOrder.indexOf(a.status) > statusOrder.indexOf(b.status)
@@ -1008,6 +992,7 @@ let sortUpIcon = (i, j) => {
   blueDownIcon[j].classList.add('hidden');
   blackUpIcon[j].classList.remove('hidden');
   blackDownIcon[j].classList.remove('hidden');
+  refresh(getUsersData);
 };
 
 let sortDownIcon = (i, j) => {
@@ -1019,27 +1004,8 @@ let sortDownIcon = (i, j) => {
   blueDownIcon[j].classList.add('hidden');
   blackUpIcon[j].classList.remove('hidden');
   blackDownIcon[j].classList.remove('hidden');
+  refresh(getUsersData);
 };
-
-blackUpIcon[0].addEventListener('click', () => {
-  sortUpIcon(0, 1);
-  refresh(getUsersData);
-});
-
-blackUpIcon[1].addEventListener('click', () => {
-  sortUpIcon(1, 0);
-  refresh(getUsersData);
-});
-
-blackDownIcon[0].addEventListener('click', () => {
-  sortDownIcon(0, 1);
-  refresh(getUsersData);
-});
-
-blackDownIcon[1].addEventListener('click', () => {
-  sortDownIcon(1, 0);
-  refresh(getUsersData);
-});
 
 let resetSort = i => {
   blackUpIcon[i].classList.remove('hidden');
@@ -1049,30 +1015,23 @@ let resetSort = i => {
   refresh(getUsersData);
 };
 
-blueUpIcon[0].addEventListener('click', () => {
-  resetSort(0);
-});
+blackUpIcon[0].onclick = () => sortUpIcon(0, 1);
+blackUpIcon[1].onclick = () => sortUpIcon(1, 0);
+blackDownIcon[0].onclick = () => sortDownIcon(0, 1);
+blackDownIcon[1].onclick = () => sortDownIcon(1, 0);
 
-blueDownIcon[0].addEventListener('click', () => {
-  resetSort(0);
-});
-
-tableNameP.addEventListener('click', () => {
-  resetSort(0);
-  resetSort(1);
-});
-
-blueUpIcon[1].addEventListener('click', () => {
-  resetSort(1);
-});
-
-blueDownIcon[1].addEventListener('click', () => {
-  resetSort(1);
-});
-
-tableStatusP.addEventListener('click', () => {
-  resetSort(0);
-  resetSort(1);
+[
+  tableStatusP,
+  tableNameP,
+  blueUpIcon[0],
+  blueDownIcon[0],
+  blueUpIcon[1],
+  blueDownIcon[1],
+].forEach(element => {
+  element.addEventListener('click', () => {
+    resetSort(0);
+    resetSort(1);
+  });
 });
 
 //tbody
@@ -1132,11 +1091,6 @@ let showStatus = sts => {
   return `${sts.toLowerCase()}-btn`;
 };
 
-let rowIdIndexArr = [];
-let resetAndHideFormBtns = () => {
-  resetForm();
-  hideFormBtns();
-};
 let appendDeleteAndEdit = item => {
   let moreTD = document.createElement('td');
   let moreDiv = document.createElement('div');
@@ -1157,7 +1111,7 @@ let appendDeleteAndEdit = item => {
 
   blackEditUserIcon.addEventListener('click', e => {
     subValidArr = [];
-    updValidArr = [0,1, 2, 3, 4, 5, 6, 7];
+    updValidArr = [0, 1, 2, 3, 4, 5, 6, 7];
     if (fullNameInput.value !== '' && submitBtn.classList.contains('hidden')) {
       mustUpdateOrCancel();
     } else {
@@ -1174,8 +1128,10 @@ let appendDeleteAndEdit = item => {
       }
       e.preventDefault();
       let copyOfGetUsersData = getUsersData.slice();
-        let filteredCopyOfGetUsersData = copyOfGetUsersData.filter(user => !user.idNumber.includes(rowId));
-            updateUsersForm(item, filteredCopyOfGetUsersData);
+      let filteredCopyOfGetUsersData = copyOfGetUsersData.filter(
+        user => !user.idNumber.includes(rowId)
+      );
+      updateUsersForm(item, filteredCopyOfGetUsersData);
       console.log('copy', copyOfGetUsersData);
       console.log('filtered', filteredCopyOfGetUsersData);
       progressBar.classList.remove('hidden');
