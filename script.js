@@ -1,39 +1,4 @@
-// 'use strict';
-let req = {};
-let done = {
-  // - Form to add customer
-  // - Fields
-  //     - Customer number (Number field)
-  //     - Customer name
-  //     - Description (textarea)
-  //     - Currency (Select: EUR, INR, USD)
-  //     - Rate (Number field)
-  //     - Balance (Number field)
-  //     - Deposit (Number filed)
-  //     - Status (Select: Active, Inactive)
-  // - Add customer to start of the array
-  // - Validation
-  //     - All fields are required (“This field is required”)
-  //     - Customer number should be unique (Error below input: “Customer number already exists”)
-  //     - Customer number should be 10 digits (Error below input: “Customer number should be 10 digits”)
-  //     - Customer name should be unique (Error below input: “Customer already exists”)
-  //     - Customer name should be string (Error below input: “Customer name must be string”)
-  //     - Description should at least have 10 characters (“Description should at least have 10 characters”)
-  //     - All fields are required (“This field is required”)
-  //     - Description should at least have 10 characters (“Description should at least have 10 characters”)
-  // - After submission clear form
-  // - Validation triggers on submit, if validation passed add customer, otherwise show errors.
-  // - Added customer should adher to all table logic (Search, Sort..)
-  // - save everything to local storage
-  // Data table requirements:
-  //     - Validation on change
-  //     - show a notification when a customer is added (5s)
-  //     - Form fill progress percentage
-  // Edit customer
-  //   - After submitting the changes of the edited customer, notification message should say: “Customer updated successfully”
-  //   - After clinking edit customer, scroll to the form and pre-fill all the fields
-  //   - After adding new customer, scroll to and highlight the newly added row in table
-};
+'use strict';
 
 let users = [
   {
@@ -458,8 +423,8 @@ let validIcon = document.querySelectorAll('.valid-icon');
 let inputDiv = document.querySelectorAll('.input-div');
 let inputArea = document.querySelectorAll('.input');
 let errors = document.querySelectorAll('.errors');
-let inputAndBlurEventListeners = ['input', 'blur']
-let changeAndBlurEventListeners = ['change', 'blur']
+let inputAndBlurEventListeners = ['input', 'blur'];
+let changeAndBlurEventListeners = ['change', 'blur'];
 
 // Sort-by
 let blueUpIcon = document.querySelectorAll('.blue-up');
@@ -480,7 +445,6 @@ let subValidArr = [];
 let updValidArr = [0, 1, 2, 3, 4, 5, 6, 7];
 
 // Table Footer
-
 // active Users :
 let activeUsers = document.querySelector('.active-users');
 let totalOfUsers = document.querySelectorAll('.total-of-users');
@@ -585,12 +549,6 @@ addUserRound.addEventListener('mouseleave', () => {
   addUserColoredIcon.classList.add('hidden');
 });
 
-let mustUpdateOrCancel = () => {
-  errorModal.classList.remove('hidden');
-  formContainer.scrollIntoView();
-  setTimeout(errorModalMessage, 5000);
-};
-
 addUserRound.addEventListener('click', () => {
   if (fullNameInput.value !== '' && submitBtn.classList.contains('hidden')) {
     mustUpdateOrCancel();
@@ -601,6 +559,12 @@ addUserRound.addEventListener('click', () => {
     showSubmitFormBtns();
   }
 });
+
+let mustUpdateOrCancel = () => {
+  errorModal.classList.remove('hidden');
+  formContainer.scrollIntoView();
+  setTimeout(errorModalMessage, 5000);
+};
 
 addUserForm.addEventListener('input', () => {
   if (formBtns.firstElementChild.classList.contains('hidden')) {
@@ -763,7 +727,7 @@ let formInputAndBlurErrors = (progV, arr) => {
       progV(0);
     })
   );
-  
+
   inputAndBlurEventListeners.forEach(event =>
     idNumberInput.addEventListener(event, () => {
       mustBeNumber(idNumberInput.value, 1);
@@ -782,8 +746,8 @@ let formInputAndBlurErrors = (progV, arr) => {
 
   changeAndBlurEventListeners.forEach(event =>
     currencyInput.addEventListener(event, () => {
-    currencyInputErrors();
-    progV(3);
+      currencyInputErrors();
+      progV(3);
     })
   );
 
@@ -1115,34 +1079,45 @@ let appendDeleteAndEdit = item => {
     if (fullNameInput.value !== '' && submitBtn.classList.contains('hidden')) {
       mustUpdateOrCancel();
     } else {
-      resetForm();
       let rowId = e.target.closest('tr').id;
-      let rowIdIndex = getUsersData.findIndex(
-        element => element.idNumber === rowId
-      );
-      if (rowIdIndexArr.length != 0) {
-        rowIdIndexArr = [];
-        rowIdIndexArr.push(rowIdIndex);
-      } else {
-        rowIdIndexArr.push(rowIdIndex);
-      }
-      e.preventDefault();
-      let copyOfGetUsersData = getUsersData.slice();
-      let filteredCopyOfGetUsersData = copyOfGetUsersData.filter(
-        user => !user.idNumber.includes(rowId)
-      );
-      updateUsersForm(item, filteredCopyOfGetUsersData);
-      console.log('copy', copyOfGetUsersData);
-      console.log('filtered', filteredCopyOfGetUsersData);
-      progressBar.classList.remove('hidden');
-      progressValue.textContent = 100;
-      progressColor.style.width = `${progressValue.textContent}%`;
-      formErrors();
+      editUserFcts(item, rowId);
     }
   });
 
   blackDeleteUserIcon.onclick = () => deleteUsers(item);
   return moreTD;
+};
+
+let extractID = id => {
+  let rowIdIndex = getUsersData.findIndex(element => element.idNumber === id);
+  if (rowIdIndexArr.length != 0) {
+    rowIdIndexArr = [];
+    rowIdIndexArr.push(rowIdIndex);
+  } else {
+    rowIdIndexArr.push(rowIdIndex);
+  }
+};
+
+let takeCopy = (element, id) => {
+  let copyOfGetUsersData = getUsersData.slice();
+  let filteredCopyOfGetUsersData = copyOfGetUsersData.filter(
+    user => !user.idNumber.includes(id)
+  );
+  updateUsersForm(element, filteredCopyOfGetUsersData);
+};
+
+let updateProgressBar = () => {
+  progressBar.classList.remove('hidden');
+      progressValue.textContent = 100;
+      progressColor.style.width = `${progressValue.textContent}%`;
+};
+
+let editUserFcts = (e, id) => {
+  resetForm();
+  extractID(id);
+  takeCopy(e, id);
+  updateProgressBar();
+  formErrors();
 };
 
 let deleteUsers = deleteItem => {
