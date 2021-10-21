@@ -425,6 +425,16 @@ let inputArea = document.querySelectorAll('.input');
 let errors = document.querySelectorAll('.errors');
 let inputAndBlurEventListeners = ['input', 'blur'];
 let changeAndBlurEventListeners = ['change', 'blur'];
+let inputsFocusEventListener = [
+  fullNameInput,
+  idNumberInput,
+  descriptionInput,
+  currencyInput,
+  depositInput,
+  rateInput,
+  balanceInput,
+  statusInput,
+];
 
 // Sort-by
 let blueUpIcon = document.querySelectorAll('.blue-up');
@@ -575,6 +585,18 @@ let mustUpdateOrCancel = () => {
   formContainer.scrollIntoView();
   setTimeout(errorModalMessage, 5000);
 };
+
+inputsFocusEventListener.forEach(element => {
+  element.addEventListener('focus', () => {
+    if (
+      submitBtn.classList.contains('hidden') &&
+      updateUserBtn.classList.contains('hidden')
+    ) {
+      subValidArr = [];
+      updValidArr = [];
+    }
+  });
+});
 
 addUserForm.addEventListener('input', () => {
   if (formBtns.firstElementChild.classList.contains('hidden')) {
@@ -872,13 +894,13 @@ submitBtn.addEventListener('click', e => {
         balance: balanceInput.value,
         status: statusInput.value,
       });
+      setTimeout(hideSuccessfullyAdded, 5000);
       setAndRefresh(getUsersData);
       main.scrollIntoView();
       let goTo = document.getElementById(idNumberInput.value);
       goTo.classList.add('green-border');
       goTo.scrollIntoView({ block: 'center' });
       resetAndHideFormBtns();
-      setTimeout(hideSuccessfullyAdded, 5000);
       setTimeout(hideSuccessBorder, 5000, goTo);
     }
   } else {
@@ -1172,6 +1194,7 @@ let updateUser = () => {
       balance: balanceInput.value,
       status: statusInput.value,
     };
+    setTimeout(hideSuccessfullyAdded, 5000);
     getUsersData.splice(rowIdIndexArr[0], 1, updatedObj);
     setAndRefresh(getUsersData);
     main.scrollIntoView();
@@ -1179,7 +1202,6 @@ let updateUser = () => {
     resetAndHideFormBtns();
     goTo.classList.add('green-border');
     goTo.scrollIntoView({ block: 'center' });
-    setTimeout(hideSuccessfullyAdded, 5000);
     setTimeout(hideSuccessBorder, 5000, goTo);
   }
 };
