@@ -395,9 +395,13 @@ let successfullyAddUserModalValue = document.querySelector(
 // Form
 let formContainer = document.getElementById('form-container');
 let addUserForm = document.querySelector('.form');
+
+// Progress Bar
 let progressBar = document.querySelector('.progress-bar');
 let progressColor = document.querySelector('.progress-color');
 let progressValue = document.querySelector('.progress-value');
+let subValidArr = [];
+let updValidArr = [0, 1, 2, 3, 4, 5, 6, 7];
 
 // Form Btns
 let formBtns = document.querySelector('.form-btns');
@@ -436,6 +440,10 @@ let inputsFocusEventListener = [
   statusInput,
 ];
 
+// table Head
+// checkbox
+let checkAll = document.getElementById('checkbox');
+
 // Sort-by
 let blueUpIcon = document.querySelectorAll('.blue-up');
 let blackUpIcon = document.querySelectorAll('.black-up');
@@ -457,10 +465,6 @@ let clickToReset = [
 let tableBody = document.querySelector('.table-body');
 let emptyData = document.querySelector('.empty-row');
 let rowIdIndexArr = [];
-
-// Progress Bar
-let subValidArr = [];
-let updValidArr = [0, 1, 2, 3, 4, 5, 6, 7];
 
 // Table Footer
 // active Users :
@@ -558,7 +562,6 @@ searchInputField.addEventListener('keyup', () => {
 });
 
 // Add User Icon Style
-
 addUserRound.addEventListener('mouseenter', () => {
   addUserBlackIcon.classList.add('hidden');
   addUserColoredIcon.classList.remove('hidden');
@@ -924,7 +927,6 @@ let hideSuccessBorder = index => {
 };
 
 //theade
-
 // Sort Functions
 let sortByFullNameAtoZ = (a, b) =>
   a.fullName.toLowerCase() > b.fullName.toLowerCase()
@@ -1043,7 +1045,7 @@ let addNewUser = userData => {
   UserRow.innerHTML = `
 <td><input type="checkbox" id="check-user"></td>
 <td class="">
-<p class="full-name">${fullName}</p>
+<p class="full-name">${fullName.toLowerCase()}</p>
 <p class="id-number">${idNumber}</p>
 </td>
 <td class="">
@@ -1217,7 +1219,6 @@ let cancelUpdateUser = () => {
 };
 
 // tfoot
-
 // active Users :
 let showActiveUsers = arr => {
   let numberOfActiveUsers = [];
