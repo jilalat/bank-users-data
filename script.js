@@ -14,7 +14,7 @@ let users = [
   },
   {
     fullName: 'Lois Waters',
-    idNumber: '6924871646',
+    idNumber: '6924871647',
     description:
       'Granny  Wince  Icon  Share  Astonish  Subsystem  Punctured  Auction  Bunkbed  Think  Lunchbox  Jingle  Letdown  Rubber  Snowstorm  Skedaddle  Cut  Mocker  Exclusive  Upbeat',
     currency: 'EUR',
@@ -25,14 +25,14 @@ let users = [
   },
   {
     fullName: 'Roberta Francis',
-    idNumber: '9434221226',
+    idNumber: '9434221227',
     description:
       'Hastily  Calcium  Outspoken  Subtitle  Doornail  Limes  Emote  Composure  Discount  Duchess  Shoplift  Prelude  Reformist  Aware  Satirical  Flatly  Flounder  Plus  Genre  Fidgeting',
     currency: 'EUR',
     deposit: '1472711',
     rate: '224769',
     balance: '-6908307213',
-    status: 'PAID',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Mable Caldwell',
@@ -43,7 +43,7 @@ let users = [
     deposit: '2489707',
     rate: '342142',
     balance: '0',
-    status: 'OPEN',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Genevieve Cortez',
@@ -54,7 +54,7 @@ let users = [
     deposit: '8843045',
     rate: '812272',
     balance: '3166305644',
-    status: 'ORDERED',
+    status: 'INACTIVE',
   },
   {
     fullName: 'Wayne Hubbard',
@@ -76,7 +76,7 @@ let users = [
     deposit: '3524020',
     rate: '277289',
     balance: '3714576807',
-    status: 'ORDERED',
+    status: 'INACTIVE',
   },
   {
     fullName: 'Darnell Barton',
@@ -98,7 +98,7 @@ let users = [
     deposit: '2582985',
     rate: '429851',
     balance: '5237845048',
-    status: 'OPEN',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Amber Griffith',
@@ -109,7 +109,7 @@ let users = [
     deposit: '4856617',
     rate: '256769',
     balance: '7819995075',
-    status: 'PAID',
+    status: 'INACTIVE',
   },
   {
     fullName: 'Cristina Snyder',
@@ -164,7 +164,7 @@ let users = [
     deposit: '1832706',
     rate: '170854',
     balance: '3035524055',
-    status: 'OPEN',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Doris Chandler',
@@ -175,7 +175,7 @@ let users = [
     deposit: '7200319',
     rate: '221401',
     balance: '3575076183',
-    status: 'ACTIVE',
+    status: 'INACTIVE',
   },
   {
     fullName: 'Frances Black',
@@ -197,7 +197,7 @@ let users = [
     deposit: '7863259',
     rate: '959580',
     balance: '2044120124',
-    status: 'PAID',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Delores Foster',
@@ -263,7 +263,7 @@ let users = [
     deposit: '9599424',
     rate: '703555',
     balance: '3067796592',
-    status: 'PAID',
+    status: 'INACTIVE',
   },
   {
     fullName: 'Omar Munoz',
@@ -285,7 +285,7 @@ let users = [
     deposit: '9541969',
     rate: '267336',
     balance: '4257941434',
-    status: 'OPEN',
+    status: 'INACTIVE',
   },
   {
     fullName: 'Archie Stokesss ',
@@ -296,7 +296,7 @@ let users = [
     deposit: '5479568',
     rate: '154580',
     balance: '6639078105',
-    status: 'ORDERED',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Jamie Cole',
@@ -340,7 +340,7 @@ let users = [
     deposit: '0321758',
     rate: '590848',
     balance: '6025379216',
-    status: 'PAID',
+    status: 'ACTIVE',
   },
   {
     fullName: 'Hector Glover',
@@ -362,11 +362,10 @@ let users = [
     deposit: '1827344',
     rate: '407700',
     balance: '3073964890',
-    status: 'OPEN',
+    status: 'ACTIVE',
   },
 ];
 
-// Local Storage
 let getLocalStorage = localStorage.getItem('usersData');
 let getUsersData = JSON.parse(getLocalStorage);
 
@@ -379,9 +378,21 @@ let blackSearchUserIcon = document.querySelector('.black-search-user-icon');
 let colorSearchUserIcon = document.querySelector('.color-search-user-icon');
 let blackDeleteSearch = document.querySelector('.black-delete-search');
 let colorDeleteSearch = document.querySelector('.color-delete-search');
+let blackFilterUserIcon = document.querySelector('.black-filter-user-icon');
+let colorFilterUserIcon = document.querySelector('.color-filter-user-icon');
+let filterBoard = document.querySelector('.filter-board');
+
 let addUserRound = document.querySelector('.add-user-icons');
 let addUserBlackIcon = document.querySelector('.add-user-black-icon');
 let addUserColoredIcon = document.querySelector('.add-user-colored-icon');
+
+let printUserRound = document.querySelector('.print-user-icons');
+let printUserBlackIcon = document.querySelector('.print-user-black-icon');
+let printUserColoredIcon = document.querySelector('.print-user-colored-icon');
+
+let deleteUserRound = document.querySelector('.delete-user-icons');
+let deleteUserColoredIcon = document.querySelector('.delete-user-colored-icon');
+let deleteUserBlackIcon = document.querySelector('.delete-user-black-icon');
 
 // Message Modal
 let errorModal = document.querySelector('.error-modal');
@@ -440,33 +451,40 @@ let inputsFocusEventListener = [
   statusInput,
 ];
 
-// table Head
+//dashboard
+let dashboard = document.getElementById('dashboard');
+let emptyData = document.querySelector('.empty-row');
+
+// table
+let table = document.querySelector('.table');
+
 // checkbox
 let checkAll = document.getElementById('checkbox');
+let checkedArr = [];
 
 // Sort-by
 let blueUpIcon = document.querySelectorAll('.blue-up');
-let blackUpIcon = document.querySelectorAll('.black-up');
-let blackDownIcon = document.querySelectorAll('.black-down');
 let blueDownIcon = document.querySelectorAll('.blue-down');
-let tableNameP = document.querySelector('.p-name');
-let tableStatusP = document.querySelector('.p-status');
-let statusOrder = ['OPEN', 'ACTIVE', 'INACTIVE', 'PAID', 'ORDERED'];
-let clickToReset = [
-  tableStatusP,
-  tableNameP,
-  blueUpIcon[0],
-  blueDownIcon[0],
-  blueUpIcon[1],
-  blueDownIcon[1],
-];
+let allName = document.getElementById('all-name');
+let azName = document.getElementById('az-name');
+let zaName = document.getElementById('za-name');
+let allStatus = document.getElementById('all-status');
+let activeStatus = document.getElementById('active-status');
+let inactiveStatus = document.getElementById('inactive-status');
+let paidStatus = document.getElementById('paid-status');
+let openStatus = document.getElementById('open-status');
+let orderedStatus = document.getElementById('ordered-status');
+let filterDoneBtn = document.getElementById('filter-done');
+let filterResetBtn = document.getElementById('filter-reset');
+let filterCancelBtn = document.getElementById('filter-cancel');
 
 // table Body
 let tableBody = document.querySelector('.table-body');
-let emptyData = document.querySelector('.empty-row');
 let rowIdIndexArr = [];
 
 // Table Footer
+let tableFooter = document.querySelector('.t-footer');
+
 // active Users :
 let activeUsers = document.querySelector('.active-users');
 let totalOfUsers = document.querySelectorAll('.total-of-users');
@@ -485,20 +503,45 @@ let colorRightArrow = document.querySelector('.color-right-arrow');
 let blackLeftArrow = document.querySelector('.black-left-arrow');
 let colorLeftArrow = document.querySelector('.color-left-arrow');
 
-// Search Bar Style
-blackSearchUserIcon.addEventListener('mouseenter', () => {
-  blackSearchUserIcon.classList.add('hidden');
-  colorSearchUserIcon.classList.remove('hidden');
-});
+// General Functions :
+let setAndRefresh = arr => {
+  localStorage.setItem('usersData', JSON.stringify(arr));
+  refresh(arr);
+};
 
-colorSearchUserIcon.addEventListener('mouseleave', () => {
-  colorSearchUserIcon.classList.add('hidden');
-  blackSearchUserIcon.classList.remove('hidden');
-});
+let removeTwoHiddenClassLists = (ele1, ele2) => {
+  ele1.classList.remove('hidden');
+  ele2.classList.remove('hidden');
+};
+
+let addTwoHiddenClassLists = (ele1, ele2) => {
+  ele1.classList.add('hidden');
+  ele2.classList.add('hidden');
+};
+
+let removeAndAddHiddenClassLists = (ele1, ele2) => {
+  ele1.classList.remove('hidden');
+  ele2.classList.add('hidden');
+};
+
+// Filter Style
+blackFilterUserIcon.onmouseenter = () =>
+  removeAndAddHiddenClassLists(colorFilterUserIcon, blackFilterUserIcon);
+
+colorFilterUserIcon.onmouseleave = () =>
+  removeAndAddHiddenClassLists(blackFilterUserIcon, colorFilterUserIcon);
+
+colorFilterUserIcon.onclick = () => filterBoard.classList.remove('hidden');
+
+// Search Bar Style
+blackSearchUserIcon.onmouseenter = () =>
+  removeAndAddHiddenClassLists(colorSearchUserIcon, blackSearchUserIcon);
+
+colorSearchUserIcon.onmouseleave = () =>
+  removeAndAddHiddenClassLists(blackSearchUserIcon, colorSearchUserIcon);
 
 colorSearchUserIcon.addEventListener('click', () => {
-  searchIcon.classList.add('hidden');
-  searchBar.classList.remove('hidden');
+  removeAndAddHiddenClassLists(searchBar, searchIcon);
   searchInputField.focus();
   if (searchInputField.value.trim() !== '') {
     blackDeleteSearch.classList.remove('hidden');
@@ -507,28 +550,22 @@ colorSearchUserIcon.addEventListener('click', () => {
   }
 });
 
-blackDeleteSearch.addEventListener('mouseenter', () => {
-  colorDeleteSearch.classList.remove('hidden');
-  blackDeleteSearch.classList.add('hidden');
-});
+blackDeleteSearch.onmouseenter = () =>
+  removeAndAddHiddenClassLists(colorDeleteSearch, blackDeleteSearch);
 
-colorDeleteSearch.addEventListener('mouseleave', () => {
-  colorDeleteSearch.classList.add('hidden');
-  blackDeleteSearch.classList.remove('hidden');
-});
+colorDeleteSearch.onmouseleave = () =>
+  removeAndAddHiddenClassLists(blackDeleteSearch, colorDeleteSearch);
 
 colorDeleteSearch.addEventListener('click', () => {
   searchInputField.focus();
   searchInputField.value = '';
   refresh(getUsersData);
-  colorDeleteSearch.classList.add('hidden');
-  blackDeleteSearch.classList.add('hidden');
+  addTwoHiddenClassLists(colorDeleteSearch, blackDeleteSearch);
 });
 
 searchBar.addEventListener('mouseleave', () => {
   if (searchInputField.value.trim() === '') {
-    searchIcon.classList.remove('hidden');
-    searchBar.classList.add('hidden');
+    removeAndAddHiddenClassLists(searchIcon, searchBar);
   }
 });
 
@@ -561,18 +598,55 @@ searchInputField.addEventListener('keyup', () => {
   refresh(getUsersData);
 });
 
-// Add User Icon Style
-addUserRound.addEventListener('mouseenter', () => {
-  addUserBlackIcon.classList.add('hidden');
-  addUserColoredIcon.classList.remove('hidden');
+// Print Users Icon Style
+printUserRound.onmouseenter = () =>
+  removeAndAddHiddenClassLists(printUserColoredIcon, printUserBlackIcon);
+
+printUserRound.onmouseleave = () =>
+  removeAndAddHiddenClassLists(printUserBlackIcon, printUserColoredIcon);
+
+printUserRound.addEventListener('click', () => {
+  filterBoard.classList.add('hidden');
+  console.log(checkedArr);
+  window.print();
 });
 
-addUserRound.addEventListener('mouseleave', () => {
-  addUserBlackIcon.classList.remove('hidden');
-  addUserColoredIcon.classList.add('hidden');
+// delete Users Icon Style
+deleteUserRound.onmouseenter = () =>
+  removeAndAddHiddenClassLists(deleteUserColoredIcon, deleteUserBlackIcon);
+
+deleteUserRound.onmouseleave = () =>
+  removeAndAddHiddenClassLists(deleteUserBlackIcon, deleteUserColoredIcon);
+
+deleteUserRound.addEventListener('click', () => {
+  filterBoard.classList.add('hidden');
+  if (confirm('Are you sure you wont to delete all this users ?')) {
+    checkedArr.forEach(element => {
+      getUsersData.splice(
+        getUsersData.findIndex(el => el.idNumber === element),
+        1
+      );
+    });
+    startingIndex.textContent > getUsersData.length
+      ? (currentPage -= 1)
+      : (currentPage = currentPage);
+    setAndRefresh(getUsersData);
+    if (getUsersData.length === 0) {
+      emptyingTable();
+    }
+    uncheckAndEmptyingCheckedArr();
+  }
 });
+
+// Add User Icon Style
+addUserRound.onmouseenter = () =>
+  removeAndAddHiddenClassLists(addUserColoredIcon, addUserBlackIcon);
+
+addUserRound.onmouseleave = () =>
+  removeAndAddHiddenClassLists(addUserBlackIcon, addUserColoredIcon);
 
 addUserRound.addEventListener('click', () => {
+  filterBoard.classList.add('hidden');
   if (fullNameInput.value !== '' && submitBtn.classList.contains('hidden')) {
     mustUpdateOrCancel();
   } else {
@@ -640,19 +714,17 @@ let removeProgressValue = i => {
 // Form Errors
 let onValid = k => {
   inputDiv[k].classList.add('valid-border');
-  validIcon[k].classList.remove('hidden');
   inputDiv[k].classList.remove('error-border');
-  errorIcon[k].classList.add('hidden');
   errors[k].classList.add('non-visible');
+  removeAndAddHiddenClassLists(validIcon[k], errorIcon[k]);
 };
 
 let onError = k => {
   inputDiv[k].classList.add('error-border');
-  errorIcon[k].classList.remove('hidden');
   errors[k].classList.remove('non-visible');
   errors[k].textContent = 'This field is required';
   inputDiv[k].classList.remove('valid-border');
-  validIcon[k].classList.add('hidden');
+  removeAndAddHiddenClassLists(errorIcon[k], validIcon[k]);
 };
 
 let mustBeNumber = (value, index) => {
@@ -847,29 +919,18 @@ cancelFormBtn.onclick = () => {
 };
 
 let hideFormBtns = () => {
-  progressBar.classList.add('hidden');
-  submitBtn.classList.add('hidden');
-  updateUserBtn.classList.add('hidden');
-  clearBtn.classList.add('hidden');
-  cancelFormBtn.classList.add('hidden');
-  cancelUpdate.classList.add('hidden');
+  addTwoHiddenClassLists(progressBar, submitBtn);
+  addTwoHiddenClassLists(updateUserBtn, clearBtn);
+  addTwoHiddenClassLists(cancelFormBtn, cancelUpdate);
 };
 
 let showSubmitFormBtns = () => {
-  updateUserBtn.classList.add('hidden');
-  progressBar.classList.remove('hidden');
-  submitBtn.classList.remove('hidden');
-  clearBtn.classList.remove('hidden');
-  cancelFormBtn.classList.remove('hidden');
-  cancelUpdate.classList.add('hidden');
+  removeTwoHiddenClassLists(progressBar, submitBtn);
+  removeTwoHiddenClassLists(clearBtn, cancelFormBtn);
+  addTwoHiddenClassLists(updateUserBtn, cancelUpdate);
 };
 
 // submit Form
-let setAndRefresh = arr => {
-  localStorage.setItem('usersData', JSON.stringify(arr));
-  refresh(arr);
-};
-
 let resetAndHideFormBtns = () => {
   resetForm();
   hideFormBtns();
@@ -883,8 +944,7 @@ submitBtn.addEventListener('click', e => {
     )
   ) {
     if (!submitBtn.classList.contains('hidden')) {
-      successfullyAddUserModal.classList.remove('hidden');
-      successfullyAdded.classList.remove('hidden');
+      removeTwoHiddenClassLists(successfullyAddUserModal, successfullyAdded);
       successfullyUpdated.classList.add('hidden');
       successfullyAddUserModalValue.innerHTML = fullNameInput.value;
       getUsersData.unshift({
@@ -905,6 +965,10 @@ submitBtn.addEventListener('click', e => {
       goTo.scrollIntoView({ block: 'center' });
       resetAndHideFormBtns();
       setTimeout(hideSuccessBorder, 5000, goTo);
+      uncheckAndEmptyingCheckedArr();
+      if (!emptyData.classList.contains('hidden')) {
+        fillingTable();
+      }
     }
   } else {
     formErrors();
@@ -926,6 +990,27 @@ let hideSuccessBorder = index => {
   index.classList.remove('green-border');
 };
 
+// table
+let emptyingTable = () => {
+  removeAndAddHiddenClassLists(emptyData, table);
+  dashboard.style.backgroundColor = '#1ae5be';
+  dashboard.style.width = '100%';
+  dashboard.style.height = '100%';
+  addUserRound.style.boxShadow =
+    '3px 3px 16px rgb(6, 53, 201), -3px -3px 36px rgb(6, 53, 201), -9px -9px 50px rgb(6, 53, 201), 9px 9px 50px rgb(6, 53, 201), -20px -20px 100px rgb(6, 53, 201), 20px 20px 100px rgb(6, 53, 201)';
+  addTwoHiddenClassLists(blackFilterUserIcon, blackSearchUserIcon);
+  checkedArr = [];
+};
+
+let fillingTable = () => {
+  removeAndAddHiddenClassLists(table, emptyData);
+  dashboard.style.backgroundColor = '';
+  dashboard.style.width = '100%';
+  dashboard.style.height = '100%';
+  addUserRound.style.boxShadow = '';
+  removeTwoHiddenClassLists(blackFilterUserIcon, blackSearchUserIcon);
+};
+
 //theade
 // Sort Functions
 let sortByFullNameAtoZ = (a, b) =>
@@ -943,86 +1028,76 @@ let sortByFullNameZtoA = (a, b) =>
     : 0;
 
 let sortByStatusAtoZ = (a, b) =>
-  statusOrder.indexOf(a.status) > statusOrder.indexOf(b.status)
+  a.status.toLowerCase() > b.status.toLowerCase()
     ? 1
-    : statusOrder.indexOf(a.status) < statusOrder.indexOf(b.status)
+    : b.status.toLowerCase() > a.status.toLowerCase()
     ? -1
     : 0;
 
 let sortByStatusZtoA = (a, b) =>
-  statusOrder.indexOf(a.status) > statusOrder.indexOf(b.status)
+  a.status.toLowerCase() > b.status.toLowerCase()
     ? -1
-    : statusOrder.indexOf(a.status) < statusOrder.indexOf(b.status)
+    : b.status.toLowerCase() > a.status.toLowerCase()
     ? 1
     : 0;
 
 let sortedArr = arr => {
-  if (
-    blackUpIcon[0].classList.contains('hidden') &&
-    !blueUpIcon[0].classList.remove('hidden')
-  ) {
+  if (azName.checked && allStatus.checked) {
+    removeAndAddHiddenClassLists(blueUpIcon[0], blueDownIcon[0]);
+    addTwoHiddenClassLists(blueUpIcon[1], blueDownIcon[1]);
     return arr.sort(sortByFullNameAtoZ);
-  } else if (
-    blackDownIcon[0].classList.contains('hidden') &&
-    !blueDownIcon[0].classList.remove('hidden')
-  ) {
+  } else if (zaName.checked && allStatus.checked) {
+    removeAndAddHiddenClassLists(blueDownIcon[0], blueUpIcon[0]);
+    addTwoHiddenClassLists(blueUpIcon[1], blueDownIcon[1]);
     return arr.sort(sortByFullNameZtoA);
-  } else if (
-    blackUpIcon[1].classList.contains('hidden') &&
-    !blueUpIcon[1].classList.remove('hidden')
-  ) {
+  } else if (activeStatus.checked && allName.checked) {
+    removeAndAddHiddenClassLists(blueUpIcon[1], blueDownIcon[1]);
+    addTwoHiddenClassLists(blueUpIcon[0], blueDownIcon[0]);
     return arr.sort(sortByStatusAtoZ);
-  } else if (
-    blackDownIcon[1].classList.contains('hidden') &&
-    !blueDownIcon[1].classList.remove('hidden')
-  ) {
+  } else if (inactiveStatus.checked && allName.checked) {
+    removeAndAddHiddenClassLists(blueDownIcon[1], blueUpIcon[1]);
+    addTwoHiddenClassLists(blueUpIcon[0], blueDownIcon[0]);
     return arr.sort(sortByStatusZtoA);
+  } else if (activeStatus.checked && azName.checked) {
+    removeTwoHiddenClassLists(blueUpIcon[0], blueUpIcon[1]);
+    addTwoHiddenClassLists(blueDownIcon[0], blueDownIcon[1]);
+    return arr.sort(sortByFullNameAtoZ).sort(sortByStatusAtoZ);
+  } else if (inactiveStatus.checked && azName.checked) {
+    removeTwoHiddenClassLists(blueUpIcon[0], blueDownIcon[1]);
+    addTwoHiddenClassLists(blueDownIcon[0], blueUpIcon[1]);
+    return arr.sort(sortByFullNameAtoZ).sort(sortByStatusZtoA);
+  } else if (activeStatus.checked && zaName.checked) {
+    removeTwoHiddenClassLists(blueDownIcon[0], blueUpIcon[1]);
+    addTwoHiddenClassLists(blueUpIcon[0], blueDownIcon[1]);
+    return arr.sort(sortByFullNameZtoA).sort(sortByStatusAtoZ);
+  } else if (inactiveStatus.checked && zaName.checked) {
+    removeTwoHiddenClassLists(blueDownIcon[0], blueDownIcon[1]);
+    addTwoHiddenClassLists(blueUpIcon[0], blueUpIcon[1]);
+    return arr.sort(sortByFullNameZtoA).sort(sortByStatusZtoA);
+  } else {
+    addTwoHiddenClassLists(blueUpIcon[1], blueDownIcon[1]);
+    addTwoHiddenClassLists(blueUpIcon[0], blueDownIcon[0]);
   }
 };
 
-// Sort-by
-let sortUpIcon = (i, j) => {
-  blackUpIcon[i].classList.add('hidden');
-  blackDownIcon[i].classList.remove('hidden');
-  blueUpIcon[i].classList.remove('hidden');
-  blueDownIcon[i].classList.add('hidden');
-  blueUpIcon[j].classList.add('hidden');
-  blueDownIcon[j].classList.add('hidden');
-  blackUpIcon[j].classList.remove('hidden');
-  blackDownIcon[j].classList.remove('hidden');
+filterDoneBtn.addEventListener('click', () => {
+  filterBoard.classList.add('hidden');
+  currentPage = 0;
   refresh(getUsersData);
-};
+});
 
-let sortDownIcon = (i, j) => {
-  blackUpIcon[i].classList.remove('hidden');
-  blackDownIcon[i].classList.add('hidden');
-  blueUpIcon[i].classList.add('hidden');
-  blueDownIcon[i].classList.remove('hidden');
-  blueUpIcon[j].classList.add('hidden');
-  blueDownIcon[j].classList.add('hidden');
-  blackUpIcon[j].classList.remove('hidden');
-  blackDownIcon[j].classList.remove('hidden');
+filterResetBtn.addEventListener('click', () => {
+  addTwoHiddenClassLists(blueUpIcon[1], blueDownIcon[1]);
+  addTwoHiddenClassLists(blueUpIcon[0], blueDownIcon[0]);
+  allName.checked = true;
+  allStatus.checked = true;
+  filterBoard.classList.add('hidden');
+  currentPage = 0;
   refresh(getUsersData);
-};
+});
 
-let resetSort = i => {
-  blackUpIcon[i].classList.remove('hidden');
-  blackDownIcon[i].classList.remove('hidden');
-  blueUpIcon[i].classList.add('hidden');
-  blueDownIcon[i].classList.add('hidden');
-  refresh(getUsersData);
-};
-
-blackUpIcon[0].onclick = () => sortUpIcon(0, 1);
-blackUpIcon[1].onclick = () => sortUpIcon(1, 0);
-blackDownIcon[0].onclick = () => sortDownIcon(0, 1);
-blackDownIcon[1].onclick = () => sortDownIcon(1, 0);
-
-clickToReset.forEach(element => {
-  element.addEventListener('click', () => {
-    resetSort(0);
-    resetSort(1);
-  });
+filterCancelBtn.addEventListener('click', () => {
+  filterBoard.classList.add('hidden');
 });
 
 //tbody
@@ -1038,54 +1113,192 @@ let addNewUser = userData => {
     balance,
     status,
   } = userData;
-
   let UserRow = document.createElement('tr');
   UserRow.setAttribute('class', 'table-row');
   UserRow.setAttribute('id', `${idNumber}`);
-  UserRow.innerHTML = `
-<td><input type="checkbox" id="check-user"></td>
-<td class="">
-<p class="full-name">${fullName.toLowerCase()}</p>
-<p class="id-number">${idNumber}</p>
-</td>
-<td class="">
-<p class="description">${description}</p>
-</td>
-<td class="">
-<p class="rate right-text-align">${Number(rate).toFixed(2)}</p>
-<p class="currency right-text-align">${currency}</p>
-</td>
-<td class="">
-<p class="balance right-text-align ${checkBalance(balance)}">${Number(
-    balance
-  ).toFixed(2)}</p>
-<p class="currency right-text-align">${currency}</p>
-</td>
-<td class="">
-<p class="deposit right-text-align">${Number(deposit).toFixed(2)}</p>
-<p class="currency right-text-align">${currency}</p>
-</td>
-<td class="center-text-align">
-<button id="" class="${showStatus(status)}">${status}</button>
-</td>
-`;
-  UserRow.appendChild(appendDeleteAndEdit(userData));
+  UserRow.appendChild(appendCheckUserTD(UserRow));
+  UserRow.appendChild(appendFullNameIdNumberTD(fullName, idNumber));
+  UserRow.appendChild(appendDescriptionTD(description));
+  UserRow.appendChild(appendRateCurrencyTD(rate, currency));
+  UserRow.appendChild(appendBalanceCurrencyTD(balance, currency));
+  UserRow.appendChild(appendDepositCurrencyTD(deposit, currency));
+  UserRow.appendChild(appendStatusTD(status));
+  UserRow.appendChild(appendMoreTD(userData));
   return UserRow;
 };
 
+let appendCheckUserTD = row => {
+  let checkUserTD = document.createElement('td');
+  checkUserTD.setAttribute('class', 'check-user-td');
+  let checkedUserIcon = document.createElement('img');
+  let uncheckedUserIcon = document.createElement('img');
+  checkedUserIcon.setAttribute('src', './images/checked-user.svg');
+  checkedUserIcon.setAttribute(
+    'class',
+    'medium-icons flex checked-user-icon hidden'
+  );
+  uncheckedUserIcon.setAttribute('src', './images/unchecked-user.png');
+  uncheckedUserIcon.setAttribute(
+    'class',
+    'medium-icons flex unchecked-user-icon'
+  );
+  checkUserTD.appendChild(checkedUserIcon);
+  checkUserTD.appendChild(uncheckedUserIcon);
+
+  checkAll.addEventListener('click', () => {
+    checkAllUsers(checkedUserIcon, uncheckedUserIcon, row, checkUserTD);
+    let nbOfElement = getUsersData.slice(
+      startingIndex.textContent - 1,
+      endingIndex.textContent
+    );
+    nbOfElement.forEach(element => {
+      let elId = element.idNumber;
+      isCheckedArrNotIncludes(elId);
+    });
+  });
+
+  uncheckedUserIcon.addEventListener('click', e => {
+    let rowId = e.target.closest('tr').id;
+    checkUser(checkedUserIcon, uncheckedUserIcon, row, checkUserTD);
+    isCheckedArrNotIncludes(rowId);
+    checkedArrLength(checkedArr);
+    checkAllAfterCheckingUser();
+  });
+
+  checkedUserIcon.addEventListener('click', e => {
+    uncheckUser(checkedUserIcon, uncheckedUserIcon, row, checkUserTD);
+    let rowId = e.target.closest('tr').id;
+    if (checkedArr.includes(rowId)) {
+      checkedArr.splice(checkedArr.indexOf(rowId), 1);
+    }
+    checkedArrLength(checkedArr);
+  });
+  return checkUserTD;
+};
+
+let checkAllUsers = (chIcon, unchIcon, row, chTD) => {
+  if (checkAll.checked) {
+    removeTwoHiddenClassLists(printUserRound, deleteUserRound);
+    checkUser(chIcon, unchIcon, row, chTD);
+  } else {
+    uncheckUser(chIcon, unchIcon, row, chTD);
+    uncheckAndEmptyingCheckedArr();
+  }
+};
+
+let checkUser = (chIcon, unchIcon, row, chTD) => {
+  removeAndAddHiddenClassLists(chIcon, unchIcon);
+  row.style.backgroundColor = '#d1dffa';
+  chTD.classList.add('check-before');
+};
+
+let uncheckUser = (chIcon, unchIcon, row, chTD) => {
+  removeAndAddHiddenClassLists(unchIcon, chIcon);
+  row.style.backgroundColor = '';
+  chTD.classList.remove('check-before');
+  checkAll.checked = false;
+};
+
+let checkedArrLength = arr => {
+  arr.length > 1
+    ? removeTwoHiddenClassLists(printUserRound, deleteUserRound)
+    : addTwoHiddenClassLists(printUserRound, deleteUserRound);
+};
+
+let checkAllAfterCheckingUser = () => {
+  let element = getUsersData.slice(
+    startingIndex.textContent - 1,
+    endingIndex.textContent
+  );
+  if (
+    checkedArr.length == getUsersData.length ||
+    checkedArr.length == element.length
+  ) {
+    checkAll.checked = true;
+  }
+};
+
+let uncheckAndEmptyingCheckedArr = () => {
+  addTwoHiddenClassLists(printUserRound, deleteUserRound);
+  checkAll.checked = false;
+  checkedArr = [];
+};
+
+let isCheckedArrNotIncludes = id => {
+  if (!checkedArr.includes(id)) {
+    checkedArr.push(id);
+  }
+};
+
+let appendFullNameIdNumberTD = (fNm, idNb) => {
+  let FullNameIdNumberTD = document.createElement('td');
+  FullNameIdNumberTD.setAttribute('class', 'full-name-id-number-td');
+  FullNameIdNumberTD.innerHTML = `
+<td class="full-name-id-number-td">
+<p class="full-name">${fNm.toLowerCase()}</p>
+<p class="id-number">${idNb}</p>
+</td>`;
+  return FullNameIdNumberTD;
+};
+
+let appendDescriptionTD = des => {
+  let DescriptionTD = document.createElement('td');
+  DescriptionTD.setAttribute('class', 'description-td');
+  DescriptionTD.innerHTML = `<p class="description">${des}</p>`;
+  return DescriptionTD;
+};
+
+let appendRateCurrencyTD = (rt, crr) => {
+  let RateCurrencyTD = document.createElement('td');
+  RateCurrencyTD.setAttribute('class', 'rate-currency-td');
+  RateCurrencyTD.innerHTML = `
+<p class="rate right-text-align">${Number(rt).toFixed(2)}</p>
+<p class="currency right-text-align">${crr}</p>`;
+  return RateCurrencyTD;
+};
+
+let appendBalanceCurrencyTD = (bal, crr) => {
+  let BalanceCurrencyTD = document.createElement('td');
+  BalanceCurrencyTD.setAttribute('class', 'balance-currency-td');
+  BalanceCurrencyTD.innerHTML = `
+<p class="balance right-text-align ${checkBalance(bal)}">${Number(bal).toFixed(
+    2
+  )}</p>
+<p class="currency right-text-align">${crr}</p>`;
+  return BalanceCurrencyTD;
+};
+
 let checkBalance = b => {
-  return b > 0 ? 'positive' : 'negative';
+  return b > 0 ? 'positive' : b < 0 ? 'negative' : '';
+};
+
+let appendDepositCurrencyTD = (dp, crr) => {
+  let DepositCurrencyTD = document.createElement('td');
+  DepositCurrencyTD.setAttribute('class', 'deposit-currency-td');
+  DepositCurrencyTD.innerHTML = `
+<p class="deposit right-text-align">${Number(dp).toFixed(2)}</p>
+<p class="currency right-text-align">${crr}</p>`;
+  return DepositCurrencyTD;
+};
+
+let appendStatusTD = st => {
+  let StatusTD = document.createElement('td');
+  StatusTD.setAttribute('class', 'status-td center-text-align');
+  StatusTD.innerHTML = `
+<button id="" class="${showStatus(st)}">${st}</button>`;
+  return StatusTD;
 };
 
 let showStatus = sts => {
   return `${sts.toLowerCase()}-btn`;
 };
 
-let appendDeleteAndEdit = item => {
+let appendMoreTD = item => {
   let moreTD = document.createElement('td');
   let moreDiv = document.createElement('div');
   let blackDeleteUserIcon = document.createElement('img');
   let blackEditUserIcon = document.createElement('img');
+  let blackPrintUserIcon = document.createElement('img');
   blackDeleteUserIcon.setAttribute('src', './images/b-delete-user.svg');
   blackDeleteUserIcon.setAttribute(
     'class',
@@ -1095,11 +1308,17 @@ let appendDeleteAndEdit = item => {
   moreDiv.setAttribute('class', 'flex-btwn');
   blackEditUserIcon.setAttribute('src', './images/b-edit-user.svg');
   blackEditUserIcon.setAttribute('class', 'medium-icons black-edit-user-icon');
+  blackPrintUserIcon.setAttribute('src', './images/b-print-user.png');
+  blackPrintUserIcon.setAttribute(
+    'class',
+    'medium-icons black-print-user-icon'
+  );
   moreTD.appendChild(moreDiv);
   moreDiv.appendChild(blackEditUserIcon);
   moreDiv.appendChild(blackDeleteUserIcon);
-
+  moreDiv.appendChild(blackPrintUserIcon);
   blackEditUserIcon.addEventListener('click', e => {
+    filterBoard.classList.add('hidden');
     subValidArr = [];
     updValidArr = [0, 1, 2, 3, 4, 5, 6, 7];
     if (fullNameInput.value !== '' && submitBtn.classList.contains('hidden')) {
@@ -1110,8 +1329,34 @@ let appendDeleteAndEdit = item => {
     }
   });
 
-  blackDeleteUserIcon.onclick = () => deleteUsers(item);
+  blackDeleteUserIcon.addEventListener('click', () => {
+    filterBoard.classList.add('hidden');
+    deleteUsers(item);
+  });
+
+  blackPrintUserIcon.addEventListener('click', () => {
+    filterBoard.classList.add('hidden');
+    console.log('hghghghghg');
+    window.print();
+  });
+
   return moreTD;
+};
+
+let deleteUsers = deleteItem => {
+  if (confirm('Are you sure you wont to delete this user ?')) {
+    getUsersData.splice(getUsersData.indexOf(deleteItem), 1);
+    if (
+      startingIndex.textContent > getUsersData.length &&
+      getUsersData.length != 0
+    ) {
+      currentPage -= 1;
+    }
+    setAndRefresh(getUsersData);
+    if (getUsersData.length === 0) {
+      emptyingTable();
+    }
+  }
 };
 
 let extractID = id => {
@@ -1146,23 +1391,11 @@ let editUserFcts = (e, id) => {
   formErrors();
 };
 
-let deleteUsers = deleteItem => {
-  if (confirm('Are you sure you wont to delete this user ?')) {
-    getUsersData.splice(getUsersData.indexOf(deleteItem), 1);
-    if (startingIndex.textContent > getUsersData.length) {
-      currentPage -= 1;
-    }
-    setAndRefresh(getUsersData);
-  }
-};
-
 let updateUsersForm = (editItem, filteredCopy) => {
-  submitBtn.classList.add('hidden');
-  clearBtn.classList.add('hidden');
-  updateUserBtn.classList.remove('hidden');
+  addTwoHiddenClassLists(submitBtn, clearBtn);
   formContainer.scrollIntoView();
   cancelFormBtn.classList.add('hidden');
-  cancelUpdate.classList.remove('hidden');
+  removeTwoHiddenClassLists(updateUserBtn, cancelUpdate);
   fullNameInput.value = editItem.fullName;
   idNumberInput.value = editItem.idNumber;
   descriptionInput.value = editItem.description;
@@ -1182,9 +1415,8 @@ let updateUser = () => {
       element[1].classList.contains('valid-border')
     )
   ) {
-    successfullyAddUserModal.classList.remove('hidden');
     successfullyAdded.classList.add('hidden');
-    successfullyUpdated.classList.remove('hidden');
+    removeTwoHiddenClassLists(successfullyAddUserModal, successfullyUpdated);
     successfullyAddUserModalValue.innerHTML = fullNameInput.value;
     let updatedObj = {
       fullName: fullNameInput.value,
@@ -1205,6 +1437,7 @@ let updateUser = () => {
     goTo.classList.add('green-border');
     goTo.scrollIntoView({ block: 'center' });
     setTimeout(hideSuccessBorder, 5000, goTo);
+    uncheckAndEmptyingCheckedArr();
   }
 };
 
@@ -1216,9 +1449,18 @@ let cancelUpdateUser = () => {
   goTo.classList.add('green-border');
   goTo.scrollIntoView({ block: 'center' });
   setTimeout(hideSuccessBorder, 5000, goTo);
+  uncheckAndEmptyingCheckedArr();
 };
 
 // tfoot
+let tableFooterColor = arr => {
+  if (arr.length % 2 != 0) {
+    tableFooter.style.backgroundColor = '#f4f7fc';
+  } else {
+    tableFooter.style.backgroundColor = '';
+  }
+};
+
 // active Users :
 let showActiveUsers = arr => {
   let numberOfActiveUsers = [];
@@ -1231,68 +1473,45 @@ let showActiveUsers = arr => {
 };
 
 // rows per page
-
 let rowsPerPageValueOnChange = rowsPerPage.addEventListener('change', e => {
   e = rowsPerPage.value;
   currentPage = 0;
+  uncheckAndEmptyingCheckedArr();
   refresh(getUsersData);
+  filterBoard.classList.add('hidden');
 });
 
 // next / previous page :
-let nbOfPages = (arr, num) => {
-  return arr > num ? Math.ceil(arr.length / num) : arr.length;
-};
+blackLeftArrow.onmouseenter = () =>
+  removeAndAddHiddenClassLists(colorLeftArrow, blackLeftArrow);
 
-blackLeftArrow.addEventListener('mouseenter', () => {
-  blackLeftArrow.classList.add('hidden');
-  colorLeftArrow.classList.remove('hidden');
-});
+colorLeftArrow.onmouseleave = () =>
+  removeAndAddHiddenClassLists(blackLeftArrow, colorLeftArrow);
 
-blackRightArrow.addEventListener('mouseenter', () => {
-  blackRightArrow.classList.add('hidden');
-  colorRightArrow.classList.remove('hidden');
-});
+blackRightArrow.onmouseenter = () =>
+  removeAndAddHiddenClassLists(colorRightArrow, blackRightArrow);
 
-colorLeftArrow.addEventListener('mouseleave', () => {
-  blackLeftArrow.classList.remove('hidden');
-  colorLeftArrow.classList.add('hidden');
-});
-
-colorRightArrow.addEventListener('mouseleave', () => {
-  blackRightArrow.classList.remove('hidden');
-  colorRightArrow.classList.add('hidden');
-});
+colorRightArrow.onmouseleave = () =>
+  removeAndAddHiddenClassLists(blackRightArrow, colorRightArrow);
 
 colorRightArrow.addEventListener('click', () => {
   if ((currentPage + 1) * rowsPerPage.value < getUsersData.length) {
     currentPage++;
   }
+  uncheckAndEmptyingCheckedArr();
   refresh(getUsersData);
+  filterBoard.classList.add('hidden');
 });
 
 colorLeftArrow.addEventListener('click', () => {
-  if (currentPage != 0) {
-    currentPage--;
-  }
+  currentPage != 0 ? currentPage-- : (currentPage = currentPage);
+  uncheckAndEmptyingCheckedArr();
   refresh(getUsersData);
+  filterBoard.classList.add('hidden');
 });
 
-// onLoad
-let searchOnLoad = () => {
-  if (searchInputField.value.trim() !== '') {
-    searchBar.classList.remove('hidden');
-    blackDeleteSearch.classList.remove('hidden');
-    searchIcon.classList.add('hidden');
-  }
-};
-
-let onLoad = () => {
-  resetAndHideFormBtns();
-  main.scrollIntoView();
-};
-
+// Render
 let refresh = arrayToRender => {
-  searchOnLoad();
   tableBody.innerHTML = null;
   let selectedRowsPerPage = rowsPerPageValueOnChange || rowsPerPage.value;
   let filteredUsers = filteredArr(arrayToRender) || arrayToRender;
@@ -1302,11 +1521,11 @@ let refresh = arrayToRender => {
     currentPage * selectedRowsPerPage,
     (currentPage + 1) * selectedRowsPerPage
   );
+  tableFooterColor(totalRowsPerPage);
   activeUsers.textContent = showActiveUsers(sortFiltered);
   totalOfUsers.forEach(element => {
     element.textContent = sortFiltered.length;
   });
-
   startingIndex.textContent = currentPage * selectedRowsPerPage + 1;
   endingIndex.textContent =
     totalRowsPerPage.length -
@@ -1317,15 +1536,21 @@ let refresh = arrayToRender => {
   });
 };
 
-if (getLocalStorage == '[]') {
-  emptyData.classList.remove('hidden');
-  onLoad();
-} else if (getLocalStorage == null) {
+// onLoad
+let onLoad = () => {
+  uncheckAndEmptyingCheckedArr();
+  resetAndHideFormBtns();
+  main.scrollIntoView();
+};
+
+if (getLocalStorage == null) {
   localStorage.setItem('usersData', JSON.stringify(users));
   refresh(getUsersData);
   onLoad();
+} else if (getLocalStorage == '[]') {
+  emptyingTable();
+  onLoad();
 } else {
-  searchOnLoad();
   refresh(getUsersData);
   onLoad();
 }

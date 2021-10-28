@@ -107,21 +107,70 @@
   </div>
 
   <main id="main">
-    <div class="dashboard">
-      <div class="search star-col-flex">
+    <div class="dashboard" id="dashboard">
+      <div class="empty-row hidden flex">you don't have any user here :(</div>
+      <div class="filter-search flex-s">
+        <div class="filter-icon">
+          <div>
+            <img src="./images/b-filter-user.png" alt="" class="black-filter-user-icon big-icons">
+            <img src="./images/filter-user.png" alt="" class="color-filter-user-icon hidden big-icons">
+          </div>
+          <div class="filter-board star-col-flex hidden">
+            <p class="sort-by">sort by name</p>
+            <div class="flex filter-div">
+              <label for="all-name" class="hov-sort">Default</label>
+              <input type="radio" name="name" id="all-name" checked>
+            </div>
+            <div class="flex filter-div">
+              <label for="az-name" class="hov-sort">A to Z</label>
+              <input type="radio" name="name" id="az-name">
+            </div>
+            <div class="flex filter-div">
+              <label for="za-name" class="hov-sort">Z to A</label>
+              <input type="radio" name="name" id="za-name">
+            </div>
+            <p class="sort-by">sort by status</p>
+            <div class="flex filter-div">
+              <label for="all-status" class="hov-sort">Default</label>
+              <input type="radio" name="status" id="all-status" checked>
+            </div>
+            <div class="flex filter-div">
+              <label for="active-status" class="hov-sort">Active</label>
+              <input type="radio" name="status" id="active-status">
+            </div>
+            <div class="flex filter-div">
+              <label for="inactive-status" class="hov-sort">Inactive</label>
+              <input type="radio" name="status" id="inactive-status">
+            </div>
+            <div class="flex filter-btns">
+              <button class="filter-btn" id="filter-cancel">Cancel</button>
+              <button class="filter-btn" id="filter-reset">Reset</button>
+              <button class="filter-btn" id="filter-done">Done</button>
+            </div>
+          </div>
+        </div>
         <div class="search-icon">
           <img src="./images/b-user.svg" alt="" class="black-search-user-icon big-icons">
           <img src="./images/user.svg" alt="" class="color-search-user-icon hidden big-icons">
         </div>
         <div class="search-bar flex hidden">
-          <input type="text" name="" id="" class="search-input-field" placeholder="Search">
+          <input type="text" name="" id="" class="search-input-field"
+            placeholder="Search by Name, Description or Id...">
           <img src="./images/b-zoom.svg" alt="" class="small-icons hidden black-delete-search">
           <img src="./images/zoom.svg" alt="" class="small-icons hidden color-delete-search">
         </div>
       </div>
-      <div class="add-user-icons flex">
+      <div class="add-user-icons fixed-icons flex">
         <img src="./images/add-user.svg" alt="" class="big-icons add-user-colored-icon hidden">
         <img src="./images/b-add-user.svg" alt="" class="big-icons add-user-black-icon">
+      </div>
+      <div class="print-user-icons fixed-icons flex hidden">
+        <img src="./images/print-user.png" alt="" class="big-icons print-user-colored-icon hidden">
+        <img src="./images/b-print-user.png" alt="" class="big-icons print-user-black-icon">
+      </div>
+      <div class="delete-user-icons fixed-icons flex hidden">
+        <img src="./images/delete-user.svg" alt="" class="big-icons delete-user-colored-icon hidden">
+        <img src="./images/b-delete-user.svg" alt="" class="big-icons delete-user-black-icon">
       </div>
       <div class="flex">
         <div class="add-user-modal flex hidden">
@@ -142,17 +191,15 @@
           </div>
         </div>
       </div>
-      <table>
-        <thead>
+      <table class="table">
+        <thead class="t-head">
           <tr>
-            <th class="table-check-user center-text-align"><input type="checkbox" id="checkbox"></th>
+            <th class="table-check-user"><input type="checkbox" id="checkbox"></th>
             <th class="table-name-and-id-number">
               <div class="flex-start">
-                <p class="p-name">NAME</p>
+                <p class="p-name flex-start">NAME</p>
                 <div class="col-flex sort">
                   <img src="./images/blue-up.svg" alt="" class="micro-icons blue-up hidden">
-                  <img src="./images/black-up.png" alt="" class="micro-icons black-up">
-                  <img src="./images/black-down.png" alt="" class="micro-icons black-down">
                   <img src="./images/blue-down.svg" alt="" class="micro-icons blue-down hidden">
                 </div>
               </div>
@@ -162,12 +209,10 @@
             <th class="table-balance-and-currency right-text-align">BALANCE</th>
             <th class="table-deposit-and-currency right-text-align">DEPOSIT</th>
             <th class="table-status">
-              <div class="flex-end">
-                <p class="p-status">STATUS</p>
+              <div class="flex">
+                <p class="p-status flex-btwn">STATUS</p>
                 <div class="col-flex sort">
                   <img src="./images/blue-up.svg" alt="" class="micro-icons blue-up hidden">
-                  <img src="./images/black-up.png" alt="" class="micro-icons black-up">
-                  <img src="./images/black-down.png" alt="" class="micro-icons black-down">
                   <img src="./images/blue-down.svg" alt="" class="micro-icons blue-down hidden">
                 </div>
               </div>
@@ -176,13 +221,8 @@
           </tr>
         </thead>
         <tbody class="table-body">
-          <tr class="empty-row hidden">
-            <td class="empty-td center-text-align" colspan="8">
-              <p>you don't have any user here :(</p>
-            </td>
-          </tr>
         </tbody>
-        <tfoot>
+        <tfoot class="t-footer">
           <tr>
             <td colspan="4">
               <p class="flex-start"> <small>ACTIVE CUSTOMERS :</small>&nbsp;&nbsp;<span
@@ -193,6 +233,7 @@
                 <p class="rows-per-page">Rows per page :</p>
                 <div class="rows-per-page-select">
                   <select name="" id="rows-per-page" class="">
+                    <option value="999999999">All</option>
                     <option value="5">5</option>
                     <option value="10" selected>10</option>
                     <option value="15">15</option>

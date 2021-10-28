@@ -256,32 +256,104 @@ main {
   padding: 40px;
 }
 
+.empty-row {
+  width: 100%;
+  height: 100%;
+  font-size: 50px;
+  font-weight: bolder;
+}
+
 .add-user-icons {
+  left: 20px;
+}
+
+.print-user-icons {
+  left: 220px;
+}
+
+.delete-user-icons {
+  left: 120px;
+}
+
+.fixed-icons {
   background-color: #ffffff;
   box-shadow: 3px 3px 16px rgb(0, 0, 0), -3px -3px 36px rgb(0, 0, 0);
   position: fixed;
-  left: 20px;
   bottom: 20px;
   width: 70px;
   height: 70px;
   border-radius: 50%;
   z-index: 100;
+  cursor: pointer;
 }
 
-.add-user-icons:hover {
+.fixed-icons:hover {
   box-shadow: 3px 3px 16px rgb(6, 53, 201), -3px -3px 36px rgb(26, 229, 190);
 }
 
-.search {
+.filter-search {
   height: 40px;
 }
 
+.filter-icon {
+  margin-right: 20px;
+  position: relative;
+}
+
+.filter-board {
+  position: absolute;
+  width: 250px;
+  background-color: rgb(255, 255, 255);
+  padding: 0 10px 10px;
+  z-index: 99;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 35px;
+  border-radius: 20px 20px 0 0;
+  box-shadow: -10px 10px 10px rgba(40, 67, 115, 0.6),
+    10px 10px 10px rgba(40, 67, 115, 0.6);
+}
+
+.sort-by {
+  margin: 10px auto;
+  border-bottom: 1px solid #c79e9e;
+  text-transform: capitalize;
+}
+
+.hov-sort {
+  flex: 1;
+}
+
+.filter-div {
+  padding: 0 15px;
+  width: 100%;
+}
+
+.filter-div:hover,
+.filter-btn:hover {
+  background-color: #f4f7fc;
+  border-radius: 7px;
+  box-shadow: 0px 0px 6px rgba(40, 67, 115, 0.6);
+}
+
+.filter-btns {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.filter-btn {
+  padding: 5px 15px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 35px;
+}
+
 .search-bar {
-  width: 190px;
+  width: 320px;
   border-radius: 10px;
   padding: 2px 8px;
   border: 1px solid black;
-  height: 80%;
+  height: 90%;
   margin: auto 0;
 }
 
@@ -367,7 +439,7 @@ thead {
 }
 
 .table-name-and-id-number {
-  width: 18%;
+  width: 16%;
 }
 
 .table-balance-and-currency {
@@ -387,7 +459,7 @@ thead {
 }
 
 .table-more {
-  width: 8%;
+  width: 10%;
   padding-top: 15px;
 }
 
@@ -396,18 +468,25 @@ thead {
 }
 
 tbody tr:nth-child(2n + 2) {
-  background: #f4f7fc;
+  background-color: #f4f7fc;
 }
 
 tbody tr:hover {
   box-shadow: 0px 0px 6px rgba(40, 67, 115, 0.6);
 }
 
-.empty-td {
-  padding: 100px;
-  font-size: 44px;
-  font-weight: bold;
-  background-color: #1ae5be;
+.check-user-td {
+  position: relative;
+}
+
+.check-before::before {
+  content: '';
+  height: 100%;
+  width: 5px;
+  background-color: #0a65ff;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .full-name {
@@ -432,6 +511,7 @@ tbody tr:hover {
 .positive {
   color: #008400;
 }
+
 .negative {
   color: #e01a1a;
 }
@@ -473,7 +553,6 @@ tbody tr:hover {
 }
 
 tfoot {
-  background-color: #e074741e;
   color: #606f89;
   font-weight: 600;
 }
