@@ -108,86 +108,88 @@
 
   <main id="main">
     <div class="dashboard" id="dashboard">
-      <div class="empty-row hidden flex">you don't have any user here :(</div>
-      <div class="filter-search flex-s">
-        <div class="filter-icon">
-          <div>
-            <img src="./images/b-filter-user.png" alt="" class="black-filter-user-icon big-icons">
-            <img src="./images/filter-user.png" alt="" class="color-filter-user-icon hidden big-icons">
+      <div class="top-icons">
+        <div class="empty-row hidden flex">you don't have any user here :(</div>
+        <div class="filter-search flex-s">
+          <div class="filter-icon">
+            <div>
+              <img src="./images/b-filter-user.png" alt="" class="black-filter-user-icon big-icons">
+              <img src="./images/filter-user.png" alt="" class="color-filter-user-icon hidden big-icons">
+            </div>
+            <div class="filter-board star-col-flex hidden">
+              <p class="sort-by">sort by name</p>
+              <div class="flex filter-div">
+                <label for="all-name" class="hov-sort">Default</label>
+                <input type="radio" name="name" id="all-name" checked>
+              </div>
+              <div class="flex filter-div">
+                <label for="az-name" class="hov-sort">A to Z</label>
+                <input type="radio" name="name" id="az-name">
+              </div>
+              <div class="flex filter-div">
+                <label for="za-name" class="hov-sort">Z to A</label>
+                <input type="radio" name="name" id="za-name">
+              </div>
+              <p class="sort-by">sort by status</p>
+              <div class="flex filter-div">
+                <label for="all-status" class="hov-sort">Default</label>
+                <input type="radio" name="status" id="all-status" checked>
+              </div>
+              <div class="flex filter-div">
+                <label for="active-status" class="hov-sort">Active</label>
+                <input type="radio" name="status" id="active-status">
+              </div>
+              <div class="flex filter-div">
+                <label for="inactive-status" class="hov-sort">Inactive</label>
+                <input type="radio" name="status" id="inactive-status">
+              </div>
+              <div class="flex filter-btns">
+                <button class="filter-btn" id="filter-cancel">Cancel</button>
+                <button class="filter-btn" id="filter-reset">Reset</button>
+                <button class="filter-btn" id="filter-done">Done</button>
+              </div>
+            </div>
           </div>
-          <div class="filter-board star-col-flex hidden">
-            <p class="sort-by">sort by name</p>
-            <div class="flex filter-div">
-              <label for="all-name" class="hov-sort">Default</label>
-              <input type="radio" name="name" id="all-name" checked>
-            </div>
-            <div class="flex filter-div">
-              <label for="az-name" class="hov-sort">A to Z</label>
-              <input type="radio" name="name" id="az-name">
-            </div>
-            <div class="flex filter-div">
-              <label for="za-name" class="hov-sort">Z to A</label>
-              <input type="radio" name="name" id="za-name">
-            </div>
-            <p class="sort-by">sort by status</p>
-            <div class="flex filter-div">
-              <label for="all-status" class="hov-sort">Default</label>
-              <input type="radio" name="status" id="all-status" checked>
-            </div>
-            <div class="flex filter-div">
-              <label for="active-status" class="hov-sort">Active</label>
-              <input type="radio" name="status" id="active-status">
-            </div>
-            <div class="flex filter-div">
-              <label for="inactive-status" class="hov-sort">Inactive</label>
-              <input type="radio" name="status" id="inactive-status">
-            </div>
-            <div class="flex filter-btns">
-              <button class="filter-btn" id="filter-cancel">Cancel</button>
-              <button class="filter-btn" id="filter-reset">Reset</button>
-              <button class="filter-btn" id="filter-done">Done</button>
-            </div>
+          <div class="search-icon">
+            <img src="./images/b-user.svg" alt="" class="black-search-user-icon big-icons">
+            <img src="./images/user.svg" alt="" class="color-search-user-icon hidden big-icons">
           </div>
-        </div>
-        <div class="search-icon">
-          <img src="./images/b-user.svg" alt="" class="black-search-user-icon big-icons">
-          <img src="./images/user.svg" alt="" class="color-search-user-icon hidden big-icons">
-        </div>
-        <div class="search-bar flex hidden">
-          <input type="text" name="" id="" class="search-input-field"
-            placeholder="Search by Name, Description or Id...">
-          <img src="./images/b-zoom.svg" alt="" class="small-icons hidden black-delete-search">
-          <img src="./images/zoom.svg" alt="" class="small-icons hidden color-delete-search">
-        </div>
-      </div>
-      <div class="add-user-icons fixed-icons flex">
-        <img src="./images/add-user.svg" alt="" class="big-icons add-user-colored-icon hidden">
-        <img src="./images/b-add-user.svg" alt="" class="big-icons add-user-black-icon">
-      </div>
-      <div class="print-user-icons fixed-icons flex hidden">
-        <img src="./images/print-user.png" alt="" class="big-icons print-user-colored-icon hidden">
-        <img src="./images/b-print-user.png" alt="" class="big-icons print-user-black-icon">
-      </div>
-      <div class="delete-user-icons fixed-icons flex hidden">
-        <img src="./images/delete-user.svg" alt="" class="big-icons delete-user-colored-icon hidden">
-        <img src="./images/b-delete-user.svg" alt="" class="big-icons delete-user-black-icon">
-      </div>
-      <div class="flex">
-        <div class="add-user-modal flex hidden">
-          <img class="medium-icons" src="./images/checked-with-success.png" alt="">
-          <div class="flex add-user-modal-p">
-            <p class="add-user-modal-value">hhhhhh</p>
-            <p>has been successfully <span class="added hidden"><b>added</b></span> <span
-                class="updated hidden"><b>updated</b></span>
-            </p>
+          <div class="search-bar flex hidden">
+            <input type="text" name="" id="" class="search-input-field"
+              placeholder="Search by Name, Description or Id...">
+            <img src="./images/b-zoom.svg" alt="" class="small-icons hidden black-delete-search">
+            <img src="./images/zoom.svg" alt="" class="small-icons hidden color-delete-search">
           </div>
         </div>
-      </div>
-      <div class="flex">
-        <div class="error-modal flex hidden">
-          <img class="medium-icons" src="./images/error.svg" alt="">
-          <div class="flex error-modal-p">
-            <p class="error-modal-value">You must Update or Cancel Update First</p>
+        <div class="add-user-icons fixed-icons flex">
+          <img src="./images/add-user.svg" alt="" class="big-icons add-user-colored-icon hidden">
+          <img src="./images/b-add-user.svg" alt="" class="big-icons add-user-black-icon">
+        </div>
+        <div class="print-user-icons fixed-icons flex hidden">
+          <img src="./images/print-user.png" alt="" class="big-icons print-user-colored-icon hidden">
+          <img src="./images/b-print-user.png" alt="" class="big-icons print-user-black-icon">
+        </div>
+        <div class="delete-user-icons fixed-icons flex hidden">
+          <img src="./images/delete-user.svg" alt="" class="big-icons delete-user-colored-icon hidden">
+          <img src="./images/b-delete-user.svg" alt="" class="big-icons delete-user-black-icon">
+        </div>
+        <div class="flex">
+          <div class="add-user-modal flex hidden">
+            <img class="medium-icons" src="./images/checked-with-success.png" alt="">
+            <div class="flex add-user-modal-p">
+              <p class="add-user-modal-value">hhhhhh</p>
+              <p>has been successfully <span class="added hidden"><b>added</b></span> <span
+                  class="updated hidden"><b>updated</b></span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="flex">
+          <div class="error-modal flex hidden">
+            <img class="medium-icons" src="./images/error.svg" alt="">
+            <div class="flex error-modal-p">
+              <p class="error-modal-value">You must Update or Cancel Update First</p>
+            </div>
           </div>
         </div>
       </div>

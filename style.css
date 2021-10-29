@@ -293,6 +293,7 @@ main {
 
 .filter-search {
   height: 40px;
+  margin-bottom: 50px;
 }
 
 .filter-icon {
@@ -409,7 +410,6 @@ main {
 table {
   border-collapse: collapse;
   width: 100%;
-  margin-top: 50px;
 }
 
 td {
@@ -429,6 +429,10 @@ thead {
   background-color: #f4f7fc;
 }
 
+.r-border {
+  border: 1px solid #000000;
+}
+
 .p-status,
 .p-name {
   cursor: default;
@@ -438,8 +442,8 @@ thead {
   margin-left: 15px;
 }
 
-.table-name-and-id-number {
-  width: 16%;
+.table-description {
+  width: 25%;
 }
 
 .table-balance-and-currency {
@@ -455,11 +459,11 @@ thead {
 }
 
 .table-status {
-  width: 11%;
+  width: 10%;
 }
 
 .table-more {
-  width: 10%;
+  width: 5%;
   padding-top: 15px;
 }
 
@@ -529,26 +533,20 @@ tbody tr:hover {
   letter-spacing: 0.08em;
 }
 
+.print-status {
+  border: none;
+  color: #000000;
+}
+
 .active-btn {
   background-color: #0a65ff;
   color: #ffffff;
+  border: 2px solid #0a65ff;
 }
 
 .inactive-btn {
   color: #707070;
   border: 2px solid #707070;
-  font-weight: 600;
-}
-
-.paid-btn,
-.ordered-btn {
-  color: #ffffff;
-  background-color: #008400;
-}
-
-.open-btn {
-  color: #ba5300;
-  border: 2px solid #ba5300;
   font-weight: 600;
 }
 

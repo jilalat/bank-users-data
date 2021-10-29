@@ -454,9 +454,14 @@ let inputsFocusEventListener = [
 //dashboard
 let dashboard = document.getElementById('dashboard');
 let emptyData = document.querySelector('.empty-row');
+let topIcons = document.querySelector('.top-icons');
 
 // table
 let table = document.querySelector('.table');
+
+// Table Head :
+let tableCheckUser = document.querySelector('.table-check-user');
+let tableMore = document.querySelector('.table-more');
 
 // checkbox
 let checkAll = document.getElementById('checkbox');
@@ -481,6 +486,16 @@ let filterCancelBtn = document.getElementById('filter-cancel');
 // table Body
 let tableBody = document.querySelector('.table-body');
 let rowIdIndexArr = [];
+let tableNameAndIdNumber = document.querySelector('.table-name-and-id-number');
+let tableDescription = document.querySelector('.table-description');
+let tableRateAndCurrency = document.querySelector('.table-rate-and-currency');
+let tableBalanceAndCurrency = document.querySelector(
+  '.table-balance-and-currency'
+);
+let tableDepositAndCurrency = document.querySelector(
+  '.table-deposit-and-currency'
+);
+let tableStatus = document.querySelector('.table-status');
 
 // Table Footer
 let tableFooter = document.querySelector('.t-footer');
@@ -541,13 +556,12 @@ colorSearchUserIcon.onmouseleave = () =>
   removeAndAddHiddenClassLists(blackSearchUserIcon, colorSearchUserIcon);
 
 colorSearchUserIcon.addEventListener('click', () => {
+  filterBoard.classList.add('hidden');
   removeAndAddHiddenClassLists(searchBar, searchIcon);
   searchInputField.focus();
-  if (searchInputField.value.trim() !== '') {
-    blackDeleteSearch.classList.remove('hidden');
-  } else {
-    blackDeleteSearch.classList.add('hidden');
-  }
+  searchInputField.value.trim() !== ''
+    ? blackDeleteSearch.classList.remove('hidden')
+    : blackDeleteSearch.classList.add('hidden');
 });
 
 blackDeleteSearch.onmouseenter = () =>
@@ -564,9 +578,8 @@ colorDeleteSearch.addEventListener('click', () => {
 });
 
 searchBar.addEventListener('mouseleave', () => {
-  if (searchInputField.value.trim() === '') {
+  if (searchInputField.value.trim() === '')
     removeAndAddHiddenClassLists(searchIcon, searchBar);
-  }
 });
 
 // search
@@ -585,20 +598,88 @@ let filteredArr = arr => {
 };
 
 searchInputField.addEventListener('input', () => {
-  if (searchInputField.value.trim() !== '') {
-    blackDeleteSearch.classList.remove('hidden');
-  } else {
-    blackDeleteSearch.classList.add('hidden');
-  }
+  searchInputField.value.trim() !== ''
+    ? blackDeleteSearch.classList.remove('hidden')
+    : blackDeleteSearch.classList.add('hidden');
 });
 
 searchInputField.addEventListener('keyup', () => {
   tableBody.innerHTML = null;
   currentPage = 0;
+  checkedArr = [];
+  checkAll.checked = false;
   refresh(getUsersData);
 });
 
+let filteredByCheckedArr = [];
+
 // Print Users Icon Style
+let printUsers = userData => {
+  let {
+    fullName,
+    idNumber,
+    description,
+    currency,
+    deposit,
+    rate,
+    balance,
+    status,
+  } = userData;
+  let UserRow = document.createElement('tr');
+  UserRow.innerHTML = `<td class="r-border">
+<p class="full-name">${fullName.toLowerCase()}</p>
+<p class="id-number">${idNumber}</p></td>
+<td class="r-border"><p class="description">${description}</p></td>
+<td class="r-border">
+<p class="rate right-text-align">${Number(rate).toFixed(2)}</p>
+<p class="currency right-text-align">${currency}</p></td>
+<td class="r-border">
+<p class="balance right-text-align ${checkBalance(balance)}">${Number(
+    balance
+  ).toFixed(2)}</p>
+<p class="currency right-text-align">${currency}</p></td>
+<td class="r-border">
+<p class="deposit right-text-align">${Number(deposit).toFixed(2)}</p>
+<p class="currency right-text-align">${currency}</p></td>
+<td class="r-border print-status-td center-text-align">
+<button id="" class="print-status">${status}</button></td>`;
+  return UserRow;
+};
+
+let printPDF = () => {
+  dashboard.style.border = 'none';
+  dashboard.style.padding = '0px';
+  addTwoHiddenClassLists(blueUpIcon[1], blueDownIcon[1]);
+  addTwoHiddenClassLists(blueUpIcon[0], blueDownIcon[0]);
+  addTwoHiddenClassLists(tableFooter, filterBoard);
+  addTwoHiddenClassLists(tableCheckUser, formContainer);
+  addTwoHiddenClassLists(tableMore, topIcons);
+  tableNameAndIdNumber.style.border = '1px solid #000000';
+  tableDescription.style.border = '1px solid #000000';
+  tableRateAndCurrency.style.border = '1px solid #000000';
+  tableBalanceAndCurrency.style.border = '1px solid #000000';
+  tableDepositAndCurrency.style.border = '1px solid #000000';
+  tableStatus.style.border = '1px solid #000000';
+  tableBody.innerHTML = null;
+};
+
+let resetDataAfterPrint = () => {
+  tableCheckUser.classList.remove('hidden');
+  removeTwoHiddenClassLists(tableFooter, formContainer);
+  removeTwoHiddenClassLists(tableMore, topIcons);
+  main.scrollIntoView();
+  dashboard.style.padding = '40px';
+  dashboard.style.border = '';
+  tableNameAndIdNumber.style.border = '';
+  tableDescription.style.border = '';
+  tableRateAndCurrency.style.border = '';
+  tableBalanceAndCurrency.style.border = '';
+  tableDepositAndCurrency.style.border = '';
+  tableStatus.style.border = '';
+  uncheckAndEmptyingCheckedArr();
+  filteredByCheckedArr = [];
+};
+
 printUserRound.onmouseenter = () =>
   removeAndAddHiddenClassLists(printUserColoredIcon, printUserBlackIcon);
 
@@ -606,9 +687,18 @@ printUserRound.onmouseleave = () =>
   removeAndAddHiddenClassLists(printUserBlackIcon, printUserColoredIcon);
 
 printUserRound.addEventListener('click', () => {
-  filterBoard.classList.add('hidden');
-  console.log(checkedArr);
+  checkedArr.forEach(element => {
+    filteredByCheckedArr.push(
+      ...getUsersData.filter(user => user.idNumber.includes(element))
+    );
+  });
+  printPDF();
+  filteredByCheckedArr.forEach(el => {
+    tableBody.appendChild(printUsers(el));
+  });
   window.print();
+  resetDataAfterPrint();
+  refresh(getUsersData);
 });
 
 // delete Users Icon Style
@@ -627,13 +717,9 @@ deleteUserRound.addEventListener('click', () => {
         1
       );
     });
-    startingIndex.textContent > getUsersData.length
-      ? (currentPage -= 1)
-      : (currentPage = currentPage);
+    if (startingIndex.textContent > getUsersData.length) currentPage -= 1;
     setAndRefresh(getUsersData);
-    if (getUsersData.length === 0) {
-      emptyingTable();
-    }
+    if (getUsersData.length === 0) emptyingTable();
     uncheckAndEmptyingCheckedArr();
   }
 });
@@ -676,21 +762,16 @@ inputsFocusEventListener.forEach(element => {
 });
 
 addUserForm.addEventListener('input', () => {
-  if (formBtns.firstElementChild.classList.contains('hidden')) {
+  if (formBtns.firstElementChild.classList.contains('hidden'))
     showSubmitFormBtns();
-  }
 });
 
 // Submit Progress Bar
 let addProgressValue = i => {
   if (inputDiv[i].classList.contains('valid-border')) {
-    if (!subValidArr.includes(i)) {
-      subValidArr.push(i);
-    }
+    if (!subValidArr.includes(i)) subValidArr.push(i);
   } else {
-    if (subValidArr.includes(i)) {
-      subValidArr.splice(subValidArr.indexOf(i), 1);
-    }
+    if (subValidArr.includes(i)) subValidArr.splice(subValidArr.indexOf(i), 1);
   }
   progressValue.textContent = (100 / inputDiv.length) * subValidArr.length;
   progressColor.style.width = `${progressValue.textContent}%`;
@@ -699,13 +780,9 @@ let addProgressValue = i => {
 // Update Progress Bar
 let removeProgressValue = i => {
   if (!inputDiv[i].classList.contains('valid-border')) {
-    if (updValidArr.includes(i)) {
-      updValidArr.splice(updValidArr.indexOf(i), 1);
-    }
+    if (updValidArr.includes(i)) updValidArr.splice(updValidArr.indexOf(i), 1);
   } else {
-    if (!updValidArr.includes(i)) {
-      updValidArr.push(i);
-    }
+    if (!updValidArr.includes(i)) updValidArr.push(i);
   }
   progressValue.textContent = (100 / inputDiv.length) * updValidArr.length;
   progressColor.style.width = `${progressValue.textContent}%`;
@@ -966,9 +1043,7 @@ submitBtn.addEventListener('click', e => {
       resetAndHideFormBtns();
       setTimeout(hideSuccessBorder, 5000, goTo);
       uncheckAndEmptyingCheckedArr();
-      if (!emptyData.classList.contains('hidden')) {
-        fillingTable();
-      }
+      if (!emptyData.classList.contains('hidden')) fillingTable();
     }
   } else {
     formErrors();
@@ -1083,6 +1158,7 @@ let sortedArr = arr => {
 filterDoneBtn.addEventListener('click', () => {
   filterBoard.classList.add('hidden');
   currentPage = 0;
+  uncheckAndEmptyingCheckedArr();
   refresh(getUsersData);
 });
 
@@ -1146,7 +1222,6 @@ let appendCheckUserTD = row => {
   checkUserTD.appendChild(uncheckedUserIcon);
 
   checkAll.addEventListener('click', () => {
-    checkAllUsers(checkedUserIcon, uncheckedUserIcon, row, checkUserTD);
     let nbOfElement = getUsersData.slice(
       startingIndex.textContent - 1,
       endingIndex.textContent
@@ -1155,6 +1230,7 @@ let appendCheckUserTD = row => {
       let elId = element.idNumber;
       isCheckedArrNotIncludes(elId);
     });
+    checkAllUsers(checkedUserIcon, uncheckedUserIcon, row, checkUserTD);
   });
 
   uncheckedUserIcon.addEventListener('click', e => {
@@ -1168,9 +1244,8 @@ let appendCheckUserTD = row => {
   checkedUserIcon.addEventListener('click', e => {
     uncheckUser(checkedUserIcon, uncheckedUserIcon, row, checkUserTD);
     let rowId = e.target.closest('tr').id;
-    if (checkedArr.includes(rowId)) {
+    if (checkedArr.includes(rowId))
       checkedArr.splice(checkedArr.indexOf(rowId), 1);
-    }
     checkedArrLength(checkedArr);
   });
   return checkUserTD;
@@ -1200,7 +1275,7 @@ let uncheckUser = (chIcon, unchIcon, row, chTD) => {
 };
 
 let checkedArrLength = arr => {
-  arr.length > 1
+  arr.length > 0
     ? removeTwoHiddenClassLists(printUserRound, deleteUserRound)
     : addTwoHiddenClassLists(printUserRound, deleteUserRound);
 };
@@ -1213,9 +1288,8 @@ let checkAllAfterCheckingUser = () => {
   if (
     checkedArr.length == getUsersData.length ||
     checkedArr.length == element.length
-  ) {
+  )
     checkAll.checked = true;
-  }
 };
 
 let uncheckAndEmptyingCheckedArr = () => {
@@ -1225,9 +1299,7 @@ let uncheckAndEmptyingCheckedArr = () => {
 };
 
 let isCheckedArrNotIncludes = id => {
-  if (!checkedArr.includes(id)) {
-    checkedArr.push(id);
-  }
+  if (!checkedArr.includes(id)) checkedArr.push(id);
 };
 
 let appendFullNameIdNumberTD = (fNm, idNb) => {
@@ -1295,28 +1367,11 @@ let showStatus = sts => {
 
 let appendMoreTD = item => {
   let moreTD = document.createElement('td');
-  let moreDiv = document.createElement('div');
-  let blackDeleteUserIcon = document.createElement('img');
   let blackEditUserIcon = document.createElement('img');
-  let blackPrintUserIcon = document.createElement('img');
-  blackDeleteUserIcon.setAttribute('src', './images/b-delete-user.svg');
-  blackDeleteUserIcon.setAttribute(
-    'class',
-    'medium-icons black-delete-user-icon'
-  );
   moreTD.setAttribute('class', 'center-text-align');
-  moreDiv.setAttribute('class', 'flex-btwn');
   blackEditUserIcon.setAttribute('src', './images/b-edit-user.svg');
   blackEditUserIcon.setAttribute('class', 'medium-icons black-edit-user-icon');
-  blackPrintUserIcon.setAttribute('src', './images/b-print-user.png');
-  blackPrintUserIcon.setAttribute(
-    'class',
-    'medium-icons black-print-user-icon'
-  );
-  moreTD.appendChild(moreDiv);
-  moreDiv.appendChild(blackEditUserIcon);
-  moreDiv.appendChild(blackDeleteUserIcon);
-  moreDiv.appendChild(blackPrintUserIcon);
+  moreTD.appendChild(blackEditUserIcon);
   blackEditUserIcon.addEventListener('click', e => {
     filterBoard.classList.add('hidden');
     subValidArr = [];
@@ -1328,35 +1383,7 @@ let appendMoreTD = item => {
       editUserFcts(item, rowId);
     }
   });
-
-  blackDeleteUserIcon.addEventListener('click', () => {
-    filterBoard.classList.add('hidden');
-    deleteUsers(item);
-  });
-
-  blackPrintUserIcon.addEventListener('click', () => {
-    filterBoard.classList.add('hidden');
-    console.log('hghghghghg');
-    window.print();
-  });
-
   return moreTD;
-};
-
-let deleteUsers = deleteItem => {
-  if (confirm('Are you sure you wont to delete this user ?')) {
-    getUsersData.splice(getUsersData.indexOf(deleteItem), 1);
-    if (
-      startingIndex.textContent > getUsersData.length &&
-      getUsersData.length != 0
-    ) {
-      currentPage -= 1;
-    }
-    setAndRefresh(getUsersData);
-    if (getUsersData.length === 0) {
-      emptyingTable();
-    }
-  }
 };
 
 let extractID = id => {
@@ -1454,20 +1481,16 @@ let cancelUpdateUser = () => {
 
 // tfoot
 let tableFooterColor = arr => {
-  if (arr.length % 2 != 0) {
-    tableFooter.style.backgroundColor = '#f4f7fc';
-  } else {
-    tableFooter.style.backgroundColor = '';
-  }
+  arr.length % 2 != 0
+    ? (tableFooter.style.backgroundColor = '#f4f7fc')
+    : (tableFooter.style.backgroundColor = '');
 };
 
 // active Users :
 let showActiveUsers = arr => {
   let numberOfActiveUsers = [];
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i].status === 'ACTIVE') {
-      numberOfActiveUsers.push(arr[i].status);
-    }
+    if (arr[i].status === 'ACTIVE') numberOfActiveUsers.push(arr[i].status);
   }
   return numberOfActiveUsers.length;
 };
@@ -1495,9 +1518,8 @@ colorRightArrow.onmouseleave = () =>
   removeAndAddHiddenClassLists(blackRightArrow, colorRightArrow);
 
 colorRightArrow.addEventListener('click', () => {
-  if ((currentPage + 1) * rowsPerPage.value < getUsersData.length) {
+  if ((currentPage + 1) * rowsPerPage.value < getUsersData.length)
     currentPage++;
-  }
   uncheckAndEmptyingCheckedArr();
   refresh(getUsersData);
   filterBoard.classList.add('hidden');
