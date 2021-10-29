@@ -394,6 +394,33 @@ let deleteUserRound = document.querySelector('.delete-user-icons');
 let deleteUserColoredIcon = document.querySelector('.delete-user-colored-icon');
 let deleteUserBlackIcon = document.querySelector('.delete-user-black-icon');
 
+//dashboard
+let dashboard = document.getElementById('dashboard');
+let emptyData = document.querySelector('.empty-row');
+let topIcons = document.querySelector('.top-icons');
+
+// print Section
+let tableNameAndIdNumber = document.querySelector('.table-name-and-id-number');
+let tableDescription = document.querySelector('.table-description');
+let tableRateAndCurrency = document.querySelector('.table-rate-and-currency');
+let tableBalanceAndCurrency = document.querySelector(
+  '.table-balance-and-currency'
+);
+let tableDepositAndCurrency = document.querySelector(
+  '.table-deposit-and-currency'
+);
+let tableStatus = document.querySelector('.table-status');
+
+let printTableStyle = [
+  dashboard,
+  tableNameAndIdNumber,
+  tableDescription,
+  tableRateAndCurrency,
+  tableBalanceAndCurrency,
+  tableDepositAndCurrency,
+  tableStatus,
+];
+
 // Message Modal
 let errorModal = document.querySelector('.error-modal');
 let successfullyAddUserModal = document.querySelector('.add-user-modal');
@@ -451,15 +478,11 @@ let inputsFocusEventListener = [
   statusInput,
 ];
 
-//dashboard
-let dashboard = document.getElementById('dashboard');
-let emptyData = document.querySelector('.empty-row');
-let topIcons = document.querySelector('.top-icons');
-
 // table
 let table = document.querySelector('.table');
 
 // Table Head :
+let tableHead = document.querySelector('.t-head');
 let tableCheckUser = document.querySelector('.table-check-user');
 let tableMore = document.querySelector('.table-more');
 
@@ -486,16 +509,6 @@ let filterCancelBtn = document.getElementById('filter-cancel');
 // table Body
 let tableBody = document.querySelector('.table-body');
 let rowIdIndexArr = [];
-let tableNameAndIdNumber = document.querySelector('.table-name-and-id-number');
-let tableDescription = document.querySelector('.table-description');
-let tableRateAndCurrency = document.querySelector('.table-rate-and-currency');
-let tableBalanceAndCurrency = document.querySelector(
-  '.table-balance-and-currency'
-);
-let tableDepositAndCurrency = document.querySelector(
-  '.table-deposit-and-currency'
-);
-let tableStatus = document.querySelector('.table-status');
 
 // Table Footer
 let tableFooter = document.querySelector('.t-footer');
@@ -647,19 +660,17 @@ let printUsers = userData => {
 };
 
 let printPDF = () => {
-  dashboard.style.border = 'none';
-  dashboard.style.padding = '0px';
   addTwoHiddenClassLists(blueUpIcon[1], blueDownIcon[1]);
   addTwoHiddenClassLists(blueUpIcon[0], blueDownIcon[0]);
   addTwoHiddenClassLists(tableFooter, filterBoard);
   addTwoHiddenClassLists(tableCheckUser, formContainer);
   addTwoHiddenClassLists(tableMore, topIcons);
-  tableNameAndIdNumber.style.border = '1px solid #000000';
-  tableDescription.style.border = '1px solid #000000';
-  tableRateAndCurrency.style.border = '1px solid #000000';
-  tableBalanceAndCurrency.style.border = '1px solid #000000';
-  tableDepositAndCurrency.style.border = '1px solid #000000';
-  tableStatus.style.border = '1px solid #000000';
+  dashboard.style.padding = '0px';
+  dashboard.style.border = 'none';
+  tableHead.style.position = 'static';
+  printTableStyle.slice(1).forEach(element => {
+    element.style.border = '1px solid #000000';
+  });
   tableBody.innerHTML = null;
 };
 
@@ -668,14 +679,12 @@ let resetDataAfterPrint = () => {
   removeTwoHiddenClassLists(tableFooter, formContainer);
   removeTwoHiddenClassLists(tableMore, topIcons);
   main.scrollIntoView();
+  tableHead.style.position = '';
   dashboard.style.padding = '40px';
-  dashboard.style.border = '';
-  tableNameAndIdNumber.style.border = '';
-  tableDescription.style.border = '';
-  tableRateAndCurrency.style.border = '';
-  tableBalanceAndCurrency.style.border = '';
-  tableDepositAndCurrency.style.border = '';
-  tableStatus.style.border = '';
+  printTableStyle.forEach(element => {
+    element.style.border = '';
+  });
+
   uncheckAndEmptyingCheckedArr();
   filteredByCheckedArr = [];
 };

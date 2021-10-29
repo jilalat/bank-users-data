@@ -425,8 +425,11 @@ tr {
   height: 66px;
 }
 
-thead {
+.t-head {
   background-color: #f4f7fc;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .r-border {
