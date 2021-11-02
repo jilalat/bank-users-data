@@ -257,8 +257,8 @@ main {
 }
 
 .empty-row {
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
   font-size: 50px;
   font-weight: bolder;
 }
@@ -267,12 +267,20 @@ main {
   left: 20px;
 }
 
+.delete-user-icons {
+  left: 120px;
+}
+
 .print-user-icons {
   left: 220px;
 }
 
-.delete-user-icons {
-  left: 120px;
+.lock-user-icons {
+  left: 320px;
+}
+
+.uncheck-all-users-icons {
+  left: 420px;
 }
 
 .fixed-icons {
@@ -296,59 +304,6 @@ main {
   margin-bottom: 50px;
 }
 
-.filter-icon {
-  margin-right: 20px;
-  position: relative;
-}
-
-.filter-board {
-  position: absolute;
-  width: 250px;
-  background-color: rgb(255, 255, 255);
-  padding: 0 10px 10px;
-  z-index: 99;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 35px;
-  border-radius: 20px 20px 0 0;
-  box-shadow: -10px 10px 10px rgba(40, 67, 115, 0.6),
-    10px 10px 10px rgba(40, 67, 115, 0.6);
-}
-
-.sort-by {
-  margin: 10px auto;
-  border-bottom: 1px solid #c79e9e;
-  text-transform: capitalize;
-}
-
-.hov-sort {
-  flex: 1;
-}
-
-.filter-div {
-  padding: 0 15px;
-  width: 100%;
-}
-
-.filter-div:hover,
-.filter-btn:hover {
-  background-color: #f4f7fc;
-  border-radius: 7px;
-  box-shadow: 0px 0px 6px rgba(40, 67, 115, 0.6);
-}
-
-.filter-btns {
-  margin-top: 10px;
-  width: 100%;
-}
-
-.filter-btn {
-  padding: 5px 15px;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 35px;
-}
-
 .search-bar {
   width: 320px;
   border-radius: 10px;
@@ -369,8 +324,54 @@ main {
   line-height: 23px;
 }
 
+.filter-icon {
+  margin-right: 20px;
+  position: relative;
+}
+
+.filter-board {
+  /* position: absolute; */
+  /* width: 90%; */
+  border: 1px solid #000000;
+  /* background-color: rgb(231, 75, 75); */
+  padding: 0 10px 10px;
+  /* z-index: 99; */
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 35px;
+  border-radius: 15px;
+  margin-left: auto;
+  /* box-shadow: -10px 10px 10px rgba(40, 67, 115, 0.6), */
+  /* 10px 10px 10px rgba(40, 67, 115, 0.6); */
+}
+
+.sort-by {
+  margin: 10px auto;
+  border-bottom: 1px solid #c79e9e;
+  text-transform: capitalize;
+}
+
+.hov-sort {
+  /* flex: 1; */
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.filter-div {
+  padding: 0 15px;
+  width: 150px;
+}
+
+.filter-div:hover {
+  background-color: #f4f7fc;
+  border-radius: 7px;
+  box-shadow: 0px 0px 6px rgba(40, 67, 115, 0.6);
+}
+
 .add-user-modal,
-.error-modal {
+.update-or-cancel-modal,
+.lock-modal,
+.duplicate-modal {
   position: fixed;
   padding: 25px 50px;
   font-size: 20px;
@@ -387,20 +388,20 @@ main {
   box-shadow: 3px -3px 16px rgb(6, 53, 201), -3px 3px 16px rgb(6, 53, 201);
 }
 
-.error-modal {
+.update-or-cancel-modal,
+.lock-modal,
+.duplicate-modal {
   background-color: #facbd5;
   border: 1px solid #ff0033;
   color: #ff0033;
   box-shadow: 3px -3px 16px rgb(255, 0, 51), -3px 3px 16px rgb(255, 0, 51);
 }
 
-.add-user-modal-p,
-.error-modal-p {
+.modal-p {
   margin-top: 6px;
 }
 
-.add-user-modal-value,
-.error-modal-value {
+.modal-value, .add-user-modal-value {
   margin-right: 7px;
   margin-left: 20px;
   font-weight: 700;
@@ -410,6 +411,7 @@ main {
 table {
   border-collapse: collapse;
   width: 100%;
+  /* position: relative; */
 }
 
 td {
@@ -423,6 +425,7 @@ th {
 
 tr {
   height: 66px;
+  /* position: relative; */
 }
 
 .t-head {
@@ -474,12 +477,54 @@ tr {
   width: 4%;
 }
 
+tbody tr {
+  position: relative;
+}
+
 tbody tr:nth-child(2n + 2) {
   background-color: #f4f7fc;
 }
 
 tbody tr:hover {
   box-shadow: 0px 0px 6px rgba(40, 67, 115, 0.6);
+  border-bottom: 5px solid blue;
+  /* z-index: 100; */
+}
+
+/* .row-hover:hover::after {
+  position: absolute;
+  content: ''; */
+  /* background-color: #008400; */
+  /* background-image: url(./images/add.png);
+  background-position: bottom;
+  background-size: 25px;
+  background-repeat: no-repeat;
+  height: 93px;
+  width: 30px;
+  left: -26px;
+  bottom: -17.5px; */
+  /* cursor: pointer; */
+  /* z-index: 100;
+} */
+
+.hhh, .row-hover {
+  position: absolute;
+  /* background-color: #e01a1a; */
+  width: 25px;
+  height: 25px;
+  left: 0;
+  background-image: url(./images/add.png);
+  /* background-color: #e01a1a; */
+  background-position: bottom;
+  background-size: 25px;
+  background-repeat: no-repeat;
+  /* height: 93px; */
+  height: 33px;
+  width: 30px;
+  left: -26px;
+  bottom: -14.5px;
+  z-index: 100;
+  cursor: pointer;
 }
 
 .check-user-td {

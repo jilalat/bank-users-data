@@ -11,6 +11,7 @@ let users = [
     rate: '641544',
     balance: '-1598207735',
     status: 'ACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Lois Waters',
@@ -22,6 +23,7 @@ let users = [
     rate: '892496',
     balance: '9369680749',
     status: 'INACTIVE',
+    lockStatus: 'locked',
   },
   {
     fullName: 'Roberta Francis',
@@ -33,6 +35,7 @@ let users = [
     rate: '224769',
     balance: '-6908307213',
     status: 'ACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Mable Caldwell',
@@ -44,6 +47,7 @@ let users = [
     rate: '342142',
     balance: '0',
     status: 'ACTIVE',
+    lockStatus: 'locked',
   },
   {
     fullName: 'Genevieve Cortez',
@@ -55,6 +59,7 @@ let users = [
     rate: '812272',
     balance: '3166305644',
     status: 'INACTIVE',
+    lockStatus: 'locked',
   },
   {
     fullName: 'Wayne Hubbard',
@@ -66,6 +71,7 @@ let users = [
     rate: '062410',
     balance: '-1122470730',
     status: 'ACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Lucy Elliott',
@@ -77,6 +83,7 @@ let users = [
     rate: '277289',
     balance: '3714576807',
     status: 'INACTIVE',
+    lockStatus: 'locked',
   },
   {
     fullName: 'Darnell Barton',
@@ -88,6 +95,7 @@ let users = [
     rate: '247781',
     balance: '3902749183',
     status: 'ACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Melvin Bennett',
@@ -99,6 +107,7 @@ let users = [
     rate: '429851',
     balance: '5237845048',
     status: 'ACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Amber Griffith',
@@ -110,6 +119,7 @@ let users = [
     rate: '256769',
     balance: '7819995075',
     status: 'INACTIVE',
+    lockStatus: 'locked',
   },
   {
     fullName: 'Cristina Snyder',
@@ -121,6 +131,7 @@ let users = [
     rate: '575380',
     balance: '6866997163',
     status: 'ACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Beth Perry',
@@ -132,6 +143,7 @@ let users = [
     rate: '530072',
     balance: '6560775003',
     status: 'ACTIVE',
+    lockStatus: 'locked',
   },
   {
     fullName: 'Chelsea Stone',
@@ -143,6 +155,7 @@ let users = [
     rate: '484711',
     balance: '8592461599',
     status: 'INACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Thelma Padilla',
@@ -154,6 +167,7 @@ let users = [
     rate: '655960',
     balance: '2312433214',
     status: 'ACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Irene Welch',
@@ -165,6 +179,7 @@ let users = [
     rate: '170854',
     balance: '3035524055',
     status: 'ACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Doris Chandler',
@@ -176,6 +191,7 @@ let users = [
     rate: '221401',
     balance: '3575076183',
     status: 'INACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Frances Black',
@@ -187,6 +203,7 @@ let users = [
     rate: '143802',
     balance: '8671405270',
     status: 'INACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Marcia Harris',
@@ -198,6 +215,7 @@ let users = [
     rate: '959580',
     balance: '2044120124',
     status: 'ACTIVE',
+    lockStatus: 'locked',
   },
   {
     fullName: 'Delores Foster',
@@ -209,6 +227,7 @@ let users = [
     rate: '361711',
     balance: '6022690123',
     status: 'ACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Norman Buchanan',
@@ -220,6 +239,7 @@ let users = [
     rate: '538399',
     balance: '0850711688',
     status: 'INACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Charles Bradley',
@@ -231,6 +251,7 @@ let users = [
     rate: '529565',
     balance: '8564614162',
     status: 'ACTIVE',
+    lockStatus: 'locked',
   },
   {
     fullName: 'Fredrick Young',
@@ -242,6 +263,7 @@ let users = [
     rate: '892306',
     balance: '2449115824',
     status: 'INACTIVE',
+    lockStatus: 'locked',
   },
   {
     fullName: 'Juan Joseph',
@@ -253,6 +275,7 @@ let users = [
     rate: '925489',
     balance: '1925762012',
     status: 'ACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Lillie Maxwell',
@@ -264,6 +287,7 @@ let users = [
     rate: '703555',
     balance: '3067796592',
     status: 'INACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Omar Munoz',
@@ -275,6 +299,7 @@ let users = [
     rate: '882937',
     balance: '9554866191',
     status: 'INACTIVE',
+    lockStatus: 'locked',
   },
   {
     fullName: 'Joann Morrison',
@@ -286,6 +311,7 @@ let users = [
     rate: '267336',
     balance: '4257941434',
     status: 'INACTIVE',
+    lockStatus: 'locked',
   },
   {
     fullName: 'Archie Stokesss ',
@@ -297,6 +323,7 @@ let users = [
     rate: '154580',
     balance: '6639078105',
     status: 'ACTIVE',
+    lockStatus: 'locked',
   },
   {
     fullName: 'Jamie Cole',
@@ -308,6 +335,7 @@ let users = [
     rate: '726171',
     balance: '9234710923',
     status: 'INACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Earnest Roberson',
@@ -319,6 +347,7 @@ let users = [
     rate: '388082',
     balance: '8409647561',
     status: 'ACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Yolanda Grisssin',
@@ -330,6 +359,7 @@ let users = [
     rate: '309092',
     balance: '7571624225',
     status: 'INACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Elijah Banks',
@@ -341,6 +371,7 @@ let users = [
     rate: '590848',
     balance: '6025379216',
     status: 'ACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Hector Glover',
@@ -352,6 +383,7 @@ let users = [
     rate: '512823',
     balance: '2737103623',
     status: 'INACTIVE',
+    lockStatus: 'not locked',
   },
   {
     fullName: 'Margarita Cunningham',
@@ -363,6 +395,7 @@ let users = [
     rate: '407700',
     balance: '3073964890',
     status: 'ACTIVE',
+    lockStatus: 'not locked',
   },
 ];
 
@@ -378,9 +411,10 @@ let blackSearchUserIcon = document.querySelector('.black-search-user-icon');
 let colorSearchUserIcon = document.querySelector('.color-search-user-icon');
 let blackDeleteSearch = document.querySelector('.black-delete-search');
 let colorDeleteSearch = document.querySelector('.color-delete-search');
+let filterBoard = document.querySelector('.filter-board');
+let filterIcon = document.querySelector('.filter-icon');
 let blackFilterUserIcon = document.querySelector('.black-filter-user-icon');
 let colorFilterUserIcon = document.querySelector('.color-filter-user-icon');
-let filterBoard = document.querySelector('.filter-board');
 
 let addUserRound = document.querySelector('.add-user-icons');
 let addUserBlackIcon = document.querySelector('.add-user-black-icon');
@@ -394,12 +428,25 @@ let deleteUserRound = document.querySelector('.delete-user-icons');
 let deleteUserColoredIcon = document.querySelector('.delete-user-colored-icon');
 let deleteUserBlackIcon = document.querySelector('.delete-user-black-icon');
 
+let lockUserRound = document.querySelector('.lock-user-icons');
+let lockUserColoredIcon = document.querySelector('.lock-user-colored-icon');
+let lockUserBlackIcon = document.querySelector('.lock-user-black-icon');
+
+let uncheckAllUsersRound = document.querySelector('.uncheck-all-users-icons');
+let uncheckAllUsersColoredIcon = document.querySelector(
+  '.uncheck-all-users-colored-icon'
+);
+let uncheckAllUsersBlackIcon = document.querySelector(
+  '.uncheck-all-users-black-icon'
+);
+
 //dashboard
 let dashboard = document.getElementById('dashboard');
 let emptyData = document.querySelector('.empty-row');
 let topIcons = document.querySelector('.top-icons');
 
 // print Section
+let filteredByCheckedArr = [];
 let tableNameAndIdNumber = document.querySelector('.table-name-and-id-number');
 let tableDescription = document.querySelector('.table-description');
 let tableRateAndCurrency = document.querySelector('.table-rate-and-currency');
@@ -422,7 +469,9 @@ let printTableStyle = [
 ];
 
 // Message Modal
-let errorModal = document.querySelector('.error-modal');
+let updateOrCancelModal = document.querySelector('.update-or-cancel-modal');
+let lockModal = document.querySelector('.lock-modal');
+let duplicateModal = document.querySelector('.duplicate-modal');
 let successfullyAddUserModal = document.querySelector('.add-user-modal');
 let successfullyAdded = document.querySelector('.added');
 let successfullyUpdated = document.querySelector('.updated');
@@ -433,6 +482,7 @@ let successfullyAddUserModalValue = document.querySelector(
 // Form
 let formContainer = document.getElementById('form-container');
 let addUserForm = document.querySelector('.form');
+let addUserInSpecificPlace = [];
 
 // Progress Bar
 let progressBar = document.querySelector('.progress-bar');
@@ -489,6 +539,7 @@ let tableMore = document.querySelector('.table-more');
 // checkbox
 let checkAll = document.getElementById('checkbox');
 let checkedArr = [];
+let forcedCheckArr = [];
 
 // Sort-by
 let blueUpIcon = document.querySelectorAll('.blue-up');
@@ -502,9 +553,6 @@ let inactiveStatus = document.getElementById('inactive-status');
 let paidStatus = document.getElementById('paid-status');
 let openStatus = document.getElementById('open-status');
 let orderedStatus = document.getElementById('ordered-status');
-let filterDoneBtn = document.getElementById('filter-done');
-let filterResetBtn = document.getElementById('filter-reset');
-let filterCancelBtn = document.getElementById('filter-cancel');
 
 // table Body
 let tableBody = document.querySelector('.table-body');
@@ -559,7 +607,8 @@ blackFilterUserIcon.onmouseenter = () =>
 colorFilterUserIcon.onmouseleave = () =>
   removeAndAddHiddenClassLists(blackFilterUserIcon, colorFilterUserIcon);
 
-colorFilterUserIcon.onclick = () => filterBoard.classList.remove('hidden');
+colorFilterUserIcon.onclick = () =>
+  removeAndAddHiddenClassLists(filterBoard, filterIcon);
 
 // Search Bar Style
 blackSearchUserIcon.onmouseenter = () =>
@@ -569,7 +618,6 @@ colorSearchUserIcon.onmouseleave = () =>
   removeAndAddHiddenClassLists(blackSearchUserIcon, colorSearchUserIcon);
 
 colorSearchUserIcon.addEventListener('click', () => {
-  filterBoard.classList.add('hidden');
   removeAndAddHiddenClassLists(searchBar, searchIcon);
   searchInputField.focus();
   searchInputField.value.trim() !== ''
@@ -619,12 +667,9 @@ searchInputField.addEventListener('input', () => {
 searchInputField.addEventListener('keyup', () => {
   tableBody.innerHTML = null;
   currentPage = 0;
-  checkedArr = [];
-  checkAll.checked = false;
   refresh(getUsersData);
+  forcedCheck();
 });
-
-let filteredByCheckedArr = [];
 
 // Print Users Icon Style
 let printUsers = userData => {
@@ -662,7 +707,7 @@ let printUsers = userData => {
 let printPDF = () => {
   addTwoHiddenClassLists(blueUpIcon[1], blueDownIcon[1]);
   addTwoHiddenClassLists(blueUpIcon[0], blueDownIcon[0]);
-  addTwoHiddenClassLists(tableFooter, filterBoard);
+  tableFooter.classList.add('hidden');
   addTwoHiddenClassLists(tableCheckUser, formContainer);
   addTwoHiddenClassLists(tableMore, topIcons);
   dashboard.style.padding = '0px';
@@ -684,7 +729,6 @@ let resetDataAfterPrint = () => {
   printTableStyle.forEach(element => {
     element.style.border = '';
   });
-
   uncheckAndEmptyingCheckedArr();
   filteredByCheckedArr = [];
 };
@@ -718,19 +762,68 @@ deleteUserRound.onmouseleave = () =>
   removeAndAddHiddenClassLists(deleteUserBlackIcon, deleteUserColoredIcon);
 
 deleteUserRound.addEventListener('click', () => {
-  filterBoard.classList.add('hidden');
   if (confirm('Are you sure you wont to delete all this users ?')) {
-    checkedArr.forEach(element => {
-      getUsersData.splice(
-        getUsersData.findIndex(el => el.idNumber === element),
-        1
-      );
+    let filterCheckedArr = checkedArr.slice();
+    filterCheckedArr.forEach(element => {
+      let i = getUsersData.findIndex(el => el.idNumber === element);
+      let j = checkedArr.findIndex(el => el === element);
+      if (getUsersData[i].lockStatus !== 'locked') {
+        getUsersData.splice(i, 1);
+        checkedArr.splice(j, 1);
+      }
     });
-    if (startingIndex.textContent > getUsersData.length) currentPage -= 1;
     setAndRefresh(getUsersData);
-    if (getUsersData.length === 0) emptyingTable();
-    uncheckAndEmptyingCheckedArr();
+    forcedCheck();
+    if (startingIndex.textContent == 0)
+      currentPage = Math.ceil(getUsersData.length / rowsPerPage.value) - 1;
+    if (startingIndex.textContent == 0) {
+      searchInputField.value = '';
+      removeAndAddHiddenClassLists(searchIcon, searchBar);
+      refresh(getUsersData);
+    }
+    // if (getUsersData.length === 0) emptyingTable();
+    if (getUsersData.length === 0) endingIndex.textContent = 0;
+    checkedArrLength();
   }
+});
+
+// Lock Users Icon Style
+lockUserRound.onmouseenter = () =>
+  removeAndAddHiddenClassLists(lockUserColoredIcon, lockUserBlackIcon);
+
+lockUserRound.onmouseleave = () =>
+  removeAndAddHiddenClassLists(lockUserBlackIcon, lockUserColoredIcon);
+
+lockUserRound.addEventListener('click', () => {
+  checkedArr.forEach(element => {
+    getUsersData[
+      getUsersData.findIndex(el => el.idNumber === element)
+    ].lockStatus = 'locked';
+  });
+  setAndRefresh(getUsersData);
+  console.log(checkedArr);
+});
+
+// Uncheck All Users Icon Style
+uncheckAllUsersRound.onmouseenter = () =>
+  removeAndAddHiddenClassLists(
+    uncheckAllUsersColoredIcon,
+    uncheckAllUsersBlackIcon
+  );
+
+uncheckAllUsersRound.onmouseleave = () =>
+  removeAndAddHiddenClassLists(
+    uncheckAllUsersBlackIcon,
+    uncheckAllUsersColoredIcon
+  );
+
+uncheckAllUsersRound.addEventListener('click', () => {
+  checkedArr = [];
+  refresh(getUsersData);
+  addTwoHiddenClassLists(printUserRound, deleteUserRound);
+  lockUserRound.classList.add('hidden');
+  uncheckAllUsersRound.classList.add('hidden');
+  checkAll.checked = false;
 });
 
 // Add User Icon Style
@@ -741,7 +834,6 @@ addUserRound.onmouseleave = () =>
   removeAndAddHiddenClassLists(addUserBlackIcon, addUserColoredIcon);
 
 addUserRound.addEventListener('click', () => {
-  filterBoard.classList.add('hidden');
   if (fullNameInput.value !== '' && submitBtn.classList.contains('hidden')) {
     mustUpdateOrCancel();
   } else {
@@ -753,9 +845,18 @@ addUserRound.addEventListener('click', () => {
 });
 
 let mustUpdateOrCancel = () => {
-  errorModal.classList.remove('hidden');
+  updateOrCancelModal.classList.remove('hidden');
   formContainer.scrollIntoView();
-  setTimeout(errorModalMessage, 5000);
+  setTimeout(updateOrCancelModalMessage, 5000);
+};
+
+let userIsLocked = () => {
+  lockModal.classList.remove('hidden');
+  setTimeout(lockModalMessage, 2000);
+};
+let userIsDuplicated = () => {
+  duplicateModal.classList.remove('hidden');
+  setTimeout(duplicateModalMessage, 2000);
 };
 
 inputsFocusEventListener.forEach(element => {
@@ -999,6 +1100,7 @@ let resetForm = () => {
 };
 
 clearBtn.onclick = () => resetForm();
+
 cancelFormBtn.onclick = () => {
   resetAndHideFormBtns();
   main.scrollIntoView();
@@ -1029,11 +1131,9 @@ submitBtn.addEventListener('click', e => {
       element[1].classList.contains('valid-border')
     )
   ) {
-    if (!submitBtn.classList.contains('hidden')) {
-      removeTwoHiddenClassLists(successfullyAddUserModal, successfullyAdded);
-      successfullyUpdated.classList.add('hidden');
-      successfullyAddUserModalValue.innerHTML = fullNameInput.value;
-      getUsersData.unshift({
+    let i = getUsersData.findIndex(el => el.idNumber === addUserInSpecificPlace[0]) + 1 || 0;
+    // if (!submitBtn.classList.contains('hidden')) {
+      let newUser = {
         fullName: fullNameInput.value,
         idNumber: idNumberInput.value,
         description: descriptionInput.value,
@@ -1042,18 +1142,26 @@ submitBtn.addEventListener('click', e => {
         rate: rateInput.value,
         balance: balanceInput.value,
         status: statusInput.value,
-      });
-      setTimeout(hideSuccessfullyAdded, 5000);
-      setAndRefresh(getUsersData);
-      main.scrollIntoView();
+        lockStatus: 'not locked',
+      }
+      
+      getUsersData.splice(i, 0, newUser);
+    setAndRefresh(getUsersData);
+    successfullyAddUserModalValue.innerHTML = fullNameInput.value;
       let goTo = document.getElementById(idNumberInput.value);
+      forcedCheck();
+      resetAndHideFormBtns();
+      main.scrollIntoView();
       goTo.classList.add('green-border');
       goTo.scrollIntoView({ block: 'center' });
-      resetAndHideFormBtns();
       setTimeout(hideSuccessBorder, 5000, goTo);
-      uncheckAndEmptyingCheckedArr();
-      if (!emptyData.classList.contains('hidden')) fillingTable();
-    }
+      removeTwoHiddenClassLists(successfullyAddUserModal, successfullyAdded);
+      successfullyUpdated.classList.add('hidden');
+        setTimeout(hideSuccessfullyAdded, 5000);
+    // }
+    // if (!emptyData.classList.contains('hidden')) {
+    //   fillingTable();
+    // }
   } else {
     formErrors();
     fullNameExist(getUsersData);
@@ -1066,8 +1174,16 @@ let hideSuccessfullyAdded = () => {
   successfullyAddUserModal.classList.add('hidden');
 };
 
-let errorModalMessage = () => {
-  errorModal.classList.add('hidden');
+let updateOrCancelModalMessage = () => {
+  updateOrCancelModal.classList.add('hidden');
+};
+
+let lockModalMessage = () => {
+  lockModal.classList.add('hidden');
+};
+
+let duplicateModalMessage = () => {
+  duplicateModal.classList.add('hidden');
 };
 
 let hideSuccessBorder = index => {
@@ -1075,25 +1191,26 @@ let hideSuccessBorder = index => {
 };
 
 // table
-let emptyingTable = () => {
-  removeAndAddHiddenClassLists(emptyData, table);
-  dashboard.style.backgroundColor = '#1ae5be';
-  dashboard.style.width = '100%';
-  dashboard.style.height = '100%';
-  addUserRound.style.boxShadow =
-    '3px 3px 16px rgb(6, 53, 201), -3px -3px 36px rgb(6, 53, 201), -9px -9px 50px rgb(6, 53, 201), 9px 9px 50px rgb(6, 53, 201), -20px -20px 100px rgb(6, 53, 201), 20px 20px 100px rgb(6, 53, 201)';
-  addTwoHiddenClassLists(blackFilterUserIcon, blackSearchUserIcon);
-  checkedArr = [];
-};
+// let emptyingTable = () => {
+//   removeAndAddHiddenClassLists(emptyData, table);
+//   // dashboard.classList.add('flex');
+//   dashboard.style.backgroundColor = '#1ae5be';
+//   dashboard.style.width = '100%';
+//   dashboard.style.height = '100%';
+//   addUserRound.style.boxShadow =
+//     '3px 3px 16px rgb(6, 53, 201), -3px -3px 36px rgb(6, 53, 201), -9px -9px 50px rgb(6, 53, 201), 9px 9px 50px rgb(6, 53, 201), -20px -20px 100px rgb(6, 53, 201), 20px 20px 100px rgb(6, 53, 201)';
+//   addTwoHiddenClassLists(blackFilterUserIcon, blackSearchUserIcon);
+//   checkedArr = [];
+// };
 
-let fillingTable = () => {
-  removeAndAddHiddenClassLists(table, emptyData);
-  dashboard.style.backgroundColor = '';
-  dashboard.style.width = '100%';
-  dashboard.style.height = '100%';
-  addUserRound.style.boxShadow = '';
-  removeTwoHiddenClassLists(blackFilterUserIcon, blackSearchUserIcon);
-};
+// let fillingTable = () => {
+//   removeAndAddHiddenClassLists(table, emptyData);
+//   dashboard.style.backgroundColor = '';
+//   dashboard.style.width = '';
+//   dashboard.style.height = '';
+//   addUserRound.style.boxShadow = '';
+//   removeTwoHiddenClassLists(blackFilterUserIcon, blackSearchUserIcon);
+// };
 
 //theade
 // Sort Functions
@@ -1164,26 +1281,9 @@ let sortedArr = arr => {
   }
 };
 
-filterDoneBtn.addEventListener('click', () => {
-  filterBoard.classList.add('hidden');
-  currentPage = 0;
-  uncheckAndEmptyingCheckedArr();
-  refresh(getUsersData);
-});
-
-filterResetBtn.addEventListener('click', () => {
-  addTwoHiddenClassLists(blueUpIcon[1], blueDownIcon[1]);
-  addTwoHiddenClassLists(blueUpIcon[0], blueDownIcon[0]);
-  allName.checked = true;
-  allStatus.checked = true;
-  filterBoard.classList.add('hidden');
-  currentPage = 0;
-  refresh(getUsersData);
-});
-
-filterCancelBtn.addEventListener('click', () => {
-  filterBoard.classList.add('hidden');
-});
+filterBoard.onchange = () => refresh(getUsersData);
+filterBoard.onmouseleave = () =>
+  removeAndAddHiddenClassLists(filterIcon, filterBoard);
 
 //tbody
 //create Elements :
@@ -1197,22 +1297,23 @@ let addNewUser = userData => {
     rate,
     balance,
     status,
+    lockStatus,
   } = userData;
   let UserRow = document.createElement('tr');
   UserRow.setAttribute('class', 'table-row');
   UserRow.setAttribute('id', `${idNumber}`);
-  UserRow.appendChild(appendCheckUserTD(UserRow));
+  UserRow.appendChild(appendCheckUserTD(userData, UserRow));
   UserRow.appendChild(appendFullNameIdNumberTD(fullName, idNumber));
   UserRow.appendChild(appendDescriptionTD(description));
   UserRow.appendChild(appendRateCurrencyTD(rate, currency));
   UserRow.appendChild(appendBalanceCurrencyTD(balance, currency));
   UserRow.appendChild(appendDepositCurrencyTD(deposit, currency));
-  UserRow.appendChild(appendStatusTD(status));
-  UserRow.appendChild(appendMoreTD(userData));
+  UserRow.appendChild(appendStatusTD(userData, status));
+  UserRow.appendChild(appendMoreTD(userData, lockStatus));
   return UserRow;
 };
 
-let appendCheckUserTD = row => {
+let appendCheckUserTD = (ud, row) => {
   let checkUserTD = document.createElement('td');
   checkUserTD.setAttribute('class', 'check-user-td');
   let checkedUserIcon = document.createElement('img');
@@ -1220,25 +1321,53 @@ let appendCheckUserTD = row => {
   checkedUserIcon.setAttribute('src', './images/checked-user.svg');
   checkedUserIcon.setAttribute(
     'class',
-    'medium-icons flex checked-user-icon hidden'
+    `medium-icons flex checked-user-icon ${checkedArrIncludesIdNumber(
+      ud,
+      row,
+      checkUserTD
+    )}`
   );
   uncheckedUserIcon.setAttribute('src', './images/unchecked-user.png');
   uncheckedUserIcon.setAttribute(
     'class',
-    'medium-icons flex unchecked-user-icon'
+    `medium-icons flex unchecked-user-icon ${checkedArrNotIncludesIdNumber(
+      ud,
+      row,
+      checkUserTD
+    )}`
   );
+
+  let addNewUserInSpecificPlace = document.createElement('div');
+  addNewUserInSpecificPlace.setAttribute('class', '');
+
+  checkUserTD.appendChild(addNewUserInSpecificPlace);
   checkUserTD.appendChild(checkedUserIcon);
   checkUserTD.appendChild(uncheckedUserIcon);
 
+  row.addEventListener('mouseenter', () => {
+    addNewUserInSpecificPlace.classList.add('row-hover');
+  });
+  addNewUserInSpecificPlace.addEventListener('click', e => {
+    let rowId = e.target.closest('tr').id;
+    addUserInSpecificPlace = [];
+    addUserInSpecificPlace.push(rowId);
+    if (fullNameInput.value !== '' && submitBtn.classList.contains('hidden')) {
+      mustUpdateOrCancel();
+    } else {
+      updValidArr = [];
+      resetForm();
+      formContainer.scrollIntoView();
+      showSubmitFormBtns();
+    }
+  });
+  row.addEventListener('mouseleave', () => {
+    addNewUserInSpecificPlace.classList.remove('row-hover');
+  });
+
   checkAll.addEventListener('click', () => {
-    let nbOfElement = getUsersData.slice(
-      startingIndex.textContent - 1,
-      endingIndex.textContent
-    );
-    nbOfElement.forEach(element => {
-      let elId = element.idNumber;
-      isCheckedArrNotIncludes(elId);
-    });
+    for (let i = 0; i < tableBody.children.length; i++) {
+      isCheckedArrNotIncludes(tableBody.children[i].id);
+    }
     checkAllUsers(checkedUserIcon, uncheckedUserIcon, row, checkUserTD);
   });
 
@@ -1246,8 +1375,8 @@ let appendCheckUserTD = row => {
     let rowId = e.target.closest('tr').id;
     checkUser(checkedUserIcon, uncheckedUserIcon, row, checkUserTD);
     isCheckedArrNotIncludes(rowId);
-    checkedArrLength(checkedArr);
-    checkAllAfterCheckingUser();
+    checkedArrLength();
+    forcedCheck();
   });
 
   checkedUserIcon.addEventListener('click', e => {
@@ -1255,19 +1384,53 @@ let appendCheckUserTD = row => {
     let rowId = e.target.closest('tr').id;
     if (checkedArr.includes(rowId))
       checkedArr.splice(checkedArr.indexOf(rowId), 1);
-    checkedArrLength(checkedArr);
+    checkedArrLength();
   });
   return checkUserTD;
 };
 
+let forcedCheck = () => {
+  for (let i = 0; i < tableBody.children.length; i++) {
+    if (tableBody.children[i].firstChild.classList.contains('check-before'))
+      forcedCheckArr.push('yes');
+  }
+  forcedCheckArr.length == tableBody.children.length
+    ? (checkAll.checked = true)
+    : (checkAll.checked = false);
+  if (tableBody.children.length == 0) checkAll.checked = false;
+  forcedCheckArr = [];
+};
+
+let checkedArrIncludesIdNumber = (ud, row, chTD) => {
+  if (checkedArr.includes(ud.idNumber)) {
+    row.style.backgroundColor = '#d1dffa';
+    chTD.classList.add('check-before');
+    return ``;
+  } else {
+    row.style.backgroundColor = '';
+    chTD.classList.remove('check-before');
+    return `hidden`;
+  }
+};
+
+let checkedArrNotIncludesIdNumber = ud =>
+  checkedArr.includes(ud.idNumber) ? `hidden` : ``;
+
 let checkAllUsers = (chIcon, unchIcon, row, chTD) => {
   if (checkAll.checked) {
     removeTwoHiddenClassLists(printUserRound, deleteUserRound);
+    lockUserRound.classList.add('hidden');
+    uncheckAllUsersRound.classList.add('hidden');
     checkUser(chIcon, unchIcon, row, chTD);
   } else {
     uncheckUser(chIcon, unchIcon, row, chTD);
-    uncheckAndEmptyingCheckedArr();
+    checkAll.checked = false;
+    for (let i = 0; i < tableBody.children.length; i++) {
+      if (checkedArr.includes(tableBody.children[i].id))
+        checkedArr.splice(checkedArr.indexOf(tableBody.children[i].id), 1);
+    }
   }
+  checkedArrLength();
 };
 
 let checkUser = (chIcon, unchIcon, row, chTD) => {
@@ -1280,29 +1443,25 @@ let uncheckUser = (chIcon, unchIcon, row, chTD) => {
   removeAndAddHiddenClassLists(unchIcon, chIcon);
   row.style.backgroundColor = '';
   chTD.classList.remove('check-before');
-  checkAll.checked = false;
+  forcedCheck();
 };
 
-let checkedArrLength = arr => {
-  arr.length > 0
-    ? removeTwoHiddenClassLists(printUserRound, deleteUserRound)
-    : addTwoHiddenClassLists(printUserRound, deleteUserRound);
-};
-
-let checkAllAfterCheckingUser = () => {
-  let element = getUsersData.slice(
-    startingIndex.textContent - 1,
-    endingIndex.textContent
-  );
-  if (
-    checkedArr.length == getUsersData.length ||
-    checkedArr.length == element.length
-  )
-    checkAll.checked = true;
+let checkedArrLength = () => {
+  if (checkedArr.length > 0) {
+    removeTwoHiddenClassLists(printUserRound, deleteUserRound);
+    lockUserRound.classList.remove('hidden');
+    uncheckAllUsersRound.classList.remove('hidden');
+  } else {
+    addTwoHiddenClassLists(printUserRound, deleteUserRound);
+    lockUserRound.classList.add('hidden');
+    uncheckAllUsersRound.classList.add('hidden');
+  }
 };
 
 let uncheckAndEmptyingCheckedArr = () => {
   addTwoHiddenClassLists(printUserRound, deleteUserRound);
+  lockUserRound.classList.add('hidden');
+  uncheckAllUsersRound.classList.add('hidden');
   checkAll.checked = false;
   checkedArr = [];
 };
@@ -1341,17 +1500,14 @@ let appendRateCurrencyTD = (rt, crr) => {
 let appendBalanceCurrencyTD = (bal, crr) => {
   let BalanceCurrencyTD = document.createElement('td');
   BalanceCurrencyTD.setAttribute('class', 'balance-currency-td');
-  BalanceCurrencyTD.innerHTML = `
-<p class="balance right-text-align ${checkBalance(bal)}">${Number(bal).toFixed(
-    2
-  )}</p>
+  BalanceCurrencyTD.innerHTML = `<p class="balance right-text-align ${checkBalance(
+    bal
+  )}">${Number(bal).toFixed(2)}</p>
 <p class="currency right-text-align">${crr}</p>`;
   return BalanceCurrencyTD;
 };
 
-let checkBalance = b => {
-  return b > 0 ? 'positive' : b < 0 ? 'negative' : '';
-};
+let checkBalance = b => (b > 0 ? 'positive' : b < 0 ? 'negative' : '');
 
 let appendDepositCurrencyTD = (dp, crr) => {
   let DepositCurrencyTD = document.createElement('td');
@@ -1362,39 +1518,88 @@ let appendDepositCurrencyTD = (dp, crr) => {
   return DepositCurrencyTD;
 };
 
-let appendStatusTD = st => {
+let appendStatusTD = (ud, st) => {
   let StatusTD = document.createElement('td');
   StatusTD.setAttribute('class', 'status-td center-text-align');
-  StatusTD.innerHTML = `
-<button id="" class="${showStatus(st)}">${st}</button>`;
+  let activityBtn = document.createElement('button');
+  activityBtn.setAttribute('class', `${showStatus(st)}`);
+  activityBtn.innerHTML = `${st}`;
+  activityBtn.addEventListener('click', () => {
+    if (ud.lockStatus === 'locked') {
+      userIsLocked();
+    } else {
+      st === 'ACTIVE' ? (ud.status = 'INACTIVE') : (ud.status = 'ACTIVE');
+      setAndRefresh(getUsersData);
+    }
+  });
+  StatusTD.appendChild(activityBtn);
   return StatusTD;
 };
 
-let showStatus = sts => {
-  return `${sts.toLowerCase()}-btn`;
-};
+let showStatus = sts => `${sts.toLowerCase()}-btn`;
 
-let appendMoreTD = item => {
+let appendMoreTD = (ud, lockSt) => {
   let moreTD = document.createElement('td');
-  let blackEditUserIcon = document.createElement('img');
+  let moreDiv = document.createElement('div');
   moreTD.setAttribute('class', 'center-text-align');
-  blackEditUserIcon.setAttribute('src', './images/b-edit-user.svg');
-  blackEditUserIcon.setAttribute('class', 'medium-icons black-edit-user-icon');
-  moreTD.appendChild(blackEditUserIcon);
-  blackEditUserIcon.addEventListener('click', e => {
-    filterBoard.classList.add('hidden');
-    subValidArr = [];
-    updValidArr = [0, 1, 2, 3, 4, 5, 6, 7];
-    if (fullNameInput.value !== '' && submitBtn.classList.contains('hidden')) {
-      mustUpdateOrCancel();
+  moreDiv.setAttribute('class', 'flex-btwn');
+
+  let EditUserIcon = document.createElement('img');
+  EditUserIcon.setAttribute('src', './images/b-edit-user.svg');
+  EditUserIcon.setAttribute('class', 'medium-icons');
+  EditUserIcon.addEventListener('click', e => {
+    if (ud.lockStatus === 'locked') {
+      userIsLocked();
     } else {
-      let rowId = e.target.closest('tr').id;
-      editUserFcts(item, rowId);
+      subValidArr = [];
+      updValidArr = [0, 1, 2, 3, 4, 5, 6, 7];
+      if (
+        fullNameInput.value !== '' &&
+        submitBtn.classList.contains('hidden')
+      ) {
+        mustUpdateOrCancel();
+      } else {
+        let rowId = e.target.closest('tr').id;
+        editUserFcts(ud, rowId);
+      }
     }
   });
+
+  let strongLockUserIcon = document.createElement('img');
+  strongLockUserIcon.setAttribute('src', './images/strong-lock-user.png');
+  strongLockUserIcon.setAttribute(
+    'class',
+    `${checkLockStatus(lockSt)} medium-icons black-print-user-icon `
+  );
+  strongLockUserIcon.addEventListener('click', () => {
+    ud.lockStatus = 'not locked';
+    setAndRefresh(getUsersData);
+  });
+
+  let duplicateUserIcon = document.createElement('img');
+  duplicateUserIcon.setAttribute('src', './images/duplicate-user.png');
+  duplicateUserIcon.setAttribute('class', 'medium-icons');
+  duplicateUserIcon.addEventListener('click', e => {
+    if (ud.lockStatus === 'locked') {
+      userIsLocked();
+    } else {
+      let rowId = e.target.closest('tr').id;
+      let rowIndex = getUsersData.findIndex(
+        element => element.idNumber === rowId
+      );
+      duplicateUser(rowIndex, ud);
+    }
+  });
+
+  moreTD.appendChild(moreDiv);
+  moreDiv.appendChild(EditUserIcon);
+  moreDiv.appendChild(strongLockUserIcon);
+  moreDiv.appendChild(duplicateUserIcon);
+
   return moreTD;
 };
 
+// let appendEditUserIcon = () => {};
 let extractID = id => {
   let rowIdIndex = getUsersData.findIndex(element => element.idNumber === id);
   if (rowIdIndexArr.length != 0) {
@@ -1441,11 +1646,11 @@ let updateUsersForm = (editItem, filteredCopy) => {
   balanceInput.value = editItem.balance;
   statusInput.value = editItem.status;
   formInputAndBlurErrors(removeProgressValue, filteredCopy);
-  updateUserBtn.onclick = () => updateUser();
+  updateUserBtn.onclick = () => updateUser(editItem.idNumber);
   cancelUpdate.onclick = () => cancelUpdateUser();
 };
 
-let updateUser = () => {
+let updateUser = val => {
   if (
     Object.entries(inputDiv).every(element =>
       element[1].classList.contains('valid-border')
@@ -1466,6 +1671,9 @@ let updateUser = () => {
     };
     setTimeout(hideSuccessfullyAdded, 5000);
     getUsersData.splice(rowIdIndexArr[0], 1, updatedObj);
+    if (checkedArr.includes(val)) {
+      checkedArr.splice(rowIdIndexArr[0], 1, idNumberInput.value);
+    }
     setAndRefresh(getUsersData);
     main.scrollIntoView();
     let goTo = document.getElementById(idNumberInput.value);
@@ -1473,8 +1681,8 @@ let updateUser = () => {
     goTo.classList.add('green-border');
     goTo.scrollIntoView({ block: 'center' });
     setTimeout(hideSuccessBorder, 5000, goTo);
-    uncheckAndEmptyingCheckedArr();
   }
+  console.log(checkedArr);
 };
 
 let cancelUpdateUser = () => {
@@ -1485,7 +1693,33 @@ let cancelUpdateUser = () => {
   goTo.classList.add('green-border');
   goTo.scrollIntoView({ block: 'center' });
   setTimeout(hideSuccessBorder, 5000, goTo);
-  uncheckAndEmptyingCheckedArr();
+};
+
+// let appendStrongLockUserIcon = () => {};
+let checkLockStatus = lockSt => (lockSt === 'locked' ? `` : `hidden`);
+
+// let appendDuplicateUserIcon = () => {};
+let duplicateUser = (i, ud) => {
+  let duplicateObj = {
+    fullName: `${ud.fullName} (duplicated)`,
+    idNumber: `${ud.idNumber} (duplicated)`,
+    description: ud.description,
+    currency: ud.currency,
+    deposit: ud.deposit,
+    rate: ud.rate,
+    balance: ud.balance,
+    status: ud.status,
+    lockStatus: ud.lockStatus,
+  };
+  if (getUsersData[i + 1].idNumber == duplicateObj.idNumber) {
+    console.log('exist');
+    userIsDuplicated();
+  } else {
+    getUsersData.splice(i + 1, 0, duplicateObj);
+    setAndRefresh(getUsersData);
+  }
+  console.log(getUsersData);
+  console.log(duplicateObj.idNumber);
 };
 
 // tfoot
@@ -1508,9 +1742,8 @@ let showActiveUsers = arr => {
 let rowsPerPageValueOnChange = rowsPerPage.addEventListener('change', e => {
   e = rowsPerPage.value;
   currentPage = 0;
-  uncheckAndEmptyingCheckedArr();
   refresh(getUsersData);
-  filterBoard.classList.add('hidden');
+  forcedCheck();
 });
 
 // next / previous page :
@@ -1529,16 +1762,16 @@ colorRightArrow.onmouseleave = () =>
 colorRightArrow.addEventListener('click', () => {
   if ((currentPage + 1) * rowsPerPage.value < getUsersData.length)
     currentPage++;
-  uncheckAndEmptyingCheckedArr();
   refresh(getUsersData);
-  filterBoard.classList.add('hidden');
+  if (startingIndex.textContent == 0) currentPage--;
+  refresh(getUsersData);
+  forcedCheck();
 });
 
 colorLeftArrow.addEventListener('click', () => {
-  currentPage != 0 ? currentPage-- : (currentPage = currentPage);
-  uncheckAndEmptyingCheckedArr();
+  if (currentPage != 0) currentPage--;
   refresh(getUsersData);
-  filterBoard.classList.add('hidden');
+  forcedCheck();
 });
 
 // Render
@@ -1557,7 +1790,10 @@ let refresh = arrayToRender => {
   totalOfUsers.forEach(element => {
     element.textContent = sortFiltered.length;
   });
-  startingIndex.textContent = currentPage * selectedRowsPerPage + 1;
+  startingIndex.textContent =
+    totalRowsPerPage.length != 0
+      ? currentPage * selectedRowsPerPage + 1
+      : totalRowsPerPage.length;
   endingIndex.textContent =
     totalRowsPerPage.length -
     selectedRowsPerPage +
@@ -1579,7 +1815,7 @@ if (getLocalStorage == null) {
   refresh(getUsersData);
   onLoad();
 } else if (getLocalStorage == '[]') {
-  emptyingTable();
+  // emptyingTable();
   onLoad();
 } else {
   refresh(getUsersData);
