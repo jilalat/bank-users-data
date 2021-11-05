@@ -560,19 +560,12 @@ let rowIdIndexArr = [];
 
 // Table Footer
 let tableFooter = document.querySelector('.t-footer');
-
-// active Users :
+let totalOfLockedUsers = document.querySelector('.total-of-locked-users');
 let activeUsers = document.querySelector('.active-users');
 let totalOfUsers = document.querySelectorAll('.total-of-users');
-
-// rows per page
 let rowsPerPage = document.getElementById('rows-per-page');
-
-// starting & ending-index
 let startingIndex = document.querySelector('.starting-index');
 let endingIndex = document.querySelector('.ending-index');
-
-// Next & Previous pages
 let currentPage = 0;
 let blackRightArrow = document.querySelector('.black-right-arrow');
 let colorRightArrow = document.querySelector('.color-right-arrow');
@@ -658,11 +651,10 @@ let filteredArr = arr => {
   return filtered;
 };
 
-searchInputField.addEventListener('input', () => {
+searchInputField.oninput = () =>
   searchInputField.value.trim() !== ''
     ? blackDeleteSearch.classList.remove('hidden')
     : blackDeleteSearch.classList.add('hidden');
-});
 
 searchInputField.addEventListener('keyup', () => {
   tableBody.innerHTML = null;
@@ -729,7 +721,6 @@ let resetDataAfterPrint = () => {
   printTableStyle.forEach(element => {
     element.style.border = '';
   });
-  uncheckAndEmptyingCheckedArr();
   filteredByCheckedArr = [];
 };
 
@@ -779,10 +770,10 @@ deleteUserRound.addEventListener('click', () => {
     if (startingIndex.textContent == 0) {
       searchInputField.value = '';
       removeAndAddHiddenClassLists(searchIcon, searchBar);
+      currentPage = 0;
       refresh(getUsersData);
     }
-    // if (getUsersData.length === 0) emptyingTable();
-    if (getUsersData.length === 0) endingIndex.textContent = 0;
+    if (getUsersData.length === 0) emptyingTable();
     checkedArrLength();
   }
 });
@@ -801,7 +792,6 @@ lockUserRound.addEventListener('click', () => {
     ].lockStatus = 'locked';
   });
   setAndRefresh(getUsersData);
-  console.log(checkedArr);
 });
 
 // Uncheck All Users Icon Style
@@ -821,8 +811,7 @@ uncheckAllUsersRound.addEventListener('click', () => {
   checkedArr = [];
   refresh(getUsersData);
   addTwoHiddenClassLists(printUserRound, deleteUserRound);
-  lockUserRound.classList.add('hidden');
-  uncheckAllUsersRound.classList.add('hidden');
+  addTwoHiddenClassLists(lockUserRound, uncheckAllUsersRound);
   checkAll.checked = false;
 });
 
@@ -845,18 +834,8 @@ addUserRound.addEventListener('click', () => {
 });
 
 let mustUpdateOrCancel = () => {
-  updateOrCancelModal.classList.remove('hidden');
   formContainer.scrollIntoView();
-  setTimeout(updateOrCancelModalMessage, 5000);
-};
-
-let userIsLocked = () => {
-  lockModal.classList.remove('hidden');
-  setTimeout(lockModalMessage, 2000);
-};
-let userIsDuplicated = () => {
-  duplicateModal.classList.remove('hidden');
-  setTimeout(duplicateModalMessage, 2000);
+  errorModalMessage(updateOrCancelModal);
 };
 
 inputsFocusEventListener.forEach(element => {
@@ -1131,37 +1110,35 @@ submitBtn.addEventListener('click', e => {
       element[1].classList.contains('valid-border')
     )
   ) {
-    let i = getUsersData.findIndex(el => el.idNumber === addUserInSpecificPlace[0]) + 1 || 0;
-    // if (!submitBtn.classList.contains('hidden')) {
-      let newUser = {
-        fullName: fullNameInput.value,
-        idNumber: idNumberInput.value,
-        description: descriptionInput.value,
-        currency: currencyInput.value,
-        deposit: depositInput.value,
-        rate: rateInput.value,
-        balance: balanceInput.value,
-        status: statusInput.value,
-        lockStatus: 'not locked',
-      }
-      
-      getUsersData.splice(i, 0, newUser);
+    let i =
+      getUsersData.findIndex(el => el.idNumber === addUserInSpecificPlace[0]) +
+        1 || 0;
+    let newUser = {
+      fullName: fullNameInput.value,
+      idNumber: idNumberInput.value,
+      description: descriptionInput.value,
+      currency: currencyInput.value,
+      deposit: depositInput.value,
+      rate: rateInput.value,
+      balance: balanceInput.value,
+      status: statusInput.value,
+      lockStatus: 'not locked',
+    };
+    getUsersData.splice(i, 0, newUser);
     setAndRefresh(getUsersData);
+    if (getUsersData.length != 0) fillingTable();
     successfullyAddUserModalValue.innerHTML = fullNameInput.value;
-      let goTo = document.getElementById(idNumberInput.value);
-      forcedCheck();
-      resetAndHideFormBtns();
-      main.scrollIntoView();
-      goTo.classList.add('green-border');
-      goTo.scrollIntoView({ block: 'center' });
-      setTimeout(hideSuccessBorder, 5000, goTo);
-      removeTwoHiddenClassLists(successfullyAddUserModal, successfullyAdded);
-      successfullyUpdated.classList.add('hidden');
-        setTimeout(hideSuccessfullyAdded, 5000);
-    // }
-    // if (!emptyData.classList.contains('hidden')) {
-    //   fillingTable();
-    // }
+    let goTo = document.getElementById(idNumberInput.value);
+    forcedCheck();
+    resetAndHideFormBtns();
+    main.scrollIntoView();
+    goTo.classList.add('green-border');
+    goTo.scrollIntoView({ block: 'center' });
+    setTimeout(hideSuccessBorder, 5000, goTo);
+    removeTwoHiddenClassLists(successfullyAddUserModal, successfullyAdded);
+    successfullyUpdated.classList.add('hidden');
+    setTimeout(ModalMessage, 5000, successfullyAddUserModal);
+    addUserInSpecificPlace = [];
   } else {
     formErrors();
     fullNameExist(getUsersData);
@@ -1170,20 +1147,13 @@ submitBtn.addEventListener('click', e => {
 });
 
 // Message Modal
-let hideSuccessfullyAdded = () => {
-  successfullyAddUserModal.classList.add('hidden');
+let errorModalMessage = (modal) => {
+  modal.classList.remove('hidden');
+  setTimeout(ModalMessage, 2000, modal);
 };
 
-let updateOrCancelModalMessage = () => {
-  updateOrCancelModal.classList.add('hidden');
-};
-
-let lockModalMessage = () => {
-  lockModal.classList.add('hidden');
-};
-
-let duplicateModalMessage = () => {
-  duplicateModal.classList.add('hidden');
+let ModalMessage = (modal) => {
+  modal.classList.add('hidden');
 };
 
 let hideSuccessBorder = index => {
@@ -1191,26 +1161,27 @@ let hideSuccessBorder = index => {
 };
 
 // table
-// let emptyingTable = () => {
-//   removeAndAddHiddenClassLists(emptyData, table);
-//   // dashboard.classList.add('flex');
-//   dashboard.style.backgroundColor = '#1ae5be';
-//   dashboard.style.width = '100%';
-//   dashboard.style.height = '100%';
-//   addUserRound.style.boxShadow =
-//     '3px 3px 16px rgb(6, 53, 201), -3px -3px 36px rgb(6, 53, 201), -9px -9px 50px rgb(6, 53, 201), 9px 9px 50px rgb(6, 53, 201), -20px -20px 100px rgb(6, 53, 201), 20px 20px 100px rgb(6, 53, 201)';
-//   addTwoHiddenClassLists(blackFilterUserIcon, blackSearchUserIcon);
-//   checkedArr = [];
-// };
+let emptyingTable = () => {
+  removeAndAddHiddenClassLists(emptyData, table);
+  dashboard.classList.add('flex');
+  dashboard.style.backgroundColor = '#1ae5be';
+  dashboard.style.width = '100%';
+  dashboard.style.height = '100%';
+  addUserRound.style.boxShadow =
+    '3px 3px 16px rgb(6, 53, 201), -3px -3px 36px rgb(6, 53, 201), -9px -9px 50px rgb(6, 53, 201), 9px 9px 50px rgb(6, 53, 201), -20px -20px 100px rgb(6, 53, 201), 20px 20px 100px rgb(6, 53, 201)';
+  addTwoHiddenClassLists(blackFilterUserIcon, blackSearchUserIcon);
+  checkedArr = [];
+};
 
-// let fillingTable = () => {
-//   removeAndAddHiddenClassLists(table, emptyData);
-//   dashboard.style.backgroundColor = '';
-//   dashboard.style.width = '';
-//   dashboard.style.height = '';
-//   addUserRound.style.boxShadow = '';
-//   removeTwoHiddenClassLists(blackFilterUserIcon, blackSearchUserIcon);
-// };
+let fillingTable = () => {
+  removeAndAddHiddenClassLists(table, emptyData);
+  dashboard.classList.remove('flex');
+  dashboard.style.backgroundColor = '';
+  dashboard.style.width = '';
+  dashboard.style.height = '';
+  addUserRound.style.boxShadow = '';
+  removeTwoHiddenClassLists(blackFilterUserIcon, blackSearchUserIcon);
+};
 
 //theade
 // Sort Functions
@@ -1344,9 +1315,8 @@ let appendCheckUserTD = (ud, row) => {
   checkUserTD.appendChild(checkedUserIcon);
   checkUserTD.appendChild(uncheckedUserIcon);
 
-  row.addEventListener('mouseenter', () => {
-    addNewUserInSpecificPlace.classList.add('row-hover');
-  });
+  row.onmouseenter = () => addNewUserInSpecificPlace.classList.add('row-hover');
+
   addNewUserInSpecificPlace.addEventListener('click', e => {
     let rowId = e.target.closest('tr').id;
     addUserInSpecificPlace = [];
@@ -1418,13 +1388,9 @@ let checkedArrNotIncludesIdNumber = ud =>
 
 let checkAllUsers = (chIcon, unchIcon, row, chTD) => {
   if (checkAll.checked) {
-    removeTwoHiddenClassLists(printUserRound, deleteUserRound);
-    lockUserRound.classList.add('hidden');
-    uncheckAllUsersRound.classList.add('hidden');
     checkUser(chIcon, unchIcon, row, chTD);
   } else {
     uncheckUser(chIcon, unchIcon, row, chTD);
-    checkAll.checked = false;
     for (let i = 0; i < tableBody.children.length; i++) {
       if (checkedArr.includes(tableBody.children[i].id))
         checkedArr.splice(checkedArr.indexOf(tableBody.children[i].id), 1);
@@ -1449,21 +1415,11 @@ let uncheckUser = (chIcon, unchIcon, row, chTD) => {
 let checkedArrLength = () => {
   if (checkedArr.length > 0) {
     removeTwoHiddenClassLists(printUserRound, deleteUserRound);
-    lockUserRound.classList.remove('hidden');
-    uncheckAllUsersRound.classList.remove('hidden');
+    removeTwoHiddenClassLists(lockUserRound, uncheckAllUsersRound);
   } else {
     addTwoHiddenClassLists(printUserRound, deleteUserRound);
-    lockUserRound.classList.add('hidden');
-    uncheckAllUsersRound.classList.add('hidden');
+    addTwoHiddenClassLists(lockUserRound, uncheckAllUsersRound);
   }
-};
-
-let uncheckAndEmptyingCheckedArr = () => {
-  addTwoHiddenClassLists(printUserRound, deleteUserRound);
-  lockUserRound.classList.add('hidden');
-  uncheckAllUsersRound.classList.add('hidden');
-  checkAll.checked = false;
-  checkedArr = [];
 };
 
 let isCheckedArrNotIncludes = id => {
@@ -1526,7 +1482,8 @@ let appendStatusTD = (ud, st) => {
   activityBtn.innerHTML = `${st}`;
   activityBtn.addEventListener('click', () => {
     if (ud.lockStatus === 'locked') {
-      userIsLocked();
+      // userIsLocked();
+      errorModalMessage(lockModal);
     } else {
       st === 'ACTIVE' ? (ud.status = 'INACTIVE') : (ud.status = 'ACTIVE');
       setAndRefresh(getUsersData);
@@ -1549,7 +1506,8 @@ let appendMoreTD = (ud, lockSt) => {
   EditUserIcon.setAttribute('class', 'medium-icons');
   EditUserIcon.addEventListener('click', e => {
     if (ud.lockStatus === 'locked') {
-      userIsLocked();
+      // userIsLocked();
+      errorModalMessage(lockModal);
     } else {
       subValidArr = [];
       updValidArr = [0, 1, 2, 3, 4, 5, 6, 7];
@@ -1581,7 +1539,8 @@ let appendMoreTD = (ud, lockSt) => {
   duplicateUserIcon.setAttribute('class', 'medium-icons');
   duplicateUserIcon.addEventListener('click', e => {
     if (ud.lockStatus === 'locked') {
-      userIsLocked();
+      // userIsLocked();
+      errorModalMessage(lockModal);
     } else {
       let rowId = e.target.closest('tr').id;
       let rowIndex = getUsersData.findIndex(
@@ -1669,7 +1628,7 @@ let updateUser = val => {
       balance: balanceInput.value,
       status: statusInput.value,
     };
-    setTimeout(hideSuccessfullyAdded, 5000);
+    setTimeout(ModalMessage, 5000, successfullyAddUserModal);
     getUsersData.splice(rowIdIndexArr[0], 1, updatedObj);
     if (checkedArr.includes(val)) {
       checkedArr.splice(rowIdIndexArr[0], 1, idNumberInput.value);
@@ -1712,8 +1671,7 @@ let duplicateUser = (i, ud) => {
     lockStatus: ud.lockStatus,
   };
   if (getUsersData[i + 1].idNumber == duplicateObj.idNumber) {
-    console.log('exist');
-    userIsDuplicated();
+    errorModalMessage(duplicateModal);
   } else {
     getUsersData.splice(i + 1, 0, duplicateObj);
     setAndRefresh(getUsersData);
@@ -1727,6 +1685,16 @@ let tableFooterColor = arr => {
   arr.length % 2 != 0
     ? (tableFooter.style.backgroundColor = '#f4f7fc')
     : (tableFooter.style.backgroundColor = '');
+};
+
+// Locked Users :
+let showLockedUsers = arr => {
+  let numberOfLockedUsers = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].lockStatus === 'locked')
+      numberOfLockedUsers.push(arr[i].lockStatus);
+  }
+  return numberOfLockedUsers.length;
 };
 
 // active Users :
@@ -1786,6 +1754,7 @@ let refresh = arrayToRender => {
     (currentPage + 1) * selectedRowsPerPage
   );
   tableFooterColor(totalRowsPerPage);
+  totalOfLockedUsers.textContent = showLockedUsers(sortFiltered);
   activeUsers.textContent = showActiveUsers(sortFiltered);
   totalOfUsers.forEach(element => {
     element.textContent = sortFiltered.length;
@@ -1805,7 +1774,6 @@ let refresh = arrayToRender => {
 
 // onLoad
 let onLoad = () => {
-  uncheckAndEmptyingCheckedArr();
   resetAndHideFormBtns();
   main.scrollIntoView();
 };
@@ -1815,7 +1783,7 @@ if (getLocalStorage == null) {
   refresh(getUsersData);
   onLoad();
 } else if (getLocalStorage == '[]') {
-  // emptyingTable();
+  emptyingTable();
   onLoad();
 } else {
   refresh(getUsersData);
