@@ -718,9 +718,7 @@ let resetDataAfterPrint = () => {
   main.scrollIntoView();
   tableHead.style.position = '';
   dashboard.style.padding = '40px';
-  printTableStyle.forEach(element => {
-    element.style.border = '';
-  });
+  printTableStyle.forEach(element => (element.style.border = ''));
   filteredByCheckedArr = [];
 };
 
@@ -737,9 +735,7 @@ printUserRound.addEventListener('click', () => {
     );
   });
   printPDF();
-  filteredByCheckedArr.forEach(el => {
-    tableBody.appendChild(printUsers(el));
-  });
+  filteredByCheckedArr.forEach(el => tableBody.appendChild(printUsers(el)));
   window.print();
   resetDataAfterPrint();
   refresh(getUsersData);
@@ -1061,18 +1057,10 @@ let resetForm = () => {
     element.classList.remove('valid-border');
     element.classList.remove('error-border');
   });
-  inputArea.forEach(element => {
-    element.value = '';
-  });
-  validIcon.forEach(element => {
-    element.classList.add('hidden');
-  });
-  errorIcon.forEach(element => {
-    element.classList.add('hidden');
-  });
-  errors.forEach(element => {
-    element.classList.add('non-visible');
-  });
+  inputArea.forEach(element => (element.value = ''));
+  validIcon.forEach(element => element.classList.add('hidden'));
+  errorIcon.forEach(element => element.classList.add('hidden'));
+  errors.forEach(element => element.classList.add('non-visible'));
   progressValue.textContent = '0';
   progressColor.style.width = '1%';
   subValidArr = [];
@@ -1129,16 +1117,16 @@ submitBtn.addEventListener('click', e => {
     if (getUsersData.length != 0) fillingTable();
     successfullyAddUserModalValue.innerHTML = fullNameInput.value;
     let goTo = document.getElementById(idNumberInput.value);
-    forcedCheck();
-    resetAndHideFormBtns();
     main.scrollIntoView();
     goTo.classList.add('green-border');
     goTo.scrollIntoView({ block: 'center' });
     setTimeout(hideSuccessBorder, 5000, goTo);
     removeTwoHiddenClassLists(successfullyAddUserModal, successfullyAdded);
     successfullyUpdated.classList.add('hidden');
-    setTimeout(ModalMessage, 5000, successfullyAddUserModal);
+    setTimeout(removeModalMessage, 5000, successfullyAddUserModal);
     addUserInSpecificPlace = [];
+    forcedCheck();
+    resetAndHideFormBtns();
   } else {
     formErrors();
     fullNameExist(getUsersData);
@@ -1147,12 +1135,12 @@ submitBtn.addEventListener('click', e => {
 });
 
 // Message Modal
-let errorModalMessage = (modal) => {
+let errorModalMessage = modal => {
   modal.classList.remove('hidden');
-  setTimeout(ModalMessage, 2000, modal);
+  setTimeout(removeModalMessage, 2000, modal);
 };
 
-let ModalMessage = (modal) => {
+let removeModalMessage = modal => {
   modal.classList.add('hidden');
 };
 
@@ -1185,67 +1173,53 @@ let fillingTable = () => {
 
 //theade
 // Sort Functions
-let sortByFullNameAtoZ = (a, b) =>
+let sortByFullName = (a, b) =>
   a.fullName.toLowerCase() > b.fullName.toLowerCase()
     ? 1
     : b.fullName.toLowerCase() > a.fullName.toLowerCase()
     ? -1
     : 0;
 
-let sortByFullNameZtoA = (a, b) =>
-  a.fullName.toLowerCase() > b.fullName.toLowerCase()
-    ? -1
-    : b.fullName.toLowerCase() > a.fullName.toLowerCase()
-    ? 1
-    : 0;
-
-let sortByStatusAtoZ = (a, b) =>
+let sortByStatus = (a, b) =>
   a.status.toLowerCase() > b.status.toLowerCase()
     ? 1
     : b.status.toLowerCase() > a.status.toLowerCase()
     ? -1
-    : 0;
-
-let sortByStatusZtoA = (a, b) =>
-  a.status.toLowerCase() > b.status.toLowerCase()
-    ? -1
-    : b.status.toLowerCase() > a.status.toLowerCase()
-    ? 1
     : 0;
 
 let sortedArr = arr => {
   if (azName.checked && allStatus.checked) {
     removeAndAddHiddenClassLists(blueUpIcon[0], blueDownIcon[0]);
     addTwoHiddenClassLists(blueUpIcon[1], blueDownIcon[1]);
-    return arr.sort(sortByFullNameAtoZ);
+    return arr.sort(sortByFullName);
   } else if (zaName.checked && allStatus.checked) {
     removeAndAddHiddenClassLists(blueDownIcon[0], blueUpIcon[0]);
     addTwoHiddenClassLists(blueUpIcon[1], blueDownIcon[1]);
-    return arr.sort(sortByFullNameZtoA);
+    return arr.sort(sortByFullName).reverse();
   } else if (activeStatus.checked && allName.checked) {
     removeAndAddHiddenClassLists(blueUpIcon[1], blueDownIcon[1]);
     addTwoHiddenClassLists(blueUpIcon[0], blueDownIcon[0]);
-    return arr.sort(sortByStatusAtoZ);
+    return arr.sort(sortByStatus);
   } else if (inactiveStatus.checked && allName.checked) {
     removeAndAddHiddenClassLists(blueDownIcon[1], blueUpIcon[1]);
     addTwoHiddenClassLists(blueUpIcon[0], blueDownIcon[0]);
-    return arr.sort(sortByStatusZtoA);
+    return arr.sort(sortByStatus).reverse();
   } else if (activeStatus.checked && azName.checked) {
     removeTwoHiddenClassLists(blueUpIcon[0], blueUpIcon[1]);
     addTwoHiddenClassLists(blueDownIcon[0], blueDownIcon[1]);
-    return arr.sort(sortByFullNameAtoZ).sort(sortByStatusAtoZ);
+    return arr.sort(sortByFullName).sort(sortByStatus);
   } else if (inactiveStatus.checked && azName.checked) {
     removeTwoHiddenClassLists(blueUpIcon[0], blueDownIcon[1]);
     addTwoHiddenClassLists(blueDownIcon[0], blueUpIcon[1]);
-    return arr.sort(sortByFullNameAtoZ).sort(sortByStatusZtoA);
+    return arr.sort(sortByFullName).reverse().sort(sortByStatus).reverse();
   } else if (activeStatus.checked && zaName.checked) {
     removeTwoHiddenClassLists(blueDownIcon[0], blueUpIcon[1]);
     addTwoHiddenClassLists(blueUpIcon[0], blueDownIcon[1]);
-    return arr.sort(sortByFullNameZtoA).sort(sortByStatusAtoZ);
+    return arr.sort(sortByFullName).reverse().sort(sortByStatus);
   } else if (inactiveStatus.checked && zaName.checked) {
     removeTwoHiddenClassLists(blueDownIcon[0], blueDownIcon[1]);
     addTwoHiddenClassLists(blueUpIcon[0], blueUpIcon[1]);
-    return arr.sort(sortByFullNameZtoA).sort(sortByStatusZtoA);
+    return arr.sort(sortByFullName).sort(sortByStatus).reverse();
   } else {
     addTwoHiddenClassLists(blueUpIcon[1], blueDownIcon[1]);
     addTwoHiddenClassLists(blueUpIcon[0], blueDownIcon[0]);
@@ -1288,7 +1262,6 @@ let appendCheckUserTD = (ud, row) => {
   let checkUserTD = document.createElement('td');
   checkUserTD.setAttribute('class', 'check-user-td');
   let checkedUserIcon = document.createElement('img');
-  let uncheckedUserIcon = document.createElement('img');
   checkedUserIcon.setAttribute('src', './images/checked-user.svg');
   checkedUserIcon.setAttribute(
     'class',
@@ -1298,6 +1271,7 @@ let appendCheckUserTD = (ud, row) => {
       checkUserTD
     )}`
   );
+  let uncheckedUserIcon = document.createElement('img');
   uncheckedUserIcon.setAttribute('src', './images/unchecked-user.png');
   uncheckedUserIcon.setAttribute(
     'class',
@@ -1307,16 +1281,40 @@ let appendCheckUserTD = (ud, row) => {
       checkUserTD
     )}`
   );
+  checkedUserIcon.addEventListener('click', e => {
+    uncheckUser(checkedUserIcon, uncheckedUserIcon, row, checkUserTD);
+    let rowId = e.target.closest('tr').id;
+    if (checkedArr.includes(rowId))
+      checkedArr.splice(checkedArr.indexOf(rowId), 1);
+    checkedArrLength();
+  });
+  uncheckedUserIcon.addEventListener('click', e => {
+    let rowId = e.target.closest('tr').id;
+    checkUser(checkedUserIcon, uncheckedUserIcon, row, checkUserTD);
+    isCheckedArrNotIncludes(rowId);
+    checkedArrLength();
+    forcedCheck();
+  });
+  checkAll.addEventListener('click', () => {
+    for (let i = 0; i < tableBody.children.length; i++) {
+      isCheckedArrNotIncludes(tableBody.children[i].id);
+    }
+    checkAllUsers(checkedUserIcon, uncheckedUserIcon, row, checkUserTD);
+  });
 
-  let addNewUserInSpecificPlace = document.createElement('div');
-  addNewUserInSpecificPlace.setAttribute('class', '');
-
-  checkUserTD.appendChild(addNewUserInSpecificPlace);
   checkUserTD.appendChild(checkedUserIcon);
   checkUserTD.appendChild(uncheckedUserIcon);
+  checkUserTD.appendChild(appendAddNewUserInSpecificPlace(row));
 
+  return checkUserTD;
+};
+
+let appendAddNewUserInSpecificPlace = row => {
+  let addNewUserInSpecificPlace = document.createElement('div');
+  addNewUserInSpecificPlace.setAttribute('class', '');
   row.onmouseenter = () => addNewUserInSpecificPlace.classList.add('row-hover');
-
+  row.onmouseleave = () =>
+    addNewUserInSpecificPlace.classList.remove('row-hover');
   addNewUserInSpecificPlace.addEventListener('click', e => {
     let rowId = e.target.closest('tr').id;
     addUserInSpecificPlace = [];
@@ -1330,33 +1328,7 @@ let appendCheckUserTD = (ud, row) => {
       showSubmitFormBtns();
     }
   });
-  row.addEventListener('mouseleave', () => {
-    addNewUserInSpecificPlace.classList.remove('row-hover');
-  });
-
-  checkAll.addEventListener('click', () => {
-    for (let i = 0; i < tableBody.children.length; i++) {
-      isCheckedArrNotIncludes(tableBody.children[i].id);
-    }
-    checkAllUsers(checkedUserIcon, uncheckedUserIcon, row, checkUserTD);
-  });
-
-  uncheckedUserIcon.addEventListener('click', e => {
-    let rowId = e.target.closest('tr').id;
-    checkUser(checkedUserIcon, uncheckedUserIcon, row, checkUserTD);
-    isCheckedArrNotIncludes(rowId);
-    checkedArrLength();
-    forcedCheck();
-  });
-
-  checkedUserIcon.addEventListener('click', e => {
-    uncheckUser(checkedUserIcon, uncheckedUserIcon, row, checkUserTD);
-    let rowId = e.target.closest('tr').id;
-    if (checkedArr.includes(rowId))
-      checkedArr.splice(checkedArr.indexOf(rowId), 1);
-    checkedArrLength();
-  });
-  return checkUserTD;
+  return addNewUserInSpecificPlace;
 };
 
 let forcedCheck = () => {
@@ -1364,9 +1336,8 @@ let forcedCheck = () => {
     if (tableBody.children[i].firstChild.classList.contains('check-before'))
       forcedCheckArr.push('yes');
   }
-  forcedCheckArr.length == tableBody.children.length
-    ? (checkAll.checked = true)
-    : (checkAll.checked = false);
+  checkAll.checked =
+    forcedCheckArr.length == tableBody.children.length ? true : false;
   if (tableBody.children.length == 0) checkAll.checked = false;
   forcedCheckArr = [];
 };
@@ -1391,6 +1362,7 @@ let checkAllUsers = (chIcon, unchIcon, row, chTD) => {
     checkUser(chIcon, unchIcon, row, chTD);
   } else {
     uncheckUser(chIcon, unchIcon, row, chTD);
+    checkAll.checked = false;
     for (let i = 0; i < tableBody.children.length; i++) {
       if (checkedArr.includes(tableBody.children[i].id))
         checkedArr.splice(checkedArr.indexOf(tableBody.children[i].id), 1);
@@ -1482,10 +1454,9 @@ let appendStatusTD = (ud, st) => {
   activityBtn.innerHTML = `${st}`;
   activityBtn.addEventListener('click', () => {
     if (ud.lockStatus === 'locked') {
-      // userIsLocked();
       errorModalMessage(lockModal);
     } else {
-      st === 'ACTIVE' ? (ud.status = 'INACTIVE') : (ud.status = 'ACTIVE');
+      ud.status = st === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE';
       setAndRefresh(getUsersData);
     }
   });
@@ -1500,13 +1471,19 @@ let appendMoreTD = (ud, lockSt) => {
   let moreDiv = document.createElement('div');
   moreTD.setAttribute('class', 'center-text-align');
   moreDiv.setAttribute('class', 'flex-btwn');
+  moreTD.appendChild(moreDiv);
+  moreDiv.appendChild(appendEditUserIcon(ud));
+  moreDiv.appendChild(appendStrongLockUserIcon(ud, lockSt));
+  moreDiv.appendChild(appendDuplicateUserIcon(ud));
+  return moreTD;
+};
 
+let appendEditUserIcon = ud => {
   let EditUserIcon = document.createElement('img');
   EditUserIcon.setAttribute('src', './images/b-edit-user.svg');
   EditUserIcon.setAttribute('class', 'medium-icons');
   EditUserIcon.addEventListener('click', e => {
     if (ud.lockStatus === 'locked') {
-      // userIsLocked();
       errorModalMessage(lockModal);
     } else {
       subValidArr = [];
@@ -1522,43 +1499,9 @@ let appendMoreTD = (ud, lockSt) => {
       }
     }
   });
-
-  let strongLockUserIcon = document.createElement('img');
-  strongLockUserIcon.setAttribute('src', './images/strong-lock-user.png');
-  strongLockUserIcon.setAttribute(
-    'class',
-    `${checkLockStatus(lockSt)} medium-icons black-print-user-icon `
-  );
-  strongLockUserIcon.addEventListener('click', () => {
-    ud.lockStatus = 'not locked';
-    setAndRefresh(getUsersData);
-  });
-
-  let duplicateUserIcon = document.createElement('img');
-  duplicateUserIcon.setAttribute('src', './images/duplicate-user.png');
-  duplicateUserIcon.setAttribute('class', 'medium-icons');
-  duplicateUserIcon.addEventListener('click', e => {
-    if (ud.lockStatus === 'locked') {
-      // userIsLocked();
-      errorModalMessage(lockModal);
-    } else {
-      let rowId = e.target.closest('tr').id;
-      let rowIndex = getUsersData.findIndex(
-        element => element.idNumber === rowId
-      );
-      duplicateUser(rowIndex, ud);
-    }
-  });
-
-  moreTD.appendChild(moreDiv);
-  moreDiv.appendChild(EditUserIcon);
-  moreDiv.appendChild(strongLockUserIcon);
-  moreDiv.appendChild(duplicateUserIcon);
-
-  return moreTD;
+  return EditUserIcon;
 };
 
-// let appendEditUserIcon = () => {};
 let extractID = id => {
   let rowIdIndex = getUsersData.findIndex(element => element.idNumber === id);
   if (rowIdIndexArr.length != 0) {
@@ -1628,11 +1571,10 @@ let updateUser = val => {
       balance: balanceInput.value,
       status: statusInput.value,
     };
-    setTimeout(ModalMessage, 5000, successfullyAddUserModal);
+    setTimeout(removeModalMessage, 5000, successfullyAddUserModal);
     getUsersData.splice(rowIdIndexArr[0], 1, updatedObj);
-    if (checkedArr.includes(val)) {
+    if (checkedArr.includes(val))
       checkedArr.splice(rowIdIndexArr[0], 1, idNumberInput.value);
-    }
     setAndRefresh(getUsersData);
     main.scrollIntoView();
     let goTo = document.getElementById(idNumberInput.value);
@@ -1641,23 +1583,52 @@ let updateUser = val => {
     goTo.scrollIntoView({ block: 'center' });
     setTimeout(hideSuccessBorder, 5000, goTo);
   }
-  console.log(checkedArr);
 };
 
 let cancelUpdateUser = () => {
   setAndRefresh(getUsersData);
   main.scrollIntoView();
-  resetAndHideFormBtns();
   let goTo = document.querySelectorAll('.table-row')[rowIdIndexArr[0]];
+  resetAndHideFormBtns();
   goTo.classList.add('green-border');
   goTo.scrollIntoView({ block: 'center' });
   setTimeout(hideSuccessBorder, 5000, goTo);
 };
 
-// let appendStrongLockUserIcon = () => {};
+let appendStrongLockUserIcon = (ud, lockSt) => {
+  let strongLockUserIcon = document.createElement('img');
+  strongLockUserIcon.setAttribute('src', './images/strong-lock-user.png');
+  strongLockUserIcon.setAttribute(
+    'class',
+    `${checkLockStatus(lockSt)} medium-icons black-print-user-icon `
+  );
+  strongLockUserIcon.addEventListener('click', () => {
+    ud.lockStatus = 'not locked';
+    setAndRefresh(getUsersData);
+  });
+  return strongLockUserIcon;
+};
+
 let checkLockStatus = lockSt => (lockSt === 'locked' ? `` : `hidden`);
 
-// let appendDuplicateUserIcon = () => {};
+let appendDuplicateUserIcon = ud => {
+  let duplicateUserIcon = document.createElement('img');
+  duplicateUserIcon.setAttribute('src', './images/duplicate-user.png');
+  duplicateUserIcon.setAttribute('class', 'medium-icons');
+  duplicateUserIcon.addEventListener('click', e => {
+    if (ud.lockStatus === 'locked') {
+      errorModalMessage(lockModal);
+    } else {
+      let rowId = e.target.closest('tr').id;
+      let rowIndex = getUsersData.findIndex(
+        element => element.idNumber === rowId
+      );
+      duplicateUser(rowIndex, ud);
+    }
+  });
+  return duplicateUserIcon;
+};
+
 let duplicateUser = (i, ud) => {
   let duplicateObj = {
     fullName: `${ud.fullName} (duplicated)`,
@@ -1676,16 +1647,11 @@ let duplicateUser = (i, ud) => {
     getUsersData.splice(i + 1, 0, duplicateObj);
     setAndRefresh(getUsersData);
   }
-  console.log(getUsersData);
-  console.log(duplicateObj.idNumber);
 };
 
 // tfoot
-let tableFooterColor = arr => {
-  arr.length % 2 != 0
-    ? (tableFooter.style.backgroundColor = '#f4f7fc')
-    : (tableFooter.style.backgroundColor = '');
-};
+let tableFooterColor = arr =>
+  (tableFooter.style.backgroundColor = arr.length % 2 != 0 ? '#f4f7fc' : '');
 
 // Locked Users :
 let showLockedUsers = arr => {
@@ -1756,9 +1722,7 @@ let refresh = arrayToRender => {
   tableFooterColor(totalRowsPerPage);
   totalOfLockedUsers.textContent = showLockedUsers(sortFiltered);
   activeUsers.textContent = showActiveUsers(sortFiltered);
-  totalOfUsers.forEach(element => {
-    element.textContent = sortFiltered.length;
-  });
+  totalOfUsers.forEach(element => (element.textContent = sortFiltered.length));
   startingIndex.textContent =
     totalRowsPerPage.length != 0
       ? currentPage * selectedRowsPerPage + 1
@@ -1767,9 +1731,9 @@ let refresh = arrayToRender => {
     totalRowsPerPage.length -
     selectedRowsPerPage +
     selectedRowsPerPage * (currentPage + 1);
-  totalRowsPerPage.forEach(element => {
-    tableBody.appendChild(addNewUser(element));
-  });
+  totalRowsPerPage.forEach(element =>
+    tableBody.appendChild(addNewUser(element))
+  );
 };
 
 // onLoad
