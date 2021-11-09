@@ -11,6 +11,7 @@ let users = [
     rate: '641544',
     balance: '-1598207735',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -23,6 +24,7 @@ let users = [
     rate: '892496',
     balance: '9369680749',
     status: 'INACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'locked',
   },
   {
@@ -35,6 +37,7 @@ let users = [
     rate: '224769',
     balance: '-6908307213',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -47,6 +50,7 @@ let users = [
     rate: '342142',
     balance: '0',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'locked',
   },
   {
@@ -59,6 +63,7 @@ let users = [
     rate: '812272',
     balance: '3166305644',
     status: 'INACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'locked',
   },
   {
@@ -71,6 +76,7 @@ let users = [
     rate: '062410',
     balance: '-1122470730',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -83,6 +89,7 @@ let users = [
     rate: '277289',
     balance: '3714576807',
     status: 'INACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'locked',
   },
   {
@@ -95,6 +102,7 @@ let users = [
     rate: '247781',
     balance: '3902749183',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -107,6 +115,7 @@ let users = [
     rate: '429851',
     balance: '5237845048',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -119,6 +128,7 @@ let users = [
     rate: '256769',
     balance: '7819995075',
     status: 'INACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'locked',
   },
   {
@@ -131,6 +141,7 @@ let users = [
     rate: '575380',
     balance: '6866997163',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -143,6 +154,7 @@ let users = [
     rate: '530072',
     balance: '6560775003',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'locked',
   },
   {
@@ -155,6 +167,7 @@ let users = [
     rate: '484711',
     balance: '8592461599',
     status: 'INACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -167,6 +180,7 @@ let users = [
     rate: '655960',
     balance: '2312433214',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -179,6 +193,7 @@ let users = [
     rate: '170854',
     balance: '3035524055',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -191,6 +206,7 @@ let users = [
     rate: '221401',
     balance: '3575076183',
     status: 'INACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -203,6 +219,7 @@ let users = [
     rate: '143802',
     balance: '8671405270',
     status: 'INACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -215,6 +232,7 @@ let users = [
     rate: '959580',
     balance: '2044120124',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'locked',
   },
   {
@@ -227,6 +245,7 @@ let users = [
     rate: '361711',
     balance: '6022690123',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -239,6 +258,7 @@ let users = [
     rate: '538399',
     balance: '0850711688',
     status: 'INACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -251,6 +271,7 @@ let users = [
     rate: '529565',
     balance: '8564614162',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'locked',
   },
   {
@@ -263,6 +284,7 @@ let users = [
     rate: '892306',
     balance: '2449115824',
     status: 'INACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'locked',
   },
   {
@@ -275,6 +297,7 @@ let users = [
     rate: '925489',
     balance: '1925762012',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -287,6 +310,7 @@ let users = [
     rate: '703555',
     balance: '3067796592',
     status: 'INACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -299,6 +323,7 @@ let users = [
     rate: '882937',
     balance: '9554866191',
     status: 'INACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'locked',
   },
   {
@@ -311,6 +336,7 @@ let users = [
     rate: '267336',
     balance: '4257941434',
     status: 'INACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'locked',
   },
   {
@@ -323,6 +349,7 @@ let users = [
     rate: '154580',
     balance: '6639078105',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'locked',
   },
   {
@@ -335,6 +362,7 @@ let users = [
     rate: '726171',
     balance: '9234710923',
     status: 'INACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -347,6 +375,7 @@ let users = [
     rate: '388082',
     balance: '8409647561',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -359,6 +388,7 @@ let users = [
     rate: '309092',
     balance: '7571624225',
     status: 'INACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -371,6 +401,7 @@ let users = [
     rate: '590848',
     balance: '6025379216',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -383,6 +414,7 @@ let users = [
     rate: '512823',
     balance: '2737103623',
     status: 'INACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
   {
@@ -395,12 +427,14 @@ let users = [
     rate: '407700',
     balance: '3073964890',
     status: 'ACTIVE',
+    checkStatus: 'unchecked',
     lockStatus: 'not locked',
   },
 ];
 
 let getLocalStorage = localStorage.getItem('usersData');
 let getUsersData = JSON.parse(getLocalStorage);
+let totalRowsPerPage;
 
 // Top Main
 let main = document.getElementById('main');
@@ -432,13 +466,15 @@ let lockUserRound = document.querySelector('.lock-user-icons');
 let lockUserColoredIcon = document.querySelector('.lock-user-colored-icon');
 let lockUserBlackIcon = document.querySelector('.lock-user-black-icon');
 
+let unlockUserRound = document.querySelector('.unlock-user-icons');
+let unlockUserColoredIcon = document.querySelector('.unlock-user-colored-icon');
+let unlockUserBlackIcon = document.querySelector('.unlock-user-black-icon');
+
 let uncheckAllUsersRound = document.querySelector('.uncheck-all-users-icons');
 let uncheckAllUsersColoredIcon = document.querySelector(
   '.uncheck-all-users-colored-icon'
 );
-let uncheckAllUsersBlackIcon = document.querySelector(
-  '.uncheck-all-users-black-icon'
-);
+let totalOfCheckedUsers = document.querySelector('.total-of-checked-users');
 
 //dashboard
 let dashboard = document.getElementById('dashboard');
@@ -446,7 +482,6 @@ let emptyData = document.querySelector('.empty-row');
 let topIcons = document.querySelector('.top-icons');
 
 // print Section
-let filteredByCheckedArr = [];
 let tableNameAndIdNumber = document.querySelector('.table-name-and-id-number');
 let tableDescription = document.querySelector('.table-description');
 let tableRateAndCurrency = document.querySelector('.table-rate-and-currency');
@@ -469,7 +504,6 @@ let printTableStyle = [
 ];
 
 // Message Modal
-let updateOrCancelModal = document.querySelector('.update-or-cancel-modal');
 let lockModal = document.querySelector('.lock-modal');
 let duplicateModal = document.querySelector('.duplicate-modal');
 let successfullyAddUserModal = document.querySelector('.add-user-modal');
@@ -510,6 +544,7 @@ let balanceInput = document.querySelector('.balance-input');
 let statusInput = document.querySelector('.status-input');
 
 // Form Validation
+let fullNameInputDiv = document.querySelectorAll('.full-name-input-div');
 let errorIcon = document.querySelectorAll('.error-icon');
 let validIcon = document.querySelectorAll('.valid-icon');
 let inputDiv = document.querySelectorAll('.input-div');
@@ -538,8 +573,6 @@ let tableMore = document.querySelector('.table-more');
 
 // checkbox
 let checkAll = document.getElementById('checkbox');
-let checkedArr = [];
-let forcedCheckArr = [];
 
 // Sort-by
 let blueUpIcon = document.querySelectorAll('.blue-up');
@@ -660,7 +693,7 @@ searchInputField.addEventListener('keyup', () => {
   tableBody.innerHTML = null;
   currentPage = 0;
   refresh(getUsersData);
-  forcedCheck();
+  if (totalRowsPerPage.length === 0) checkAll.checked = false;
 });
 
 // Print Users Icon Style
@@ -719,7 +752,6 @@ let resetDataAfterPrint = () => {
   tableHead.style.position = '';
   dashboard.style.padding = '40px';
   printTableStyle.forEach(element => (element.style.border = ''));
-  filteredByCheckedArr = [];
 };
 
 printUserRound.onmouseenter = () =>
@@ -729,16 +761,16 @@ printUserRound.onmouseleave = () =>
   removeAndAddHiddenClassLists(printUserBlackIcon, printUserColoredIcon);
 
 printUserRound.addEventListener('click', () => {
-  checkedArr.forEach(element => {
-    filteredByCheckedArr.push(
-      ...getUsersData.filter(user => user.idNumber.includes(element))
-    );
+  let printCheckedElements = [];
+  getUsersData.forEach(element => {
+    if (element.checkStatus === 'checked') printCheckedElements.push(element);
   });
   printPDF();
-  filteredByCheckedArr.forEach(el => tableBody.appendChild(printUsers(el)));
+  printCheckedElements.forEach(el => tableBody.appendChild(printUsers(el)));
   window.print();
   resetDataAfterPrint();
   refresh(getUsersData);
+  console.log(printCheckedElements);
 });
 
 // delete Users Icon Style
@@ -749,29 +781,26 @@ deleteUserRound.onmouseleave = () =>
   removeAndAddHiddenClassLists(deleteUserBlackIcon, deleteUserColoredIcon);
 
 deleteUserRound.addEventListener('click', () => {
+  let deleteCheckedElements = [];
   if (confirm('Are you sure you wont to delete all this users ?')) {
-    let filterCheckedArr = checkedArr.slice();
-    filterCheckedArr.forEach(element => {
+    getUsersData.forEach(element => {
+      if (element.checkStatus === 'checked' && element.lockStatus !== 'locked')
+        deleteCheckedElements.push(element.idNumber);
+    });
+    deleteCheckedElements.forEach(element => {
       let i = getUsersData.findIndex(el => el.idNumber === element);
-      let j = checkedArr.findIndex(el => el === element);
-      if (getUsersData[i].lockStatus !== 'locked') {
-        getUsersData.splice(i, 1);
-        checkedArr.splice(j, 1);
-      }
+      getUsersData.splice(i, 1);
     });
     setAndRefresh(getUsersData);
-    forcedCheck();
-    if (startingIndex.textContent == 0)
-      currentPage = Math.ceil(getUsersData.length / rowsPerPage.value) - 1;
-    if (startingIndex.textContent == 0) {
-      searchInputField.value = '';
-      removeAndAddHiddenClassLists(searchIcon, searchBar);
-      currentPage = 0;
-      refresh(getUsersData);
-    }
-    if (getUsersData.length === 0) emptyingTable();
-    checkedArrLength();
   }
+    if (startingIndex.textContent == 0 && searchInputField.value.trim() !== '') {
+    searchInputField.value = '';
+    removeAndAddHiddenClassLists(searchIcon, searchBar);
+    currentPage = 0;
+    refresh(getUsersData);
+      }
+  if (getUsersData.length === 0) emptyingTable();
+  showRoundIcons(getUsersData);
 });
 
 // Lock Users Icon Style
@@ -782,33 +811,50 @@ lockUserRound.onmouseleave = () =>
   removeAndAddHiddenClassLists(lockUserBlackIcon, lockUserColoredIcon);
 
 lockUserRound.addEventListener('click', () => {
-  checkedArr.forEach(element => {
-    getUsersData[
-      getUsersData.findIndex(el => el.idNumber === element)
-    ].lockStatus = 'locked';
+  getUsersData.forEach(element => {
+    if (element.checkStatus === 'checked') element.lockStatus = 'locked';
   });
   setAndRefresh(getUsersData);
 });
 
+// Unlock Users Icon Style
+unlockUserRound.onmouseenter = () =>
+  removeAndAddHiddenClassLists(unlockUserColoredIcon, unlockUserBlackIcon);
+
+unlockUserRound.onmouseleave = () =>
+  removeAndAddHiddenClassLists(unlockUserBlackIcon, unlockUserColoredIcon);
+
+unlockUserRound.addEventListener('click', () => {
+  getUsersData.forEach(element => {
+    if (element.checkStatus === 'checked') element.lockStatus = 'not locked';
+  });
+  setAndRefresh(getUsersData);
+});
+
+// Total Of Checked Users :
+let showTotalOfCheckedUsers = arr => {
+  let numberOfCheckedUsers = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].checkStatus === 'checked')
+      numberOfCheckedUsers.push(arr[i].checkStatus);
+  }
+  return numberOfCheckedUsers.length;
+};
+
 // Uncheck All Users Icon Style
 uncheckAllUsersRound.onmouseenter = () =>
-  removeAndAddHiddenClassLists(
-    uncheckAllUsersColoredIcon,
-    uncheckAllUsersBlackIcon
-  );
+  removeAndAddHiddenClassLists(uncheckAllUsersColoredIcon, totalOfCheckedUsers);
 
 uncheckAllUsersRound.onmouseleave = () =>
-  removeAndAddHiddenClassLists(
-    uncheckAllUsersBlackIcon,
-    uncheckAllUsersColoredIcon
-  );
+  removeAndAddHiddenClassLists(totalOfCheckedUsers, uncheckAllUsersColoredIcon);
 
 uncheckAllUsersRound.addEventListener('click', () => {
-  checkedArr = [];
   refresh(getUsersData);
   addTwoHiddenClassLists(printUserRound, deleteUserRound);
   addTwoHiddenClassLists(lockUserRound, uncheckAllUsersRound);
+  unlockUserRound.classList.add('hidden');
   checkAll.checked = false;
+  uncheckedAll(getUsersData);
 });
 
 // Add User Icon Style
@@ -819,20 +865,11 @@ addUserRound.onmouseleave = () =>
   removeAndAddHiddenClassLists(addUserBlackIcon, addUserColoredIcon);
 
 addUserRound.addEventListener('click', () => {
-  if (fullNameInput.value !== '' && submitBtn.classList.contains('hidden')) {
-    mustUpdateOrCancel();
-  } else {
-    updValidArr = [];
-    resetForm();
-    formContainer.scrollIntoView();
-    showSubmitFormBtns();
-  }
-});
-
-let mustUpdateOrCancel = () => {
+  updValidArr = [];
+  resetForm();
   formContainer.scrollIntoView();
-  errorModalMessage(updateOrCancelModal);
-};
+  showSubmitFormBtns();
+});
 
 inputsFocusEventListener.forEach(element => {
   element.addEventListener('focus', () => {
@@ -1111,6 +1148,7 @@ submitBtn.addEventListener('click', e => {
       balance: balanceInput.value,
       status: statusInput.value,
       lockStatus: 'not locked',
+      checkStatus: 'unchecked',
     };
     getUsersData.splice(i, 0, newUser);
     setAndRefresh(getUsersData);
@@ -1125,7 +1163,6 @@ submitBtn.addEventListener('click', e => {
     successfullyUpdated.classList.add('hidden');
     setTimeout(removeModalMessage, 5000, successfullyAddUserModal);
     addUserInSpecificPlace = [];
-    forcedCheck();
     resetAndHideFormBtns();
   } else {
     formErrors();
@@ -1158,7 +1195,6 @@ let emptyingTable = () => {
   addUserRound.style.boxShadow =
     '3px 3px 16px rgb(6, 53, 201), -3px -3px 36px rgb(6, 53, 201), -9px -9px 50px rgb(6, 53, 201), 9px 9px 50px rgb(6, 53, 201), -20px -20px 100px rgb(6, 53, 201), 20px 20px 100px rgb(6, 53, 201)';
   addTwoHiddenClassLists(blackFilterUserIcon, blackSearchUserIcon);
-  checkedArr = [];
 };
 
 let fillingTable = () => {
@@ -1243,9 +1279,10 @@ let addNewUser = userData => {
     balance,
     status,
     lockStatus,
+    checkStatus,
   } = userData;
   let UserRow = document.createElement('tr');
-  UserRow.setAttribute('class', 'table-row');
+  UserRow.setAttribute('class', `table-row ${checkRowStyle(checkStatus)}`);
   UserRow.setAttribute('id', `${idNumber}`);
   UserRow.appendChild(appendCheckUserTD(userData, UserRow));
   UserRow.appendChild(appendFullNameIdNumberTD(fullName, idNumber));
@@ -1254,148 +1291,172 @@ let addNewUser = userData => {
   UserRow.appendChild(appendBalanceCurrencyTD(balance, currency));
   UserRow.appendChild(appendDepositCurrencyTD(deposit, currency));
   UserRow.appendChild(appendStatusTD(userData, status));
-  UserRow.appendChild(appendMoreTD(userData, lockStatus));
+  UserRow.appendChild(appendMoreTD(userData));
   return UserRow;
 };
+let checkRowStyle = checkSt => (checkSt === 'checked' ? `check-row-style` : ``);
 
 let appendCheckUserTD = (ud, row) => {
   let checkUserTD = document.createElement('td');
   checkUserTD.setAttribute('class', 'check-user-td');
+  checkUserTD.appendChild(appendCheckedUserIcon(ud));
+  checkUserTD.appendChild(appendUncheckedUserIcon(ud));
+  checkUserTD.appendChild(appendAddDuplicateDelete(row, ud));
+  return checkUserTD;
+};
+
+let appendCheckedUserIcon = ud => {
   let checkedUserIcon = document.createElement('img');
   checkedUserIcon.setAttribute('src', './images/checked-user.svg');
   checkedUserIcon.setAttribute(
     'class',
-    `medium-icons flex checked-user-icon ${checkedArrIncludesIdNumber(
-      ud,
-      row,
-      checkUserTD
-    )}`
+    `medium-icons flex checked-user-icon ${checkIconStyle(ud, 'checked')}`
   );
+  checkedUserIcon.addEventListener('click', e => {
+    let rowId = e.target.closest('tr').id;
+    getUsersData[
+      getUsersData.findIndex(el => el.idNumber === rowId)
+    ].checkStatus = 'unchecked';
+    showRoundIcons(getUsersData);
+    setAndRefresh(getUsersData);
+  });
+  return checkedUserIcon;
+};
+
+let checkIconStyle = (ud, checkSt) =>
+  ud.checkStatus === checkSt ? `` : `hidden`;
+let appendUncheckedUserIcon = ud => {
   let uncheckedUserIcon = document.createElement('img');
   uncheckedUserIcon.setAttribute('src', './images/unchecked-user.png');
   uncheckedUserIcon.setAttribute(
     'class',
-    `medium-icons flex unchecked-user-icon ${checkedArrNotIncludesIdNumber(
-      ud,
-      row,
-      checkUserTD
-    )}`
+    `medium-icons flex unchecked-user-icon ${checkIconStyle(ud, 'unchecked')}`
   );
-  checkedUserIcon.addEventListener('click', e => {
-    uncheckUser(checkedUserIcon, uncheckedUserIcon, row, checkUserTD);
-    let rowId = e.target.closest('tr').id;
-    if (checkedArr.includes(rowId))
-      checkedArr.splice(checkedArr.indexOf(rowId), 1);
-    checkedArrLength();
-  });
   uncheckedUserIcon.addEventListener('click', e => {
     let rowId = e.target.closest('tr').id;
-    checkUser(checkedUserIcon, uncheckedUserIcon, row, checkUserTD);
-    isCheckedArrNotIncludes(rowId);
-    checkedArrLength();
-    forcedCheck();
+    getUsersData[
+      getUsersData.findIndex(el => el.idNumber === rowId)
+    ].checkStatus = 'checked';
+    showRoundIcons(getUsersData);
+    setAndRefresh(getUsersData);
   });
-  checkAll.addEventListener('click', () => {
-    for (let i = 0; i < tableBody.children.length; i++) {
-      isCheckedArrNotIncludes(tableBody.children[i].id);
-    }
-    checkAllUsers(checkedUserIcon, uncheckedUserIcon, row, checkUserTD);
-  });
-
-  checkUserTD.appendChild(checkedUserIcon);
-  checkUserTD.appendChild(uncheckedUserIcon);
-  checkUserTD.appendChild(appendAddNewUserInSpecificPlace(row));
-
-  return checkUserTD;
+  return uncheckedUserIcon;
 };
 
-let appendAddNewUserInSpecificPlace = row => {
-  let addNewUserInSpecificPlace = document.createElement('div');
-  addNewUserInSpecificPlace.setAttribute('class', '');
-  row.onmouseenter = () => addNewUserInSpecificPlace.classList.add('row-hover');
-  row.onmouseleave = () =>
-    addNewUserInSpecificPlace.classList.remove('row-hover');
-  addNewUserInSpecificPlace.addEventListener('click', e => {
-    let rowId = e.target.closest('tr').id;
-    addUserInSpecificPlace = [];
-    addUserInSpecificPlace.push(rowId);
-    if (fullNameInput.value !== '' && submitBtn.classList.contains('hidden')) {
-      mustUpdateOrCancel();
+let appendAddDuplicateDelete = (row, ud) => {
+  let addDuplicateDeleteDiv = document.createElement('div');
+  addDuplicateDeleteDiv.setAttribute('class', 'add-duplicate-delete hidden');
+  row.onmouseenter = () => addDuplicateDeleteDiv.classList.remove('hidden');
+  row.onmouseleave = () => addDuplicateDeleteDiv.classList.add('hidden');
+  addDuplicateDeleteDiv.appendChild(appendDeleteThisRow(ud));
+  addDuplicateDeleteDiv.appendChild(appendDuplicateThisRow(ud));
+  addDuplicateDeleteDiv.appendChild(appendAddNewUserHere());
+  return addDuplicateDeleteDiv;
+};
+
+let appendDeleteThisRow = ud => {
+  let DeleteThisRow = document.createElement('img');
+  DeleteThisRow.setAttribute('class', 'delete-this medium-icons');
+  DeleteThisRow.setAttribute('src', './images/error.svg');
+  DeleteThisRow.addEventListener('click', () => {
+    if (ud.lockStatus === 'locked') {
+      errorModalMessage(lockModal);
     } else {
-      updValidArr = [];
-      resetForm();
-      formContainer.scrollIntoView();
-      showSubmitFormBtns();
+      if (confirm('Are you sure you wont to delete this user ?'))
+        getUsersData.splice(getUsersData.indexOf(ud), 1);
     }
+
+    if (startingIndex.textContent > getUsersData.length) currentPage -= 1;
+    setAndRefresh(getUsersData);
+    if (getUsersData.length === 0) emptyingTable();
   });
-  return addNewUserInSpecificPlace;
+  return DeleteThisRow;
 };
 
-let forcedCheck = () => {
-  for (let i = 0; i < tableBody.children.length; i++) {
-    if (tableBody.children[i].firstChild.classList.contains('check-before'))
-      forcedCheckArr.push('yes');
-  }
-  checkAll.checked =
-    forcedCheckArr.length == tableBody.children.length ? true : false;
-  if (tableBody.children.length == 0) checkAll.checked = false;
-  forcedCheckArr = [];
+let appendDuplicateThisRow = ud => {
+  let DuplicateThisRow = document.createElement('img');
+  DuplicateThisRow.setAttribute('class', 'duplicate-this medium-icons');
+  DuplicateThisRow.setAttribute('src', './images/duplicate-user.png');
+
+  DuplicateThisRow.addEventListener('click', e => {
+    let rowId = e.target.closest('tr').id;
+    duplicateUser(ud, rowId);
+  });
+  return DuplicateThisRow;
 };
 
-let checkedArrIncludesIdNumber = (ud, row, chTD) => {
-  if (checkedArr.includes(ud.idNumber)) {
-    row.style.backgroundColor = '#d1dffa';
-    chTD.classList.add('check-before');
-    return ``;
-  } else {
-    row.style.backgroundColor = '';
-    chTD.classList.remove('check-before');
-    return `hidden`;
-  }
+let duplicateUser = (editItem, i) => {
+  getIndexAndScrollToForm(i);
+  descriptionInput.value = editItem.description;
+  currencyInput.value = editItem.currency;
+  depositInput.value = editItem.deposit;
+  rateInput.value = editItem.rate;
+  balanceInput.value = editItem.balance;
+  statusInput.value = editItem.status;
+  fullNameInput.value = editItem.fullName;
+  idNumberInput.value = editItem.idNumber;
+  formErrors();
+  fullNameExist(getUsersData);
+  idExist(getUsersData);
+  formInputAndBlurErrors(removeProgressValue, getUsersData);
+  updValidArr = [2, 3, 4, 5, 6, 7];
+  updateProgressBar(75);
 };
 
-let checkedArrNotIncludesIdNumber = ud =>
-  checkedArr.includes(ud.idNumber) ? `hidden` : ``;
-
-let checkAllUsers = (chIcon, unchIcon, row, chTD) => {
-  if (checkAll.checked) {
-    checkUser(chIcon, unchIcon, row, chTD);
-  } else {
-    uncheckUser(chIcon, unchIcon, row, chTD);
-    checkAll.checked = false;
-    for (let i = 0; i < tableBody.children.length; i++) {
-      if (checkedArr.includes(tableBody.children[i].id))
-        checkedArr.splice(checkedArr.indexOf(tableBody.children[i].id), 1);
-    }
-  }
-  checkedArrLength();
+let getIndexAndScrollToForm = index => {
+  addUserInSpecificPlace = [];
+  addUserInSpecificPlace.push(index);
+  resetForm();
+  formContainer.scrollIntoView();
+  showSubmitFormBtns();
 };
 
-let checkUser = (chIcon, unchIcon, row, chTD) => {
-  removeAndAddHiddenClassLists(chIcon, unchIcon);
-  row.style.backgroundColor = '#d1dffa';
-  chTD.classList.add('check-before');
+let appendAddNewUserHere = () => {
+  let AddNewUserHere = document.createElement('img');
+  AddNewUserHere.setAttribute('class', 'add-new-user-here medium-icons');
+  AddNewUserHere.setAttribute('src', './images/add.png');
+  AddNewUserHere.addEventListener('click', e => {
+    let rowId = e.target.closest('tr').id;
+    getIndexAndScrollToForm(rowId);
+    updValidArr = [];
+  });
+  return AddNewUserHere;
 };
 
-let uncheckUser = (chIcon, unchIcon, row, chTD) => {
-  removeAndAddHiddenClassLists(unchIcon, chIcon);
-  row.style.backgroundColor = '';
-  chTD.classList.remove('check-before');
-  forcedCheck();
+let forcedCheck = ud => {
+  checkAll.checked = ud.every(element => element.checkStatus === 'checked')
+    ? true
+    : false;
 };
 
-let checkedArrLength = () => {
-  if (checkedArr.length > 0) {
+checkAll.addEventListener('click', () => {
+  checkAllUsers(totalRowsPerPage);
+  setAndRefresh(getUsersData);
+  showRoundIcons(getUsersData);
+});
+
+let checkAllUsers = arr => {
+  arr.forEach(
+    element =>
+      (element.checkStatus = checkAll.checked ? 'checked' : 'unchecked')
+  );
+};
+
+let showRoundIcons = ud => {
+  if (ud.some(element => element.checkStatus === 'checked')) {
     removeTwoHiddenClassLists(printUserRound, deleteUserRound);
     removeTwoHiddenClassLists(lockUserRound, uncheckAllUsersRound);
+    unlockUserRound.classList.remove('hidden');
   } else {
     addTwoHiddenClassLists(printUserRound, deleteUserRound);
     addTwoHiddenClassLists(lockUserRound, uncheckAllUsersRound);
+    unlockUserRound.classList.add('hidden');
   }
 };
 
-let isCheckedArrNotIncludes = id => {
-  if (!checkedArr.includes(id)) checkedArr.push(id);
+let uncheckedAll = ud => {
+  ud.forEach(element => (element.checkStatus = 'unchecked'));
+  setAndRefresh(ud);
 };
 
 let appendFullNameIdNumberTD = (fNm, idNb) => {
@@ -1466,15 +1527,15 @@ let appendStatusTD = (ud, st) => {
 
 let showStatus = sts => `${sts.toLowerCase()}-btn`;
 
-let appendMoreTD = (ud, lockSt) => {
+let appendMoreTD = ud => {
   let moreTD = document.createElement('td');
   let moreDiv = document.createElement('div');
   moreTD.setAttribute('class', 'center-text-align');
   moreDiv.setAttribute('class', 'flex-btwn');
   moreTD.appendChild(moreDiv);
   moreDiv.appendChild(appendEditUserIcon(ud));
-  moreDiv.appendChild(appendStrongLockUserIcon(ud, lockSt));
-  moreDiv.appendChild(appendDuplicateUserIcon(ud));
+  moreDiv.appendChild(appendStrongLockUserIcon(ud));
+  moreDiv.appendChild(appendWeakLockUserIcon(ud));
   return moreTD;
 };
 
@@ -1488,15 +1549,8 @@ let appendEditUserIcon = ud => {
     } else {
       subValidArr = [];
       updValidArr = [0, 1, 2, 3, 4, 5, 6, 7];
-      if (
-        fullNameInput.value !== '' &&
-        submitBtn.classList.contains('hidden')
-      ) {
-        mustUpdateOrCancel();
-      } else {
-        let rowId = e.target.closest('tr').id;
-        editUserFcts(ud, rowId);
-      }
+      let rowId = e.target.closest('tr').id;
+      editUserFcts(ud, rowId);
     }
   });
   return EditUserIcon;
@@ -1520,9 +1574,9 @@ let takeCopy = (element, id) => {
   updateUsersForm(element, filteredCopyOfGetUsersData);
 };
 
-let updateProgressBar = () => {
+let updateProgressBar = num => {
   progressBar.classList.remove('hidden');
-  progressValue.textContent = 100;
+  progressValue.textContent = num;
   progressColor.style.width = `${progressValue.textContent}%`;
 };
 
@@ -1530,7 +1584,7 @@ let editUserFcts = (e, id) => {
   resetForm();
   extractID(id);
   takeCopy(e, id);
-  updateProgressBar();
+  updateProgressBar(100);
   formErrors();
 };
 
@@ -1547,12 +1601,13 @@ let updateUsersForm = (editItem, filteredCopy) => {
   rateInput.value = editItem.rate;
   balanceInput.value = editItem.balance;
   statusInput.value = editItem.status;
+  console.log(editItem.checkStatus);
   formInputAndBlurErrors(removeProgressValue, filteredCopy);
-  updateUserBtn.onclick = () => updateUser(editItem.idNumber);
+  updateUserBtn.onclick = () => updateUser(editItem.checkStatus);
   cancelUpdate.onclick = () => cancelUpdateUser();
 };
 
-let updateUser = val => {
+let updateUser = (checkSt) => {
   if (
     Object.entries(inputDiv).every(element =>
       element[1].classList.contains('valid-border')
@@ -1570,11 +1625,11 @@ let updateUser = val => {
       rate: rateInput.value,
       balance: balanceInput.value,
       status: statusInput.value,
+      lockStatus: 'not locked',
+      checkStatus: checkSt,
     };
     setTimeout(removeModalMessage, 5000, successfullyAddUserModal);
     getUsersData.splice(rowIdIndexArr[0], 1, updatedObj);
-    if (checkedArr.includes(val))
-      checkedArr.splice(rowIdIndexArr[0], 1, idNumberInput.value);
     setAndRefresh(getUsersData);
     main.scrollIntoView();
     let goTo = document.getElementById(idNumberInput.value);
@@ -1595,12 +1650,12 @@ let cancelUpdateUser = () => {
   setTimeout(hideSuccessBorder, 5000, goTo);
 };
 
-let appendStrongLockUserIcon = (ud, lockSt) => {
+let appendStrongLockUserIcon = ud => {
   let strongLockUserIcon = document.createElement('img');
   strongLockUserIcon.setAttribute('src', './images/strong-lock-user.png');
   strongLockUserIcon.setAttribute(
     'class',
-    `${checkLockStatus(lockSt)} medium-icons black-print-user-icon `
+    `${checkLockStatus(ud, 'locked')} medium-icons black-print-user-icon `
   );
   strongLockUserIcon.addEventListener('click', () => {
     ud.lockStatus = 'not locked';
@@ -1609,45 +1664,22 @@ let appendStrongLockUserIcon = (ud, lockSt) => {
   return strongLockUserIcon;
 };
 
-let checkLockStatus = lockSt => (lockSt === 'locked' ? `` : `hidden`);
-
-let appendDuplicateUserIcon = ud => {
-  let duplicateUserIcon = document.createElement('img');
-  duplicateUserIcon.setAttribute('src', './images/duplicate-user.png');
-  duplicateUserIcon.setAttribute('class', 'medium-icons');
-  duplicateUserIcon.addEventListener('click', e => {
-    if (ud.lockStatus === 'locked') {
-      errorModalMessage(lockModal);
-    } else {
-      let rowId = e.target.closest('tr').id;
-      let rowIndex = getUsersData.findIndex(
-        element => element.idNumber === rowId
-      );
-      duplicateUser(rowIndex, ud);
-    }
-  });
-  return duplicateUserIcon;
-};
-
-let duplicateUser = (i, ud) => {
-  let duplicateObj = {
-    fullName: `${ud.fullName} (duplicated)`,
-    idNumber: `${ud.idNumber} (duplicated)`,
-    description: ud.description,
-    currency: ud.currency,
-    deposit: ud.deposit,
-    rate: ud.rate,
-    balance: ud.balance,
-    status: ud.status,
-    lockStatus: ud.lockStatus,
-  };
-  if (getUsersData[i + 1].idNumber == duplicateObj.idNumber) {
-    errorModalMessage(duplicateModal);
-  } else {
-    getUsersData.splice(i + 1, 0, duplicateObj);
+let appendWeakLockUserIcon = ud => {
+  let weakLockUserIcon = document.createElement('img');
+  weakLockUserIcon.setAttribute('src', './images/weak-lock-user.png');
+  weakLockUserIcon.setAttribute(
+    'class',
+    `${checkLockStatus(ud, 'not locked')} medium-icons black-print-user-icon `
+  );
+  weakLockUserIcon.addEventListener('click', () => {
+    ud.lockStatus = 'locked';
     setAndRefresh(getUsersData);
-  }
+  });
+  return weakLockUserIcon;
 };
+
+let checkLockStatus = (ud, lockSt) =>
+  ud.lockStatus === lockSt ? `` : `hidden`;
 
 // tfoot
 let tableFooterColor = arr =>
@@ -1677,7 +1709,6 @@ let rowsPerPageValueOnChange = rowsPerPage.addEventListener('change', e => {
   e = rowsPerPage.value;
   currentPage = 0;
   refresh(getUsersData);
-  forcedCheck();
 });
 
 // next / previous page :
@@ -1699,13 +1730,11 @@ colorRightArrow.addEventListener('click', () => {
   refresh(getUsersData);
   if (startingIndex.textContent == 0) currentPage--;
   refresh(getUsersData);
-  forcedCheck();
 });
 
 colorLeftArrow.addEventListener('click', () => {
   if (currentPage != 0) currentPage--;
   refresh(getUsersData);
-  forcedCheck();
 });
 
 // Render
@@ -1715,12 +1744,13 @@ let refresh = arrayToRender => {
   let filteredUsers = filteredArr(arrayToRender) || arrayToRender;
   let sortFiltered = filteredUsers.slice() || filteredUsers;
   sortedArr(sortFiltered);
-  let totalRowsPerPage = sortFiltered.slice(
+  totalRowsPerPage = sortFiltered.slice(
     currentPage * selectedRowsPerPage,
     (currentPage + 1) * selectedRowsPerPage
   );
   tableFooterColor(totalRowsPerPage);
   totalOfLockedUsers.textContent = showLockedUsers(sortFiltered);
+  totalOfCheckedUsers.textContent = showTotalOfCheckedUsers(arrayToRender);
   activeUsers.textContent = showActiveUsers(sortFiltered);
   totalOfUsers.forEach(element => (element.textContent = sortFiltered.length));
   startingIndex.textContent =
@@ -1734,8 +1764,8 @@ let refresh = arrayToRender => {
   totalRowsPerPage.forEach(element =>
     tableBody.appendChild(addNewUser(element))
   );
+  forcedCheck(totalRowsPerPage);
 };
-
 // onLoad
 let onLoad = () => {
   resetAndHideFormBtns();
@@ -1751,5 +1781,6 @@ if (getLocalStorage == null) {
   onLoad();
 } else {
   refresh(getUsersData);
+  uncheckedAll(getUsersData);
   onLoad();
 }

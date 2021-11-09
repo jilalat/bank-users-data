@@ -175,6 +175,10 @@
           <img src="./images/color-lock-user.png" alt="" class="big-icons lock-user-colored-icon hidden">
           <img src="./images/lock-user.png" alt="" class="big-icons lock-user-black-icon">
         </div>
+        <div class="unlock-user-icons fixed-icons flex hidden">
+          <img src="./images/color-unlock-user.png" alt="" class="big-icons unlock-user-colored-icon hidden">
+          <img src="./images/unlock-user.png" alt="" class="big-icons unlock-user-black-icon">
+        </div>
         <div class="delete-user-icons fixed-icons flex hidden">
           <img src="./images/delete-user.svg" alt="" class="big-icons delete-user-colored-icon hidden">
           <img src="./images/b-delete-user.svg" alt="" class="big-icons delete-user-black-icon">
@@ -182,13 +186,15 @@
 
         <div class="uncheck-all-users-icons fixed-icons flex hidden">
           <img src="./images/cancel.svg" alt="" class="big-icons uncheck-all-users-colored-icon hidden">
-          <img src="./images/b-cancel.svg" alt="" class="big-icons uncheck-all-users-black-icon">
+          <p class="flex-start total-of-checked-users"></p>
+          <!-- <p class="flex-start total-of-checked-users">(888)</p> -->
+          <!-- <img src="./images/b-cancel.svg" alt="" class="big-icons uncheck-all-users-black-icon"> -->
         </div>
         <div class="flex">
           <div class="add-user-modal flex hidden">
             <img class="medium-icons" src="./images/checked-with-success.png" alt="">
             <div class="flex modal-p">
-              <p class="add-user-modal-value">hhhhhh</p>
+              <p class="add-user-modal-value"></p>
               <p>has been successfully <span class="added hidden"><b>added</b></span> <span
                   class="updated hidden"><b>updated</b></span>
               </p>
@@ -197,14 +203,14 @@
         </div>
         <!-- ////////////////////////////////////////////////////// -->
         <div class="error-modals">
-          <div class="flex">
+          <!-- <div class="flex">
             <div class="update-or-cancel-modal flex hidden">
               <img class="medium-icons" src="./images/error.svg" alt="">
               <div class="flex modal-p">
                 <p class="modal-value">You must Update or Cancel Update First</p>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="flex">
             <div class="lock-modal flex hidden">
               <img class="medium-icons" src="./images/error.svg" alt="">
@@ -271,8 +277,8 @@
                 <div class="rows-per-page-select">
                   <select name="" id="rows-per-page" class="">
                     <option value="999999999">All</option>
-                    <option value="5">5</option>
-                    <option value="10" selected>10</option>
+                    <option value="5" selected>5</option>
+                    <option value="10">10</option>
                     <option value="15">15</option>
                     <option value="20">20</option>
                     <option value="25">25</option>
