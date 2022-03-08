@@ -5,15 +5,104 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./styles/common styles.css" />
-  <link rel="stylesheet" href="./styles/main.css" />
+  <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <title>Data Table</title>
+  <title>Customer data</title>
 </head>
 
 <body>
+  <div class="form-container flex" id="form-container">
+    <div class="col-flex">
+      <form action="" class="form col-flex" id="form">
+        <div class="col-flex">
+          <div class="progress-bar flex">
+            <p class="progress-text">Progress :&nbsp&nbsp <span class="progress-value">0</span>%</p>
+            <div class="progress-color"></div>
+          </div>
+
+          <div class="flex">
+            <div class="left-form star-col-flex stretch">
+              <div class="input-div flex-btwn full-name-input-div">
+                <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+                <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+                <input type="text" placeholder="Full Name" class="input full-name-input">
+              </div>
+              <p class="errors non-visible">Error</p>
+              <div class="input-div id-number-input-div flex-btwn">
+                <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+                <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+                <input type="text" placeholder="ID Number" class="input id-number-input">
+              </div>
+              <p class="errors non-visible">Error</p>
+              <div class="input-div textarea-input-div textarea flex-s">
+                <div class="textarea-imgs">
+                  <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+                  <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+                </div>
+                <textarea name="" id="" class="input description-input" placeholder="Description"
+                  maxlength="250"></textarea>
+              </div>
+              <p class="errors non-visible">Error</p>
+            </div>
+            <div class="right-form star-col-flex">
+              <div class="input-div currency-input-div flex-btwn">
+                <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+                <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+                <select name="" id="" class="options-error currency-input input">
+                  <option value="" disabled selected hidden>Currency</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                  <option value="GBP">GBP</option>
+                  <option value="INR">INR</option>
+                </select>
+              </div>
+              <p class="errors non-visible">Error</p>
+              <div class="input-div deposit-input-div flex-btwn">
+                <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+                <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+                <input type="text" placeholder="Deposit Amount" class="input deposit-input">
+              </div>
+              <p class="errors non-visible">Error</p>
+              <div class="input-div rate-input-div flex-btwn">
+                <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+                <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+                <input type="text" class="input rate-input" placeholder="Rate" maxlength="10">
+              </div>
+              <p class="errors non-visible">Error</p>
+              <div class="input-div balance-input-div flex-btwn">
+                <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+                <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+                <input type="text" placeholder="Balance" class="input balance-input">
+              </div>
+              <p class="errors non-visible">Error</p>
+              <div class="input-div status-input-div flex-btwn">
+                <img src="./images/checked.svg" alt="" class="valid-icon small-icons hidden">
+                <img src="./images/error.svg" alt="" class="error-icon small-icons hidden">
+                <select name="" id="" class="options-error status-input input">
+                  <option value="" disabled selected hidden>Status</option>
+                  <option value="ACTIVE">ACTIVE</option>
+                  <option value="INACTIVE">INACTIVE</option>
+                </select>
+              </div>
+              <p class="errors non-visible">Error</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex">
+        </div>
+      </form>
+      <div class="form-btns">
+        <button class="btn update-user-btn">Update User</button>
+        <button id="submit-btn" class="btn submit-btn">Submit</button>
+        <button class="btn clear-btn">Clear</button>
+        <button class="btn cancel-form">Cancel</button>
+        <button class="btn cancel-update">Cancel Update</button>
+      </div>
+    </div>
+  </div>
+
   <main id="main">
     <div class="dashboard" id="dashboard">
       <div class="top-icons">
@@ -35,16 +124,16 @@
                 <p class="sort-by">sort by name</p>
               </div>
               <div class="flex">
-                <div class="flex filter-div default-name">
-                  <input type="radio" name="name" id="default-name-radio">
+                <div class="flex filter-div">
+                  <input type="radio" name="name" id="all-name" checked>
                   <label for="all-name" class="hov-sort">Default</label>
                 </div>
-                <div class="flex filter-div az-name">
-                  <input type="radio" name="name" id="az-name-radio">
+                <div class="flex filter-div">
+                  <input type="radio" name="name" id="az-name">
                   <label for="az-name" class="hov-sort">A to Z</label>
                 </div>
-                <div class="flex filter-div za-name">
-                  <input type="radio" name="name" id="za-name-radio">
+                <div class="flex filter-div">
+                  <input type="radio" name="name" id="za-name">
                   <label for="za-name" class="hov-sort">Z to A</label>
                 </div>
               </div>
@@ -54,16 +143,16 @@
                 <p class="sort-by">sort by status</p>
               </div>
               <div class="flex">
-                <div class="flex filter-div default-status">
-                  <input type="radio" name="status" id="default-status-radio"
+                <div class="flex filter-div">
+                  <input type="radio" name="status" id="all-status" checked>
                   <label for="all-status" class="hov-sort">Default</label>
                 </div>
-                <div class="flex filter-div active-status">
-                  <input type="radio" name="status" id="active-status-radio">
+                <div class="flex filter-div">
+                  <input type="radio" name="status" id="active-status">
                   <label for="active-status" class="hov-sort">Active</label>
                 </div>
-                <div class="flex filter-div inactive-status">
-                  <input type="radio" name="status" id="inactive-status-radio">
+                <div class="flex filter-div">
+                  <input type="radio" name="status" id="inactive-status">
                   <label for="inactive-status" class="hov-sort">Inactive</label>
                 </div>
               </div>
@@ -98,6 +187,8 @@
         <div class="uncheck-all-users-icons fixed-icons flex hidden">
           <img src="./images/cancel.svg" alt="" class="big-icons uncheck-all-users-colored-icon hidden">
           <p class="flex-start total-of-checked-users"></p>
+          <!-- <p class="flex-start total-of-checked-users">(888)</p> -->
+          <!-- <img src="./images/b-cancel.svg" alt="" class="big-icons uncheck-all-users-black-icon"> -->
         </div>
         <div class="flex">
           <div class="add-user-modal flex hidden">
@@ -110,7 +201,16 @@
             </div>
           </div>
         </div>
+        <!-- ////////////////////////////////////////////////////// -->
         <div class="error-modals">
+          <!-- <div class="flex">
+            <div class="update-or-cancel-modal flex hidden">
+              <img class="medium-icons" src="./images/error.svg" alt="">
+              <div class="flex modal-p">
+                <p class="modal-value">You must Update or Cancel Update First</p>
+              </div>
+            </div>
+          </div> -->
           <div class="flex">
             <div class="lock-modal flex hidden">
               <img class="medium-icons" src="./images/error.svg" alt="">
@@ -128,6 +228,7 @@
             </div>
           </div>
         </div>
+        <!-- /////////////////////////////////////////////////////////// -->
       </div>
       <table class="table">
         <thead class="t-head">
@@ -204,25 +305,8 @@
       </table>
     </div>
   </main>
-<!-- Generalities -->
-  <script src="./scripts/users-data.js"></script>
-  <script src="./scripts/localStorage.js"></script>
-  <script src="./scripts/main-variables.js"></script>
-  <script src="./scripts/main-general-faunctions.js"></script>
-  <script src="./scripts/common-functions.js"></script>
-  <!-- Round Icons -->
-  <script src="./scripts/search.js"></script>
-  <script src="./scripts/sort.js"></script>
-  <script src="./scripts/add-new-user.js"></script>
-  <script src="./scripts/delete-users.js"></script>
-  <script src="./scripts/print-users.js"></script>
-  <script src="./scripts/Lock-unlock-users.js"></script>
-  <script src="./scripts/uncheck-users.js"></script>
-  <!-- Table -->
-  <script src="./scripts/user-row.js"></script>
-  <script src="./scripts/footer.js"></script>
-  <!-- Render -->
-  <script src="./scripts/render.js"></script>
+
+  <script src="script.js"></script>
 </body>
 
 </html>
